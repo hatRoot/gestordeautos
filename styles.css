@@ -363,13 +363,23 @@ ul {
 }
 
 .section-title h2 {
-    font-size: 2rem;
+    font-size: 3rem;
+    /* Increased from 2rem */
     color: var(--primary-color);
     margin-bottom: 1rem;
 }
 
 .section-title p {
+    font-size: 1.25rem;
+    /* Increased readability */
     color: var(--secondary-color);
+}
+
+.google-maps-icon {
+    color: #6b7280;
+    margin-right: 0.5rem;
+    font-size: 3.3rem;
+    /* Tripled from 1.1rem */
 }
 
 .partners-grid {
@@ -421,8 +431,16 @@ ul {
 .tab-btn {
     padding: 0.75rem 2rem;
     border: none;
-    background: transparent;
-    color: var(--secondary-color);
+
+    /* Blue glassmorphism effect */
+    background: linear-gradient(135deg,
+            rgba(59, 130, 246, 0.1) 0%,
+            rgba(37, 99, 235, 0.05) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    color: #1f2937;
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
@@ -430,16 +448,26 @@ ul {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     z-index: 1;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
 }
 
 .tab-btn:hover {
-    color: var(--accent-color);
+    background: linear-gradient(135deg,
+            rgba(59, 130, 246, 0.2) 0%,
+            rgba(37, 99, 235, 0.15) 100%);
+    color: #111827;
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .tab-btn.active {
-    background: var(--white);
-    color: var(--accent-color);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background: linear-gradient(135deg,
+            rgba(59, 130, 246, 0.25) 0%,
+            rgba(37, 99, 235, 0.2) 100%);
+    color: #0f172a;
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow:
+        0 8px 16px rgba(59, 130, 246, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .tab-content {
@@ -467,6 +495,18 @@ ul {
     cursor: pointer;
     border: 1px solid #f1f5f9;
     height: 100%;
+}
+
+.service-item h4 {
+    font-size: 1.5rem;
+    /* Increased size for visibility */
+    margin-bottom: 0.25rem;
+}
+
+.service-item small {
+    font-size: 0.95rem;
+    /* Slightly larger subtitle */
+    color: var(--secondary-color);
 }
 
 .service-item:hover {
@@ -569,171 +609,240 @@ ul {
     }
 }
 
-.reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+/* Reviews Section - Simple & Clean (Dimensión Desconocida) */
+.reviews-section {
+    background: #f8f9fa;
+    padding: 4rem 0;
+}
+
+.reviews-section .section-title h2 {
+    color: var(--primary-color);
+}
+
+.reviews-section .section-title p {
+    color: var(--secondary-color);
+}
+
+.reviews-slider-container {
+    width: 100%;
     margin: 3rem 0;
     position: relative;
-    z-index: 1;
+}
+
+.reviews-track {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 2rem 1rem;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    /* Hide scrollbar */
+}
+
+.reviews-track::-webkit-scrollbar {
+    display: none;
+    /* Hide scrollbar for Chrome/Safari */
+}
+
+/* Navigation Arrows */
+.review-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.review-nav-btn:hover {
+    background: var(--accent-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.review-nav-btn.prev {
+    left: -24px;
+}
+
+.review-nav-btn.next {
+    right: -24px;
+}
+
+.review-nav-btn i {
+    font-size: 1.2rem;
 }
 
 .review-card {
-    background: var(--white);
+    min-width: 350px;
+    max-width: 350px;
+    background: white;
+    border-radius: 12px;
     padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    border: 1px solid transparent;
-}
-
-.review-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    scroll-snap-align: center;
+    flex-shrink: 0;
 }
 
 .review-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2),
-        0 0 30px rgba(37, 99, 235, 0.15);
-    border-color: var(--accent-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.review-card:hover::before {
+/* Remove all special states */
+.review-card.active,
+.review-card.prev,
+.review-card.next {
     opacity: 1;
+    transform: none;
+    filter: none;
 }
 
+.review-card.active::before,
+.review-card::after {
+    display: none;
+}
+
+/* Review Text - Simple */
+.review-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+/* Stars - Simple */
 .review-stars {
     display: flex;
     gap: 0.25rem;
+    justify-content: center;
+    color: #fbbf24;
+    font-size: 1.1rem;
     margin-bottom: 1rem;
-    font-size: 1.2rem;
 }
 
 .review-stars i {
     color: #fbbf24;
-    text-shadow: 0 2px 4px rgba(251, 191, 36, 0.3);
-    animation: star-glow 2s ease-in-out infinite;
 }
 
-.review-stars i:nth-child(1) {
-    animation-delay: 0s;
+/* Footer - Simplified */
+.review-footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-top: none;
+    /* Remove border */
+    padding-top: 0;
+    margin-top: auto;
 }
 
-.review-stars i:nth-child(2) {
-    animation-delay: 0.1s;
-}
-
-.review-stars i:nth-child(3) {
-    animation-delay: 0.2s;
-}
-
-.review-stars i:nth-child(4) {
-    animation-delay: 0.3s;
-}
-
-.review-stars i:nth-child(5) {
-    animation-delay: 0.4s;
-}
-
-@keyframes star-glow {
-
-    0%,
-    100% {
-        filter: drop-shadow(0 0 2px rgba(251, 191, 36, 0.5));
-    }
-
-    50% {
-        filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.8));
-    }
-}
-
-.review-text {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--secondary-color);
-    margin-bottom: 1.5rem;
-    font-style: italic;
-    position: relative;
-    z-index: 1;
-}
-
-.review-text::before {
-    content: "" ";
- position: absolute;
-    top: -10px;
-    left: -10px;
-    font-size: 3rem;
-    color: var(--accent-color);
-    opacity: 0.1;
-    font-family: Georgia, serif;
-}
-
+/* Hide Author for cleaner look (like reference) */
 .review-author {
+    display: none;
+}
+
+/* Verified Badge - Google Style with Glassmorphism */
+.verified-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    margin-top: 1rem;
+}
+
+.verified-badge i {
+    color: #4285f4;
+    /* Google Blue */
+    font-size: 1rem;
+    filter: drop-shadow(0 0 3px rgba(66, 133, 244, 0.6));
+}
+
+.verified-badge span {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+/* Google Badge - Blue Glassmorphism */
+.google-badge {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding: 1.5rem 2.5rem;
+
+    /* Blue glassmorphism effect */
+    background: linear-gradient(135deg,
+            rgba(59, 130, 246, 0.15) 0%,
+            rgba(37, 99, 235, 0.1) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    box-shadow:
+        0 8px 32px rgba(59, 130, 246, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.google-badge::before {
+    display: none;
+}
+
+.badge-text {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    position: relative;
-    z-index: 1;
+    font-size: 1.1rem;
 }
 
-.review-author img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid var(--accent-color);
+.badge-text strong {
+    color: white;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.review-author span {
-    font-weight: 600;
-    color: var(--primary-color);
+.rating-number {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.google-badge {
+.badge-stars {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 3rem;
-    padding: 1.5rem;
-    background: var(--white);
-    border-radius: 1rem;
-    box-shadow: var(--shadow-lg);
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    z-index: 1;
+    gap: 0.25rem;
 }
 
-.google-badge i {
-    font-size: 2.5rem;
-    color: #4285f4;
+.badge-stars i {
+    color: #fbbf24;
+    font-size: 1.2rem;
+    filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.5));
 }
 
-.google-badge div {
-    text-align: left;
-}
-
-.google-badge strong {
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-right: 0.5rem;
-}
-
-.google-badge span {
-    color: var(--secondary-color);
-    font-size: 0.95rem;
+.badge-label {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .google-cta {
@@ -795,14 +904,6 @@ ul {
     color: var(--secondary-color);
     font-size: 0.95rem;
     font-weight: 500;
-}
-
-.verify-text::before {
-    content: "✓";
-    color: #34a853;
-    font-weight: bold;
-    margin-right: 0.5rem;
-    font-size: 1.2rem;
 }
 
 /* Footer */

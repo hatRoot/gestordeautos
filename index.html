@@ -313,88 +313,251 @@
         <div class="container">
             <div class="section-title">
                 <h2>La Confianza de Nuestros Clientes</h2>
-                <p>Reseñas reales de Google Maps</p>
+                <p><i class="fas fa-map-marker-alt google-maps-icon"></i> Reseñas reales de Google Maps</p>
             </div>
 
-            <div class="reviews-grid">
-                <!-- Review Card 1 -->
-                <div class="review-card">
-                    <div class="review-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="review-text">"Excelente servicio! Tramitaron mi alta de placas muy rápido y sin
-                        complicaciones. Totalmente recomendable."</p>
-                    <div class="review-author">
-                        <img src="https://ui-avatars.com/api/?name=Cliente+1&background=2563eb&color=fff&size=40"
-                            alt="Cliente 1">
-                        <span>Cliente 1</span>
-                    </div>
-                </div>
+            <div class="reviews-slider-container">
+                <!-- Navigation Arrows -->
+                <button class="review-nav-btn prev" onclick="scrollReviews('prev')">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="review-nav-btn next" onclick="scrollReviews('next')">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
 
-                <!-- Review Card 2 -->
-                <div class="review-card">
-                    <div class="review-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                <div class="reviews-track" id="reviewsTrack">
+                    <!-- Review Card 1 -->
+                    <div class="review-card">
+                        <p class="review-text">"Excelente servicio! Tramitaron mi alta de placas muy rápido y sin
+                            complicaciones. Totalmente recomendable."</p>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-footer">
+                            <div class="review-author">
+                                <img src="https://ui-avatars.com/api/?name=Cliente+1&background=2563eb&color=fff&size=40"
+                                    alt="Cliente 1">
+                                <span>Cliente 1</span>
+                            </div>
+                            <div class="verified-badge">
+                                <i class="fab fa-google"></i>
+                                <span>Verified Review</span>
+                            </div>
+                        </div>
                     </div>
-                    <p class="review-text">"Muy profesionales. Me ayudaron con el cambio de propietario de mi auto sin
-                        ningún problema."</p>
-                    <div class="review-author">
-                        <img src="https://ui-avatars.com/api/?name=Cliente+2&background=2563eb&color=fff&size=40"
-                            alt="Cliente 2">
-                        <span>Cliente 2</span>
-                    </div>
-                </div>
 
-                <!-- Review Card 3 -->
-                <div class="review-card">
-                    <div class="review-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                    <!-- Review Card 2 -->
+                    <div class="review-card">
+                        <p class="review-text">"Muy profesionales. Me ayudaron con el cambio de propietario de mi auto
+                            sin ningún problema."</p>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-footer">
+                            <div class="review-author">
+                                <img src="https://ui-avatars.com/api/?name=Cliente+2&background=2563eb&color=fff&size=40"
+                                    alt="Cliente 2">
+                                <span>Cliente 2</span>
+                            </div>
+                            <div class="verified-badge">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                                    alt="G" width="16">
+                                <span>Verified Review</span>
+                            </div>
+                        </div>
                     </div>
-                    <p class="review-text">"Atención de primera. Resolvieron todas mis dudas y todo el proceso fue muy
-                        transparente."</p>
-                    <div class="review-author">
-                        <img src="https://ui-avatars.com/api/?name=Cliente+3&background=2563eb&color=fff&size=40"
-                            alt="Cliente 3">
-                        <span>Cliente 3</span>
-                    </div>
-                </div>
 
-                <!-- Review Card 4 -->
-                <div class="review-card">
-                    <div class="review-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                    <!-- Review Card 3 -->
+                    <div class="review-card">
+                        <p class="review-text">"Atención de primera. Resolvieron todas mis dudas y todo el proceso fue
+                            muy transparente."</p>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-footer">
+                            <div class="review-author">
+                                <img src="https://ui-avatars.com/api/?name=Cliente+3&background=2563eb&color=fff&size=40"
+                                    alt="Cliente 3">
+                                <span>Cliente 3</span>
+                            </div>
+                            <div class="verified-badge">
+                                <i class="fab fa-google"></i>
+                                <span>Verified Review</span>
+                            </div>
+                        </div>
                     </div>
-                    <p class="review-text">"Rapidísimo y confiable. Sin salir de casa me tramitaron todo. ¡Súper
-                        recomendado!"</p>
-                    <div class="review-author">
-                        <img src="https://ui-avatars.com/api/?name=Cliente+4&background=2563eb&color=fff&size=40"
-                            alt="Cliente 4">
-                        <span>Cliente 4</span>
+
+                    <!-- Review Card 4 -->
+                    <div class="review-card">
+                        <p class="review-text">"Rapidísimo y confiable. Sin salir de casa me tramitaron todo. ¡Súper
+                            recomendado!"</p>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-footer">
+                            <div class="review-author">
+                                <img src="https://ui-avatars.com/api/?name=Cliente+4&background=2563eb&color=fff&size=40"
+                                    alt="Cliente 4">
+                                <span>Cliente 4</span>
+                            </div>
+                            <div class="verified-badge">
+                                <i class="fab fa-google"></i>
+                                <span>Verified Review</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review Card 5 -->
+                    <div class="review-card">
+                        <p class="review-text">"Me ahorraron las filas interminables. El servicio de legalización fue
+                            impecable y muy rápido."</p>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-footer">
+                            <div class="review-author">
+                                <img src="https://ui-avatars.com/api/?name=Cliente+5&background=2563eb&color=fff&size=40"
+                                    alt="Cliente 5">
+                                <span>Cliente 5</span>
+                            </div>
+                            <div class="verified-badge">
+                                <i class="fab fa-google"></i>
+                                <span>Verified Review</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review Card 6 -->
+                    <div class="review-card">
+                        <p class="review-text">"Excelente atención personalizada. Resolvieron mi problema de tenencias
+                            atrasadas en días."</p>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-footer">
+                            <div class="review-author">
+                                <img src="https://ui-avatars.com/api/?name=Cliente+6&background=2563eb&color=fff&size=40"
+                                    alt="Cliente 6">
+                                <span>Cliente 6</span>
+                            </div>
+                            <div class="verified-badge">
+                                <i class="fab fa-google"></i>
+                                <span>Verified Review</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review Card 7 -->
+                    <div class="review-card">
+                        <p class="review-text">"100% confiable. Ya es el segundo trámite que hago con ellos y siempre
+                            cumplen."</p>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-footer">
+                            <div class="review-author">
+                                <img src="https://ui-avatars.com/api/?name=Cliente+7&background=2563eb&color=fff&size=40"
+                                    alt="Cliente 7">
+                                <span>Cliente 7</span>
+                            </div>
+                            <div class="verified-badge">
+                                <i class="fab fa-google"></i>
+                                <span>Verified Review</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review Card 8 -->
+                    <div class="review-card">
+                        <p class="review-text">"La mejor opción para trámites vehiculares en la ciudad. Servicio premium
+                            de verdad."</p>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-footer">
+                            <div class="review-author">
+                                <img src="https://ui-avatars.com/api/?name=Cliente+8&background=2563eb&color=fff&size=40"
+                                    alt="Cliente 8">
+                                <span>Cliente 8</span>
+                            </div>
+                            <div class="verified-badge">
+                                <i class="fab fa-google"></i>
+                                <span>Verified Review</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review Card 9 -->
+                    <div class="review-card">
+                        <p class="review-text">"Increíble eficiencia. Recogieron y entregaron mis documentos en la
+                            puerta de mi casa."</p>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-footer">
+                            <div class="review-author">
+                                <img src="https://ui-avatars.com/api/?name=Cliente+9&background=2563eb&color=fff&size=40"
+                                    alt="Cliente 9">
+                                <span>Cliente 9</span>
+                            </div>
+                            <div class="verified-badge">
+                                <i class="fab fa-google"></i>
+                                <span>Verified Review</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="google-badge">
-                <i class="fab fa-google"></i>
-                <div>
-                    <strong>5.0</strong> <span>calificación en Google</span>
+                <div class="badge-text">
+                    <strong>Google Maps</strong>
+                    <span class="rating-number">5.0</span>
                 </div>
+                <div class="badge-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <span class="badge-label">Puntaje Perfecto</span>
             </div>
 
             <div class="google-cta">
@@ -460,6 +623,109 @@
             } else {
                 header.classList.remove('scrolled');
             }
+        });
+    </script>
+
+    <!-- Reviews Navigation Script -->
+    <script>
+        function scrollReviews(direction) {
+            const track = document.getElementById('reviewsTrack');
+            const cardWidth = 350 + 24; // card width + gap
+            const scrollAmount = direction === 'prev' ? -cardWidth : cardWidth;
+
+            track.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+
+    <!-- Cover Flow Effect Script (Apple-style Physics) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.querySelector('.reviews-track');
+            const cards = document.querySelectorAll('.review-card');
+
+            // Physics State
+            let currentScroll = track.scrollLeft;
+            let targetScroll = track.scrollLeft;
+            let isDragging = false;
+
+            // Lerp factor (Lower = Smoother/Heavier, Higher = Snappier)
+            // 0.08 is a sweet spot for "Apple-like" fluid weight
+            const lerpFactor = 0.08;
+
+            function lerp(start, end, factor) {
+                return start + (end - start) * factor;
+            }
+
+            function updateCoverFlow() {
+                // Smooth out the scroll value
+                targetScroll = track.scrollLeft;
+
+                // If the difference is small enough, snap to target to save CPU
+                if (Math.abs(targetScroll - currentScroll) < 0.5) {
+                    currentScroll = targetScroll;
+                } else {
+                    currentScroll = lerp(currentScroll, targetScroll, lerpFactor);
+                }
+
+                // Calculate center based on SMOOTHED scroll
+                const center = currentScroll + (track.offsetWidth / 2);
+
+                cards.forEach(card => {
+                    const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+                    const distance = Math.abs(center - cardCenter);
+                    const maxDistance = 500; // Increased range for softer falloff
+
+                    // Reset classes
+                    card.classList.remove('active', 'prev', 'next');
+                    card.style.zIndex = Math.round(1000 - distance); // Ultra-precise z-indexing
+
+                    // Normalized distance (0 to 1)
+                    let normDist = Math.min(1, distance / maxDistance);
+
+                    // Smooth easing functions for properties
+                    // Quadratic ease-in for scale (1 -> 0.85)
+                    const scale = 1.15 - (normDist * 0.35); // 1.15 center -> 0.8 sides
+
+                    // Sinusoidal ease for Rotation
+                    // Slightly S-curve for smoother start/end of rotation
+                    const rotRaw = normDist * 45; // Max 45deg
+
+                    // Translation X (The "Magnetic" pull)
+                    // REMOVED shift to keep them physically separated as per request
+                    const shift = 0;
+
+                    // Depth
+                    // Reduced from -150 to -70 to bring them "just behind" the active card
+                    const depth = -70 * normDist;
+
+                    if (distance < 50) { // Center "Sweet spot"
+                        card.classList.add('active');
+                        // Pure front-facing
+                        card.style.transform = `translateX(0px) scale(1.15) translateZ(100px) rotateY(0deg)`;
+                    } else {
+                        // Side cards
+                        if (cardCenter < center) {
+                            card.classList.add('prev');
+                            card.style.transform = `translateX(${shift}px) scale(${scale}) translateZ(${depth}px) rotateY(${rotRaw}deg)`;
+                        } else {
+                            card.classList.add('next');
+                            card.style.transform = `translateX(${shift}px) scale(${scale}) translateZ(${depth}px) rotateY(-${rotRaw}deg)`;
+                        }
+
+                        // Smooth opacity fade
+                        card.style.opacity = 1 - (normDist * 0.6); // Fade out as they go back
+                    }
+                });
+
+                // Infinite loop for physics
+                window.requestAnimationFrame(updateCoverFlow);
+            }
+
+            // Kick off the loop
+            updateCoverFlow();
         });
     </script>
 </body>
