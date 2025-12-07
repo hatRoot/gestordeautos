@@ -506,7 +506,7 @@ ul {
 .service-item small {
     font-size: 0.95rem;
     /* Slightly larger subtitle */
-    color: var(--secondary-color);
+    color: var(--accent-color);
 }
 
 .service-item:hover {
@@ -563,7 +563,7 @@ ul {
 }
 
 .highlight-card small {
-    color: #94a3b8;
+    color: #38bdf8;
 }
 
 .highlight-card .service-icon {
