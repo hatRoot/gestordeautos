@@ -275,12 +275,11 @@ ul {
 
 .hero-image-stack {
     position: relative;
-    width: 600px;
-    /* Wider for side-by-side */
-    height: 350px;
+    width: 100%;
+    height: 100%;
     display: flex;
-    align-items: flex-end;
-    /* Align bottom */
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-car {
@@ -297,18 +296,18 @@ ul {
 
 .hero-moto {
     position: relative;
-    width: 45%;
-    /* Slightly smaller */
-    max-width: 280px;
+    width: 80%;
+    /* Larger since it is alone */
+    max-width: 450px;
     object-fit: contain;
-    margin-left: -50px;
-    /* Slight overlap for cohesion */
     /* Light Gray Contour */
-    filter: drop-shadow(0 0 3px rgba(203, 213, 225, 0.8));
-    animation: floatMoto 5s ease-in-out infinite 0.5s;
-    transform: scaleX(-1);
-    /* Facing the car/center */
+    filter: drop-shadow(0 0 10px rgba(203, 213, 225, 0.6));
+    /* Face Right (Natural) */
+    transform: none;
+    /* Remove transition to prevent jitter with JS scroll */
+    transition: filter 0.3s ease;
     z-index: 2;
+    will-change: transform, opacity;
 }
 
 @keyframes floatCar {
@@ -743,46 +742,27 @@ ul {
     }
 }
 
-/* Reviews Section - Glassmorphism Blue */
+/* Reviews Section - Blended with Car Image */
 .reviews-section {
-    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-    /* Deep Blue Gradient */
+    background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 50%, #f1f3f5 100%);
+    /* Subtle gradient matching car image environment */
     padding: 4rem 0;
     position: relative;
-    overflow: hidden;
 }
 
-/* Background Pattern for depth */
+/* Remove Background Pattern */
 .reviews-section::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
-    animation: rotate-bg 20s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes rotate-bg {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
+    display: none;
 }
 
 .reviews-section .section-title h2 {
-    color: white;
-    /* White text for contrast */
+    color: var(--primary-color);
+    /* Restore dark color */
 }
 
 .reviews-section .section-title p {
-    color: #bfdbfe;
-    /* Light blue text */
+    color: var(--secondary-color);
+    /* Restore gray color */
 }
 
 .reviews-slider-container {
@@ -825,11 +805,9 @@ ul {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.2);
-    /* Semi-transparent */
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
+    background: white;
+    border: 1px solid #e5e7eb;
+    color: var(--primary-color);
     border-radius: 50%;
     width: 48px;
     height: 48px;
@@ -837,16 +815,15 @@ ul {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     z-index: 10;
 }
 
 .review-nav-btn:hover {
-    background: white;
-    color: #1e3a8a;
-    /* Blue text on hover */
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    background: var(--accent-color);
+    color: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .review-nav-btn.prev {
@@ -861,22 +838,15 @@ ul {
     font-size: 1.2rem;
 }
 
-/* Glassmorphism Card */
+/* Standard Card */
 .review-card {
     min-width: 350px;
     max-width: 350px;
-    /* Glass Effect */
-    background: rgba(255, 255, 255, 0.1);
-    /* Very transparent white */
-    backdrop-filter: blur(12px);
-    /* Blur the blue background behind */
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    /* Subtle white border */
+    background: white;
+    border: 1px solid #f1f5f9;
     border-radius: 16px;
     padding: 2rem;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-    /* Deep shadow */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     scroll-snap-align: center;
     transition: all 0.3s ease;
     display: flex;
@@ -884,32 +854,32 @@ ul {
     justify-content: space-between;
 }
 
-/* Text adjustments for dark background */
+/* Text adjustments for light background */
 .review-text {
-    color: white;
-    /* White text */
+    color: var(--text-color);
+    /* Dark text */
     font-size: 1.05rem;
     line-height: 1.6;
     margin-bottom: 1.5rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-shadow: none;
 }
 
 .review-author span {
-    color: white;
+    color: var(--primary-color);
     font-weight: 600;
 }
 
 .verified-badge {
-    background: rgba(0, 0, 0, 0.3);
-    /* Darker badge bg */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #cbd5e1;
+    background: #f1f5f9;
+    /* Light gray badge */
+    border: none;
+    color: #64748b;
 }
 
 /* Review Stars specific override */
 .review-stars i {
     color: #fbbf24;
-    filter: drop-shadow(0 0 2px rgba(251, 191, 36, 0.5));
+    filter: none;
 }
 
 
@@ -2033,4 +2003,27 @@ ul {
     color: #fbbf24;
     filter: drop-shadow(0 0 2px rgba(251, 191, 36, 0.5));
     font-size: 1.1rem;
+}
+
+/* Mobile Responsiveness Tweaks */
+@media (max-width: 768px) {
+
+    html,
+    body {
+        overflow-x: hidden;
+    }
+
+    .import-popup {
+        display: none !important;
+    }
+
+    .tab-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: none;
+    }
 }
