@@ -102,7 +102,8 @@ ul {
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 1000;
+    z-index: 5000;
+    /* Increased to stay above 3D cards */
     padding: 2rem 0;
     /* Huge padding initially */
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -245,7 +246,115 @@ ul {
 
 .hero-content {
     max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
     animation: fadeInUp 1s ease-out;
+    display: flex;
+    /* Flex layout */
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.hero-text {
+    flex: 1;
+    max-width: 600px;
+    z-index: 2;
+    /* Keep text above if overlap */
+}
+
+.hero-visual {
+    flex: 1;
+    height: 400px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.hero-image-stack {
+    position: relative;
+    width: 600px;
+    /* Wider for side-by-side */
+    height: 350px;
+    display: flex;
+    align-items: flex-end;
+    /* Align bottom */
+}
+
+.hero-car {
+    position: relative;
+    /* Changing to relative for flex flow */
+    width: 60%;
+    max-width: 350px;
+    object-fit: contain;
+    /* Light Gray Contour (Drop Shadow trick) */
+    filter: drop-shadow(0 0 3px rgba(203, 213, 225, 0.8));
+    animation: floatCar 6s ease-in-out infinite;
+    z-index: 1;
+}
+
+.hero-moto {
+    position: relative;
+    width: 45%;
+    /* Slightly smaller */
+    max-width: 280px;
+    object-fit: contain;
+    margin-left: -50px;
+    /* Slight overlap for cohesion */
+    /* Light Gray Contour */
+    filter: drop-shadow(0 0 3px rgba(203, 213, 225, 0.8));
+    animation: floatMoto 5s ease-in-out infinite 0.5s;
+    transform: scaleX(-1);
+    /* Facing the car/center */
+    z-index: 2;
+}
+
+@keyframes floatCar {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes floatMoto {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Mobile Fix */
+@media (max-width: 1024px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-text {
+        max-width: 100%;
+    }
+
+    .hero-buttons,
+    .hero-stats {
+        justify-content: center;
+    }
+
+    .hero-visual {
+        display: none;
+        /* Hide via CSS or helper class */
+    }
 }
 
 .hero h1 {
@@ -382,22 +491,47 @@ ul {
     /* Tripled from 1.1rem */
 }
 
-.partners-grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
+/* Infinite Partner Scroll */
+.partners-slider {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
     margin-top: 2rem;
-    flex-wrap: wrap;
+    /* Fade gradients on sides for smoothness */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
-.partners-grid img {
+.partners-track {
+    display: flex;
+    width: max-content;
+    gap: 3rem;
+    animation: scroll 30s linear infinite;
+    padding: 1rem 0;
+}
+
+.partners-track img {
     height: 60px;
     width: auto;
     object-fit: contain;
     filter: grayscale(100%);
     opacity: 0.7;
     transition: var(--transition);
+}
+
+.partners-track img:hover {
+    opacity: 1;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+        /* Moves exactly half the track (one full set) */
+    }
 }
 
 
@@ -609,24 +743,53 @@ ul {
     }
 }
 
-/* Reviews Section - Simple & Clean (Dimensión Desconocida) */
+/* Reviews Section - Glassmorphism Blue */
 .reviews-section {
-    background: #f8f9fa;
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    /* Deep Blue Gradient */
     padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background Pattern for depth */
+.reviews-section::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+    animation: rotate-bg 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotate-bg {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .reviews-section .section-title h2 {
-    color: var(--primary-color);
+    color: white;
+    /* White text for contrast */
 }
 
 .reviews-section .section-title p {
-    color: var(--secondary-color);
+    color: #bfdbfe;
+    /* Light blue text */
 }
 
 .reviews-slider-container {
     width: 100%;
     margin: 3rem 0;
     position: relative;
+    z-index: 2;
 }
 
 .reviews-track {
@@ -637,12 +800,24 @@ ul {
     padding: 2rem 1rem;
     scroll-behavior: smooth;
     scrollbar-width: none;
-    /* Hide scrollbar */
 }
 
 .reviews-track::-webkit-scrollbar {
     display: none;
-    /* Hide scrollbar for Chrome/Safari */
+}
+
+/* Spacer for centering logic */
+.review-spacer {
+    min-width: calc(50% - 190px);
+    flex-shrink: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+@media (max-width: 768px) {
+    .review-spacer {
+        min-width: calc(50% - 175px);
+    }
 }
 
 /* Navigation Arrows */
@@ -650,8 +825,11 @@ ul {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: white;
-    border: 1px solid #e5e7eb;
+    background: rgba(255, 255, 255, 0.2);
+    /* Semi-transparent */
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
     border-radius: 50%;
     width: 48px;
     height: 48px;
@@ -659,15 +837,16 @@ ul {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     z-index: 10;
 }
 
 .review-nav-btn:hover {
-    background: var(--accent-color);
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: white;
+    color: #1e3a8a;
+    /* Blue text on hover */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
 .review-nav-btn.prev {
@@ -682,16 +861,58 @@ ul {
     font-size: 1.2rem;
 }
 
+/* Glassmorphism Card */
 .review-card {
     min-width: 350px;
     max-width: 350px;
-    background: white;
-    border-radius: 12px;
+    /* Glass Effect */
+    background: rgba(255, 255, 255, 0.1);
+    /* Very transparent white */
+    backdrop-filter: blur(12px);
+    /* Blur the blue background behind */
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Subtle white border */
+    border-radius: 16px;
     padding: 2rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    /* Deep shadow */
     scroll-snap-align: center;
-    flex-shrink: 0;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
+/* Text adjustments for dark background */
+.review-text {
+    color: white;
+    /* White text */
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-author span {
+    color: white;
+    font-weight: 600;
+}
+
+.verified-badge {
+    background: rgba(0, 0, 0, 0.3);
+    /* Darker badge bg */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #cbd5e1;
+}
+
+/* Review Stars specific override */
+.review-stars i {
+    color: #fbbf24;
+    filter: drop-shadow(0 0 2px rgba(251, 191, 36, 0.5));
+}
+
+
 
 .review-card:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -779,70 +1000,83 @@ ul {
     letter-spacing: 0.3px;
 }
 
-/* Google Badge - Blue Glassmorphism */
+/* Google Badge - Official Style */
 .google-badge {
+    background: white;
+    padding: 1.5rem 2.5rem;
+    border-radius: 12px;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     margin-top: 2rem;
-    padding: 1.5rem 2.5rem;
-
-    /* Blue glassmorphism effect */
-    background: linear-gradient(135deg,
-            rgba(59, 130, 246, 0.15) 0%,
-            rgba(37, 99, 235, 0.1) 100%);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-
-    border-radius: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-
-    box-shadow:
-        0 8px 32px rgba(59, 130, 246, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+    border: 1px solid #e1e4e8;
 }
 
-.google-badge::before {
-    display: none;
+.google-badge:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.badge-text {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 1.1rem;
+.google-logo {
+    font-family: 'Product Sans', 'Roboto', sans-serif;
+    /* Google Fonts usually needed, but sans-serif fallback is okay */
+    font-size: 2.2rem;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    line-height: 1;
 }
 
-.badge-text strong {
-    color: white;
-    font-weight: 700;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+.g-blue {
+    color: #4285F4;
 }
 
-.rating-number {
-    color: white;
-    font-size: 1.5rem;
-    font-weight: 800;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+.g-red {
+    color: #EA4335;
+}
+
+.g-yellow {
+    color: #FBBC05;
+}
+
+.g-green {
+    color: #34A853;
+}
+
+.badge-subtitle {
+    font-size: 1.2rem;
+    color: #202124;
+    /* Google Dark Gray */
+    font-weight: 400;
+    letter-spacing: 0.2px;
 }
 
 .badge-stars {
     display: flex;
-    gap: 0.25rem;
+    gap: 0.3rem;
+    align-items: center;
+    margin-top: 0.5rem;
 }
 
 .badge-stars i {
-    color: #fbbf24;
-    font-size: 1.2rem;
-    filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.5));
+    font-size: 1.4rem;
+    color: #FBBC05;
+    /* Star Yellow */
+    filter: none;
+    /* Remove previous glow/drop shadow if any */
 }
 
-.badge-label {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+.check-icon {
+    color: #34A853 !important;
+    /* Green Check */
+    background: white;
+    border-radius: 50%;
+    /* To make it look like a circle with check inside if icon is just check. 
+       fas fa-check-circle is a check inside a circle. */
+    font-size: 1.5rem !important;
 }
 
 .google-cta {
@@ -900,10 +1134,29 @@ ul {
 }
 
 .verify-text {
-    margin-top: 1rem;
-    color: var(--secondary-color);
-    font-size: 0.95rem;
-    font-weight: 500;
+    margin-top: 1.25rem;
+    color: #4ade80;
+    /* Bright Green */
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
+    animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.02);
+    }
 }
 
 /* Footer */
@@ -958,6 +1211,25 @@ ul {
     z-index: 1000;
     transition: var(--transition);
     animation: pulse 2s infinite;
+}
+
+.whatsapp-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #ef4444;
+    /* Notification Red */
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 800;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .floating-whatsapp:hover {
@@ -1163,14 +1435,13 @@ ul {
         padding: 3rem 0;
     }
 
-    .partners-grid {
-        gap: 1rem;
-        margin-top: 1.5rem;
+    /* Mobile Partner Scroll Adjustments */
+    .partners-track {
+        gap: 2rem;
     }
 
-    .partners-grid img {
+    .partners-track img {
         height: 40px;
-        /* Smaller partner logos */
     }
 
     /* Footer Adjustments */
@@ -1193,4 +1464,573 @@ ul {
         right: 1.5rem;
         font-size: 1.5rem;
     }
+}
+
+/* Premium Gold Popup */
+.gold-popup {
+    position: fixed;
+    top: 100px;
+    /* Below header */
+    left: 2rem;
+    /* Anchor Left */
+    right: auto;
+    z-index: 5500;
+    width: 300px;
+    background: linear-gradient(145deg, #1a1a1a 0%, #000000 100%);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(251, 191, 36, 0.1),
+        inset 0 0 0 1px rgba(255, 215, 0, 0.1);
+
+    /* Start State: Off-screen Right */
+    transform: translateX(120vw);
+    opacity: 0;
+
+    font-family: 'Inter', sans-serif;
+    color: #f8fafc;
+    pointer-events: none;
+    /* Prevent clicks while off-screen */
+}
+
+/* Desktop Car Animation */
+@media (min-width: 769px) {
+    .gold-popup.visible {
+        /* Run Animation */
+        animation: car-park 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        pointer-events: all;
+    }
+}
+
+@keyframes car-park {
+    0% {
+        transform: translateX(120vw) skewX(-20deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    60% {
+        transform: translateX(-40px) skewX(10deg);
+        /* Brake & Overshoot Left */
+    }
+
+    80% {
+        transform: translateX(10px) skewX(-5deg);
+        /* Rebound Right */
+    }
+
+    100% {
+        transform: translateX(0) skewX(0);
+        /* Parked */
+        opacity: 1;
+    }
+}
+
+.gold-popup.hidden {
+    display: none;
+}
+
+.gold-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.gold-icon {
+    font-size: 1.2rem;
+    color: #fbbf24;
+    filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.6));
+    animation: gold-pulse 3s infinite;
+}
+
+.gold-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #ffffff, #e2e8f0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.5px;
+}
+
+.gold-subtitle {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+}
+
+.gold-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.gold-link-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.gold-link-item i {
+    width: 24px;
+    text-align: center;
+    color: #fbbf24;
+    /* Gold icons */
+    transition: transform 0.3s;
+}
+
+.gold-link-item:hover {
+    background: linear-gradient(90deg, rgba(251, 191, 36, 0.1) 0%, transparent 100%);
+    border-color: rgba(251, 191, 36, 0.3);
+    color: white;
+    transform: translateX(5px);
+}
+
+.gold-link-item:hover i {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.6));
+}
+
+.link-highlight {
+    background: linear-gradient(90deg, rgba(37, 99, 235, 0.1) 0%, transparent 100%);
+    border-color: rgba(37, 99, 235, 0.3);
+}
+
+.link-highlight i {
+    color: #60a5fa;
+}
+
+.close-gold,
+.close-reemplacamiento {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: rgba(255, 255, 255, 0.15);
+    /* More visible bg */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #e2e8f0;
+    /* Brighter initial color */
+    width: 44px;
+    /* Slightly larger */
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(6px);
+    z-index: 20;
+    /* Ensure on top */
+}
+
+.close-gold:hover,
+.close-reemplacamiento:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    transform: rotate(90deg) scale(1.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes gold-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.8));
+    }
+}
+
+@media (max-width: 768px) {
+    .gold-popup {
+        left: 50%;
+        top: 80px;
+        right: auto;
+        transform: translate(-50%, -150%);
+        width: 90%;
+        max-width: 350px;
+        animation: none;
+        /* No drift on mobile */
+    }
+
+    .gold-popup.visible {
+        transform: translate(-50%, 0);
+        animation: none;
+        pointer-events: all;
+    }
+}
+
+/* Import Popup - Floating Promo */
+.import-popup {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 6000;
+    /* Above header (5000) */
+    max-width: 800px;
+    width: 95%;
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    transform-origin: bottom right;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.import-popup.hidden {
+    display: none;
+}
+
+.import-popup:not(.visible) {
+    transform: translateY(100px) scale(0.5);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.close-popup {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: white;
+    color: #0f172a;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.close-popup:hover {
+    transform: scale(1.1);
+    background: #ef4444;
+    /* Red close/minimize */
+    color: white;
+}
+
+/* Import Trigger (Floating Button) */
+.import-trigger {
+    position: fixed;
+    bottom: 2rem;
+    right: 6.5rem;
+    /* Gap from WhatsApp (2rem + 60px + gap) */
+    z-index: 5999;
+    /* Just below popup but above header/content */
+    background: white;
+    border: none;
+
+    /* Circle Shape */
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transform: translateY(0);
+    opacity: 1;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    color: #0f172a;
+    /* Dark icon */
+}
+
+.import-trigger.hidden {
+    display: none;
+}
+
+.import-trigger:not(.visible) {
+    transform: translateY(50px) scale(0.8);
+    opacity: 0;
+}
+
+.trigger-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #ef4444;
+    /* Notification Red */
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 800;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    animation: pulse-badge 2s infinite;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.import-trigger:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes pulse-badge {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+.import-card {
+    background: #111827;
+    /* Solid rich dark background */
+    border-radius: 1.5rem;
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: 300px;
+}
+
+.import-content {
+    padding: 2.5rem;
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.import-badge {
+    background: #fbbf24;
+    color: #0f172a;
+    font-weight: 800;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    text-transform: uppercase;
+    width: fit-content;
+    margin-bottom: 1rem;
+    animation: bounce 2s infinite;
+}
+
+.import-content h2 {
+    font-size: 2rem;
+    line-height: 1.1;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.text-gradient {
+    background: linear-gradient(to right, #38bdf8, #818cf8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.import-content h3 {
+    color: #94a3b8;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.import-content p {
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+.btn-import {
+    background: white;
+    color: #0f172a;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    width: fit-content;
+    border-radius: 2rem;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-import:hover {
+    transform: translateY(-2px);
+    background: #f1f5f9;
+}
+
+/* Visual Side - Unfiltered */
+.import-visual {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.car-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.import-card:hover .car-img {
+    transform: scale(1.05);
+}
+
+/* Waving Flags */
+.waving-flag {
+    position: absolute;
+    font-size: 3rem;
+    z-index: 10;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    animation: wave 3s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+
+.usa-flag {
+    top: 1rem;
+    left: 1rem;
+    animation-delay: 0s;
+}
+
+.mx-flag {
+    bottom: 1rem;
+    right: 1rem;
+    animation-delay: 1.5s;
+}
+
+@keyframes wave {
+
+    0%,
+    100% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .import-popup {
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 1.5rem 1.5rem 0 0;
+    }
+
+    .import-card {
+        border-radius: 1.5rem 1.5rem 0 0;
+        height: auto;
+        flex-direction: column-reverse;
+        /* Image on top */
+    }
+
+    .import-content {
+        padding: 2rem;
+        text-align: center;
+        align-items: center;
+    }
+
+    .import-visual {
+        min-height: 200px;
+    }
+
+    .close-popup {
+        top: 1rem;
+        right: 1rem;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(4px);
+    }
+
+    /* Position floating button above WhatsApp on mobile */
+    .import-trigger {
+        right: 2rem;
+        bottom: 6rem;
+        /* WhatsApp (2rem + 60px) + gap */
+    }
+}
+
+/* Premium Google Badge */
+.google-badge.premium-badge {
+    background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+    border: 1px solid rgba(251, 191, 36, 0.4);
+    /* Gold border */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05),
+        0 0 15px rgba(251, 191, 36, 0.15);
+    padding: 1rem 2rem;
+    min-width: 220px;
+}
+
+.score-text {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-right: 0.5rem;
+    letter-spacing: -0.5px;
+    background: linear-gradient(145deg, #1e293b 0%, #000000 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.premium-badge .badge-stars {
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.premium-badge .badge-stars i.fa-star {
+    color: #fbbf24;
+    filter: drop-shadow(0 0 2px rgba(251, 191, 36, 0.5));
+    font-size: 1.1rem;
 }
