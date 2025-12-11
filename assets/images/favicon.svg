@@ -1,5 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" fill="#ffffff"/>
-  <path d="M112 368c26.5 0 48-21.5 48-48s-21.5-48-48-48-48 21.5-48 48 21.5 48 48 48zm288 0c26.5 0 48-21.5 48-48s-21.5-48-48-48-48 21.5-48 48 21.5 48 48 48z" fill="#000000"/>
-  <path d="M416 208h-26.6l-21.4-69.5C359.8 111.9 334.8 96 307.7 96H204.3c-27.1 0-52.1 15.9-60.3 42.5L122.6 208H96c-17.7 0-32 14.3-32 32v112h32c0 29.8 20.9 54.9 48.8 61.9C157.9 443.2 189.6 424 189.6 392h132.8c0 32 31.7 51.2 44.8 21.9 27.9-7 48.8-32.1 48.8-61.9h32V240c0-17.7-14.3-32-32-32zm-67.4-78.6c1.6-5.2 6.4-8.6 11.9-8.6h20.7c5.4 0 10.3 3.4 11.9 8.6l16.1 52.2H332l-16.6-52.2zm-127.2 0c1.6-5.2 6.5-8.6 11.9-8.6h73.3c5.5 0 10.3 3.4 11.9 8.6l16.6 52.2H204.8l16.6-52.2z" fill="#000000"/>
+  <!-- Minimalist Black Circle Background -->
+  <circle cx="256" cy="256" r="240" fill="#000000"/>
+  
+  <!-- White Car Silhouette (Centered) -->
+  <path d="M136 336c-17.7 0-32-14.3-32-32v-88c0-17.7 14.3-32 32-32h16l12.5-40.6c6.2-20.2 25-34 46.1-34h120.8c21.1 0 39.9 13.9 46.1 34l12.5 40.6h16c17.7 0 32 14.3 32 32v88c0 17.7-14.3 32-32 32H136z M168 336c13.3 0 24 10.7 24 24s-10.7 24-24 24-24-10.7-24-24 10.7-24 24-24zm176 0c13.3 0 24 10.7 24 24s-10.7 24-24 24-24-10.7-24-24 10.7-24 24-24z" fill="#ffffff" transform="translate(0, 20)"/>
+  
+  <!-- "Ready" Checkmark Icon (Green Circle with White Check or just Green Check) -->
+  <!-- Let's do a solid green circle with white check for maximum visibility in small size -->
+  <circle cx="390" cy="130" r="90" fill="#22c55e" stroke="#ffffff" stroke-width="15"/>
+  <path d="M350 130 l25 25 l55 -55" stroke="#ffffff" stroke-width="15" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
