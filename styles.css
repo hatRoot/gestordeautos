@@ -2014,7 +2014,8 @@ ul {
         overflow-x: hidden;
     }
 
-    .import-popup {
+    .import-popup,
+    .gold-popup {
         display: none !important;
     }
 
