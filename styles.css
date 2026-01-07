@@ -1332,7 +1332,7 @@ ul {
         max-width: 280px;
         /* Slightly narrower */
         margin-top: 0.25rem;
-        padding: 0.6rem 1rem;
+        padding: 0.8rem 1rem;
         /* Compact button */
         font-size: 0.95rem;
     }
@@ -1638,9 +1638,10 @@ ul {
 @media (max-width: 768px) {
     .gold-popup {
         left: 50%;
-        top: 80px;
+        top: auto;
+        bottom: 100px;
         right: auto;
-        transform: translate(-50%, -150%);
+        transform: translate(-50%, 100%);
         width: 90%;
         max-width: 350px;
         animation: none;
