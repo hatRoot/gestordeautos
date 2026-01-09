@@ -10,9 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <meta name="description"
-        content="¿Auto Nuevo? Tramita tu Permiso de Guerrero 2026 y Licencia Permanente CDMX. Gestoría vehicular experta en Chalco, Huixquilucan e Interlomas. ¡Sin filas!">
+        content="¿Auto Nuevo? Tramita tu Permiso de Guerrero 2026 y Licencia Permanente CDMX. Gestoría vehicular experta en Chalco, Huixquilucan e Interlomas. Foreigner Services available: Plates & Licenses for Foreigners.">
     <meta name="keywords"
-        content="auto nuevo permiso, permiso provisional auto nuevo, licencia permanente cdmx, permiso guerrero 2026, gestoria vehicular cdmx, gestoria chalco, gestoria interlomas, placas edomex">
+        content="auto nuevo permiso, permiso provisional auto nuevo, licencia permanente cdmx, permiso guerrero 2026, gestoria vehicular cdmx, gestoria chalco, gestoria interlomas, placas edomex, foreigner driver license mexico, placas para extranjeros mexico, car legalization mexico, english speaking vehicle registry service">
     <meta name="robots" content="index, follow">
     <meta name="google-site-verification" content="d2EckAkRF5uJ8I1-9sY4JRgDJ7gYxpGV7pLnztUAxLQ">
     <link rel="canonical" href="https://gestordeautos.com.mx/">
@@ -136,17 +136,22 @@
                 </div>
                 <div class="logo-text">
                     <div class="site-title">Gestor de <span>Autos</span></div>
-                    <div class="header-slogan">Gestión vehicular rápida y segura.</div>
+                    <div class="header-slogan" data-i18n="header_slogan">Gestión vehicular rápida y segura.</div>
                 </div>
             </a>
             <ul class="nav-links">
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#servicios" data-i18n="nav_services">Servicios</a></li>
+                <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
             </ul>
-            <a href="https://wa.me/525535757364?text=Hola,%20me%20interesa%20una%20cotización" class="btn btn-whatsapp"
-                target="_blank">
-                <i class="fab fa-whatsapp"></i> Cotizar Ahora
-            </a>
+            <div style="display: flex; align-items: center;">
+                <a href="https://wa.me/525535757364?text=Hola,%20me%20interesa%20una%20cotización"
+                    class="btn btn-whatsapp" target="_blank" data-i18n="btn_quote">
+                    <i class="fab fa-whatsapp"></i> Cotizar Ahora
+                </a>
+                <button id="langToggle" class="lang-btn" aria-label="Switch Language">
+                    ES
+                </button>
+            </div>
         </div>
     </header>
 
@@ -157,40 +162,44 @@
         <section id="inicio" class="hero">
             <div class="container hero-content">
                 <div class="hero-text">
-                    <h1 style="font-size: 2.5rem; line-height: 1.2;">Gestoría Vehicular CDMX y Edomex: <br
-                            class="hidden-mobile"><span style="font-weight: 400; font-size: 0.8em;">Chalco, Huixquilucan
+                    <h1 style="font-size: 2.5rem; line-height: 1.2;"><span data-i18n="hero_title_main">Gestoría
+                            Vehicular CDMX y Edomex:</span> <br class="hidden-mobile"><span
+                            style="font-weight: 400; font-size: 0.8em;" data-i18n="hero_title_sub">Chalco, Huixquilucan
                             e Interlomas</span></h1>
-                    <p><strong>¿Moto o Auto nuevos?</strong> Olvídate de filas y estrés. Somos Expertos en altas, bajas,
-                        legalización y cambios de propietario en la Zona Metropolitana entre otros estados de la
-                        república.</p>
+                    <p><strong data-i18n="hero_desc_bold">¿Moto o Auto nuevos?</strong> <span
+                            data-i18n="hero_desc_text">Olvídate de filas y estrés. Somos Expertos en altas, bajas,
+                            legalización y cambios de propietario en la Zona Metropolitana entre otros estados de la
+                            república.</span></p>
                     <div class="hero-buttons">
                         <a href="https://wa.me/525535757364?text=Hola,%20necesito%20ayuda%20con%20un%20trámite"
                             class="btn btn-whatsapp" target="_blank" aria-label="Cotizar trámite por WhatsApp">
                             <i class="fab fa-whatsapp"></i> Cotizar por WhatsApp
                         </a>
                         <a href="#servicios" class="btn btn-primary"
-                            style="background-color: transparent; border: 2px solid white;">
+                            style="background-color: transparent; border: 2px solid white;"
+                            data-i18n="btn_view_services">
                             Ver Servicios
                         </a>
                     </div>
 
                     <div class="hero-trust-text">
-                        <h2>¿Por qué elegirnos?</h2>
-                        <p>Más de 5 años simplificando la vida de los conductores mexicanos.</p>
+                        <h2 data-i18n="trust_title">¿Por qué elegirnos?</h2>
+                        <p data-i18n="trust_subtitle">Más de 5 años simplificando la vida de los conductores mexicanos.
+                        </p>
                     </div>
 
                     <div class="hero-stats">
                         <div class="hero-stat-item">
                             <h3>+5,000</h3>
-                            <p>Trámites Exitosos</p>
+                            <p data-i18n="text_stat_1">Trámites Exitosos</p>
                         </div>
                         <div class="hero-stat-item">
                             <h3>100%</h3>
-                            <p>Clientes Satisfechos</p>
+                            <p data-i18n="text_stat_2">Clientes Satisfechos</p>
                         </div>
                         <div class="hero-stat-item">
                             <h3>24h</h3>
-                            <p>Tiempo Promedio de Respuesta</p>
+                            <p data-i18n="text_stat_3">Tiempo Promedio de Respuesta</p>
                         </div>
                     </div>
                 </div>
@@ -213,8 +222,9 @@
         <section id="servicios" class="section-padding services">
             <div class="container">
                 <div class="section-title">
-                    <h2>Nuestros Servicios</h2>
-                    <p>Gestión especializada en CDMX, Estado de México, Morelos, Guerrero, Michoacán y Oaxaca.</p>
+                    <h2 data-i18n="services_title">Nuestros Servicios</h2>
+                    <p data-i18n="services_subtitle">Gestión especializada en CDMX, Estado de México, Morelos, Guerrero,
+                        Michoacán y Oaxaca.</p>
                     <div class="partners-slider">
                         <div class="partners-track">
                             <!-- Set 1 -->
@@ -252,9 +262,11 @@
 
                 <!-- Service Tabs Control -->
                 <div class="services-tabs">
-                    <button class="tab-btn active" data-tab="control">Placas & Trámites</button>
-                    <button class="tab-btn" data-tab="licencias">Licencias</button>
-                    <button class="tab-btn" data-tab="otros">Legalizaciones y REPUVE</button>
+                    <button class="tab-btn active" data-tab="control" data-i18n="tab_control">Placas & Trámites</button>
+                    <button class="tab-btn" data-tab="licencias" data-i18n="tab_licenses">Licencias</button>
+                    <button class="tab-btn" data-tab="extranjeros" data-i18n="tab_foreigners">Extranjeros /
+                        Foreigners</button>
+                    <button class="tab-btn" data-tab="otros" data-i18n="tab_others">Legalizaciones y REPUVE</button>
                 </div>
 
                 <!-- Tab Content: Control Vehicular -->
@@ -437,6 +449,53 @@
                 </script>
             </div>
         </section>
+
+        <!-- Tab Content: Extranjeros -->
+        <div class="tab-content" id="extranjeros">
+            <div class="services-grid">
+                <!-- Foreigner License Card -->
+                <div class="service-item premium-item">
+                    <div class="service-header">
+                        <div class="service-icon"><i class="fas fa-passport"></i></div>
+                        <div>
+                            <h4 data-i18n="svc_foreign_lic_title">Licencia para Extranjeros</h4>
+                            <small data-i18n="svc_foreign_lic_sub">Driver's License for Foreigners</small>
+                        </div>
+                    </div>
+                    <div class="service-tags">
+                        <span class="tag"><i class="fas fa-id-card"></i> FM3 / FM2</span>
+                        <span class="tag"><i class="fas fa-globe"></i> International</span>
+                        <span class="tag"><i class="fas fa-check-circle"></i> Valid in Mexico</span>
+                    </div>
+                    <p style="font-size: 0.9em; color: #64748b; margin-top: 0.5rem;" data-i18n="svc_foreign_lic_desc">
+                        Tramitamos tu licencia de conducir mexicana con tu pasaporte o forma migratoria. Proceso 100%
+                        legal y seguro.
+                    </p>
+                </div>
+
+                <!-- Foreigner Plates Card -->
+                <div class="service-item">
+                    <div class="service-header">
+                        <div class="service-icon"><i class="fas fa-car"></i></div>
+                        <div>
+                            <h4 data-i18n="svc_foreign_plates_title">Placas para Extranjeros</h4>
+                            <small data-i18n="svc_foreign_plates_sub">Plates registration</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legalization Card (Ref) -->
+                <div class="service-item">
+                    <div class="service-header">
+                        <div class="service-icon"><i class="fas fa-file-contract"></i></div>
+                        <div>
+                            <h4 data-i18n="svc_legalization_title">Legalización de Autos</h4>
+                            <small data-i18n="svc_legalization_sub">Car Legalization</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Pillars / Why Us -->
         <section class="section-padding features">
@@ -1184,6 +1243,135 @@
             // Kick off the loop
             updateCoverFlow();
         });
+    </script>
+    <script>
+        const translations = {
+            es: {
+                // Nav
+                nav_services: "Servicios",
+                nav_contact: "Contacto",
+                btn_quote: '<i class="fab fa-whatsapp"></i> Cotizar Ahora',
+
+                // Header
+                header_slogan: "Gestión vehicular rápida y segura.",
+
+                // Hero
+                hero_title_main: "Gestoría Vehicular CDMX y Edomex:",
+                hero_title_sub: "Chalco, Huixquilucan e Interlomas",
+                hero_desc_bold: "¿Moto o Auto nuevos?",
+                hero_desc_text: "Olvídate de filas y estrés. Somos Expertos en altas, bajas, legalización y cambios de propietario en la Zona Metropolitana entre otros estados de la república.",
+                btn_view_services: "Ver Servicios",
+                trust_title: "¿Por qué elegirnos?",
+                trust_subtitle: "Más de 5 años simplificando la vida de los conductores mexicanos.",
+                text_stat_1: "Trámites Exitosos",
+                text_stat_2: "Clientes Satisfechos",
+                text_stat_3: "Tiempo Promedio de Respuesta",
+
+                // Services
+                services_title: "Nuestros Servicios",
+                services_subtitle: "Gestión especializada en CDMX, Estado de México, Morelos, Guerrero, Michoacán y Oaxaca.",
+
+                // Tabs
+                tab_control: "Placas & Trámites",
+                tab_licenses: "Licencias",
+                tab_foreigners: "Extranjeros / Foreigners",
+                tab_others: "Legalizaciones y REPUVE",
+
+                // Foreigner Svc
+                svc_foreign_lic_title: "Licencia para Extranjeros",
+                svc_foreign_lic_sub: "Licencia de conducir para extranjeros",
+                svc_foreign_lic_desc: "Tramitamos tu licencia de conducir mexicana con tu pasaporte o forma migratoria. Proceso 100% legal y seguro.",
+                svc_foreign_plates_title: "Placas para Extranjeros",
+                svc_foreign_plates_sub: "Registro de placas",
+                svc_legalization_title: "Legalización de Autos",
+                svc_legalization_sub: "Regularización de extranjeros",
+            },
+            en: {
+                // Nav
+                nav_services: "Services",
+                nav_contact: "Contact",
+                btn_quote: '<i class="fab fa-whatsapp"></i> Get Quote',
+
+                // Header
+                header_slogan: "Fast and secure vehicle registration.",
+
+                // Hero
+                hero_title_main: "Vehicle Registration Services CDMX & Edomex:",
+                hero_title_sub: "Chalco, Huixquilucan & Interlomas",
+                hero_desc_bold: "New Car or Moto?",
+                hero_desc_text: "Forget lines and stress. We are experts in registration, legalization, and ownership transfer in the Metropolitan Area and other states.",
+                btn_view_services: "View Services",
+                trust_title: "Why Choose Us?",
+                trust_subtitle: "Over 5 years simplifying life for drivers in Mexico.",
+                text_stat_1: "Successful Procedures",
+                text_stat_2: "Satisfied Clients",
+                text_stat_3: "Average Response Time",
+
+                // Services
+                services_title: "Our Services",
+                services_subtitle: "Specialized management in CDMX, State of Mexico, Morelos, Guerrero, Michoacán, and Oaxaca.",
+
+                // Tabs
+                tab_control: "Plates & Procedures",
+                tab_licenses: "Licenses",
+                tab_foreigners: "Foreigners Services",
+                tab_others: "Legalization & REPUVE",
+
+                // Foreigner Svc
+                svc_foreign_lic_title: "Driver's License for Foreigners",
+                svc_foreign_lic_sub: "Valid Mexican Driver's License",
+                svc_foreign_lic_desc: "We process your Mexican driver's license using your passport or immigration form. 100% legal and secure process.",
+                svc_foreign_plates_title: "License Plates for Foreigners",
+                svc_foreign_plates_sub: "Vehicle Registration",
+                svc_legalization_title: "Car Legalization",
+                svc_legalization_sub: "Foreign car regularization",
+            }
+        };
+
+        const langToggle = document.getElementById('langToggle');
+        let currentLang = 'es';
+
+        // Auto-detect language
+        const userLang = navigator.language || navigator.userLanguage;
+        if (userLang.startsWith('en')) {
+            currentLang = 'en';
+        }
+
+        function updateLanguage(lang) {
+            currentLang = lang;
+            langToggle.textContent = lang === 'es' ? 'EN' : 'ES'; // Show the OTHER option to switch to, or current? Standard is showing current or flag. Let's show current code.
+            // Actually, better UX: Show what you WILL switch to? Or what IS?
+            // "EN" usually means "Switch to English". "ES" means "Switch to Spanish".
+            // If current is ES, button says EN.
+            langToggle.textContent = lang === 'es' ? 'EN' : 'ES';
+
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    if (element.tagName === 'A' && element.classList.contains('btn-whatsapp')) {
+                        // Preserve icon for buttons if html is needed
+                        element.innerHTML = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+        }
+
+        langToggle.addEventListener('click', () => {
+            const newLang = currentLang === 'es' ? 'en' : 'es';
+            updateLanguage(newLang);
+        });
+
+        // Initialize
+        // If we want to auto-switch on load:
+        if (currentLang === 'en') {
+            updateLanguage('en');
+        } else {
+            // Default text is already Spanish HTML, but running this ensures consistency if we change defaults
+            langToggle.textContent = 'EN';
+        }
+
     </script>
 </body>
 
