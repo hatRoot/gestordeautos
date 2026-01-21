@@ -2392,6 +2392,13 @@ ul {
         font-size: 2.2rem;
         line-height: 1.1;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+        background-color: rgba(255, 255, 255, 0.2);
+        /* Fondo claro translucido */
+        padding: 5px 0;
+        backdrop-filter: blur(2px);
+        /* Slight blur for readability */
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
         z-index: 20;
         pointer-events: none;
         opacity: 0;
@@ -2424,10 +2431,14 @@ ul {
 /* Mobile Improvements */
 @media (max-width: 768px) {
     .header-slogan {
-        margin-top: 8px;
+        margin-top: 35px;
+        /* Significantly increased to clear any menu overlap */
         font-size: 0.95rem;
         line-height: 1.4;
         white-space: normal;
+        padding-top: 15px;
+        display: block;
+        /* Ensure it respects spacing */
     }
 
     .header {

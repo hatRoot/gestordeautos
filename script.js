@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Run animation
-    animateNumbers();
+    // animateNumbers(); // Removed to ensure it ONLY runs on scroll intersection logic below
 
     // Re-run animation when visible (optional, using Intersection Observer)
     const observer = new IntersectionObserver((entries) => {
