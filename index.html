@@ -215,15 +215,15 @@
 
                     <div class="hero-stats">
                         <div class="hero-stat-item">
-                            <h3>+5,000</h3>
+                            <h3 class="counter" data-target="5000" data-prefix="+" data-suffix="">+0</h3>
                             <p data-i18n="text_stat_1">Trámites Exitosos</p>
                         </div>
                         <div class="hero-stat-item">
-                            <h3>100%</h3>
+                            <h3 class="counter" data-target="100" data-prefix="" data-suffix="%">0%</h3>
                             <p data-i18n="text_stat_2">Clientes Satisfechos</p>
                         </div>
                         <div class="hero-stat-item">
-                            <h3>24h</h3>
+                            <h3 class="counter" data-target="24" data-prefix="" data-suffix="h">0h</h3>
                             <p data-i18n="text_stat_3">Tiempo Promedio de Respuesta</p>
                         </div>
                     </div>
@@ -238,6 +238,39 @@
             </div>
             </div>
         </section>
+
+        <!-- Stats Counter Script -->
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const counters = document.querySelectorAll('.counter');
+
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const prefix = counter.getAttribute('data-prefix') || "";
+                    const suffix = counter.getAttribute('data-suffix') || "";
+                    const duration = 3000; // 3 seconds
+                    const increment = target / (duration / 16); // 60fps approx
+
+                    let current = 0;
+
+                    const updateCounter = () => {
+                        current += increment;
+
+                        if (current < target) {
+                            // Format number with commas for thousands
+                            const formatted = Math.ceil(current).toLocaleString();
+                            counter.innerText = `${prefix}${formatted}${suffix}`;
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            // Ensure final value is exact
+                            counter.innerText = `${prefix}${target.toLocaleString()}${suffix}`;
+                        }
+                    };
+
+                    updateCounter();
+                });
+            });
+        </script>
 
 
 
