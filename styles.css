@@ -2393,18 +2393,18 @@ ul {
         line-height: 1.1;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
         background-color: rgba(255, 255, 255, 0.2);
-        /* Fondo claro translucido */
         padding: 5px 0;
         backdrop-filter: blur(2px);
-        /* Slight blur for readability */
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
         border-radius: 8px;
         z-index: 20;
         pointer-events: none;
         opacity: 0;
         /* Start hidden */
-        animation: friendlyFlash 1.2s ease-out 0.8s forwards;
-        /* Delay to appear after page load/scroll start */
+    }
+
+    .mobile-hero-overlay.visible {
+        animation: friendlyFlash 1.2s ease-out forwards;
     }
 }
 
@@ -2431,7 +2431,7 @@ ul {
 /* Mobile Improvements */
 @media (max-width: 768px) {
     .header-slogan {
-        margin-top: 35px;
+        margin-top: 50px;
         /* Significantly increased to clear any menu overlap */
         font-size: 0.95rem;
         line-height: 1.4;

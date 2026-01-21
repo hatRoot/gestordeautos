@@ -36,21 +36,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Run animation
-    // animateNumbers(); // Removed to ensure it ONLY runs on scroll intersection logic below
-
-    // Re-run animation when visible (optional, using Intersection Observer)
+    // Intersection Observer for Animations
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                animateNumbers();
-                observer.unobserve(entry.target);
+                if (entry.target.classList.contains('hero-stats')) {
+                    animateNumbers();
+                    observer.unobserve(entry.target);
+                }
+
+                // Overlay Aimation Trigger
+                if (entry.target.classList.contains('mobile-hero-overlay')) {
+                    entry.target.classList.add('visible'); // Add class to trigger CSS animation
+                    observer.unobserve(entry.target);
+                }
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.3 }); // Lower threshold for earlier trigger
 
     const statsSection = document.querySelector('.hero-stats');
     if (statsSection) {
         observer.observe(statsSection);
+    }
+
+    const heroOverlay = document.querySelector('.mobile-hero-overlay');
+    if (heroOverlay) {
+        observer.observe(heroOverlay);
     }
 });
