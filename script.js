@@ -4,31 +4,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const stats = document.querySelectorAll('.counter');
 
         stats.forEach(stat => {
-            const finalValueStr = stat.innerText;
-            const finalValue = parseInt(finalValueStr.replace(/\D/g, ''));
-            const suffix = finalValueStr.replace(/[0-9]/g, '');
-            const duration = 3000; // 3 seconds
+            // Get target from data attribute, fallback to innerText if missing
+            const targetAttr = stat.getAttribute('data-target');
+            const target = targetAttr ? parseInt(targetAttr) : null;
+
+            if (!target) return; // Skip if no target
+
+            const prefix = stat.getAttribute('data-prefix') || '';
+            const suffix = stat.getAttribute('data-suffix') || '';
+
+            const duration = 2500;
             const startTime = performance.now();
 
             const update = (currentTime) => {
                 const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / duration, 1);
+                const ease = 1 - Math.pow(1 - progress, 4); // EaseOutQuart
 
-                // Ease out quart
-                const ease = 1 - Math.pow(1 - progress, 4);
+                const current = Math.floor(target * ease);
 
-                const current = Math.floor(finalValue * ease);
-
-                if (finalValueStr.includes('+')) {
-                    stat.innerText = '+' + current.toLocaleString() + suffix.replace('+', '');
-                } else {
-                    stat.innerText = current.toLocaleString() + suffix;
-                }
+                // Format WITHOUT commas per user request
+                stat.innerText = `${prefix}${current}${suffix}`;
 
                 if (progress < 1) {
                     requestAnimationFrame(update);
                 } else {
-                    stat.innerText = finalValueStr; // Ensure final value is exact
+                    stat.innerText = `${prefix}${target}${suffix}`;
                 }
             };
 

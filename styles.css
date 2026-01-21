@@ -97,29 +97,30 @@ ul {
 }
 
 /* Header */
+/* Header */
 .header {
-    background-color: rgba(255, 255, 255, 0.1);
-    /* Vidrio Claro (Glass) */
-    backdrop-filter: blur(12px);
-    /* Blur effect */
-    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(0, 0, 0, 0.1);
+    /* Vidrio sutil al inicio (Subtle Glass) */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 5000;
     padding: 1rem 0;
-    /* Reduced padding for mobile clearance */
-    transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .header.scrolled {
-    background-color: rgba(15, 23, 42, 0.85);
-    /* Vidrio Opaco (Dark Glass) */
+    background-color: rgba(0, 0, 0, 0.35);
+    /* Much more translucent (Muy transparente) */
     padding: 0.5rem 0;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(20px);
+    /* Heavy blur to keep text readable */
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .nav {
@@ -2433,29 +2434,44 @@ ul {
 }
 
 /* Mobile Improvements */
+/* Mobile Improvements */
 @media (max-width: 768px) {
-    .header-slogan {
-        margin-top: 65px;
-        /* Forced clearance */
-        font-size: 0.9rem;
-        line-height: normal;
-        white-space: normal;
-        display: block;
-        padding-top: 10px;
-        position: relative;
-        z-index: 5001;
-        /* Ensure on top */
-        color: rgba(255, 255, 255, 0.9);
-    }
-
     .header {
-        padding-bottom: 1rem;
+        height: auto;
+        padding-bottom: 1.5rem;
+        /* No background override - inherits global scrolled style */
     }
 
-    /* Push Hero text down on mobile */
+    .nav {
+        flex-wrap: wrap;
+        height: auto !important;
+        gap: 0.8rem;
+        justify-content: center;
+        padding-bottom: 0.5rem;
+    }
+
+    .logo {
+        margin-right: 0;
+        margin-bottom: 0px;
+    }
+
+    /* Slogan inside header - Clean styling */
+    .header-slogan {
+        width: 100%;
+        text-align: center;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.9);
+        display: block;
+        white-space: normal;
+        line-height: 1.3;
+    }
+
+    /* Push Hero text down to account for taller header */
     .hero-text {
-        margin-top: 140px;
-        /* Safe distance below fixed header */
+        margin-top: 30px;
+        /* Drastically reduced per user request to move it UP */
         padding-top: 2rem;
     }
 }
@@ -2464,6 +2480,8 @@ ul {
 .lang-btn {
     width: 35px;
     height: 35px;
+    min-width: 35px;
+    /* Enforce width */
     border-radius: 50%;
     /* Circle */
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -2478,7 +2496,8 @@ ul {
     margin-left: 10px;
     transition: all 0.3s ease;
     padding: 0;
-    /* Remove default padding */
+    flex-shrink: 0;
+    /* Prevent squashing */
 }
 
 .lang-btn:hover {
