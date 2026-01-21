@@ -98,24 +98,28 @@ ul {
 
 /* Header */
 .header {
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Vidrio Claro (Glass) */
+    backdrop-filter: blur(12px);
+    /* Blur effect */
+    -webkit-backdrop-filter: blur(12px);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 5000;
-    /* Increased to stay above 3D cards */
-    padding: 2rem 0;
-    /* Huge padding initially */
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    /* Smooth dramatic transition */
+    padding: 1rem 0;
+    /* Reduced padding for mobile clearance */
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .header.scrolled {
-    background-color: #000000;
-    /* Total black */
+    background-color: rgba(15, 23, 42, 0.85);
+    /* Vidrio Opaco (Dark Glass) */
     padding: 0.5rem 0;
-    /* Very compact padding */
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 }
 
 .nav {
@@ -2431,14 +2435,17 @@ ul {
 /* Mobile Improvements */
 @media (max-width: 768px) {
     .header-slogan {
-        margin-top: 50px;
-        /* Significantly increased to clear any menu overlap */
-        font-size: 0.95rem;
-        line-height: 1.4;
+        margin-top: 65px;
+        /* Forced clearance */
+        font-size: 0.9rem;
+        line-height: normal;
         white-space: normal;
-        padding-top: 15px;
         display: block;
-        /* Ensure it respects spacing */
+        padding-top: 10px;
+        position: relative;
+        z-index: 5001;
+        /* Ensure on top */
+        color: rgba(255, 255, 255, 0.9);
     }
 
     .header {

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Number Counter Animation
     const animateNumbers = () => {
-        const stats = document.querySelectorAll('.hero-stat-number');
+        const stats = document.querySelectorAll('.counter');
 
         stats.forEach(stat => {
             const finalValueStr = stat.innerText;
