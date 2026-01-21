@@ -245,32 +245,52 @@ ul {
 }
 
 .hero-content {
-    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    animation: fadeInUp 1s ease-out;
+    position: relative;
+    /* Changed for simple stacking */
     display: flex;
-    /* Flex layout */
+    flex-direction: column;
+    /* Stack mobile first */
     align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-}
-
-.hero-text {
-    flex: 1;
-    max-width: 600px;
-    z-index: 2;
-    /* Keep text above if overlap */
+    padding: 0;
+    /* Remove padding to let image hit edges */
 }
 
 .hero-visual {
-    flex: 1;
-    height: 400px;
+    width: 100%;
+    /* Full width */
+    height: auto;
+    display: block;
+    /* Normal block flow */
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-bottom: -15%;
+    /* Pull content up */
     z-index: 1;
+}
+
+.hero-moto {
+    width: 100%;
+    height: auto;
+    max-width: none;
+    /* Unrestricted */
+    object-fit: contain;
+    /* Show full image */
+    display: block;
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+.hero-text {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 800px;
+    padding: 0 1.5rem;
+    margin-top: -100px;
+    /* Overlap the image bottom */
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    /* Strong shadow for readability */
 }
 
 .hero-image-stack {
@@ -296,9 +316,10 @@ ul {
 
 .hero-moto {
     position: relative;
-    width: 80%;
-    /* Larger since it is alone */
-    max-width: 450px;
+    width: 120%;
+    /* Massive width */
+    max-width: 900px;
+    min-width: 350px;
     object-fit: contain;
     /* Light Gray Contour */
     filter: drop-shadow(0 0 10px rgba(203, 213, 225, 0.6));
@@ -335,24 +356,44 @@ ul {
 }
 
 /* Mobile Fix */
-@media (max-width: 1024px) {
+/* Desktop Refinements */
+@media (min-width: 1024px) {
     .hero-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .hero-text {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        /* Push content */
+        padding: 0;
         max-width: 100%;
-    }
-
-    .hero-buttons,
-    .hero-stats {
-        justify-content: center;
+        /* Break container */
     }
 
     .hero-visual {
-        display: none;
-        /* Hide via CSS or helper class */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 60%;
+        /* Take left 60% */
+        height: 100%;
+        margin: 0;
+        object-fit: cover;
+    }
+
+    .hero-moto {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: right center;
+        mask-image: linear-gradient(to right, black 80%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    }
+
+    .hero-text {
+        width: 40%;
+        max-width: 600px;
+        margin: 0;
+        text-align: left;
+        padding-right: 5%;
     }
 }
 
