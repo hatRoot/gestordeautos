@@ -99,8 +99,8 @@ ul {
 /* Header */
 /* Header */
 .header {
-    background-color: rgba(0, 0, 0, 0.1);
-    /* Vidrio sutil al inicio (Subtle Glass) */
+    background-color: rgba(255, 255, 255, 0.05);
+    /* Ultra clear white glass */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     position: fixed;
@@ -113,14 +113,15 @@ ul {
 }
 
 .header.scrolled {
-    background-color: rgba(0, 0, 0, 0.35);
-    /* Much more translucent (Muy transparente) */
+    background-color: rgba(255, 255, 255, 0.15);
+    /* White glass when scrolled (Vidrio Blanco) */
     padding: 0.5rem 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(20px);
-    /* Heavy blur to keep text readable */
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    /* Very subtle shadow */
+    backdrop-filter: blur(25px);
+    /* Heavy blur */
+    -webkit-backdrop-filter: blur(25px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav {
@@ -2439,7 +2440,15 @@ ul {
     .header {
         height: auto;
         padding-bottom: 1.5rem;
-        /* No background override - inherits global scrolled style */
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        /* Force Clear */
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+    }
+
+    .header.scrolled {
+        background-color: rgba(255, 255, 255, 0.15) !important;
+        /* Force White Glass */
     }
 
     .nav {
