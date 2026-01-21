@@ -2371,3 +2371,66 @@ ul {
         font-size: 0.8rem;
     }
 }
+
+/* Mobile Hero Overlay Animation */
+.mobile-hero-overlay {
+    display: none;
+    /* Hidden on desktop */
+}
+
+@media (max-width: 768px) {
+    .mobile-hero-overlay {
+        display: block;
+        position: absolute;
+        bottom: 10%;
+        /* Position over the lower part of the character */
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-family: 'Yellowtail', cursive;
+        color: #fbbf24;
+        font-size: 2.2rem;
+        line-height: 1.1;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+        z-index: 20;
+        pointer-events: none;
+        opacity: 0;
+        /* Start hidden */
+        animation: friendlyFlash 1.2s ease-out 0.8s forwards;
+        /* Delay to appear after page load/scroll start */
+    }
+}
+
+@keyframes friendlyFlash {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1.1) translateY(0);
+        text-shadow: 0 0 30px rgba(251, 191, 36, 1), 2px 2px 4px rgba(0, 0, 0, 0.9);
+        /* "Destello" burst */
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    }
+}
+
+/* Mobile Improvements */
+@media (max-width: 768px) {
+    .header-slogan {
+        margin-top: 8px;
+        font-size: 0.95rem;
+        line-height: 1.4;
+        white-space: normal;
+    }
+
+    .header {
+        padding-bottom: 1rem;
+    }
+}
