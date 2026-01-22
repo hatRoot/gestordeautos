@@ -259,6 +259,110 @@ ul {
     /* Increased to account for massive header */
 }
 
+/* Hero Trust Block */
+.hero-trust-block {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+    max-width: 600px;
+}
+
+.trust-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.8rem;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+}
+
+.trust-desc {
+    color: #94a3b8;
+    /* Slate 400 */
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.google-pill-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+
+    /* Glassmorphism */
+    background: rgba(255, 255, 255, 0.1);
+    /* Very transparent white */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.google-pill-badge:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.pill-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.pill-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--white);
+    font-weight: 700;
+}
+
+.pill-divider {
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 300;
+}
+
+.pill-count {
+    color: #cbd5e1;
+    /* Slate 300 */
+    font-weight: 400;
+    text-decoration: none;
+    /* Removed underline */
+}
+
+.google-pill-badge:hover .pill-count {
+    color: var(--white);
+}
+
+.pill-g {
+    display: block;
+    /* Ensure SVG displays block */
+}
+
+@media (max-width: 768px) {
+    .trust-title {
+        font-size: 2rem;
+    }
+
+    .hero-trust-block {
+        text-align: center;
+        margin: 2rem auto 0;
+    }
+
+    .google-pill-badge {
+        margin: 0 auto;
+    }
+}
+
 .hero-content {
     width: 100%;
     margin: 0 auto;
@@ -840,6 +944,10 @@ ul {
         transform: translate(5%, 5%) scale(1.1);
     }
 }
+
+/* Reviews Section Layout */
+
+
 
 /* Reviews Section - Blended with Car Image */
 .reviews-section {
@@ -2131,398 +2239,400 @@ ul {
         margin-top: auto;
         /* Double insurance for flex */
     }
+}
 
-    /* =========================================
+/* =========================================
    New Trámites Section (Permiso & Licencia)
+   Global Styles (Desktop Default)
    ========================================= */
-    .tramites-section {
-        background-color: #f8fafc;
-        /* Very light gray/slate */
-        border-top: 1px solid #e2e8f0;
-    }
+.tramites-section {
+    background-color: #f8fafc;
+    /* Very light gray/slate */
+    border-top: 1px solid #e2e8f0;
+}
 
-    .section-heading {
-        text-align: center;
-        font-size: 2.5rem;
-        color: #15803d;
-        /* Official Green */
-        margin-bottom: 3rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
+.section-heading {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #15803d;
+    /* Official Green */
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
+.tramites-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    /* Split view style */
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e2e8f0;
+}
+
+.tramite-card {
+    padding: 3rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* Divider line between columns */
+.tramite-card:first-child {
+    border-right: 2px solid #f1f5f9;
+}
+
+.tramite-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.text-green {
+    color: #4ade80;
+    /* Bright Green */
+    color: #65a30d;
+    /* Lime/Green darker */
+}
+
+/* Specific colors for headers */
+.tramite-card:first-child .tramite-title {
+    color: #65a30d;
+    /* Lime Green for Permiso */
+}
+
+.tramite-card:last-child .tramite-title {
+    color: #65a30d;
+    /* Same green uniform */
+}
+
+
+.tramite-image {
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 350px;
+    transition: transform 0.3s ease;
+}
+
+.tramite-image img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+    border-radius: 8px;
+}
+
+.tramite-image:hover {
+    transform: scale(1.02);
+}
+
+.tramite-validity {
+    color: #475569;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.tramite-subtitle {
+    font-size: 1.5rem;
+    color: #65a30d;
+    font-weight: 700;
+    margin: 1.5rem 0 1rem;
+}
+
+.tramite-desc {
+    color: #64748b;
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0 auto 2rem;
+}
+
+.requirements-list {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.req-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: #475569;
+    font-size: 0.9rem;
+}
+
+.tramite-btn-container {
+    margin-top: auto;
+}
+
+.btn-whatsapp-full {
+    background-color: #15803d;
+    /* Darker Green */
+    color: white;
+    padding: 1rem 3rem;
+    border-radius: 8px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-whatsapp-full:hover {
+    background-color: #166534;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Layout - Stacked (iPhone style) */
+@media (max-width: 640px) {
     .tramites-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0;
-        /* Split view style */
-        background: white;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        border: 1px solid #e2e8f0;
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        /* Force single column stack */
+        gap: 2rem !important;
+        /* Force gap between cards */
+        box-shadow: none;
+        border: none;
+        background: transparent;
     }
 
     .tramite-card {
-        padding: 3rem 2rem;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        /* Stronger shadow for individual cards */
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        padding: 2.5rem 1.5rem;
+        margin: 0;
+        width: 100%;
+        /* Full width */
     }
 
-    /* Divider line between columns */
+    /* Remove desktop dividers */
     .tramite-card:first-child {
-        border-right: 2px solid #f1f5f9;
+        border-right: none;
+        margin-right: 0;
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+
+    .tramite-card:last-child {
+        margin-left: 0;
     }
 
     .tramite-title {
-        font-size: 2rem;
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-    }
-
-    .text-green {
-        color: #4ade80;
-        /* Bright Green */
-        color: #65a30d;
-        /* Lime/Green darker */
-    }
-
-    /* Specific colors for headers */
-    .tramite-card:first-child .tramite-title {
-        color: #65a30d;
-        /* Lime Green for Permiso */
-    }
-
-    .tramite-card:last-child .tramite-title {
-        color: #65a30d;
-        /* Same green uniform */
-    }
-
-
-    .tramite-image {
-        margin-bottom: 2rem;
-        width: 100%;
-        max-width: 350px;
-        transition: transform 0.3s ease;
-    }
-
-    .tramite-image img {
-        width: 100%;
-        height: auto;
-        filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
-        border-radius: 8px;
-    }
-
-    .tramite-image:hover {
-        transform: scale(1.02);
-    }
-
-    .tramite-validity {
-        color: #475569;
-        font-weight: 700;
-        text-transform: uppercase;
-        margin-bottom: 1rem;
-        letter-spacing: 1px;
-        font-size: 0.9rem;
+        font-size: 1.6rem;
     }
 
     .tramite-subtitle {
-        font-size: 1.5rem;
-        color: #65a30d;
-        font-weight: 700;
-        margin: 1.5rem 0 1rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* Desktop Layout Enforcement */
+@media (min-width: 641px) {
+    .tramites-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        /* Strictly 2 columns */
+        width: 100%;
     }
 
-    .tramite-desc {
-        color: #64748b;
-        line-height: 1.6;
-        max-width: 400px;
-        margin: 0 auto 2rem;
+    .tramite-card {
+        width: auto;
+        /* Allow grid to control width */
     }
+}
 
-    .requirements-list {
-        list-style: none;
-        display: flex;
-        gap: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
+/* Intermediate/Mobile styles (Tablet and below) */
+@media (max-width: 900px) {
+    .section-heading {
+        font-size: 1.8rem;
         margin-bottom: 2rem;
+        color: #0f172a;
+        /* Dark text instead of bright green for discretion */
+        opacity: 0.9;
     }
 
-    .req-item {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        color: #475569;
-        font-size: 0.9rem;
-    }
-
-    .tramite-btn-container {
-        margin-top: auto;
+    .tramite-title {
+        font-size: 1.5rem;
+        color: #334155 !important;
+        /* Slate 700 - Softer than black/green */
     }
 
     .btn-whatsapp-full {
-        background-color: #15803d;
-        /* Darker Green */
-        color: white;
-        padding: 1rem 3rem;
-        border-radius: 8px;
-        font-size: 1.25rem;
-        font-weight: 700;
-        transition: all 0.3s;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-
-    .btn-whatsapp-full:hover {
-        background-color: #166534;
-        transform: translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Mobile Responsiveness for Tramites - Soft & Discreet */
-    @media (max-width: 900px) {
-        .tramites-grid {
-            grid-template-columns: 1fr;
-            box-shadow: none;
-            /* Remove harsh shadow */
-            border: none;
-            /* Cleaner look */
-            background: transparent;
-            /* Seamless blend */
-            gap: 2rem;
-        }
-
-        .tramite-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-            /* Extremely subtle shadow */
-            border: 1px solid rgba(0, 0, 0, 0.03);
-            padding: 2rem 1.5rem;
-        }
-
-        .tramite-card:first-child {
-            border-right: none;
-            border-bottom: none;
-            padding-bottom: 2rem;
-        }
-
-        .section-heading {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            color: #0f172a;
-            /* Dark text instead of bright green for discretion */
-            opacity: 0.9;
-        }
-
-        .tramite-title {
-            font-size: 1.5rem;
-            color: #334155 !important;
-            /* Slate 700 - Softer than black/green */
-        }
-
-        .btn-whatsapp-full {
-            width: 100%;
-            padding: 1rem;
-            font-size: 1.1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5rem;
-            /* Softer Green Gradient */
-            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
-        }
-    }
-
-    /* Language Switcher */
-    .lang-btn {
-        background: transparent;
-        border: 2px solid var(--white);
-        color: var(--white);
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.1rem;
         display: flex;
-        align-items: center;
         justify-content: center;
-        font-weight: 700;
-        font-size: 0.9rem;
-        cursor: pointer;
-        transition: var(--transition);
-        margin-left: 1rem;
-        position: relative;
-        z-index: 5001;
-        /* Above mobile menu */
+        align-items: center;
+        gap: 0.5rem;
+        /* Softer Green Gradient */
+        background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
     }
+}
 
-    .lang-btn:hover {
-        background: var(--white);
-        color: var(--primary-color);
-        transform: scale(1.1);
-    }
+/* Language Switcher */
+.lang-btn {
+    background: transparent;
+    border: 2px solid var(--white);
+    color: var(--white);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-left: 1rem;
+    position: relative;
+    z-index: 5001;
+    /* Above mobile menu */
+}
 
-    /* Scrolled state for language button */
-    .header.scrolled .lang-btn {
-        border-color: var(--primary-color);
-        color: var(--primary-color);
-    }
+.lang-btn:hover {
+    background: var(--white);
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
 
-    .header.scrolled .lang-btn:hover {
-        background: var(--primary-color);
-        color: var(--white);
-    }
+/* Scrolled state for language button */
+.header.scrolled .lang-btn {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
 
-    /* Mobile Language Button Adjustment */
-    @media (max-width: 768px) {
-        .nav {
-            /* Ensure nav container handles the extra button */
-        }
+.header.scrolled .lang-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+}
 
-        .lang-btn {
-            margin-right: 0.5rem;
-            width: 35px;
-            height: 35px;
-            font-size: 0.8rem;
-        }
-    }
-
-    /* Mobile Hero Overlay Animation */
-    .mobile-hero-overlay {
-        display: none;
-        /* Hidden on desktop */
-    }
-
-    @media (max-width: 768px) {
-        .mobile-hero-overlay {
-            display: block;
-            position: absolute;
-            bottom: 10%;
-            /* Position over the lower part of the character */
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-family: 'Yellowtail', cursive;
-            color: #fbbf24;
-            font-size: 2.2rem;
-            line-height: 1.1;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 5px 0;
-            backdrop-filter: blur(2px);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            z-index: 20;
-            pointer-events: none;
-            opacity: 0;
-            /* Start hidden */
-        }
-
-        .mobile-hero-overlay.visible {
-            animation: friendlyFlash 1.2s ease-out forwards;
-        }
-    }
-
-    @keyframes friendlyFlash {
-        0% {
-            opacity: 0;
-            transform: scale(0.8) translateY(20px);
-        }
-
-        60% {
-            opacity: 1;
-            transform: scale(1.1) translateY(0);
-            text-shadow: 0 0 30px rgba(251, 191, 36, 1), 2px 2px 4px rgba(0, 0, 0, 0.9);
-            /* "Destello" burst */
-        }
-
-        100% {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-        }
-    }
-
-    /* Mobile Improvements */
-    /* Mobile Improvements */
-    @media (max-width: 768px) {
-        .header {
-            height: auto;
-            padding-bottom: 1.5rem;
-            background-color: rgba(255, 255, 255, 0.05) !important;
-            /* Force Clear */
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-        }
-
-        .header.scrolled {
-            background-color: rgba(255, 255, 255, 0.15) !important;
-            /* Force White Glass */
-        }
-
-        .nav {
-            flex-wrap: wrap;
-            height: auto !important;
-            gap: 0.8rem;
-            justify-content: center;
-            padding-bottom: 0.5rem;
-        }
-
-        .logo {
-            margin-right: 0;
-            margin-bottom: 0px;
-        }
-
-        /* Slogan inside header - Clean styling */
-        .header-slogan {
-            width: 100%;
-            text-align: center;
-            margin-top: 5px;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.9);
-            display: block;
-            white-space: normal;
-            line-height: 1.3;
-        }
-
-        /* Push Hero text down to account for taller header */
-        .hero-text {
-            margin-top: 30px;
-            /* Drastically reduced per user request to move it UP */
-            padding-top: 2rem;
-        }
-    }
-
-    /* Discreet Circular Language Button */
+/* Mobile Language Button Adjustment */
+@media (max-width: 768px) {
     .lang-btn {
+        margin-right: 0.5rem;
         width: 35px;
         height: 35px;
-        min-width: 35px;
-        /* Enforce width */
-        border-radius: 50%;
-        /* Circle */
-        border: 1px solid rgba(0, 0, 0, 0.2);
-        background: rgba(255, 255, 255, 0.8);
-        color: #333;
-        font-size: 0.7rem;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        margin-left: 10px;
-        transition: all 0.3s ease;
-        padding: 0;
-        flex-shrink: 0;
-        /* Prevent squashing */
+        font-size: 0.8rem;
+    }
+}
+
+/* Mobile Hero Overlay Animation */
+.mobile-hero-overlay {
+    display: none;
+    /* Hidden on desktop */
+}
+
+@media (max-width: 768px) {
+    .mobile-hero-overlay {
+        display: block;
+        position: absolute;
+        bottom: 10%;
+        /* Position over the lower part of the character */
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-family: 'Yellowtail', cursive;
+        color: #fbbf24;
+        font-size: 2.2rem;
+        line-height: 1.1;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 5px 0;
+        backdrop-filter: blur(2px);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        z-index: 20;
+        pointer-events: none;
+        opacity: 0;
+        /* Start hidden */
     }
 
-    .lang-btn:hover {
-        background: #fff;
-        transform: scale(1.05);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    .mobile-hero-overlay.visible {
+        animation: friendlyFlash 1.2s ease-out forwards;
     }
+}
+
+@keyframes friendlyFlash {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1.1) translateY(0);
+        text-shadow: 0 0 30px rgba(251, 191, 36, 1), 2px 2px 4px rgba(0, 0, 0, 0.9);
+        /* "Destello" burst */
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    }
+}
+
+/* Mobile Improvements */
+@media (max-width: 768px) {
+    .header {
+        height: auto;
+        padding-bottom: 1.5rem;
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        /* Force Clear */
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+    }
+
+    .header.scrolled {
+        background-color: rgba(255, 255, 255, 0.15) !important;
+        /* Force White Glass */
+    }
+
+    .nav {
+        flex-wrap: wrap;
+        height: auto !important;
+        gap: 0.8rem;
+        justify-content: center;
+        padding-bottom: 0.5rem;
+    }
+
+    .logo {
+        margin-right: 0;
+        margin-bottom: 0px;
+    }
+
+    /* Slogan inside header - Clean styling */
+    .header-slogan {
+        width: 100%;
+        text-align: center;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.9);
+        display: block;
+        white-space: normal;
+        line-height: 1.3;
+    }
+
+    /* Push Hero text down to account for taller header */
+    .hero-text {
+        margin-top: 30px;
+        /* Drastically reduced per user request to move it UP */
+        padding-top: 2rem;
+    }
+}
