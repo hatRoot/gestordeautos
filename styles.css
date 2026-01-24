@@ -2444,6 +2444,26 @@ ul {
     /* The requested moving halo */
 }
 
+@media (max-width: 600px) {
+    .google-badge.premium-badge {
+        min-width: 280px;
+        padding: 1.5rem 2rem;
+        border-radius: 15px;
+    }
+
+    .google-badge.premium-badge .google-logo {
+        font-size: 2.8rem;
+    }
+
+    .google-badge.premium-badge .badge-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .google-badge.premium-badge .badge-stars i {
+        font-size: 1.2rem;
+    }
+}
+
 .google-logo {
     font-size: 4.5rem;
     /* Massive Google Logo */
@@ -2928,8 +2948,9 @@ ul {
 
     /* Push Hero text down to account for taller header */
     .hero-text {
-        margin-top: 30px;
-        /* Drastically reduced per user request to move it UP */
-        padding-top: 2rem;
+        margin-top: 50px;
+        /* Increased to avoid overlap */
+        padding-top: 4rem;
+        /* Additional clearance for centered mobile logo */
     }
 }
