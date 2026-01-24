@@ -2446,21 +2446,22 @@ ul {
 
 @media (max-width: 600px) {
     .google-badge.premium-badge {
-        min-width: 280px;
-        padding: 1.5rem 2rem;
-        border-radius: 15px;
+        min-width: 200px;
+        width: 90%;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
     }
 
     .google-badge.premium-badge .google-logo {
-        font-size: 2.8rem;
+        font-size: 2rem;
     }
 
     .google-badge.premium-badge .badge-subtitle {
-        font-size: 1.2rem;
+        font-size: 0.9rem;
     }
 
     .google-badge.premium-badge .badge-stars i {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 }
 
@@ -2948,9 +2949,9 @@ ul {
 
     /* Push Hero text down to account for taller header */
     .hero-text {
-        margin-top: 50px;
-        /* Increased to avoid overlap */
-        padding-top: 4rem;
-        /* Additional clearance for centered mobile logo */
+        margin-top: 100px;
+        /* Significantly increased to avoid overlap with large mobile header */
+        padding-top: 6rem;
+        /* Ensures text is well below the centered logo/menu area */
     }
 }
