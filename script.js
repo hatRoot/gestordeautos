@@ -64,4 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroOverlay) {
         observer.observe(heroOverlay);
     }
+    // Scroll Reveal Animation
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 });

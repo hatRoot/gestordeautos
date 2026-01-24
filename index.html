@@ -4,23 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestor de Autos | Trámites Vehiculares Estado de México y CDMX en Línea</title>
+    <title>Gestor de Autos | Trámites Vehiculares EdoMex, CDMX y Morelos</title>
     <meta name="description"
-        content="¡Evita filas! Realiza tus trámites de placas, licencias y cambio de propietario del Estado de México y CDMX 100% en línea. Servicio rápido y seguro en Chalco, Interlomas, Huixquilucan. Consulta gratis.">
+        content="Expertos en trámites vehiculares en línea. Placas, licencias y cambio de propietario en Estado de México, CDMX y Morelos. Servicio rápido en Chalco, Interlomas y Huixquilucan. Evita filas, respuesta en 24h.">
     <meta name="keywords"
-        content="tramites vehiculares estado de mexico, placas edomex, gestoria vehicular cdmx, licencia de conducir estado de mexico, cambio de propietario edomex, reemplacamiento estado de mexico, gestor de autos, chalco, ixtapaluca, interlomas, huixquilucan">
+        content="gestoria vehicular, tramites vehiculares online, placas edomex linea, licencia conducir edomex, cambio propietario auto mexico, gestor vehicular interlomas, placas morelos cdmx, repuve consulta, alta placas moto edomex">
     <link rel="canonical" href="https://gestordeautos.com.mx/">
+    <meta name="robots" content="index, follow">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
-    <link rel="icon" type="image/jpeg" sizes="192x192" href="assets/images/logo.jpg">
-    <link rel="apple-touch-icon" href="assets/images/logo.jpg">
-    <link rel="shortcut icon" href="assets/images/logo.jpg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/browser-favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/browser-favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/google-favicon.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/images/google-favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/logo.jpg">
+    <link rel="mask-icon" href="assets/images/google-favicon.png" color="#2563eb">
+    <meta name="msapplication-TileColor" content="#0f172a">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="shortcut icon" href="assets/images/browser-favicon.png">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gestordeautos.com.mx/">
-    <meta property="og:title" content="Gestor de Autos | Trámites Vehiculares CDMX y EdoMex en Línea">
+    <meta property="og:title" content="Gestor de Autos | Trámites Vehiculares Expertos">
     <meta property="og:description"
         content="Evita filas y multas. Realizamos tu alta de placas, licencias, cambios de propietario y regularización en EdoMex, CDMX y Morelos. Servicio 100% garantizado.">
     <meta property="og:image" content="https://gestordeautos.com.mx/assets/images/logo.jpg">
@@ -28,7 +34,7 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://gestordeautos.com.mx/">
-    <meta property="twitter:title" content="Gestor de Autos | Trámites Vehiculares CDMX y EdoMex en Línea">
+    <meta property="twitter:title" content="Gestor de Autos | Trámites Vehiculares CDMX & EdoMex">
     <meta property="twitter:description"
         content="Evita filas y multas. Realizamos tu alta de placas, licencias, cambios de propietario y regularización en EdoMex, CDMX y Morelos. Servicio 100% garantizado.">
     <meta property="twitter:image" content="https://gestordeautos.com.mx/assets/images/logo.jpg">
@@ -40,9 +46,11 @@
       "@graph": [
         {
           "@type": "WebSite",
-          "name": "GESTOR DE AUTOS",
-          "alternateName": ["GestoreDeAutos.com.mx", "Gestor Vehicular Online"],
+          "@id": "https://gestordeautos.com.mx/#website",
+          "name": "Gestor de Autos",
+          "alternateName": ["Gestoría Vehicular Online Edomex", "Placas y Licencias Mexico"],
           "url": "https://gestordeautos.com.mx",
+          "publisher": { "@id": "https://gestordeautos.com.mx/#organization" },
           "potentialAction": {
             "@type": "SearchAction",
             "target": "https://gestordeautos.com.mx/?s={search_term_string}",
@@ -51,14 +59,16 @@
         },
         {
           "@type": "LocalBusiness",
-          "@id": "https://gestordeautos.com.mx",
-          "name": "Gestor de Autos - Trámites Vehiculares Online",
+          "@id": "https://gestordeautos.com.mx/#organization",
+          "name": "Gestor de Autos - Trámites Vehiculares CDMX, EdoMex y Morelos",
           "image": "https://gestordeautos.com.mx/assets/images/logo.jpg",
+          "logo": "https://gestordeautos.com.mx/assets/images/logo.jpg",
           "telephone": "+525535757364",
           "url": "https://gestordeautos.com.mx",
+          "description": "Líderes en gestión vehicular online en el Estado de México y CDMX. Especialistas en alta de placas, licencias de conducir, cambios de propietario y regularización REPUVE.",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Servicio a Domicilio y Online",
+            "streetAddress": "Servicio Digital y Domicilio",
             "addressLocality": "Ciudad de México",
             "addressRegion": "MX-CMX",
             "postalCode": "06500",
@@ -71,80 +81,35 @@
           },
           "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday"
-            ],
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
             "opens": "09:00",
-            "closes": "18:00"
+            "closes": "20:00"
           },
-          "contactPoint": {
-              "@type": "ContactPoint",
-              "telephone": "+525535757364",
-              "contactType": "customer service",
-              "areaServed": ["MX"],
-              "availableLanguage": ["es", "en"],
-              "contactOption": ["TollFree", "HearingImpairedSupported"]
-          },
-          "sameAs": [
-            "https://wa.me/525535757364"
+          "contactPoint": [
+            { "@type": "ContactPoint", "telephone": "+525535757364", "contactType": "sales", "availableLanguage": ["es", "en"] },
+            { "@type": "ContactPoint", "telephone": "+525522917267", "contactType": "customer service", "availableLanguage": ["es", "en"] }
           ],
+          "sameAs": ["https://wa.me/525535757364"],
           "areaServed": [
-            "Ciudad de México",
-            "Estado de México",
-            "Morelos",
-            "Guerrero",
-            "Michoacán",
-            "Oaxaca",
-            "Chalco",
-            "Ixtapaluca",
-            "Huixquilucan",
-            "Interlomas"
+            "Ciudad de México", "Estado de México", "Morelos", "Huixquilucan", "Interlomas", 
+            "Chalco", "Ixtapaluca", "Naucalpan", "Tlalnepantla", "Ecatepec"
           ],
           "priceRange": "$$",
           "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "5.0",
-            "reviewCount": "207"
+            "reviewCount": "250"
           },
-          "makesOffer": [
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "Alta de Placas Estado de México en Línea",
-                    "description": "Gestionamos el alta de placas del Estado de México en línea sin que tengas que hacer filas."
-                }
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "Gestoría CDMX",
-                    "description": "Licencias permanentes y trámites vehiculares en Ciudad de México."
-                }
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "Placas Morelos y Guerrero",
-                    "description": "Gestión de placas y permisos provisionales online."
-                }
-            },
-             {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "Legalización y REPUVE",
-                    "description": "Regularización de autos extranjeros y registro REPUVE garantizado."
-                }
-            }
-          ]
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Servicios Vehiculares",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Alta de Placas EdoMex", "serviceType": "Legal" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Licencia de Conducir CDMX", "serviceType": "Legal" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cambio de Propietario", "serviceType": "Legal" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Regularización REPUVE", "serviceType": "Legal" } }
+            ]
+          }
         }
       ]
     }
@@ -175,8 +140,9 @@
         <div class="container nav">
             <a href="#" class="logo">
                 <div class="logo-container">
-                    <img src="assets/images/logo.jpg" alt="Gestor de Autos Logo" class="logo-img" width="50"
-                        height="50">
+                    <img decoding="async" src="assets/images/logo.jpg"
+                        alt="Logo de Gestor de Autos - Trámites Vehiculares EdoMex" class="logo-img" width="50"
+                        height="50" fetchpriority="high">
                 </div>
                 <div class="logo-text">
                     <div class="site-title">Gestor de <span>Autos</span></div>
@@ -186,11 +152,17 @@
                 <li><a href="#servicios" data-i18n="nav_services">Servicios</a></li>
                 <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
             </ul>
-            <div style="display: flex; align-items: center;">
-                <a href="https://wa.me/525535757364?text=Hola,%20me%20interesa%20una%20cotización"
-                    class="btn btn-whatsapp" target="_blank" data-i18n="btn_quote">
-                    <i class="fab fa-whatsapp"></i> Cotizar Ahora
-                </a>
+            <div class="header-contacts">
+                <div class="header-btns">
+                    <a href="https://wa.me/525535757364?text=Hola,%20me%20interesa%20una%20cotización"
+                        class="btn btn-whatsapp header-btn primary-tel" target="_blank">
+                        <i class="fab fa-whatsapp"></i> <span class="btn-text">Cotiza Ahora</span>
+                    </a>
+                    <a href="https://wa.me/525522917267?text=Hola,%20me%20interesa%20una%20cotización"
+                        class="btn btn-whatsapp header-btn secondary-tel" target="_blank">
+                        <i class="fab fa-whatsapp"></i> <span class="btn-text">Cotiza Ahora</span>
+                    </a>
+                </div>
                 <button id="langToggle" class="lang-btn" aria-label="Switch Language">
                     ES
                 </button>
@@ -206,11 +178,11 @@
             <div class="container hero-content">
                 <div class="hero-text">
                     <h1 style="font-size: 2.5rem; line-height: 1.2;">
-                        <span style="font-weight: 800; color: white;">Realizamos tus Trámites Vehiculares del Estado de
+                        <span style="font-weight: 800; color: white; display: block;">Realizamos tus Trámites
+                            Vehiculares del Estado de
                             México Ahora en Línea</span>
-                        <br>
                         <span
-                            style="font-family: 'Yellowtail', cursive; font-size: 1.5em; color: #fbbf24; text-shadow: 2px 2px 0 #000;">
+                            style="font-family: 'Yellowtail', cursive; font-size: 1.5em; color: #fbbf24; text-shadow: 2px 2px 0 #000; display: block; margin-top: 1.5rem;">
                             Mejor llama a Gestor de Autos
                         </span>
                     </h1>
@@ -288,9 +260,9 @@
 
                 <div class="hero-visual">
                     <!-- Overlapping composition -->
-                    <img src="assets/images/hero-coyote.png"
-                        alt="Gestor de Autos - Trámites vehiculares Estado de México en línea con el especialista Nick Wilde"
-                        class="hero-moto" fetchpriority="high" width="900" height="900">
+                    <img decoding="async" src="assets/images/hero-coyote.png"
+                        alt="Gestor de Autos - Trámites vehiculares Estado de México" class="hero-moto"
+                        fetchpriority="high" width="900" height="900">
 
                     <!-- Mobile Animated Overlay -->
                     <div class="mobile-hero-overlay">
@@ -339,7 +311,7 @@
 
 
         <!-- Services Section -->
-        <section id="servicios" class="section-padding services">
+        <section id="servicios" class="section-padding services reveal">
             <div class="container">
                 <div class="section-title">
                     <h2 data-i18n="services_title">Nuestros Servicios</h2>
@@ -348,34 +320,34 @@
                     <div class="partners-slider">
                         <div class="partners-track">
                             <!-- Set 1 -->
-                            <img src="assets/images/partners/cdmx.png"
+                            <img loading="lazy" decoding="async" src="assets/images/partners/cdmx.png"
                                 alt="Gobierno Ciudad de México - Trámites Vehiculares" loading="lazy" width="60"
                                 height="60">
-                            <img src="assets/images/partners/edomex.png"
+                            <img loading="lazy" decoding="async" src="assets/images/partners/edomex.png"
                                 alt="Gobierno Estado de México - Tenencia y Placas" loading="lazy" width="60"
                                 height="60">
-                            <img src="assets/images/partners/morelos.png" alt="Gobierno Morelos - Altas y Bajas"
-                                loading="lazy" width="60" height="60">
-                            <img src="assets/images/partners/guerrero.png" alt="Gobierno Guerrero - Permisos"
-                                loading="lazy" width="60" height="60">
-                            <img src="assets/images/partners/michoacan.png" alt="Gobierno Michoacán - Gestoría"
-                                loading="lazy" width="60" height="60">
-                            <img src="assets/images/partners/oaxaca.png" alt="Gobierno Oaxaca - Trámites" loading="lazy"
-                                width="60" height="60">
+                            <img loading="lazy" decoding="async" src="assets/images/partners/morelos.png"
+                                alt="Gobierno Morelos - Altas y Bajas" loading="lazy" width="60" height="60">
+                            <img loading="lazy" decoding="async" src="assets/images/partners/guerrero.png"
+                                alt="Gobierno Guerrero - Permisos" loading="lazy" width="60" height="60">
+                            <img loading="lazy" decoding="async" src="assets/images/partners/michoacan.png"
+                                alt="Gobierno Michoacán - Gestoría" loading="lazy" width="60" height="60">
+                            <img loading="lazy" decoding="async" src="assets/images/partners/oaxaca.png"
+                                alt="Gobierno Oaxaca - Trámites" loading="lazy" width="60" height="60">
 
                             <!-- Set 2 (Duplicate for Loop) -->
-                            <img src="assets/images/partners/cdmx.png" alt="Gobierno CDMX" loading="lazy" width="60"
-                                height="60">
-                            <img src="assets/images/partners/edomex.png" alt="Gobierno Estado de México" loading="lazy"
-                                width="60" height="60">
-                            <img src="assets/images/partners/morelos.png" alt="Gobierno Morelos" loading="lazy"
-                                width="60" height="60">
-                            <img src="assets/images/partners/guerrero.png" alt="Gobierno Guerrero" loading="lazy"
-                                width="60" height="60">
-                            <img src="assets/images/partners/michoacan.png" alt="Gobierno Michoacán" loading="lazy"
-                                width="60" height="60">
-                            <img src="assets/images/partners/oaxaca.png" alt="Gobierno Oaxaca" loading="lazy" width="60"
-                                height="60">
+                            <img loading="lazy" decoding="async" src="assets/images/partners/cdmx.png"
+                                alt="Gobierno CDMX" loading="lazy" width="60" height="60">
+                            <img loading="lazy" decoding="async" src="assets/images/partners/edomex.png"
+                                alt="Gobierno Estado de México" loading="lazy" width="60" height="60">
+                            <img loading="lazy" decoding="async" src="assets/images/partners/morelos.png"
+                                alt="Gobierno Morelos" loading="lazy" width="60" height="60">
+                            <img loading="lazy" decoding="async" src="assets/images/partners/guerrero.png"
+                                alt="Gobierno Guerrero" loading="lazy" width="60" height="60">
+                            <img loading="lazy" decoding="async" src="assets/images/partners/michoacan.png"
+                                alt="Gobierno Michoacán" loading="lazy" width="60" height="60">
+                            <img loading="lazy" decoding="async" src="assets/images/partners/oaxaca.png"
+                                alt="Gobierno Oaxaca" loading="lazy" width="60" height="60">
                         </div>
                     </div>
                 </div>
@@ -625,36 +597,72 @@
         </div>
 
         <!-- Pillars / Why Us -->
-        <section class="section-padding features">
+        <section class="section-padding features reveal">
             <div class="container">
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <i class="fas fa-shipping-fast feature-icon"></i>
-                        <h3>Rapidez Garantizada</h3>
-                        <p>Sabemos que tu tiempo vale oro. Entregamos tus trámites en el menor tiempo posible.</p>
+                <div class="features-layout">
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-shipping-fast feature-icon"></i>
+                            <h3>Rapidez Garantizada</h3>
+                            <p>Sabemos que tu tiempo vale oro. Entregamos tus trámites en el menor tiempo posible.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-shield-alt feature-icon"></i>
+                            <h3>100% Seguro y Legal</h3>
+                            <p>Seguridad total con tus documentos originales. Trámites verificables ante la autoridad.
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-user-check feature-icon"></i>
+                            <h3>Atención Personalizada</h3>
+                            <p>Un gestor dedicado te mantendrá informado del estatus de tu trámite paso a paso.</p>
+                        </div>
                     </div>
-                    <div class="feature-card">
-                        <i class="fas fa-shield-alt feature-icon"></i>
-                        <h3>100% Seguro y Legal</h3>
-                        <p>Seguridad total con tus documentos originales. Trámites verificables ante la autoridad.</p>
+
+                    <div class="features-visual">
+                        <img loading="lazy" decoding="async" src="assets/images/fox-thumbs.png"
+                            alt="Zorro Gestor - Trámites de autos garantizados" class="features-fox" loading="lazy"
+                            decoding="async">
                     </div>
-                    <div class="feature-card">
-                        <i class="fas fa-user-check feature-icon"></i>
-                        <h3>Atención Personalizada</h3>
-                        <p>Un gestor dedicado te mantendrá informado del estatus de tu trámite paso a paso.</p>
-                    </div>
+
                 </div>
             </div>
         </section>
 
         <!-- Google Reviews Section -->
-        <section class="section-padding reviews-section">
+        <section class="section-padding reviews-section reveal">
             <div class="container">
                 <div class="section-title">
                     <h2>La Confianza de Nuestros Clientes</h2>
                     <p><i class="fas fa-map-marker-alt google-maps-icon"
                             style="background: linear-gradient(145deg, #ffd700 0%, #ffed4e 25%, #c5a000 50%, #ffed4e 75%, #ffd700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.5)); font-size: 1.1em;"></i>
                         Reseñas reales de Google Maps</p>
+                </div>
+
+                <!-- Trophy Wall Section -->
+                <div class="trophy-wall-container">
+                    <img loading="lazy" decoding="async" src="assets/images/carros.jpg"
+                        alt="Expertos en placas y licencias - Gestor de Autos" class="trophy-car-img" loading="lazy"
+                        decoding="async">
+
+                    <div class="trophy-overlay">
+                        <div class="google-badge premium-badge">
+                            <div class="google-logo">
+                                <span class="g-blue">G</span><span class="g-red">o</span><span
+                                    class="g-yellow">o</span><span class="g-blue">g</span><span
+                                    class="g-green">l</span><span class="g-red">e</span>
+                            </div>
+                            <div class="badge-subtitle">Verified Reviews</div>
+                            <div class="badge-stars">
+                                <span class="score-text">5.0</span>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="reviews-slider-container">
@@ -684,7 +692,8 @@
                             </div>
                             <div class="review-footer">
                                 <div class="review-author">
-                                    <img src="https://ui-avatars.com/api/?name=Cliente+1&background=2563eb&color=fff&size=40"
+                                    <img loading="lazy" decoding="async"
+                                        src="https://ui-avatars.com/api/?name=Cliente+1&background=2563eb&color=fff&size=40"
                                         alt="Cliente satisfecho con alta de placas CDMX" loading="lazy">
                                     <span>Cliente 1</span>
                                 </div>
@@ -710,7 +719,8 @@
                             </div>
                             <div class="review-footer">
                                 <div class="review-author">
-                                    <img src="https://ui-avatars.com/api/?name=Cliente+2&background=2563eb&color=fff&size=40"
+                                    <img loading="lazy" decoding="async"
+                                        src="https://ui-avatars.com/api/?name=Cliente+2&background=2563eb&color=fff&size=40"
                                         alt="Cliente recomendando cambio de propietario Edomex" loading="lazy">
                                     <span>Cliente 2</span>
                                 </div>
@@ -736,7 +746,8 @@
                             </div>
                             <div class="review-footer">
                                 <div class="review-author">
-                                    <img src="https://ui-avatars.com/api/?name=Cliente+3&background=2563eb&color=fff&size=40"
+                                    <img loading="lazy" decoding="async"
+                                        src="https://ui-avatars.com/api/?name=Cliente+3&background=2563eb&color=fff&size=40"
                                         alt="Testimonio real legalización de autos" loading="lazy">
                                     <span>Cliente 3</span>
                                 </div>
@@ -761,7 +772,8 @@
                             </div>
                             <div class="review-footer">
                                 <div class="review-author">
-                                    <img src="https://ui-avatars.com/api/?name=Cliente+4&background=2563eb&color=fff&size=40"
+                                    <img loading="lazy" decoding="async"
+                                        src="https://ui-avatars.com/api/?name=Cliente+4&background=2563eb&color=fff&size=40"
                                         alt="Reseña verificada gestión vehicular" loading="lazy">
                                     <span>Cliente 4</span>
                                 </div>
@@ -787,7 +799,8 @@
                             </div>
                             <div class="review-footer">
                                 <div class="review-author">
-                                    <img src="https://ui-avatars.com/api/?name=Cliente+5&background=2563eb&color=fff&size=40"
+                                    <img loading="lazy" decoding="async"
+                                        src="https://ui-avatars.com/api/?name=Cliente+5&background=2563eb&color=fff&size=40"
                                         alt="Cliente feliz con placas de auto antiguo" loading="lazy">
                                     <span>Cliente 5</span>
                                 </div>
@@ -812,7 +825,8 @@
                             </div>
                             <div class="review-footer">
                                 <div class="review-author">
-                                    <img src="https://ui-avatars.com/api/?name=Cliente+6&background=2563eb&color=fff&size=40"
+                                    <img loading="lazy" decoding="async"
+                                        src="https://ui-avatars.com/api/?name=Cliente+6&background=2563eb&color=fff&size=40"
                                         alt="Cliente satisfecho con cambio de propietario en CDMX" loading="lazy">
                                     <span>Cliente 6</span>
                                 </div>
@@ -838,7 +852,8 @@
                             </div>
                             <div class="review-footer">
                                 <div class="review-author">
-                                    <img src="https://ui-avatars.com/api/?name=Cliente+7&background=2563eb&color=fff&size=40"
+                                    <img loading="lazy" decoding="async"
+                                        src="https://ui-avatars.com/api/?name=Cliente+7&background=2563eb&color=fff&size=40"
                                         alt="Dueño de auto legalizado con Gestor de Autos" loading="lazy">
                                     <span>Cliente 7</span>
                                 </div>
@@ -864,7 +879,8 @@
                             </div>
                             <div class="review-footer">
                                 <div class="review-author">
-                                    <img src="https://ui-avatars.com/api/?name=Cliente+8&background=2563eb&color=fff&size=40"
+                                    <img loading="lazy" decoding="async"
+                                        src="https://ui-avatars.com/api/?name=Cliente+8&background=2563eb&color=fff&size=40"
                                         alt="Usuario recomendando Gestor de Autos" loading="lazy">
                                     <span>Cliente 8</span>
                                 </div>
@@ -889,7 +905,8 @@
                             </div>
                             <div class="review-footer">
                                 <div class="review-author">
-                                    <img src="https://ui-avatars.com/api/?name=Cliente+9&background=2563eb&color=fff&size=40"
+                                    <img loading="lazy" decoding="async"
+                                        src="https://ui-avatars.com/api/?name=Cliente+9&background=2563eb&color=fff&size=40"
                                         alt="Cliente satisfecho con entrega a domicilio" loading="lazy">
                                     <span>Cliente 9</span>
                                 </div>
@@ -905,43 +922,18 @@
                     </div>
                 </div>
 
-                <div
-                    style="display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap; margin: 2rem 0;">
-                    <!-- Car Image Compact -->
-                    <div style="max-width: 550px; flex-shrink: 0;">
-                        <img src="assets/images/carros.jpg" alt="Flota de vehículos"
-                            style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);"
-                            loading="lazy" decoding="async">
-                    </div>
+                <div class="google-cta" style="margin-top: 2rem; position: relative;">
 
-                    <!-- Google Badge -->
-                    <div class="google-badge premium-badge">
-                        <div class="google-logo">
-                            <span class="g-blue">G</span><span class="g-red">o</span><span
-                                class="g-yellow">o</span><span class="g-blue">g</span><span
-                                class="g-green">l</span><span class="g-red">e</span>
-                        </div>
-                        <div class="badge-subtitle">Verified Reviews</div>
-                        <div class="badge-stars">
-                            <span class="score-text">5.0</span>
-                            <i class="fas fa-check-circle check-icon"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="google-cta">
                     <a href="https://maps.app.goo.gl/HEGvNwtQ4kYn3rpS7" target="_blank" rel="noopener noreferrer"
                         class="btn-google-review">
                         <i class="fas fa-star"></i>
                         Ver Todas las Reseñas Reales en Google Maps
                         <i class="fas fa-external-link-alt"></i>
                     </a>
-                    <p class="verify-text">✓ Verifica por ti mismo - 100% reseñas auténticas</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="verify-text">✓ Verifica por ti mismo - 100% reseñas auténticas</span>
+                    </div>
                 </div>
         </section>
 
@@ -955,7 +947,7 @@
                     <div class="tramite-card">
                         <h3 class="tramite-title">Permiso vehicular</h3>
                         <div class="tramite-image">
-                            <img src="assets/images/permiso_2026.png"
+                            <img loading="lazy" decoding="async" src="assets/images/permiso_2026.png"
                                 alt="Permiso Provisional Guerrero 2026 Uso Demostrativo" loading="lazy">
                         </div>
                         <p class="tramite-validity">VÁLIDO EN TODA LA REPÚBLICA MEXICANA</p>
@@ -977,8 +969,8 @@
                     <div class="tramite-card">
                         <h3 class="tramite-title">Licencia vehicular</h3>
                         <div class="tramite-image">
-                            <img src="assets/images/licencia_morada.png" alt="Licencia Permanente Tipo A Morada"
-                                loading="lazy" style="max-width: 280px;">
+                            <img loading="lazy" decoding="async" src="assets/images/licencia_morada.png"
+                                alt="Licencia Permanente Tipo A Morada" loading="lazy" style="max-width: 280px;">
                         </div>
                         <p class="tramite-validity">VÁLIDO EN TODA LA REPÚBLICA MEXICANA</p>
 
@@ -1077,7 +1069,8 @@
 
     <!-- Gold Certificate Badge -->
     <div class="gold-badge" style="display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-        <img src="assets/images/gold.png" alt="Certificación Premium - Gestoría Vehicular"
+        <img loading="lazy" decoding="async" src="assets/images/gold.png"
+            alt="Certificación Premium - Gestoría Vehicular"
             style="max-width: 150px; width: 100%; height: auto; margin-left: 1rem; margin-right: 1rem; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));"
             loading="lazy" decoding="async">
     </div>
@@ -1106,8 +1099,9 @@
                     <h4>Contacto</h4>
                     <ul class="footer-links">
                         <li><a href="https://wa.me/525535757364" target="_blank" aria-label="WhatsApp 55 3575 7364"><i
-                                    class="fab fa-whatsapp"></i> 55 3575
-                                7364</a></li>
+                                    class="fab fa-whatsapp"></i> 55 3575 7364 - Ing Duran</a></li>
+                        <li><a href="https://wa.me/525522917267" target="_blank" aria-label="WhatsApp 55 2291 7267"><i
+                                    class="fab fa-whatsapp"></i> 55 2291 7267 - Lic Erika</a></li>
 
                         <li><i class="fas fa-envelope"></i> contacto@gestordeautos.com.mx</li>
                         <li><i class="fas fa-map-marker-alt"></i> CDMX, México</li>
@@ -1171,7 +1165,8 @@
             <div class="import-visual">
                 <div class="waving-flag usa-flag">🇺🇸</div>
                 <div class="waving-flag mx-flag">🇲🇽</div>
-                <img src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&q=80&w=1000"
+                <img loading="lazy" decoding="async"
+                    src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&q=80&w=1000"
                     alt="Ford Mustang Americano" class="car-img" loading="lazy">
             </div>
         </div>
@@ -1216,12 +1211,18 @@
                     const reemplacamientoPopup = document.getElementById('reemplacamientoPopup');
                     if (reemplacamientoPopup) {
                         reemplacamientoPopup.classList.remove('hidden');
-                        // Force Right-to-Left animation logic
-                        reemplacamientoPopup.style.transform = 'translateX(0)'; // Simple visibility trigger if CSS handles transition
-                        // Actually, reusing .gold-popup class means it needs 'visible' class
-                        requestAnimationFrame(() => {
+                        setTimeout(() => {
                             reemplacamientoPopup.classList.add('visible');
-                        });
+                        }, 100);
+                    }
+
+                    // Trigger Gold Popup HERE (after banner closes)
+                    const goldPopup = document.getElementById('goldPopup');
+                    if (goldPopup) {
+                        goldPopup.classList.remove('hidden');
+                        setTimeout(() => {
+                            goldPopup.classList.add('visible');
+                        }, 600); // Slight delay after Reemplacamiento
                     }
 
                 }, 500); // Match CSS transition time
@@ -1267,31 +1268,16 @@
             const goldPopup = document.getElementById('goldPopup');
             const closeGold = document.querySelector('.close-gold');
 
-            // Scroll Trigger Logic for Gold Popup
-            const triggerText = document.querySelector('.verify-text');
-            if (triggerText && goldPopup) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            goldPopup.classList.remove('hidden');
-                            requestAnimationFrame(() => {
-                                goldPopup.classList.add('visible');
-                            });
-                            // Trigger only once
-                            observer.disconnect();
-                        }
-                    });
-                }, { threshold: 0.5 }); // Trigger when 50% visible
+            // Scroll Trigger Logic REMOVED per user request
 
-                observer.observe(triggerText);
+            if (closeGold) {
+                closeGold.addEventListener('click', () => {
+                    goldPopup.classList.remove('visible');
+                    setTimeout(() => {
+                        goldPopup.classList.add('hidden');
+                    }, 600);
+                });
             }
-
-            closeGold.addEventListener('click', () => {
-                goldPopup.classList.remove('visible');
-                setTimeout(() => {
-                    goldPopup.classList.add('hidden');
-                }, 600);
-            });
 
             // Physics State
             let currentScroll = track.scrollLeft;
