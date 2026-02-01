@@ -297,6 +297,18 @@ ul {
         margin: 0 auto;
         justify-content: center;
     }
+
+    /* Hide language button on mobile */
+    .lang-btn {
+        display: none !important;
+    }
+}
+
+/* Desktop: Show language button, Golden Ticket in nav */
+@media (min-width: 769px) {
+    .lang-btn {
+        display: flex !important;
+    }
 }
 
 .header-contacts {
@@ -1036,7 +1048,8 @@ ul {
 /* Service Item Refinements */
 .service-item {
     background: var(--white);
-    padding: 1.5rem;
+    padding: 2rem;
+    /* Increased from 1.5rem for better spacing */
     border-radius: 1rem;
     /* More rounded */
     box-shadow: var(--shadow-sm);
