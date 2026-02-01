@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNJCSQXF11"></script>
     <script>
@@ -117,6 +120,35 @@
               { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Regularización REPUVE y Autos Extranjeros", "serviceType": "Legal" } }
             ]
           }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cuáles son los requisitos para alta de placas en el Estado de México?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Los requisitos básicos incluyen identificación oficial, comprobante de domicilio en EdoMex, factura del vehículo y comprobante de pago de derechos. En Gestor de Autos realizamos este trámite 100% online."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto tiempo tarda el trámite de licencia en la CDMX?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Con nuestra gestión especializada, procesamos tu licencia de forma rápida, a menudo con respuesta el mismo día o en 24 horas hábiles."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Realizan trámites vehiculares en Huixquilucan e Interlomas?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, tenemos cobertura total en Huixquilucan, Interlomas, Chalco y todo el área metropolitana, brindando servicio a domicilio o digital."
+              }
+            }
+          ]
         }
       ]
     }
@@ -158,6 +190,11 @@
             <ul class="nav-links">
                 <li><a href="#servicios" data-i18n="nav_services">Servicios</a></li>
                 <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
+                <li id="navTicketItem" class="hidden-nav-ticket">
+                    <button id="openNavTicket" class="nav-ticket-btn">
+                        <i class="fas fa-ticket-alt"></i> Boleto Dorado
+                    </button>
+                </li>
             </ul>
             <div class="header-contacts">
                 <div class="header-btns">
@@ -632,8 +669,8 @@
 
                     <div class="features-visual">
                         <img loading="lazy" decoding="async" src="assets/images/fox-thumbs.png"
-                            alt="Zorro Gestor - Trámites de autos garantizados" class="features-fox" loading="lazy"
-                            decoding="async">
+                            alt="Gestor de Autos - Servicio 100% garantizado y legal" class="features-fox" width="500"
+                            height="500">
                     </div>
 
                 </div>
@@ -654,7 +691,7 @@
                 <div class="trophy-wall-container">
                     <img loading="lazy" decoding="async" src="assets/images/carros.jpg"
                         alt="Gestoría vehicular en Chalco, Ixtapaluca y Huixquilucan - Expertos en Placas"
-                        class="trophy-car-img" loading="lazy" decoding="async">
+                        class="trophy-car-img" width="800" height="600">
 
                     <div class="trophy-overlay">
                         <div class="google-badge premium-badge">
@@ -705,7 +742,7 @@
                                 <div class="review-author">
                                     <img loading="lazy" decoding="async"
                                         src="https://ui-avatars.com/api/?name=Cliente+1&background=2563eb&color=fff&size=40"
-                                        alt="Cliente satisfecho con alta de placas CDMX" loading="lazy">
+                                        alt="Opinión real sobre alta de placas en CDMX" width="40" height="40">
                                     <span>Cliente 1</span>
                                 </div>
                                 <div class="verified-badge">
@@ -732,7 +769,7 @@
                                 <div class="review-author">
                                     <img loading="lazy" decoding="async"
                                         src="https://ui-avatars.com/api/?name=Cliente+2&background=2563eb&color=fff&size=40"
-                                        alt="Cliente recomendando cambio de propietario Edomex" loading="lazy">
+                                        alt="Recomendación de cambio de propietario en EdoMex" width="40" height="40">
                                     <span>Cliente 2</span>
                                 </div>
                                 <div class="verified-badge">
@@ -759,7 +796,8 @@
                                 <div class="review-author">
                                     <img loading="lazy" decoding="async"
                                         src="https://ui-avatars.com/api/?name=Cliente+3&background=2563eb&color=fff&size=40"
-                                        alt="Testimonio real legalización de autos" loading="lazy">
+                                        alt="Testimonio de legalización de autos extranjeros Chalco" width="40"
+                                        height="40">
                                     <span>Cliente 3</span>
                                 </div>
                                 <div class="verified-badge">
@@ -785,7 +823,7 @@
                                 <div class="review-author">
                                     <img loading="lazy" decoding="async"
                                         src="https://ui-avatars.com/api/?name=Cliente+4&background=2563eb&color=fff&size=40"
-                                        alt="Reseña verificada gestión vehicular" loading="lazy">
+                                        alt="Gestoría vehicular Huixquilucan reseña verificada" width="40" height="40">
                                     <span>Cliente 4</span>
                                 </div>
                                 <div class="verified-badge">
@@ -812,7 +850,7 @@
                                 <div class="review-author">
                                     <img loading="lazy" decoding="async"
                                         src="https://ui-avatars.com/api/?name=Cliente+5&background=2563eb&color=fff&size=40"
-                                        alt="Cliente feliz con placas de auto antiguo" loading="lazy">
+                                        alt="Placas de auto antiguo EdoMex opinión de cliente" width="40" height="40">
                                     <span>Cliente 5</span>
                                 </div>
                                 <div class="verified-badge">
@@ -838,7 +876,7 @@
                                 <div class="review-author">
                                     <img loading="lazy" decoding="async"
                                         src="https://ui-avatars.com/api/?name=Cliente+6&background=2563eb&color=fff&size=40"
-                                        alt="Cliente satisfecho con cambio de propietario en CDMX" loading="lazy">
+                                        alt="Alta de placas Ixtapaluca cliente satisfecho" width="40" height="40">
                                     <span>Cliente 6</span>
                                 </div>
                                 <div class="verified-badge">
@@ -865,7 +903,7 @@
                                 <div class="review-author">
                                     <img loading="lazy" decoding="async"
                                         src="https://ui-avatars.com/api/?name=Cliente+7&background=2563eb&color=fff&size=40"
-                                        alt="Dueño de auto legalizado con Gestor de Autos" loading="lazy">
+                                        alt="Gestoría de placas Tlalnepantla testimonio real" width="40" height="40">
                                     <span>Cliente 7</span>
                                 </div>
                                 <div class="verified-badge">
@@ -892,7 +930,7 @@
                                 <div class="review-author">
                                     <img loading="lazy" decoding="async"
                                         src="https://ui-avatars.com/api/?name=Cliente+8&background=2563eb&color=fff&size=40"
-                                        alt="Usuario recomendando Gestor de Autos" loading="lazy">
+                                        alt="Servicio de placas Ecatepec recomendado" width="40" height="40">
                                     <span>Cliente 8</span>
                                 </div>
                                 <div class="verified-badge">
@@ -918,7 +956,8 @@
                                 <div class="review-author">
                                     <img loading="lazy" decoding="async"
                                         src="https://ui-avatars.com/api/?name=Cliente+9&background=2563eb&color=fff&size=40"
-                                        alt="Cliente satisfecho con entrega a domicilio" loading="lazy">
+                                        alt="Trámites vehiculares a domicilio Interlomas experto" width="40"
+                                        height="40">
                                     <span>Cliente 9</span>
                                 </div>
                                 <div class="verified-badge">
@@ -959,7 +998,7 @@
                         <h3 class="tramite-title">Permiso vehicular</h3>
                         <div class="tramite-image">
                             <img loading="lazy" decoding="async" src="assets/images/permiso_2026.png"
-                                alt="Permiso Provisional Guerrero 2026 Uso Demostrativo" loading="lazy">
+                                alt="Permiso Provisional Guerrero 2026 Uso Demostrativo" width="300" height="200">
                         </div>
                         <p class="tramite-validity">VÁLIDO EN TODA LA REPÚBLICA MEXICANA</p>
 
@@ -981,7 +1020,8 @@
                         <h3 class="tramite-title">Licencia vehicular</h3>
                         <div class="tramite-image">
                             <img loading="lazy" decoding="async" src="assets/images/licencia_morada.png"
-                                alt="Licencia Permanente Tipo A Morada" loading="lazy" style="max-width: 280px;">
+                                alt="Licencia Permanente Tipo A Morada" width="280" height="180"
+                                style="max-width: 280px;">
                         </div>
                         <p class="tramite-validity">VÁLIDO EN TODA LA REPÚBLICA MEXICANA</p>
 
@@ -1065,77 +1105,372 @@
         </section>
     </main>
 
-    <!-- Reemplacamiento Warning Popup (Gold Style) -->
-    <div id="reemplacamientoPopup" class="gold-popup hidden"
-        style="left: auto; right: 2rem; transform: translateX(120%);">
-        <button class="close-reemplacamiento" aria-label="Cerrar aviso"><i class="fas fa-times"></i></button>
-        <div class="gold-header">
-            <i class="fas fa-exclamation-triangle gold-icon" style="color: #ef4444;"></i>
-            <h3>Aviso Importante EdoMex</h3>
-        </div>
-
-        <div class="toast-body" style="color: #cbd5e1;">
-            <p style="color: #ef4444; font-weight: 800; text-transform: uppercase; margin-bottom: 0.5rem;">¡Evita
-                Sanciones y Corralón!</p>
-            <p style="margin-bottom: 0.5rem;"><strong>¿Tus placas son 2020 o anteriores?</strong><br>Ya no están
-                vigentes. En el Estado de México la vigencia es de 5 años.</p>
-            <p style="color: #fbbf24; font-weight: 600; margin-bottom: 1rem;">Nos especializamos en Altas y
-                Reemplacamiento.</p>
-
-            <a href="https://wa.me/525535757364?text=Necesito%20regularizar%20mis%20placas%20del%20EdoMex"
-                class="gold-link-item link-highlight"
-                style="justify-content: center; background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3);">
-                <i class="fab fa-whatsapp" style="color: #ef4444;"></i> Regularizar Ahora
-            </a>
-        </div>
-    </div>
-
-    <!-- Gold Resources Popup -->
-    <div id="goldPopup" class="gold-popup hidden">
-        <button class="close-gold" aria-label="Cerrar recursos"><i class="fas fa-times"></i></button>
-        <div class="gold-header">
-            <i class="fas fa-gem gold-icon"></i>
-            <h3
-                style="font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">
-                Te podría interesar</h3>
-        </div>
-        <p class="gold-subtitle">Recursos oficiales que te ayudarán</p>
-
-        <div class="gold-links">
-            <a href="https://sedema.cdmx.gob.mx/programas/programa/verificacion-vehicular" target="_blank"
-                rel="noopener" class="gold-link-item">
-                <i class="fas fa-calendar-check"></i> Calendario de Verificación
-            </a>
-            <a href="https://cemer.edomex.gob.mx/sites/cemer.edomex.gob.mx/files/files/AIR%202022/142/REGLAMENTO.pdf"
-                target="_blank" rel="noopener" class="gold-link-item">
-                <i class="fas fa-book"></i> Reglamento de Tránsito
-            </a>
-            <a href="https://data.finanzas.cdmx.gob.mx/consulta_adeudos" target="_blank" rel="noopener"
-                class="gold-link-item">
-                <i class="fas fa-file-invoice-dollar"></i> Multas CDMX
-            </a>
-            <a href="https://www2.repuve.gob.mx:8443/ciudadania/" target="_blank" rel="noopener" class="gold-link-item">
-                <i class="fas fa-car-side"></i> Consulta REPUVE
-            </a>
-            <a href="https://data.finanzas.cdmx.gob.mx/sma/consulta_sedema" target="_blank" rel="noopener"
-                class="gold-link-item">
-                <i class="fas fa-search-dollar"></i> Consulta Infracciones
-            </a>
-        </div>
-    </div>
 
     </div>
 
     <!-- Gold Certificate Badge -->
     <div class="gold-badge" style="display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
         <img loading="lazy" decoding="async" src="assets/images/gold.png"
-            alt="Certificación Premium - Gestoría Vehicular"
+            alt="Certificación Premium - Gestoría Vehicular #1"
             style="max-width: 150px; width: 100%; height: auto; margin-left: 1rem; margin-right: 1rem; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));"
-            loading="lazy" decoding="async">
+            width="150" height="150">
     </div>
 
     <!-- Friendly Fox pointing to WhatsApp -->
 
+
+    <!-- Golden Ticket v2 / Boleto Dorado (Personalizado) -->
+    <div id="goldenTicketModal" class="golden-modal hidden">
+        <div class="golden-overlay"></div>
+        <div class="ticket-container">
+            <div class="ticket">
+                <!-- Close Button (X) -->
+                <button id="closeTicket" class="ticket-close-x" aria-label="Cerrar">&times;</button>
+
+                <div class="ticket-header">
+                    <span class="ticket-star">★</span>
+                    <span class="ticket-title">BOLETO DORADO</span>
+                    <span class="ticket-star">★</span>
+                    <span style="display:none">v3.0</span>
+                </div>
+
+                <div class="ticket-step">
+                    <div class="ticket-body">
+                        <h3>¡COTIZA TU TRÁMITE!</h3>
+                        <p>Mándanos un WhatsApp para tu cotización. Escribe tu nombre y envía este folio (o toma
+                            captura):</p>
+
+                        <div class="folio-box">
+                            <span class="folio-label">TU FOLIO DE SEGURIDAD:</span>
+                            <span id="ticketFolio" class="folio-number">...</span>
+                        </div>
+
+                        <input type="text" id="ticketVisitorName" class="ticket-input"
+                            placeholder="Escribe tu nombre aquí..." maxlength="40">
+                    </div>
+                    <div class="ticket-footer">
+                        <a href="#" id="claimTicketBtn" class="btn-claim">
+                            <i class="fab fa-whatsapp"></i> ENVIAR POR WHATSAPP
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <style>
+        /* Golden Ticket Styles v2 */
+        .golden-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .golden-modal.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .golden-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+        }
+
+        .ticket-container {
+            position: relative;
+            perspective: 1000px;
+            width: 95%;
+            max-width: 450px;
+        }
+
+        .ticket {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 25%, #c5a000 50%, #ffed4e 75%, #ffd700 100%);
+            padding: 2.5rem 1.5rem;
+            border-radius: 12px;
+            position: relative;
+            text-align: center;
+            color: #1a1a1a;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(255, 255, 255, 0.4);
+            border: 4px double #b08d57;
+            font-family: 'Inter', sans-serif;
+            animation: ticketEntry 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes ticketEntry {
+            from {
+                transform: scale(0.8) rotateX(-30deg);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) rotateX(0);
+                opacity: 1;
+            }
+        }
+
+        .ticket-close-x {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            font-size: 2rem;
+            line-height: 1;
+            cursor: pointer;
+            color: #8b6508;
+            transition: transform 0.3s;
+            z-index: 10;
+            font-weight: 300;
+        }
+
+        .ticket-close-x:hover {
+            transform: scale(1.2) rotate(90deg);
+            color: #000;
+        }
+
+        .ticket-header {
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .ticket-title {
+            font-weight: 900;
+            letter-spacing: 4px;
+            font-size: 1.2rem;
+        }
+
+        .ticket-star {
+            color: #8b6508;
+            font-size: 1.5rem;
+        }
+
+        .ticket-body h3 {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 900;
+            color: #1a1a1a;
+        }
+
+        .ticket-body p {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            color: #333;
+        }
+
+        .ticket-input {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 2px solid #b08d57;
+            background: rgba(255, 255, 255, 0.9);
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            text-align: center;
+            font-weight: 600;
+            outline: none;
+        }
+
+        .ticket-input:focus {
+            border-color: #000;
+            background: #fff;
+        }
+
+        .folio-box {
+            background: rgba(0, 0, 0, 0.05);
+            border: 2px dashed #8b6508;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+
+        .folio-label {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #8b6508;
+            margin-bottom: 0.2rem;
+        }
+
+        .folio-number {
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .ticket-benefit {
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .ticket-footer {
+            margin-top: 1.5rem;
+        }
+
+        .btn-claim {
+            background: #1a1a1a;
+            color: #ffd700;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .btn-claim:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: #000;
+        }
+
+        /* Teaser Style */
+
+        /* Nav Ticket Button Styles */
+        .hidden-nav-ticket {
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.5s ease;
+            pointer-events: none;
+            visibility: hidden;
+            width: 0;
+            overflow: hidden;
+        }
+
+        .hidden-nav-ticket.visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+            visibility: visible !important;
+            width: auto !important;
+            margin-left: 1rem !important;
+            overflow: visible !important;
+            display: block !important;
+        }
+
+        .nav-ticket-btn {
+            background: linear-gradient(135deg, #ffd700, #c5a000);
+            color: #1a1a1a;
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 10px rgba(218, 165, 32, 0.3);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-ticket-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(218, 165, 32, 0.5);
+            background: linear-gradient(135deg, #ffed4e, #ffd700);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ticketModal = document.getElementById('goldenTicketModal');
+            const navTicketItem = document.getElementById('navTicketItem');
+            const openNavBtn = document.getElementById('openNavTicket');
+            const closeBtn = document.getElementById('closeTicket');
+            const nameInput = document.getElementById('ticketVisitorName');
+            const folioSpan = document.getElementById('ticketFolio');
+            const claimBtn = document.getElementById('claimTicketBtn');
+
+            let currentFolio = "";
+            let ticketShown = false;
+
+            // Short serial-style Folio Generator (Smarter & Shorter)
+            function generateSerialFolio() {
+                const now = new Date();
+                const day = now.getDate().toString().padStart(2, '0');
+                const hour = now.getHours().toString().padStart(2, '0');
+                const randomPart = Math.floor(100 + Math.random() * 900); // 3 random digits
+                return `GD-${day}${hour}-${randomPart}`;
+            }
+
+            // Show nav button after 10 seconds OR 300px scroll
+            function triggerTicketEntry() {
+                if (ticketShown) return;
+
+                ticketShown = true;
+                navTicketItem.classList.add('visible');
+            }
+
+            setTimeout(triggerTicketEntry, 1000);
+            window.addEventListener('scroll', triggerTicketEntry);
+
+            function openTicket() {
+                if (!currentFolio) {
+                    currentFolio = generateSerialFolio();
+                    folioSpan.textContent = currentFolio;
+                }
+                ticketModal.classList.remove('hidden');
+                setTimeout(() => ticketModal.classList.add('visible'), 10);
+            }
+
+            openNavBtn.addEventListener('click', openTicket);
+
+            closeBtn.addEventListener('click', () => {
+                ticketModal.classList.remove('visible');
+                setTimeout(() => {
+                    ticketModal.classList.add('hidden');
+                }, 500);
+            });
+
+            claimBtn.addEventListener('click', (e) => {
+                const userName = nameInput.value.trim();
+                if (userName.length < 2) {
+                    e.preventDefault();
+                    nameInput.style.borderColor = "#ef4444";
+                    nameInput.placeholder = "Escribe tu nombre";
+                    return;
+                }
+
+                sessionStorage.setItem('ticketClaimed', 'true');
+                if (navTicketItem) navTicketItem.classList.remove('visible');
+
+                // FINAL UPDATED MESSAGE - VERSION 3.0
+                const finalMsg = `Hola, soy *${userName}*. He generado mi *BOLETO DORADO* en GestorDeAutos.\nFolio Serial: [${currentFolio}]\nMe gustaría solicitar una cotización lo mas pronto posible.`;
+                const waUrl = `https://wa.me/525535757364?text=${encodeURIComponent(finalMsg)}`;
+
+                window.open(waUrl, '_blank');
+
+                ticketModal.classList.remove('visible');
+                setTimeout(() => ticketModal.classList.add('hidden'), 500);
+            });
+        });
+    </script>
 
     <!-- Footer -->
     <footer id="contacto" class="footer">
@@ -1168,17 +1503,13 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 Gestor de Autos. Todos los derechos reservados.</p>
+                <p>&copy; 2026 Gestor de Autos. Todos los derechos reservados. Sitio desarrollado e impulsado por <a
+                        href="https://intersite.netlify.app" target="_blank"
+                        style="color: inherit; text-decoration: none; font-weight: 600;">InterSite</a></p>
             </div>
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/525535757364?text=Hola,%20me%20interesa%20realizar%20un%20trámite" class="floating-whatsapp"
-        target="_blank" aria-label="Contactar por WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-        <div class="whatsapp-badge">1</div>
-    </a>
 
     <!-- Scroll Effect Script -->
     <script>
@@ -1206,101 +1537,6 @@
         }
     </script>
 
-    <!-- Import Banner Popup -->
-    <div id="importPopup" class="import-popup hidden">
-        <button class="close-popup" aria-label="Minimizar oferta"><i class="fas fa-minus"></i></button>
-        <div class="import-card">
-            <div class="import-content">
-                <div class="import-badge">🔥 Oferta Irresistible</div>
-                <h2>¿Un <span class="text-gradient">Audi</span> en tu Garage?</h2>
-                <h3>Lo traemos de USA a México, 100% Legal.</h3>
-                <p>Nos encargamos de la <strong>logística, aduana y legalización</strong>.</p>
-
-                <a href="https://wa.me/525535757364?text=Me%20interesa%20la%20promo%20del%20Audi" class="btn btn-import"
-                    target="_blank">
-                    <i class="fas fa-flag-usa"></i> Cotizar Mi Americano
-                </a>
-            </div>
-            <div class="import-visual">
-                <div class="waving-flag usa-flag">🇺🇸</div>
-                <div class="waving-flag mx-flag">🇲🇽</div>
-                <img loading="lazy" decoding="async"
-                    src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&q=80&w=1000"
-                    alt="Ford Mustang Americano" class="car-img" loading="lazy">
-            </div>
-        </div>
-    </div>
-
-    <!-- Floating Trigger Icon (Minimized state) -->
-    <button id="importTrigger" class="import-trigger hidden" aria-label="Ver Oferta Importación">
-        <i class="fas fa-flag-usa" style="font-size: 1.5rem;"></i>
-        <div class="trigger-badge">1</div>
-    </button>
-
-    <!-- Popup Logic -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const popup = document.getElementById('importPopup');
-            const closeBtn = document.querySelector('.close-popup');
-            const trigger = document.getElementById('importTrigger');
-
-            // Show after 1 second (almost immediately on load)
-            setTimeout(() => {
-                // ALWAYS show the banner open on load, as requested.
-                // We ignore previous dismissal history for the initial state.
-                popup.classList.remove('hidden');
-                requestAnimationFrame(() => {
-                    popup.classList.add('visible');
-                });
-            }, 1000);
-
-            // Minimize Logic
-            closeBtn.addEventListener('click', () => {
-                popup.classList.remove('visible');
-                sessionStorage.setItem('bannerDismissed', 'true');
-
-                setTimeout(() => {
-                    popup.classList.add('hidden');
-                    trigger.classList.remove('hidden');
-                    requestAnimationFrame(() => {
-                        trigger.classList.add('visible');
-                    });
-
-                    // Trigger Reemplacamiento Popup HERE (after banner closes)
-                    const reemplacamientoPopup = document.getElementById('reemplacamientoPopup');
-                    if (reemplacamientoPopup) {
-                        reemplacamientoPopup.classList.remove('hidden');
-                        setTimeout(() => {
-                            reemplacamientoPopup.classList.add('visible');
-                        }, 100);
-                    }
-
-                    // Trigger Gold Popup HERE (after banner closes)
-                    const goldPopup = document.getElementById('goldPopup');
-                    if (goldPopup) {
-                        goldPopup.classList.remove('hidden');
-                        setTimeout(() => {
-                            goldPopup.classList.add('visible');
-                        }, 600); // Slight delay after Reemplacamiento
-                    }
-
-                }, 500); // Match CSS transition time
-            });
-
-            // Restore Logic
-            trigger.addEventListener('click', () => {
-                trigger.classList.remove('visible');
-
-                setTimeout(() => {
-                    trigger.classList.add('hidden');
-                    popup.classList.remove('hidden');
-                    requestAnimationFrame(() => {
-                        popup.classList.add('visible');
-                    });
-                }, 300);
-            });
-        });
-    </script>
 
     <!-- Cover Flow Effect Script (Apple-style Physics) -->
     <script>
@@ -1308,35 +1544,6 @@
             const track = document.querySelector('.reviews-track');
             const cards = document.querySelectorAll('.review-card');
 
-            // Info Toast Logic REMOVED
-
-            // Reemplacamiento Close Logic
-            const reemplacamientoPopup = document.getElementById('reemplacamientoPopup');
-            const closeReemplacamiento = document.querySelector('.close-reemplacamiento');
-
-            if (closeReemplacamiento) {
-                closeReemplacamiento.addEventListener('click', () => {
-                    reemplacamientoPopup.classList.remove('visible');
-                    setTimeout(() => {
-                        reemplacamientoPopup.classList.add('hidden');
-                    }, 600);
-                });
-            }
-
-            // Gold Popup Logic (Te Podría Interesar)
-            const goldPopup = document.getElementById('goldPopup');
-            const closeGold = document.querySelector('.close-gold');
-
-            // Scroll Trigger Logic REMOVED per user request
-
-            if (closeGold) {
-                closeGold.addEventListener('click', () => {
-                    goldPopup.classList.remove('visible');
-                    setTimeout(() => {
-                        goldPopup.classList.add('hidden');
-                    }, 600);
-                });
-            }
 
             // Physics State
             let currentScroll = track.scrollLeft;

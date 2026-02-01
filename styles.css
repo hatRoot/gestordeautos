@@ -1544,49 +1544,6 @@ ul {
     font-size: 0.875rem;
 }
 
-/* Floating WhatsApp */
-.floating-whatsapp {
-    position: fixed;
-    bottom: calc(2rem + var(--iphone-safe-bottom, 0px));
-    right: 2rem;
-    background-color: var(--success-color);
-    color: white;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    box-shadow: var(--shadow-lg);
-    z-index: 1000;
-    transition: var(--transition);
-    animation: pulse 2s infinite;
-    will-change: transform, box-shadow;
-}
-
-.whatsapp-badge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: #ef4444;
-    /* Notification Red */
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 800;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.floating-whatsapp:hover {
-    transform: scale(1.1);
-}
 
 /* Animations */
 @keyframes fadeInUp {
@@ -1809,13 +1766,6 @@ ul {
         align-items: center;
     }
 
-    .floating-whatsapp {
-        width: 50px;
-        height: 50px;
-        bottom: 1.5rem;
-        right: 1.5rem;
-        font-size: 1.5rem;
-    }
 }
 
 /* Premium Gold Popup */
