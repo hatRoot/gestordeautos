@@ -254,6 +254,51 @@ ul {
     }
 }
 
+/* Golden Ticket Button */
+.nav-ticket-btn {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: #1a1a1a;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+}
+
+.nav-ticket-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(251, 191, 36, 0.6);
+    background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+}
+
+.nav-ticket-btn i {
+    font-size: 1.1rem;
+}
+
+/* Mobile: Show Golden Ticket button */
+@media (max-width: 768px) {
+    #navTicketItem {
+        display: block !important;
+        width: 100%;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+
+    .nav-ticket-btn {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+        justify-content: center;
+    }
+}
+
 .header-contacts {
     display: flex;
     flex-direction: row;
@@ -1032,13 +1077,6 @@ ul {
     gap: 1rem;
 }
 
-/* Premium Item (Alta de Placas) */
-.premium-item {
-    grid-column: 1 / -1;
-    /* Full width on mobile/tablet */
-    /* Removed custom background/border to match others */
-}
-
 .service-tags {
     display: flex;
     flex-wrap: wrap;
@@ -1079,13 +1117,6 @@ ul {
     background: rgba(255, 255, 255, 0.1);
     color: #38bdf8;
     /* Light blue accent */
-}
-
-@media (min-width: 1024px) {
-    .premium-item {
-        grid-column: span 2;
-        /* Spans 2 cols on desktop */
-    }
 }
 
 /* Reviews Section */
@@ -2903,5 +2934,83 @@ ul {
         /* Significantly increased to avoid overlap with large mobile header */
         padding-top: 6rem;
         /* Ensures text is well below the centered logo/menu area */
+    }
+}
+
+/* Fox Interaction Systems */
+.features-visual {
+    position: relative;
+}
+
+.fox-bubble {
+    position: absolute;
+    top: -30px;
+    right: 10%;
+
+    /* Modern Glassmorphism */
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.95) 0%, rgba(245, 158, 11, 0.95) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    color: #ffffff;
+    padding: 1rem 1.8rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 1.1rem;
+
+    /* Premium Shadow */
+    box-shadow:
+        0 20px 40px rgba(251, 191, 36, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.3) inset,
+        0 4px 6px rgba(0, 0, 0, 0.1);
+
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    z-index: 100;
+    white-space: nowrap;
+
+    /* Subtle inner glow */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.fox-bubble.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation: bubbleFloat 4s ease-in-out infinite alternate;
+}
+
+@keyframes bubbleFloat {
+    from {
+        transform: translateY(0) rotate(-1deg);
+    }
+
+    to {
+        transform: translateY(-12px) rotate(1deg);
+    }
+}
+
+/* Modern speech bubble tail */
+.fox-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.95) 0%, rgba(251, 191, 36, 0.95) 100%);
+    transform: rotate(45deg);
+    border-radius: 0 0 4px 0;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile responsive bubble */
+@media (max-width: 768px) {
+    .fox-bubble {
+        top: -20px;
+        right: 5%;
+        font-size: 0.9rem;
+        padding: 0.7rem 1.2rem;
     }
 }

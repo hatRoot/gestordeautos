@@ -190,7 +190,7 @@
             <ul class="nav-links">
                 <li><a href="#servicios" data-i18n="nav_services">Servicios</a></li>
                 <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
-                <li id="navTicketItem" class="hidden-nav-ticket">
+                <li id="navTicketItem">
                     <button id="openNavTicket" class="nav-ticket-btn">
                         <i class="fas fa-ticket-alt"></i> Boleto Dorado
                     </button>
@@ -621,18 +621,26 @@
                 </div>
 
                 <!-- Foreigner Plates Card -->
-                <div class="service-item">
+                <div class="service-item premium-item">
                     <div class="service-header">
-                        <div class="service-icon"><i class="fas fa-car"></i></div>
+                        <div class="service-icon"><i class="fas fa-car-side"></i></div>
                         <div>
                             <h4 data-i18n="svc_foreign_plates_title">Placas para Extranjeros</h4>
-                            <small data-i18n="svc_foreign_plates_sub">Plates registration</small>
+                            <small data-i18n="svc_foreign_plates_sub">Vehicle Registration</small>
                         </div>
                     </div>
+                    <div class="service-tags">
+                        <span class="tag"><i class="fas fa-passport"></i> Pasaporte</span>
+                        <span class="tag"><i class="fas fa-file-invoice"></i> Alta Legal</span>
+                    </div>
+                    <p style="font-size: 0.9em; color: #64748b; margin-top: 0.5rem;">
+                        Registramos tu vehículo extranjero o nacional para residentes extranjeros con toda la
+                        documentación oficial.
+                    </p>
                 </div>
 
-                <!-- Legalization Card (Ref) -->
-                <div class="service-item">
+                <!-- Legalization Card -->
+                <div class="service-item premium-item">
                     <div class="service-header">
                         <div class="service-icon"><i class="fas fa-file-contract"></i></div>
                         <div>
@@ -640,6 +648,14 @@
                             <small data-i18n="svc_legalization_sub">Car Legalization</small>
                         </div>
                     </div>
+                    <div class="service-tags">
+                        <span class="tag"><i class="fas fa-check-double"></i> Decreto</span>
+                        <span class="tag"><i class="fas fa-shield-alt"></i> REPUVE</span>
+                    </div>
+                    <p style="font-size: 0.9em; color: #64748b; margin-top: 0.5rem;">
+                        Regularización de vehículos de procedencia extranjera. Todo el proceso bajo el decreto vigente y
+                        registro en REPUVE.
+                    </p>
                 </div>
             </div>
         </div>
@@ -668,6 +684,7 @@
                     </div>
 
                     <div class="features-visual">
+                        <div id="foxBubble" class="fox-bubble">¿Ya tienes tu boleto Dorado?</div>
                         <img loading="lazy" decoding="async" src="assets/images/fox-thumbs.png"
                             alt="Gestor de Autos - Servicio 100% garantizado y legal" class="features-fox" width="500"
                             height="500">
@@ -725,6 +742,32 @@
                     <div class="reviews-track" id="reviewsTrack">
                         <!-- Spacer for Start Centering -->
                         <div class="review-spacer"></div>
+
+                        <!-- Review Card 10 (NEWEST - MOVED TO FIRST) -->
+                        <div class="review-card">
+                            <p class="review-text">"Realmente muy responsable y atento en todos los trámites, en tiempo
+                                y forma de acuerdo a tus necesidades. Brinda una atención personalizada, totalmente te
+                                resuelven. 100% recomendados."</p>
+                            <div class="review-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="review-footer">
+                                <div class="review-author">
+                                    <img loading="lazy" decoding="async"
+                                        src="https://ui-avatars.com/api/?name=Cliente+10&background=2563eb&color=fff&size=40"
+                                        alt="Opinión real sobre atención personalizada" width="40" height="40">
+                                    <span>Cliente 10</span>
+                                </div>
+                                <div class="verified-badge">
+                                    <i class="fab fa-google"></i>
+                                    <span>Verified Review</span>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Review Card 1 -->
                         <div class="review-card">
@@ -967,6 +1010,8 @@
                             </div>
                         </div>
 
+
+
                         <!-- Spacer for End Centering -->
                         <div class="review-spacer"></div>
                     </div>
@@ -1141,9 +1186,16 @@
                             captura):</p>
 
                         <div class="folio-box">
-                            <span class="folio-label">TU FOLIO DE SEGURIDAD:</span>
+                            <span class="folio-label">TU CÓDIGO ÚNICO:</span>
                             <span id="ticketFolio" class="folio-number">...</span>
                         </div>
+
+                        <label for="referralSource" class="ticket-label">¿Cómo nos conociste?</label>
+                        <select id="referralSource" class="ticket-select">
+                            <option value="G">Google Maps / Internet</option>
+                            <option value="R">Recomendación de Raul</option>
+                            <option value="E">Recomendación de Erika</option>
+                        </select>
 
                         <input type="text" id="ticketVisitorName" class="ticket-input"
                             placeholder="Escribe tu nombre aquí..." maxlength="40">
@@ -1345,29 +1397,44 @@
             background: #000;
         }
 
-        /* Teaser Style */
-
-        /* Nav Ticket Button Styles */
-        .hidden-nav-ticket {
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: all 0.5s ease;
-            pointer-events: none;
-            visibility: hidden;
-            width: 0;
-            overflow: hidden;
+        /* Referral Source Dropdown */
+        .ticket-label {
+            display: block;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #1a1a1a;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-align: left;
         }
 
-        .hidden-nav-ticket.visible {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-            pointer-events: auto !important;
-            visibility: visible !important;
-            width: auto !important;
-            margin-left: 1rem !important;
-            overflow: visible !important;
-            display: block !important;
+        .ticket-select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #b08d57;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a1a1a;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
         }
+
+        .ticket-select:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+        }
+
+        .ticket-select option {
+            padding: 0.5rem;
+            background: white;
+            color: #1a1a1a;
+        }
+
+
 
         .nav-ticket-btn {
             background: linear-gradient(135deg, #ffd700, #c5a000);
@@ -1406,23 +1473,21 @@
             const nameInput = document.getElementById('ticketVisitorName');
             const folioSpan = document.getElementById('ticketFolio');
             const claimBtn = document.getElementById('claimTicketBtn');
+            const referralSelect = document.getElementById('referralSource');
 
             let currentFolio = "";
             let ticketShown = false;
 
-            // Short serial-style Folio Generator (Smarter & Shorter)
-            function generateSerialFolio() {
-                const now = new Date();
-                const day = now.getDate().toString().padStart(2, '0');
-                const hour = now.getHours().toString().padStart(2, '0');
-                const randomPart = Math.floor(100 + Math.random() * 900); // 3 random digits
-                return `GD-${day}${hour}-${randomPart}`;
+            // Unique Code Generator with Referral Source Prefix
+            function generateUniqueCode(source) {
+                const timestamp = Date.now().toString().slice(-4); // Last 4 digits of timestamp
+                const random = Math.floor(1000 + Math.random() * 9000); // 4 random digits
+                return `${source}-${timestamp}${random}`;
             }
 
-            // Show nav button after 10 seconds OR 300px scroll
+            // Show nav button after 1 second OR on scroll
             function triggerTicketEntry() {
                 if (ticketShown) return;
-
                 ticketShown = true;
                 navTicketItem.classList.add('visible');
             }
@@ -1431,13 +1496,21 @@
             window.addEventListener('scroll', triggerTicketEntry);
 
             function openTicket() {
-                if (!currentFolio) {
-                    currentFolio = generateSerialFolio();
-                    folioSpan.textContent = currentFolio;
-                }
+                // Generate new code each time modal opens
+                const selectedSource = referralSelect.value;
+                currentFolio = generateUniqueCode(selectedSource);
+                folioSpan.textContent = currentFolio;
+
                 ticketModal.classList.remove('hidden');
                 setTimeout(() => ticketModal.classList.add('visible'), 10);
             }
+
+            // Update code when referral source changes
+            referralSelect.addEventListener('change', () => {
+                const selectedSource = referralSelect.value;
+                currentFolio = generateUniqueCode(selectedSource);
+                folioSpan.textContent = currentFolio;
+            });
 
             openNavBtn.addEventListener('click', openTicket);
 
@@ -1460,8 +1533,8 @@
                 sessionStorage.setItem('ticketClaimed', 'true');
                 if (navTicketItem) navTicketItem.classList.remove('visible');
 
-                // FINAL UPDATED MESSAGE - VERSION 3.0
-                const finalMsg = `Hola, soy *${userName}*. He generado mi *BOLETO DORADO* en GestorDeAutos.\nFolio Serial: [${currentFolio}]\nMe gustaría solicitar una cotización lo mas pronto posible.`;
+                // Updated message with unique code
+                const finalMsg = `Hola, soy *${userName}*. He generado mi *BOLETO DORADO* en GestorDeAutos.\\nCódigo Único: *${currentFolio}*\\nMe gustaría solicitar una cotización lo mas pronto posible.`;
                 const waUrl = `https://wa.me/525535757364?text=${encodeURIComponent(finalMsg)}`;
 
                 window.open(waUrl, '_blank');
@@ -1757,6 +1830,26 @@
 
     </script>
     <!-- Number Animation Script -->
+
+    <script>
+        // Fox Bubble Interaction
+        document.addEventListener('DOMContentLoaded', () => {
+            const foxTrigger = document.querySelector('.features-fox');
+            const foxBubble = document.getElementById('foxBubble');
+
+            if (foxTrigger && foxBubble) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            foxBubble.classList.add('visible');
+                        }
+                    });
+                }, { threshold: 0.3 });
+
+                observer.observe(foxTrigger);
+            }
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 
