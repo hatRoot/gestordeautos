@@ -1547,7 +1547,9 @@
                 if (navTicketItem) navTicketItem.classList.remove('visible');
 
                 // Updated message with unique code
-                const finalMsg = `Hola, soy *${userName}*. He generado mi *BOLETO DORADO* en GestorDeAutos.\\nCódigo Único: *${currentFolio}*\\nMe gustaría solicitar una cotización lo mas pronto posible.`;
+                const finalMsg = `Hola, soy *${userName}*. He generado mi *BOLETO DORADO* en GestorDeAutos.
+Código Único: *${currentFolio}*
+Me gustaría solicitar una cotización lo mas pronto posible.`;
                 const waUrl = `https://wa.me/525535757364?text=${encodeURIComponent(finalMsg)}`;
 
                 window.open(waUrl, '_blank');
