@@ -24,6 +24,12 @@
     <link rel="canonical" href="https://gestordeautos.com.mx/">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
+    <!-- Geo Tags for Local SEO -->
+    <meta name="geo.region" content="MX-MEX">
+    <meta name="geo.placename" content="Estado de México">
+    <meta name="geo.position" content="19.3592;-99.3582">
+    <meta name="ICBM" content="19.3592, -99.3582">
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="48x48" href="assets/images/logo.jpg">
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
@@ -149,6 +155,33 @@
               }
             }
           ]
+        }
+      ]
+    }
+    </script>
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://gestordeautos.com.mx/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Servicios",
+          "item": "https://gestordeautos.com.mx/#servicios"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Contacto",
+          "item": "https://gestordeautos.com.mx/#contacto"
         }
       ]
     }
