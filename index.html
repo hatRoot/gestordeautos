@@ -1199,7 +1199,7 @@
                         <label for="referralSource" class="ticket-label">¿Cómo nos conociste?</label>
                         <select id="referralSource" class="ticket-select">
                             <option value="G">Google Maps / Internet</option>
-                            <option value="R">Recomendación de Raul</option>
+                            <option value="O">Recomendación de Oso</option>
                             <option value="E">Recomendación de Erika</option>
                         </select>
 
@@ -1485,11 +1485,24 @@
             let currentFolio = "";
             let ticketShown = false;
 
-            // Unique Code Generator with Referral Source Prefix
+            // Unique Code Generator with Date and Sequential Counter
             function generateUniqueCode(source) {
-                const timestamp = Date.now().toString().slice(-4); // Last 4 digits of timestamp
-                const random = Math.floor(1000 + Math.random() * 9000); // 4 random digits
-                return `${source}-${timestamp}${random}`;
+                // Get current date in DDMMYY format
+                const now = new Date();
+                const day = String(now.getDate()).padStart(2, '0');
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const year = String(now.getFullYear()).slice(-2);
+                const dateStr = `${day}${month}${year}`;
+
+                // Get and increment global sequential counter (starts at 5000)
+                let counter = parseInt(localStorage.getItem('ticketCounter') || '5000', 10);
+                counter += 1;
+                localStorage.setItem('ticketCounter', counter.toString());
+
+                // Format counter as 4-digit number with leading zeros
+                const counterStr = String(counter).padStart(4, '0');
+
+                return `${source}-${dateStr}-${counterStr}`;
             }
 
             // Show nav button after 1 second OR on scroll
