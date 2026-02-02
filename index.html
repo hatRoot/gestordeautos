@@ -191,7 +191,7 @@
                 <li><a href="#servicios" data-i18n="nav_services">Servicios</a></li>
                 <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
                 <li id="navTicketItem">
-                    <button id="openNavTicket" class="nav-ticket-btn">
+                    <button id="openNavTicketDesktop" class="nav-ticket-btn">
                         <i class="fas fa-ticket-alt"></i> Boleto Dorado
                     </button>
                 </li>
@@ -206,6 +206,9 @@
                         class="btn btn-whatsapp header-btn secondary-tel" target="_blank">
                         <i class="fab fa-whatsapp"></i> <span class="btn-text">Cotiza Ahora</span>
                     </a>
+                    <button id="openNavTicket" class="nav-ticket-btn">
+                        <i class="fas fa-ticket-alt"></i> Boleto Dorado
+                    </button>
                 </div>
                 <button id="langToggle" class="lang-btn" aria-label="Switch Language">
                     ES
@@ -1471,7 +1474,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             const ticketModal = document.getElementById('goldenTicketModal');
             const navTicketItem = document.getElementById('navTicketItem');
-            const openNavBtn = document.getElementById('openNavTicket');
+            const openNavBtnDesktop = document.getElementById('openNavTicketDesktop');
+            const openNavBtnMobile = document.getElementById('openNavTicket');
             const closeBtn = document.getElementById('closeTicket');
             const nameInput = document.getElementById('ticketVisitorName');
             const folioSpan = document.getElementById('ticketFolio');
@@ -1515,7 +1519,13 @@
                 folioSpan.textContent = currentFolio;
             });
 
-            openNavBtn.addEventListener('click', openTicket);
+            // Add event listeners for both desktop and mobile buttons
+            if (openNavBtnDesktop) {
+                openNavBtnDesktop.addEventListener('click', openTicket);
+            }
+            if (openNavBtnMobile) {
+                openNavBtnMobile.addEventListener('click', openTicket);
+            }
 
             closeBtn.addEventListener('click', () => {
                 ticketModal.classList.remove('visible');

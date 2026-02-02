@@ -238,7 +238,6 @@ ul {
 
 .nav-links a {
     color: var(--white);
-    /* White links */
     font-weight: 500;
     transition: var(--transition);
 }
@@ -269,6 +268,7 @@ ul {
     box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     white-space: nowrap;
 }
@@ -283,33 +283,31 @@ ul {
     font-size: 1.1rem;
 }
 
-/* Mobile: Show nav-links for Golden Ticket button, hide language button */
+/* Mobile: Adjust button layout */
 @media (max-width: 768px) {
+
+    /* Hide nav-links completely on mobile */
     .nav-links {
-        display: flex !important;
+        display: none !important;
+    }
+
+    .header-btns {
         flex-direction: column;
-        align-items: center;
+        gap: 0.5rem;
         width: 100%;
-        gap: 0;
-        margin-top: 0.5rem;
     }
 
-    /* Hide desktop nav links on mobile */
-    .nav-links li:not(#navTicketItem) {
-        display: none;
-    }
-
-    #navTicketItem {
-        display: block !important;
+    .header-btn {
         width: 100%;
-        text-align: center;
+        max-width: 280px;
     }
 
+    /* Golden ticket button in mobile - same size as other buttons */
     .nav-ticket-btn {
         width: 100%;
         max-width: 280px;
-        margin: 0 auto;
-        justify-content: center;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
     }
 
     /* Hide language button on mobile */
@@ -318,10 +316,15 @@ ul {
     }
 }
 
-/* Desktop: Show language button, Golden Ticket in nav */
+/* Desktop: Show language button */
 @media (min-width: 769px) {
     .lang-btn {
         display: flex !important;
+    }
+
+    /* Desktop: Hide golden ticket from header-btns, show in nav */
+    .header-btns .nav-ticket-btn {
+        display: none;
     }
 }
 
