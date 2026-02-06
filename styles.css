@@ -3044,3 +3044,136 @@ ul {
         padding: 0.7rem 1.2rem;
     }
 }
+/* =========================================
+   SEO Content & FAQ Section Styles
+   ========================================= */
+
+.seo-content {
+    background-color: var(--white);
+    position: relative;
+    z-index: 10;
+}
+
+.seo-block {
+    margin-bottom: 4rem;
+}
+
+.seo-block:last-child {
+    margin-bottom: 0;
+}
+
+.seo-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.seo-text {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 2.5rem;
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    line-height: 1.7;
+}
+
+/* Coverage List - Grid Layout */
+.coverage-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.coverage-list li {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem;
+    color: var(--text-dark);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.coverage-list li i {
+    color: var(--accent-color);
+    font-size: 1.1rem;
+}
+
+.coverage-list li:hover {
+    background-color: var(--white);
+    border-color: var(--accent-color);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+/* FAQ Grid Layout */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background-color: var(--white);
+    border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.faq-item:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+.faq-item h3 {
+    font-size: 1.125rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+.faq-item p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .seo-title {
+        font-size: 1.75rem;
+    }
+    
+    .coverage-list {
+        grid-template-columns: 1fr;
+    }
+
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .seo-text {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+}
