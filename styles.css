@@ -1558,10 +1558,18 @@ ul {
     }
 
     50% {
-        opacity: 0.8;
-        transform: scale(1.02);
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        font-weight: 700;
     }
 }
+
+.faq-item p {
+    color: var(--secondary-color);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
 
 /* Footer */
 .footer {
