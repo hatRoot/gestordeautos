@@ -3177,3 +3177,217 @@ ul {
         padding: 0 1rem;
     }
 }
+
+/* =========================================
+   Carta Poder Component Styles
+   ========================================= */
+
+.cp-section-title {
+    text-align: center;
+    margin: 4rem 0 2rem;
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.carta-poder-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+    padding: 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    border: 1px solid #e2e8f0;
+}
+
+.cp-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 1rem;
+}
+
+.cp-header h3 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.cp-body {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #334155;
+    margin-bottom: 3rem;
+    text-align: justify;
+}
+
+.cp-highlight {
+    background: #f8fafc;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    border: 1px dashed #cbd5e1;
+    color: #475569;
+    font-weight: 500;
+}
+
+.cp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem 2rem;
+    margin-top: 3rem;
+}
+
+.cp-signature {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.cp-line {
+    border-top: 1px solid #94a3b8;
+    margin: 0 auto 0.5rem;
+    width: 80%;
+}
+
+.cp-label {
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.cp-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.btn-cp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+}
+
+.btn-download {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 6px rgba(15, 23, 42, 0.2);
+}
+
+.btn-download:hover {
+    background-color: #1e293b;
+    transform: translateY(-2px);
+}
+
+.btn-copy {
+    background-color: white;
+    color: var(--primary-color);
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.btn-copy:hover {
+    background-color: #f8fafc;
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+    .carta-poder-card {
+        padding: 1.5rem;
+    }
+    
+    .cp-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .cp-actions {
+        flex-direction: column;
+    }
+    
+    .btn-cp {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Interactive Carta Poder Inputs */
+.cp-input {
+    border: none;
+    border-bottom: 2px dashed #94a3b8;
+    background: transparent;
+    padding: 0 0.5rem;
+    font-family: inherit;
+    font-size: inherit;
+    color: #0f172a;
+    font-weight: 600;
+    width: 100%;
+    min-width: 150px;
+    max-width: 100%;
+    outline: none;
+    transition: all 0.3s ease;
+    margin: 0 0.2rem;
+}
+
+.cp-input:focus {
+    border-bottom: 2px solid var(--accent-color);
+    background: rgba(37, 99, 235, 0.05);
+}
+
+.cp-input::placeholder {
+    color: #cbd5e1;
+    font-weight: 400;
+    opacity: 0.7;
+}
+
+/* Print/PDF Specifics */
+@media print {
+    .cp-input {
+        border-bottom: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .cp-input::placeholder {
+        color: transparent !important;
+    }
+}
+
+.cp-footer-pdf {
+    display: none; /* Hidden on web */
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+/* Adjust grid for no witnesses */
+.cp-grid.two-col {
+    grid-template-columns: 1fr 1fr;
+    max-width: 600px;
+    margin: 3rem auto 0;
+}
+
+@media (max-width: 640px) {
+    .cp-input {
+        display: inline-block; /* Allow wrapping */
+        width: auto;
+        min-width: 100%; /* Full width on mobile for easy typing */
+        margin-bottom: 0.5rem;
+    }
+}

@@ -288,13 +288,106 @@
             <p>Al solicitar nuestros servicios, ya sea de forma presencial, telefónica, por WhatsApp o a través de
                 nuestro sitio web, el cliente acepta haber leído, entendido y estar de acuerdo con los presentes
                 términos y condiciones, así como con nuestro Aviso de Privacidad.</p>
+            <p><strong>Uso de WhatsApp:</strong> Al enviar sus documentos o fotografías a través de WhatsApp a nuestros
+                números oficiales, usted confirma que ha leído y aceptado este Contrato de Adhesión y nuestro Aviso de
+                Privacidad. Este acto constituye su consentimiento expreso para el tratamiento de su información
+                personal y sensible para fines del servicio.</p>
 
             <div class="highlight-box">
                 <strong>Declaración del Cliente:</strong> Manifiesto que he leído y acepto los términos del presente
                 Contrato de Adhesión y el Aviso de Privacidad de Gestor de Autos. Autorizo el tratamiento de mis datos
                 personales conforme a lo establecido y acepto las limitaciones de responsabilidad aquí descritas.
             </div>
+
+            <h3>12. Mecanismo Legal de Aceptación (Aceptación por Gestión)</h3>
+            <p><strong>No es necesaria la firma autógrafa del cliente en un contrato físico.</strong> De conformidad con
+                los artículos
+                80, 89 y 93 del Código de Comercio y la NOM-151-SCFI-2016, el consentimiento se otorga mediante el uso
+                de medios
+                electrónicos.</p>
+            <p><strong>Se considera "Aceptación por Gestión" y consentimiento expreso cuando el cliente realiza
+                    cualquiera de las
+                    siguientes acciones:</strong></p>
+            <ul>
+                <li>Envía sus documentos (fotografías o escaneos) vía WhatsApp, correo electrónico o formulario web.
+                </li>
+                <li>Realiza el pago total o parcial (anticipo) de los servicios.</li>
+                <li>Confirma verbalmente o por escrito (mensaje de texto/WhatsApp) el inicio del trámite.</li>
+            </ul>
+            <p>Al realizar cualquiera de estas acciones, el cliente acepta incondicionalmente los términos de este
+                Contrato de Adhesión y
+                nuestro Aviso de Privacidad.</p>
         </div>
+
+        <!-- CARTA PODER -->
+        <h2 class="cp-section-title">Recursos para Trámites</h2>
+
+        <div class="carta-poder-card" id="cartaPoderContent">
+            <div class="cp-header">
+                <h3>Formato de Carta Poder</h3>
+                <div class="cp-footer-pdf" id="cpMetadata"></div>
+            </div>
+
+            <div class="cp-body">
+                <p>
+                    <strong>Lugar y Fecha:</strong> <input type="text" class="cp-input"
+                        placeholder="Ej. CDMX, a 01 de Enero 2026" id="cpFecha"> &nbsp;|&nbsp;
+                    <strong>A quien corresponda:</strong>
+                </p>
+                <p style="margin-top: 1.5rem;">
+                    Por la presente, yo <input type="text" class="cp-input" placeholder="[Nombre del Cliente]"
+                        id="cpCliente">, otorgo poder amplio y cumplido a
+                    <span class="cp-highlight">Ing. Joel Durán</span> para que a mi nombre y representación realice el
+                    trámite de
+                    <input type="text" class="cp-input" placeholder="[Nombre del trámite]" id="cpTramite"> del vehículo
+                    con serie
+                    <input type="text" class="cp-input" placeholder="[Número de serie]" id="cpSerie">.
+                </p>
+                <p style="margin-top: 1rem;">
+                    Autorizo al aceptante para que realice pagos, firme formatos administrativos y reciba la
+                    documentación oficial,
+                    así como para realizar cualquier gestión necesaria para el cumplimiento del presente mandato.
+                </p>
+            </div>
+
+            <div class="cp-grid two-col">
+                <!-- Otorgante -->
+                <div class="cp-signature">
+                    <!-- Spacer to match Aceptante height -->
+                    <div style="min-height: 1.5rem; margin-bottom: 0.2rem;"></div>
+                    <div class="cp-line"></div>
+                    <div class="cp-label">Otorgante</div>
+                    <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.2rem;">(Firma del Propietario)</div>
+                </div>
+
+                <!-- Aceptante -->
+                <div class="cp-signature">
+                    <!-- Content injected via JS for PDF, empty/label only for Web -->
+                    <div id="aceptanteSignArea"
+                        style="min-height: 1.5rem; margin-bottom: 0.2rem; font-weight:700; color:#1e293b;"></div>
+                    <div class="cp-line"></div>
+                    <div class="cp-label">Aceptante</div>
+                    <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.2rem;">(Gestor Vehicular Asignado)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hidden footer for PDF -->
+            <div id="pdfFooter" class="cp-footer-pdf">
+                Generado el <span id="printDate"></span> en gestordeautos.com.mx
+            </div>
+        </div>
+
+        <div class="cp-actions">
+            <button class="btn-cp btn-download" onclick="downloadPDF()">
+                <i class="fas fa-file-pdf"></i> Descargar Formato PDF
+            </button>
+            <button class="btn-cp btn-copy" onclick="copyText()">
+                <i class="fas fa-copy"></i> Copiar Texto
+            </button>
+        </div>
+
+        <div style="height: 4rem;"></div>
 
         <!-- CONTACTO -->
         <div class="legal-section">
@@ -315,6 +408,107 @@
                 cambios serán publicados en nuestro sitio web.</p>
         </div>
     </div>
+    <!-- PDF Generation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        function downloadPDF() {
+            // 1. Get original element
+            const original = document.getElementById('cartaPoderContent');
+
+            // 2. Clone it 
+            const clone = original.cloneNode(true);
+
+            // 3. Configure Clone for Capture
+            clone.style.position = 'absolute';
+            clone.style.left = '-9999px';
+            clone.style.top = '0';
+            clone.style.width = '750px';
+            clone.style.maxWidth = 'none';
+            clone.style.height = 'auto';
+            clone.style.boxShadow = 'none';
+            clone.style.border = 'none';
+            clone.style.background = 'white';
+            clone.style.margin = '0';
+            clone.style.padding = '40px';
+
+            // 3a. Capture Inputs (Robust ID matching)
+            const inputIds = ['cpFecha', 'cpCliente', 'cpTramite', 'cpSerie'];
+
+            inputIds.forEach(id => {
+                const originalInput = document.getElementById(id);
+                // Find corresponding input in clone (since IDs are duplicated for a moment)
+                // We use querySelector on the CLONE to be safe
+                const cloneInput = clone.querySelector('#' + id);
+
+                if (originalInput && cloneInput) {
+                    const val = originalInput.value;
+                    const span = document.createElement('span');
+
+                    // Logic: If empty => show dashed line. If text => show text bold.
+                    if (val && val.trim().length > 0) {
+                        span.textContent = val;
+                        span.style.borderBottom = 'none';
+                        span.style.color = '#000000'; // Force black
+                    } else {
+                        span.textContent = '__________________';
+                        span.style.borderBottom = '1px dashed #000';
+                        span.style.color = '#94a3b8'; // Matching placeholder color
+                    }
+
+                    span.style.fontWeight = 'bold';
+                    span.style.fontFamily = 'inherit';
+                    span.style.fontSize = 'inherit';
+
+                    cloneInput.parentNode.replaceChild(span, cloneInput);
+                }
+            });
+
+            // 3b. Handle "Aceptante" Signature
+            const acceptanteArea = clone.querySelector('#aceptanteSignArea');
+            if (acceptanteArea) {
+                acceptanteArea.innerHTML = 'Ing. Joel Durán<br><span style="font-size:0.8rem; font-weight:400;">(Gestor de Autos)</span>';
+            }
+
+            // 3c. Show Footer
+            const footer = clone.querySelector('#pdfFooter');
+            const dateSpan = clone.querySelector('#printDate');
+            if (footer && dateSpan) {
+                dateSpan.textContent = new Date().toLocaleString();
+                footer.style.display = 'block';
+            }
+
+            // 4. Append Clone
+            document.body.appendChild(clone);
+
+            // 5. Generate PDF
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: 'Carta_Poder_GestorDeAutos.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(clone).save().then(() => {
+                document.body.removeChild(clone);
+            });
+        }
+
+        function copyText() {
+            const f = document.getElementById('cpFecha').value || '__________';
+            const c = document.getElementById('cpCliente').value || '[Nombre Cliente]';
+            const t = document.getElementById('cpTramite').value || '[Trámite]';
+            const s = document.getElementById('cpSerie').value || '[Serie]';
+
+            const text = `CARTA PODER\n\nLugar y Fecha: ${f}\n\nA quien corresponda:\n\nPor la presente, yo ${c}, otorgo poder amplio y cumplido a Ing. Joel Durán para que a mi nombre y representación realice el trámite de ${t} del vehículo con serie ${s}.\n\nAutorizo al aceptante para que realice pagos, firme formatos administrativos y reciba la documentación oficial.`;
+
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Texto copiado al portapapeles');
+            }).catch(err => {
+                console.error('Error al copiar: ', err);
+            });
+        }
+    </script>
 </body>
 
 </html>
