@@ -386,15 +386,7 @@ ul {
     transform: translateY(0);
 }
 
-.secondary-tel:hover::after {
-    content: "Lic Erika";
-    opacity: 1;
-    transform: translateY(0);
-}
 
-.secondary-tel {
-    background-color: #2563eb;
-}
 
 @media (max-width: 768px) {
     .header-contacts {
