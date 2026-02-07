@@ -2599,6 +2599,166 @@ ul {
     letter-spacing: 1px;
 }
 
+/* Urgent Feature Card (Reemplacamiento) */
+.urgent-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 25px -5px rgba(105, 28, 50, 0.15), 0 10px 10px -5px rgba(105, 28, 50, 0.1);
+    border: 2px solid #691C32;
+    /* Guinda for Urgency */
+    margin-bottom: 3rem;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.urgent-badge {
+    background: #691C32;
+    color: white;
+    padding: 0.5rem 2rem;
+    position: absolute;
+    top: 20px;
+    right: -30px;
+    transform: rotate(45deg);
+    font-weight: 800;
+    font-size: 0.9rem;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.urgent-content {
+    padding: 3rem;
+    flex: 1;
+}
+
+.urgent-image {
+    width: 40%;
+    min-height: 100%;
+    background: #fef2f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    overflow: visible;
+}
+
+/* Realistic CSS License Plate */
+.license-plate {
+    background: white;
+    width: 280px;
+    height: 140px;
+    border-radius: 12px;
+    border: 4px solid #691C32;
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 2px white,
+        inset 0 0 20px rgba(0, 0, 0, 0.05);
+    /* Realistic lighting */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    transform: rotate(-3deg);
+    transition: transform 0.3s ease;
+}
+
+@media (max-width: 380px) {
+    .license-plate {
+        transform: rotate(-3deg) scale(0.9);
+        width: 260px;
+    }
+}
+
+.license-plate:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.plate-header {
+    background: #691C32;
+    color: white;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 4px 0;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.plate-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    /* Could use a mono font if available */
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #333;
+    letter-spacing: 2px;
+    background: repeating-linear-gradient(45deg,
+            transparent,
+            transparent 10px,
+            rgba(0, 0, 0, 0.02) 10px,
+            rgba(0, 0, 0, 0.02) 20px);
+    /* Subtle security pattern */
+}
+
+.plate-footer {
+    background: #691C32;
+    height: 15px;
+    width: 100%;
+}
+
+.urgent-badge {
+    background: #691C32;
+    color: white;
+    padding: 0.5rem 3rem;
+    position: absolute;
+    top: 25px;
+    right: -40px;
+    transform: rotate(45deg);
+    font-weight: 800;
+    font-size: 1rem;
+    z-index: 20;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border: 2px solid white;
+    /* Make it pop */
+}
+
+
+/* Mobile Responsive for Urgent Card */
+@media (max-width: 900px) {
+    .urgent-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .urgent-image {
+        width: 100%;
+        padding: 2rem;
+    }
+
+    .urgent-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .urgent-badge {
+        right: auto;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        border-radius: 0 0 10px 10px;
+        width: auto;
+        padding: 0.5rem 3rem;
+    }
+}
+
 .tramites-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
