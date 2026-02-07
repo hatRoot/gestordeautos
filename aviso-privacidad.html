@@ -412,75 +412,65 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
         function downloadPDF() {
-            // 1. Get original element
-            const original = document.getElementById('cartaPoderContent');
+            const element = document.getElementById('cartaPoderContent');
+            const aceptanteArea = document.getElementById('aceptanteSignArea');
+            const pdfFooter = document.getElementById('pdfFooter');
+            const printDate = document.getElementById('printDate');
 
-            // 2. Clone it 
-            const clone = original.cloneNode(true);
+            // 1. Save Original State
+            const originalShadow = element.style.boxShadow;
+            const originalBorder = element.style.border;
+            const originalAceptanteContent = aceptanteArea.innerHTML;
 
-            // 3. Configure Clone for Capture
-            clone.style.position = 'absolute';
-            clone.style.left = '-9999px';
-            clone.style.top = '0';
-            clone.style.width = '750px';
-            clone.style.maxWidth = 'none';
-            clone.style.height = 'auto';
-            clone.style.boxShadow = 'none';
-            clone.style.border = 'none';
-            clone.style.background = 'white';
-            clone.style.margin = '0';
-            clone.style.padding = '40px';
+            // 2. Transform for PDF (Live DOM)
+            // Modify visual style for A4 print
+            element.style.boxShadow = 'none';
+            element.style.border = 'none';
 
-            // 3a. Capture Inputs (Robust ID matching)
-            const inputIds = ['cpFecha', 'cpCliente', 'cpTramite', 'cpSerie'];
+            // Aceptante signature (Fill it)
+            aceptanteArea.innerHTML = 'Ing. Joel Durán<br><span style="font-size:0.8rem; font-weight:400;">(Gestor de Autos)</span>';
 
-            inputIds.forEach(id => {
-                const originalInput = document.getElementById(id);
-                // Find corresponding input in clone (since IDs are duplicated for a moment)
-                // We use querySelector on the CLONE to be safe
-                const cloneInput = clone.querySelector('#' + id);
+            // Footer (Show it)
+            if (printDate && pdfFooter) {
+                printDate.textContent = new Date().toLocaleString();
+                pdfFooter.style.display = 'block';
+            }
 
-                if (originalInput && cloneInput) {
-                    const val = originalInput.value;
-                    const span = document.createElement('span');
+            // 3. Transform Inputs strings => Text Spans
+            // We must keep references to restore them
+            const inputs = element.querySelectorAll('input');
+            const restoreOps = []; // functions to restore
 
-                    // Logic: If empty => show dashed line. If text => show text bold.
-                    if (val && val.trim().length > 0) {
-                        span.textContent = val;
-                        span.style.borderBottom = 'none';
-                        span.style.color = '#000000'; // Force black
-                    } else {
-                        span.textContent = '__________________';
-                        span.style.borderBottom = '1px dashed #000';
-                        span.style.color = '#94a3b8'; // Matching placeholder color
-                    }
+            inputs.forEach(input => {
+                const val = input.value;
+                const span = document.createElement('span');
 
-                    span.style.fontWeight = 'bold';
-                    span.style.fontFamily = 'inherit';
-                    span.style.fontSize = 'inherit';
+                // Style the span to look like the input but printed
+                span.style.fontWeight = 'bold';
+                span.style.fontFamily = 'inherit';
+                span.style.fontSize = 'inherit';
+                span.style.color = '#000000'; // Force black text
 
-                    cloneInput.parentNode.replaceChild(span, cloneInput);
+                if (val && val.trim().length > 0) {
+                    span.textContent = val;
+                    span.style.borderBottom = 'none';
+                } else {
+                    span.textContent = '__________________';
+                    span.style.borderBottom = '1px dashed #94a3b8'; // Visual line for empty field
+                    span.style.color = '#94a3b8'; // Lighter color for placeholder lines
                 }
+
+                // Replace input with span
+                input.parentNode.replaceChild(span, input);
+
+                // Add restorer function
+                restoreOps.push(() => {
+                    span.parentNode.replaceChild(input, span);
+                    input.value = val; // Restore value ensuring it's not lost
+                });
             });
 
-            // 3b. Handle "Aceptante" Signature
-            const acceptanteArea = clone.querySelector('#aceptanteSignArea');
-            if (acceptanteArea) {
-                acceptanteArea.innerHTML = 'Ing. Joel Durán<br><span style="font-size:0.8rem; font-weight:400;">(Gestor de Autos)</span>';
-            }
-
-            // 3c. Show Footer
-            const footer = clone.querySelector('#pdfFooter');
-            const dateSpan = clone.querySelector('#printDate');
-            if (footer && dateSpan) {
-                dateSpan.textContent = new Date().toLocaleString();
-                footer.style.display = 'block';
-            }
-
-            // 4. Append Clone
-            document.body.appendChild(clone);
-
-            // 5. Generate PDF
+            // 4. Generate PDF
             const opt = {
                 margin: [10, 10, 10, 10],
                 filename: 'Carta_Poder_GestorDeAutos.pdf',
@@ -489,9 +479,25 @@
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            html2pdf().set(opt).from(clone).save().then(() => {
-                document.body.removeChild(clone);
-            });
+            html2pdf().set(opt).from(element).save()
+                .then(() => {
+                    // 5. Restore Original State (Success)
+                    restoreAll();
+                })
+                .catch(err => {
+                    console.error('PDF Generation Error', err);
+                    alert('Error al generar PDF. Por favor intente de nuevo.');
+                    restoreAll();
+                });
+
+            function restoreAll() {
+                element.style.boxShadow = originalShadow;
+                element.style.border = originalBorder;
+                aceptanteArea.innerHTML = originalAceptanteContent;
+                if (pdfFooter) pdfFooter.style.display = 'none';
+
+                restoreOps.forEach(op => op());
+            }
         }
 
         function copyText() {
