@@ -25,6 +25,14 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+img,
+video,
+iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
@@ -3044,6 +3052,7 @@ ul {
         padding: 0.7rem 1.2rem;
     }
 }
+
 /* =========================================
    SEO Content & FAQ Section Styles
    ========================================= */
@@ -3163,7 +3172,7 @@ ul {
     .seo-title {
         font-size: 1.75rem;
     }
-    
+
     .coverage-list {
         grid-template-columns: 1fr;
     }
@@ -3171,7 +3180,7 @@ ul {
     .faq-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .seo-text {
         font-size: 1rem;
         padding: 0 1rem;
@@ -3193,7 +3202,7 @@ ul {
 .carta-poder-card {
     background: #fff;
     border-radius: 16px;
-    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
     padding: 3rem;
     max-width: 800px;
     margin: 0 auto;
@@ -3295,7 +3304,7 @@ ul {
     background-color: white;
     color: var(--primary-color);
     border: 1px solid #e2e8f0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .btn-copy:hover {
@@ -3308,16 +3317,16 @@ ul {
     .carta-poder-card {
         padding: 1.5rem;
     }
-    
+
     .cp-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-    
+
     .cp-actions {
         flex-direction: column;
     }
-    
+
     .btn-cp {
         width: 100%;
         justify-content: center;
@@ -3360,14 +3369,15 @@ ul {
         padding: 0 !important;
         margin: 0 !important;
     }
-    
+
     .cp-input::placeholder {
         color: transparent !important;
     }
 }
 
 .cp-footer-pdf {
-    display: none; /* Hidden on web */
+    display: none;
+    /* Hidden on web */
     margin-top: 2rem;
     padding-top: 1rem;
     border-top: 1px solid #e2e8f0;
@@ -3385,9 +3395,11 @@ ul {
 
 @media (max-width: 640px) {
     .cp-input {
-        display: inline-block; /* Allow wrapping */
+        display: inline-block;
+        /* Allow wrapping */
         width: auto;
-        min-width: 100%; /* Full width on mobile for easy typing */
+        min-width: 100%;
+        /* Full width on mobile for easy typing */
         margin-bottom: 0.5rem;
     }
 }
