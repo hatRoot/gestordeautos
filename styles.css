@@ -129,32 +129,37 @@ ul {
     background: linear-gradient(135deg, #25d366, #128c7e) !important;
 }
 
+.header-btn {
+    min-width: 130px;
+    /* Fixed width to prevent jitter */
+    padding: 0.6rem 0.5rem !important;
+    justify-content: center;
+}
+
 .btn-text {
     display: grid;
-    place-items: center;
+    width: 100%;
 }
 
 .text-default,
 .text-hover {
     grid-area: 1 / 1;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.2s ease;
     white-space: nowrap;
+    text-align: center;
 }
 
 .text-hover {
     opacity: 0;
-    transform: translateY(5px);
     pointer-events: none;
 }
 
 .header-btn:hover .text-default {
     opacity: 0;
-    transform: translateY(-5px);
 }
 
 .header-btn:hover .text-hover {
     opacity: 1;
-    transform: translateY(0);
     pointer-events: auto;
 }
 
