@@ -237,11 +237,11 @@ ul {
 .logo {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
     color: var(--white);
     text-decoration: none;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    margin-right: 2rem;
+    flex-shrink: 0;
 }
 
 .logo-container {
@@ -252,13 +252,12 @@ ul {
 
 .logo-img {
     height: 120px;
-    /* Slightly reduced to fit stars */
     width: 120px;
-    /* Force square aspect ratio */
-    object-fit: cover;
-    /* Prevent squashing */
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
     border-radius: 50%;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
 }
 
 .logo-text {
@@ -295,7 +294,6 @@ ul {
 .header.scrolled .logo-img {
     height: 45px;
     width: 45px;
-    /* Maintain square aspect ratio when scrolled */
 }
 
 .header.scrolled .site-title {
@@ -333,8 +331,7 @@ ul {
     .nav-links {
         display: flex;
         gap: 2rem;
-        margin-right: 2rem;
-        /* Add spacing between Contacto and golden button */
+        margin-right: 3rem;
     }
 }
 
