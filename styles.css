@@ -3001,9 +3001,25 @@ ul {
 @media (max-width: 768px) {
     .lang-btn {
         margin-right: 0.5rem;
-        width: 35px;
-        height: 35px;
+        width: 38px;
+        height: 38px;
+        flex-shrink: 0;
+        aspect-ratio: 1/1;
         font-size: 0.8rem;
+    }
+
+    /* Hide scrollbar on mobile devices */
+    ::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    body {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
     }
 }
 
