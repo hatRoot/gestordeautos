@@ -118,7 +118,29 @@ ul {
     padding: 4rem 0;
 }
 
-/* Header */
+/* Header Buttons Optimization */
+.header-btns {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.erika-tel {
+    background: linear-gradient(135deg, #25d366, #128c7e) !important;
+}
+
+@media (max-width: 768px) {
+    .header-btns .btn-text {
+        display: none;
+    }
+
+    .header-btns .btn {
+        padding: 0.5rem;
+        aspect-ratio: 1;
+        border-radius: 50%;
+    }
+}
+
 /* Header */
 .header {
     background-color: rgba(255, 255, 255, 0.05);

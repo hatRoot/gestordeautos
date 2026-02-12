@@ -145,7 +145,15 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('ticketCounter', counter.toString());
 
         const counterStr = String(counter).padStart(4, '0');
-        return `${source}-${dateStr}-${counterStr}`;
+
+        // Map prefixes properly
+        let prefixSource = source;
+        if (source === 'G') prefixSource = 'G';
+        if (source === 'R') prefixSource = 'R';
+        if (source === 'E') prefixSource = 'E';
+        if (source === 'O') prefixSource = 'O';
+
+        return `${prefixSource}-${dateStr}-${counterStr}`;
     }
 
     // Trigger Ticket Entry
@@ -168,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedSource = referralSelect.value;
         currentFolio = generateUniqueCode(selectedSource);
         folioSpan.textContent = currentFolio;
-        
+
         ticketModal.classList.remove('hidden');
         setTimeout(() => ticketModal.classList.add('visible'), 10);
     }
