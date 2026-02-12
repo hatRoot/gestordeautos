@@ -129,16 +129,33 @@ ul {
     background: linear-gradient(135deg, #25d366, #128c7e) !important;
 }
 
+.btn-text {
+    display: grid;
+    place-items: center;
+}
+
+.text-default,
 .text-hover {
-    display: none;
+    grid-area: 1 / 1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    white-space: nowrap;
+}
+
+.text-hover {
+    opacity: 0;
+    transform: translateY(5px);
+    pointer-events: none;
 }
 
 .header-btn:hover .text-default {
-    display: none;
+    opacity: 0;
+    transform: translateY(-5px);
 }
 
 .header-btn:hover .text-hover {
-    display: inline;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
 @media (max-width: 768px) {
