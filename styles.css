@@ -118,35 +118,42 @@ ul {
     padding: 4rem 0;
 }
 
-/* Header Buttons Optimization */
+/* --- CONSOLIDATED HEADER BUTTONS --- */
 .header-btns {
-    display: flex;
-    gap: 0.5rem;
+    display: flex !important;
+    gap: 1.5rem !important;
+    /* Force clear separation */
     align-items: center;
+}
+
+.header-btn {
+    min-width: 155px;
+    /* Stable width for Cotizaciones label */
+    padding: 0.6rem 0.8rem !important;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border-radius: 25px !important;
 }
 
 .erika-tel {
     background: linear-gradient(135deg, #25d366, #128c7e) !important;
 }
 
-.header-btn {
-    min-width: 130px;
-    /* Fixed width to prevent jitter */
-    padding: 0.6rem 0.5rem !important;
-    justify-content: center;
-}
-
 .btn-text {
-    display: grid;
+    display: grid !important;
     width: 100%;
 }
 
 .text-default,
 .text-hover {
     grid-area: 1 / 1;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.25s ease;
     white-space: nowrap;
     text-align: center;
+    font-weight: 700;
 }
 
 .text-hover {
@@ -164,16 +171,21 @@ ul {
 }
 
 @media (max-width: 768px) {
-    .header-btns .btn-text {
-        display: none;
+    .header-btns {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        width: 100%;
     }
 
-    .header-btns .btn {
-        padding: 0.5rem;
-        aspect-ratio: 1;
-        border-radius: 50%;
+    .header-btn,
+    .nav-ticket-btn {
+        width: 100%;
+        max-width: 280px;
     }
 }
+
+/* --- END CONSOLIDATED HEADER BUTTONS --- */
+
 
 /* Header */
 .header {
@@ -355,29 +367,7 @@ ul {
         display: none !important;
     }
 
-    .header-btns {
-        flex-direction: column;
-        gap: 0.5rem;
-        width: 100%;
-    }
-
-    .header-btn {
-        width: 100%;
-        max-width: 280px;
-    }
-
-    /* Golden ticket button in mobile - same size as other buttons */
-    .nav-ticket-btn {
-        width: 100%;
-        max-width: 280px;
-        padding: 0.6rem 1.2rem;
-        font-size: 0.9rem;
-    }
-
-    /* Hide language button on mobile */
-    .lang-btn {
-        display: none !important;
-    }
+    /* Redundant mobile block removed */
 }
 
 /* Desktop: Show language button */
@@ -386,10 +376,7 @@ ul {
         display: flex !important;
     }
 
-    /* Desktop: Hide golden ticket from header-btns, show in nav */
-    .header-btns .nav-ticket-btn {
-        display: none;
-    }
+    /* Desktop: Golden ticket shown in header-btns */
 }
 
 .header-contacts {
@@ -401,76 +388,11 @@ ul {
     /* Pushed to the right and aligned with nav text */
 }
 
-.header-btns {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.header-btn {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    position: relative;
-    overflow: hidden;
-    min-width: 140px;
-    /* Ensure space for text switch */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-text {
-    display: inline-block;
-    transition: all 0.3s ease;
-}
-
-.header-btn:hover .btn-text {
-    opacity: 0;
-    transform: translateY(-20px);
-}
-
-.header-btn::after {
-    content: attr(data-hover-content);
-    /* Will use JS or CSS content if preferred */
-    position: absolute;
-    left: 0;
-    right: 0;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
-    font-weight: 700;
-}
-
-/* Specific text update for hover labels */
-.primary-tel:hover::after {
-    content: "Ing Duran";
-    opacity: 1;
-    transform: translateY(0);
-}
+/* Redundant consolidated block removed */
 
 
 
-@media (max-width: 768px) {
-    .header-contacts {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .header-btns {
-        flex-direction: column;
-        gap: 0.5rem;
-        width: 100%;
-    }
-
-    .header-btn {
-        width: 100%;
-        max-width: 280px;
-    }
-}
+/* Redundant mobile block removed */
 
 /* Hero Section */
 .hero {
