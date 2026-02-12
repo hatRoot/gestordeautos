@@ -147,7 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Map prefixes properly
         let prefixSource = source;
         if (source === 'G') prefixSource = 'G';
-        if (source === 'R') prefixSource = 'R';
         if (source === 'E') prefixSource = 'E';
         if (source === 'O') prefixSource = 'O';
 
