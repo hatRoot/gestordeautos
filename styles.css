@@ -129,6 +129,18 @@ ul {
     background: linear-gradient(135deg, #25d366, #128c7e) !important;
 }
 
+.text-hover {
+    display: none;
+}
+
+.header-btn:hover .text-default {
+    display: none;
+}
+
+.header-btn:hover .text-hover {
+    display: inline;
+}
+
 @media (max-width: 768px) {
     .header-btns .btn-text {
         display: none;
