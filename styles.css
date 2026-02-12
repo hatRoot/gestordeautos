@@ -253,7 +253,10 @@ ul {
 .logo-img {
     height: 120px;
     /* Slightly reduced to fit stars */
-    width: auto;
+    width: 120px;
+    /* Force square aspect ratio */
+    object-fit: cover;
+    /* Prevent squashing */
     border-radius: 50%;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -291,6 +294,8 @@ ul {
 /* Scrolled State for New Elements */
 .header.scrolled .logo-img {
     height: 45px;
+    width: 45px;
+    /* Maintain square aspect ratio when scrolled */
 }
 
 .header.scrolled .site-title {
@@ -328,6 +333,8 @@ ul {
     .nav-links {
         display: flex;
         gap: 2rem;
+        margin-right: 2rem;
+        /* Add spacing between Contacto and golden button */
     }
 }
 
