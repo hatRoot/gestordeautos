@@ -272,6 +272,11 @@ ul {
     white-space: nowrap;
 }
 
+.site-title span {
+    color: #2563eb;
+    /* Royal Blue / Azul Rey */
+}
+
 .header-slogan {
     font-size: 1.1rem;
     font-weight: 400;
