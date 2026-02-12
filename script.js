@@ -120,8 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Golden Ticket Logic
     // ==========================================
     const ticketModal = document.getElementById('goldenTicketModal');
-    const navTicketItem = document.getElementById('navTicketItem');
-    const openNavBtnDesktop = document.getElementById('openNavTicketDesktop');
     const openNavBtnMobile = document.getElementById('openNavTicket');
     const closeBtn = document.getElementById('closeTicket');
     const nameInput = document.getElementById('ticketVisitorName');
@@ -158,14 +156,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Trigger Ticket Entry
     function triggerTicketEntry() {
-        if (ticketShown || !navTicketItem) return;
+        if (ticketShown) return;
         ticketShown = true;
-        navTicketItem.classList.add('visible');
     }
 
     // Check if claimed
     if (sessionStorage.getItem('ticketClaimed') === 'true') {
-        if (navTicketItem) navTicketItem.classList.remove('visible');
+        // Ticket already claimed
     } else {
         setTimeout(triggerTicketEntry, 1000);
         window.addEventListener('scroll', triggerTicketEntry);
@@ -189,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (openNavBtnDesktop) openNavBtnDesktop.addEventListener('click', openTicket);
     if (openNavBtnMobile) openNavBtnMobile.addEventListener('click', openTicket);
 
     if (closeBtn && ticketModal) {
@@ -212,7 +208,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             sessionStorage.setItem('ticketClaimed', 'true');
-            if (navTicketItem) navTicketItem.classList.remove('visible');
 
             const finalMsg = `Hola, soy *${userName}*. He generado mi *BOLETO DORADO* en GestorDeAutos.\nCódigo Único: *${currentFolio}*\nMe gustaría solicitar una cotización lo mas pronto posible.`;
             const waUrl = `https://wa.me/525535757364?text=${encodeURIComponent(finalMsg)}`;
