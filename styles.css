@@ -225,7 +225,7 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 90px;
+    height: 95px;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -242,6 +242,7 @@ ul {
     text-decoration: none;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
+    margin-right: 3rem;
 }
 
 .logo-container {
@@ -266,7 +267,7 @@ ul {
 }
 
 .site-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 800;
     letter-spacing: -0.5px;
     line-height: 1;
