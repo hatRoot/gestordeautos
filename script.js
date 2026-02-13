@@ -85,9 +85,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const foxTrigger = document.querySelector('.features-fox');
     if (foxTrigger) observer.observe(foxTrigger);
 
+    // ==========================================
+    // 3. Scroll-Reveal Observer
+    // ==========================================
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+        revealObserver.observe(el);
+    });
+
 
     // ==========================================
-    // 3. Service Tabs Logic
+    // 4. Service Tabs Logic
     // ==========================================
     document.querySelectorAll('.tab-btn').forEach(button => {
         button.addEventListener('mouseover', () => {

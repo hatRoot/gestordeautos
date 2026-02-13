@@ -2865,14 +2865,17 @@ ul {
     margin: 0 auto 4rem;
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 1.2rem;
+    /* Slightly increased gap for better breathing */
     text-align: center;
 }
 
 .apple-line {
     display: block;
-    font-size: 1.25rem;
-    font-weight: 500;
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+    /* Unified size for all lines */
+    font-weight: 850;
+    line-height: 1.2;
 }
 
 .apple-line-1 {
@@ -2882,25 +2885,19 @@ ul {
 /* Dark Professional Gray */
 .apple-line-2 {
     color: #2563eb;
-    font-size: clamp(1.8rem, 5vw, 2.4rem);
     font-weight: 950;
     letter-spacing: -1px;
-    margin: 0.8rem 0;
-    line-height: 1.1;
+    margin: 0.2rem 0;
 }
 
 /* Highlight Blue */
 .apple-line-3 {
     color: #64748b;
-    font-weight: 400;
 }
 
 /* Subtle Slate */
 .apple-line-4 {
     color: #16a34a;
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-top: 1rem;
 }
 
 /* Trust Indicator */
@@ -3771,4 +3768,47 @@ ul {
     .comparison-container {
         grid-template-columns: 1fr;
     }
+}
+
+/* Scroll Reveal Animation System */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered Delays for Morelos Section */
+#morelos-especial h2.reveal {
+    transition-delay: 0s;
+}
+
+#morelos-especial .apple-line-1 {
+    transition-delay: 0.15s;
+}
+
+#morelos-especial .apple-line-2 {
+    transition-delay: 0.3s;
+}
+
+#morelos-especial .apple-line-3 {
+    transition-delay: 0.45s;
+}
+
+#morelos-especial .apple-line-4 {
+    transition-delay: 0.6s;
+}
+
+/* Grid and Wrapper Reveal delays */
+#morelos-especial .morelos-cards-grid.reveal {
+    transition-delay: 0.75s;
+}
+
+#morelos-especial .comparison-wrapper.reveal {
+    transition-delay: 0.9s;
 }
