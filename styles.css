@@ -2858,87 +2858,22 @@ ul {
     transition: transform 0.3s ease;
 }
 
-.morelos-feature-banner {
-    max-width: 900px;
-    margin: 4rem auto;
-    padding: 3.5rem 2rem;
-    background: #ffffff;
-    border-radius: 2rem;
-    border: 1.5px solid #eef2ff;
-    text-align: center;
-    box-shadow:
-        0 4px 6px -1px rgba(0, 0, 0, 0.05),
-        0 20px 25px -5px rgba(0, 0, 0, 0.03);
-    position: relative;
-    overflow: hidden;
-}
 
-.morelos-feature-banner::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 6px;
-    height: 100%;
-    background: #2563eb;
-}
-
-.morelos-feature-banner::after {
-    content: 'SERVICIO OFICIAL MORELOS';
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    font-size: 0.7rem;
-    font-weight: 800;
-    color: #94a3b8;
-    letter-spacing: 1px;
-}
-
-.banner-title {
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-    color: #0f172a;
-    font-weight: 850;
-    margin-bottom: 2rem;
-    line-height: 1.2;
-}
-
-.banner-highlight {
-    display: inline-block;
-    color: #2563eb;
-    background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 900;
-    font-style: italic;
-}
-
-.banner-text {
-    font-size: 1.25rem;
+.morelos-intro-text {
+    max-width: 850px;
+    margin: 0 auto 3rem;
+    font-size: 1.15rem;
+    /* Medium size */
+    line-height: 1.8;
     color: #475569;
-    max-width: 750px;
-    margin: 0 auto;
-    line-height: 1.7;
-    font-weight: 500;
+    text-align: justify;
+    /* Justified as requested */
+    padding: 0 1rem;
 }
 
-.banner-footer {
-    margin-top: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.banner-tag {
-    background: #f8faff;
+.morelos-intro-text strong {
     color: #2563eb;
-    padding: 0.6rem 1.5rem;
-    border-radius: 3rem;
     font-weight: 700;
-    font-size: 0.9rem;
-    border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .tramite-image img {
