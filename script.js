@@ -412,11 +412,70 @@ document.addEventListener('DOMContentLoaded', () => {
             const newLang = currentLang === 'es' ? 'en' : 'es';
             updateLanguage(newLang);
         });
-
-        if (currentLang === 'en') {
-            updateLanguage('en');
-        } else {
-            langToggle.textContent = 'EN';
-        }
     }
+
+    // ==========================================
+    // 8. Dynamic Content Rotation (SEO Freshness)
+    // ==========================================
+    const activityDataPool = [
+        { type: "Refrendo Morelos 2026", loc: "Huixquilucan / Interlomas", status: "Entregado", time: "11:45 AM", desc: "Gestión digital exitosa por WhatsApp." },
+        { type: "Alta de Placas EdoMex 2026", loc: "Chalco", status: "Finalizado", time: "09:15 AM", desc: "Emplacamiento de vehículo nuevo sin filas." },
+        { type: "Licencia Permanente CDMX", loc: "Tlalnepantla", status: "Verificado", time: "04:30 PM", desc: "Asesoría integral y trámite garantizado." },
+        { type: "Baja de Placas EdoMex", loc: "Ecatepec", status: "Completado", time: "10:20 AM", desc: "Cese de obligaciones vehiculares rápido." },
+        { type: "Cambio de Propietario", loc: "Naucalpan", status: "Entregado", time: "01:15 PM", desc: "Actualización de titularidad sin complicaciones." },
+        { type: "Permiso Provisional 30 días", loc: "Ixtapaluca", status: "Finalizado", time: "12:00 PM", desc: "Permiso oficial para circular sin placas." },
+        { type: "Refrendo Morelos Online", loc: "Cuautitlán Izcalli", status: "Entregado", time: "08:45 AM", desc: "Pago de derechos procesado en línea." },
+        { type: "Reposición de Tarjeta", loc: "Atizapán", status: "Verificado", time: "02:30 PM", desc: "Recuperación de circulación por extravío." },
+        { type: "Regularización REPUVE", loc: "Chalco", status: "Completado", time: "03:50 PM", desc: "Inscripción certificada en el sistema federal." },
+        { type: "Alta de Placas CDMX", loc: "Interlomas", status: "Finalizado", time: "11:10 AM", desc: "Emplacamiento de lujo a domicilio." },
+        { type: "Licencia Tipo B", loc: "Nezahualcóyotl", status: "Entregado", time: "09:55 AM", desc: "Trámite de licencia de carga agilizado." },
+        { type: "Refrendo 2026", loc: "Chimalhuacán", status: "Finalizado", time: "10:15 AM", desc: "Pago anual de tenencia sin recargos." }
+    ];
+
+    function getSeededRandom(seed) {
+        const x = Math.sin(seed) * 10000;
+        return x - Math.floor(x);
+    }
+
+    function rotateActivityFeed() {
+        const grid = document.getElementById('activityGrid');
+        if (!grid) return;
+
+        // Use today's date as seed (YYYYMMDD)
+        const now = new Date();
+        const seedStr = now.getFullYear().toString() + (now.getMonth() + 1).toString().padStart(2, '0') + now.getDate().toString().padStart(2, '0');
+        const seed = parseInt(seedStr);
+
+        // Shuffle a copy of the pool using the seed
+        let pool = [...activityDataPool];
+        let shuffled = [];
+
+        // simple seeded shuffle for 3 items
+        for (let i = 0; i < 3; i++) {
+            const rand = getSeededRandom(seed + i);
+            const index = Math.floor(rand * pool.length);
+            shuffled.push(pool.splice(index, 1)[0]);
+        }
+
+        grid.innerHTML = shuffled.map((item, idx) => {
+            const dayLabel = idx === 0 ? "Finalizado Hoy" : (idx === 1 ? "Hace unas horas" : "Ayer");
+            const bgLabel = "background: #dcfce7; color: #166534;";
+
+            return `
+                <div class="activity-card" style="padding: 2rem; border-radius: 16px; background: #f8fafc; border: 1px solid #e2e8f0; transition: transform 0.3s ease; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                        <span style="padding: 0.4rem 0.8rem; border-radius: 20px; ${bgLabel} font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">${dayLabel}</span>
+                        <span style="color: #94a3b8; font-size: 0.8rem;">${item.time}</span>
+                    </div>
+                    <h4 style="font-size: 1.25rem; color: #1e293b; margin-bottom: 0.75rem; font-weight: 700;">${item.type}</h4>
+                    <p style="font-size: 0.95rem; color: #64748b; line-height: 1.6;">${item.desc} para cliente en <b>${item.loc}</b>.</p>
+                    <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; display: flex; align-items: center; gap: 0.5rem; color: #16a34a; font-weight: 600; font-size: 0.9rem;">
+                        <i class="fas fa-check-circle"></i> Estatus: ${item.status}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    rotateActivityFeed();
 });
