@@ -50,11 +50,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // ==========================================
-    // 2. Intersection Observer (Stats & Overlay & Fox)
+    // 2. Intersection Observer (Stats, Reveals, Fox)
     // ==========================================
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // Generic Reveals
+                if (entry.target.classList.contains('reveal')) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
                 // Stats
                 if (entry.target.classList.contains('hero-stats')) {
                     animateNumbers();
@@ -69,12 +74,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (entry.target.classList.contains('features-fox')) {
                     const bubble = document.getElementById('foxBubble');
                     if (bubble) bubble.classList.add('visible');
-                    // Keep observing? logic said yes in inline, but here we can optimize.
-                    // Inline logic: unobserve was NOT called for fox.
                 }
             }
         });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.15 });
+
+    // Observe all reveals
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     const statsSection = document.querySelector('.hero-stats');
     if (statsSection) observer.observe(statsSection);
