@@ -2859,22 +2859,51 @@ ul {
 }
 
 
-.morelos-intro-text {
-    max-width: 850px;
-    margin: 0 auto 3rem;
-    font-size: 1.15rem;
-    /* Medium size */
-    line-height: 1.8;
-    color: #475569;
-    text-align: justify;
-    /* Justified as requested */
-    padding: 0 1rem;
+
+.morelos-apple-lines {
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    text-align: center;
 }
 
-.morelos-intro-text strong {
-    color: #2563eb;
-    font-weight: 700;
+.apple-line {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 500;
 }
+
+.apple-line-1 {
+    color: #475569;
+}
+
+/* Dark Professional Gray */
+.apple-line-2 {
+    color: #2563eb;
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+    font-weight: 950;
+    letter-spacing: -1px;
+    margin: 0.8rem 0;
+    line-height: 1.1;
+}
+
+/* Highlight Blue */
+.apple-line-3 {
+    color: #64748b;
+    font-weight: 400;
+}
+
+/* Subtle Slate */
+.apple-line-4 {
+    color: #16a34a;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+/* Trust Indicator */
 
 .tramite-image img {
     width: 100%;
