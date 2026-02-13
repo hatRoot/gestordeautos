@@ -3388,6 +3388,94 @@ ul {
 }
 
 /* FAQ Grid Layout */
+/* Vibrant Coverage Pills */
+.coverage-pills-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 3rem auto;
+}
+
+.coverage-pill {
+    padding: 1.5rem 2.5rem;
+    border-radius: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    color: white;
+    cursor: default;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    min-width: 240px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: none;
+}
+
+.coverage-pill::after {
+    content: '';
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    width: 80%;
+    height: 30%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent);
+    border-radius: 50px;
+    pointer-events: none;
+}
+
+.coverage-pill:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.coverage-pill h4 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 0.25rem;
+    color: white !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.coverage-pill p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* Split Color Combinations (Inspired by the Image) */
+.pill-blue {
+    background: linear-gradient(90deg, #4477aa 50%, #99bbdd 50%);
+}
+
+.pill-purple {
+    background: linear-gradient(90deg, #7766aa 50%, #bbaaee 50%);
+}
+
+.pill-pink {
+    background: linear-gradient(90deg, #dd5577 50%, #ee9aaa 50%);
+}
+
+.pill-orange {
+    background: linear-gradient(90deg, #ee7744 50%, #ffbb99 50%);
+}
+
+.pill-yellow {
+    background: linear-gradient(90deg, #eedd44 50%, #ffee99 50%);
+}
+
+.pill-green {
+    background: linear-gradient(90deg, #44aa66 50%, #99ddaa 50%);
+}
+
+.pill-gray {
+    background: linear-gradient(90deg, #999999 50%, #dddddd 50%);
+}
+
 /* Vibrant Bubble FAQ Redesign */
 .faq-grid {
     display: flex;
