@@ -3620,3 +3620,108 @@ ul {
         margin-bottom: 0.5rem;
     }
 }
+
+/* Morelos Refrendo Section - Special Additions */
+#morelos-especial {
+    background: radial-gradient(circle at top, #f8fafc 0%, #ffffff 100%);
+    border-top: 1px solid #e2e8f0;
+}
+
+.morelos-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.comparison-wrapper {
+    background: #f1f5f9;
+    padding: 3rem 2rem;
+    border-radius: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.comparison-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.card-view {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.card-view:hover {
+    transform: translateY(-5px);
+}
+
+.card-view img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    display: block;
+}
+
+.card-label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #475569;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Privacy Masking Overlays - Enhanced Privacy (Pixelation Effect) */
+.mask-name,
+.mask-serial,
+.mask-qr {
+    position: absolute;
+    backdrop-filter: blur(15px) contrast(1.2);
+    -webkit-backdrop-filter: blur(15px) contrast(1.2);
+    background: rgba(255, 255, 255, 0.4);
+    z-index: 5;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+    /* Simulated pixelation pattern */
+    background-image: radial-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 4px 4px;
+}
+
+.mask-qr {
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mask-qr i {
+    font-size: 1.2rem;
+    color: #334155;
+    opacity: 0.6;
+}
+
+.comparison-info {
+    max-width: 800px;
+    margin: 3rem auto 0;
+    text-align: center;
+}
+
+.comparison-info p {
+    font-size: 1.1rem;
+    color: #475569;
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+    .comparison-container {
+        grid-template-columns: 1fr;
+    }
+}
