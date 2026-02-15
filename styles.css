@@ -3432,17 +3432,7 @@ ul {
     border: none;
 }
 
-.coverage-pill::after {
-    content: '';
-    position: absolute;
-    top: 5%;
-    left: 10%;
-    width: 80%;
-    height: 30%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent);
-    border-radius: 50px;
-    pointer-events: none;
-}
+/* Glossy overlay removed */
 
 .coverage-pill:hover {
     transform: scale(1.05) translateY(-5px);
@@ -3464,33 +3454,33 @@ ul {
     line-height: 1.3;
 }
 
-/* Split Color Combinations (Inspired by the Image) */
+/* Split Color Combinations (Solid version) */
 .pill-blue {
-    background: linear-gradient(90deg, #4477aa 50%, #99bbdd 50%);
+    background: #4477aa;
 }
 
 .pill-purple {
-    background: linear-gradient(90deg, #7766aa 50%, #bbaaee 50%);
+    background: #7766aa;
 }
 
 .pill-pink {
-    background: linear-gradient(90deg, #dd5577 50%, #ee9aaa 50%);
+    background: #dd5577;
 }
 
 .pill-orange {
-    background: linear-gradient(90deg, #ee7744 50%, #ffbb99 50%);
+    background: #ee7744;
 }
 
 .pill-yellow {
-    background: linear-gradient(90deg, #eedd44 50%, #ffee99 50%);
+    background: #eedd44;
 }
 
 .pill-green {
-    background: linear-gradient(90deg, #44aa66 50%, #99ddaa 50%);
+    background: #44aa66;
 }
 
 .pill-gray {
-    background: linear-gradient(90deg, #999999 50%, #dddddd 50%);
+    background: #999999;
 }
 
 /* Vibrant Bubble FAQ Redesign */
@@ -3533,61 +3523,45 @@ ul {
     position: relative;
     color: white;
     border: none;
-    box-shadow:
-        inset -10px -10px 30px rgba(0, 0, 0, 0.2),
-        inset 10px 10px 20px rgba(255, 255, 255, 0.3),
-        0 15px 35px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     overflow: hidden;
     animation: bubbleFloat 6s ease-in-out infinite;
     cursor: default;
 }
 
-.faq-item::before {
-    content: '';
-    position: absolute;
-    top: 10%;
-    left: 15%;
-    width: 30%;
-    height: 15%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), transparent);
-    border-radius: 50%;
-    transform: rotate(-25deg);
-    filter: blur(2px);
-}
+/* Glossy bubble highlight removed */
 
 .faq-item:hover {
     transform: scale(1.1) translateY(-15px);
-    box-shadow:
-        inset -15px -15px 40px rgba(0, 0, 0, 0.3),
-        inset 15px 15px 30px rgba(255, 255, 255, 0.4),
-        0 25px 50px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
     z-index: 10;
 }
 
 /* Color Sequence from Apple 5c Style */
+/* Solid Color Sequence */
 .faq-item:nth-child(5n+1) {
-    background: radial-gradient(circle at 30% 30%, #ffd700, #ff8c00);
+    background: #ff8c00;
 }
 
 /* Yellow/Orange */
 .faq-item:nth-child(5n+2) {
-    background: radial-gradient(circle at 30% 30%, #ff1493, #c71585);
+    background: #c71585;
 }
 
 /* Pink/Red */
 .faq-item:nth-child(5n+3) {
-    background: radial-gradient(circle at 30% 30%, #00bfff, #1e90ff);
+    background: #1e90ff;
 }
 
 /* Blue */
 .faq-item:nth-child(5n+4) {
-    background: radial-gradient(circle at 30% 30%, #32cd32, #228b22);
+    background: #228b22;
 }
 
 /* Green */
 .faq-item:nth-child(5n+5) {
-    background: radial-gradient(circle at 30% 30%, #da70d6, #8a2be2);
+    background: #8a2be2;
 }
 
 /* Purple */
