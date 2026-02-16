@@ -649,22 +649,7 @@ ul {
     }
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
-    }
-
-    70% {
-        transform: scale(1.05);
-        box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
-    }
-
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
-    }
-}
+/* Pulse animation removed - no longer used */
 
 /* Mobile Fix */
 /* Desktop Refinements */
@@ -3523,45 +3508,61 @@ ul {
     position: relative;
     color: white;
     border: none;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    box-shadow:
+        inset -10px -10px 30px rgba(0, 0, 0, 0.2),
+        inset 10px 10px 20px rgba(255, 255, 255, 0.3),
+        0 15px 35px rgba(0, 0, 0, 0.15);
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     overflow: hidden;
     animation: bubbleFloat 6s ease-in-out infinite;
     cursor: default;
 }
 
-/* Glossy bubble highlight removed */
+.faq-item::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    width: 30%;
+    height: 15%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), transparent);
+    border-radius: 50%;
+    transform: rotate(-25deg);
+    filter: blur(2px);
+}
 
 .faq-item:hover {
     transform: scale(1.1) translateY(-15px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    box-shadow:
+        inset -15px -15px 40px rgba(0, 0, 0, 0.3),
+        inset 15px 15px 30px rgba(255, 255, 255, 0.4),
+        0 25px 50px rgba(0, 0, 0, 0.2);
     z-index: 10;
 }
 
 /* Color Sequence from Apple 5c Style */
-/* Solid Color Sequence */
 .faq-item:nth-child(5n+1) {
-    background: #ff8c00;
+    background: radial-gradient(circle at 30% 30%, #ffd700, #ff8c00);
 }
 
 /* Yellow/Orange */
 .faq-item:nth-child(5n+2) {
-    background: #c71585;
+    background: radial-gradient(circle at 30% 30%, #ff1493, #c71585);
 }
 
 /* Pink/Red */
 .faq-item:nth-child(5n+3) {
-    background: #1e90ff;
+    background: radial-gradient(circle at 30% 30%, #00bfff, #1e90ff);
 }
 
 /* Blue */
 .faq-item:nth-child(5n+4) {
-    background: #228b22;
+    background: radial-gradient(circle at 30% 30%, #32cd32, #228b22);
 }
 
 /* Green */
 .faq-item:nth-child(5n+5) {
-    background: #8a2be2;
+    background: radial-gradient(circle at 30% 30%, #da70d6, #8a2be2);
 }
 
 /* Purple */
