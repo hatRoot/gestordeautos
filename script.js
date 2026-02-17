@@ -478,4 +478,86 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     rotateActivityFeed();
+
+    // ==========================================
+    // 9. GA4 Event Tracking & Sticky CTA
+    // ==========================================
+    
+    // Helper to safely trigger GA4 events
+    function trackEvent(eventName, params = {}) {
+        if (typeof gtag === 'function') {
+            gtag('event', eventName, params);
+            console.log(`GA4 Event tracked: ${eventName}`, params);
+        } else {
+            console.warn(`GA4 not loaded. Event: ${eventName}`, params);
+        }
+    }
+
+    // A. Track all WhatsApp Clicks globally
+    document.body.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href*="wa.me"]');
+        if (link) {
+            // Identify which button was clicked for clearer analytics
+            let label = 'generic_whatsapp';
+            if (link.classList.contains('primary-tel')) label = 'header_duran';
+            if (link.classList.contains('erika-tel')) label = 'header_erika';
+            if (link.closest('.hero')) label = 'hero_cta';
+            if (link.closest('.service-card') || link.closest('.service-card-edomex')) label = 'service_card';
+            if (link.closest('.sticky-whatsapp')) label = 'sticky_mobile';
+            if (link.closest('.golden-ticket-modal')) label = 'golden_ticket_claim';
+
+            trackEvent('generate_lead', {
+                currency: "MXN",
+                value: 100, // Estimated lead value
+                event_category: "contact",
+                event_label: label,
+                transport_type: 'beacon'
+            });
+        }
+    });
+
+    // B. Track Boleto Dorado Claims (Specific Event)
+    if (claimBtn) {
+        // We attach to the existing listener logic by wrapping or adding a new one. 
+        // Since we can't easily wrap the anonymous function above without refactoring, 
+        // we'll just add a second listener that runs in parallel for tracking.
+        claimBtn.addEventListener('click', () => {
+             const userName = nameInput.value.trim();
+             if (userName.length >= 2) {
+                 trackEvent('campaign_click', {
+                     event_category: 'promotion',
+                     event_label: 'boleto_dorado_claim',
+                     value: 500 // Higher intent value
+                 });
+             }
+        });
+    }
+
+    // C. Sticky Mobile WhatsApp Button (Inject if missing)
+    function injectStickyBtn() {
+        if (window.innerWidth > 768) return; // Mobile only
+        
+        // Check if already exists
+        if (document.querySelector('.sticky-whatsapp')) return;
+
+        const stickyBtn = document.createElement('a');
+        stickyBtn.href = "https://wa.me/525535757364?text=Hola,%20vi%20su%20web%20y%20quiero%20cotizar.";
+        stickyBtn.className = "sticky-whatsapp";
+        stickyBtn.target = "_blank";
+        stickyBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Cotizar Ahora';
+        document.body.appendChild(stickyBtn);
+
+        // Show/Hide based on scroll (hide when at very top to avoid clutter, show after scroll)
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                stickyBtn.classList.add('visible');
+            } else {
+                stickyBtn.classList.remove('visible');
+            }
+        });
+    }
+
+    injectStickyBtn();
+    // Re-check on resize
+    window.addEventListener('resize', injectStickyBtn);
 });
