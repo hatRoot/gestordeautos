@@ -173,21 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${prefixSource}-${dateStr}-${counterStr}`;
     }
 
-    // Trigger Ticket Entry
-    function triggerTicketEntry() {
-        if (ticketShown) return;
-        ticketShown = true;
-        openTicket(); // 🔴 FIX: This was missing! The ticket was never being shown.
-        window.removeEventListener('scroll', triggerTicketEntry); // Clean up listener
-    }
-
-    // Check if claimed
-    if (sessionStorage.getItem('ticketClaimed') === 'true') {
-        // Ticket already claimed
-    } else {
-        setTimeout(triggerTicketEntry, 1000);
-        window.addEventListener('scroll', triggerTicketEntry);
-    }
+    // Boleto Dorado: solo se abre con el botón, NO automáticamente.
 
     function openTicket() {
         if (!referralSelect || !folioSpan || !ticketModal) return;
