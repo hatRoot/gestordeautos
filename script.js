@@ -109,12 +109,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Service Tabs Logic
     // ==========================================
     document.querySelectorAll('.tab-btn').forEach(button => {
-        button.addEventListener('mouseover', () => {
+        // 🔴 FIX: Changed 'mouseover' to 'click'. Hover doesn't work on mobile/touch devices.
+        button.addEventListener('click', () => {
             // Remove active class from all
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 
-            // Add active class to hovered
+            // Add active class to clicked
             button.classList.add('active');
             const target = document.getElementById(button.dataset.tab);
             if (target) target.classList.add('active');
@@ -176,6 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function triggerTicketEntry() {
         if (ticketShown) return;
         ticketShown = true;
+        openTicket(); // 🔴 FIX: This was missing! The ticket was never being shown.
+        window.removeEventListener('scroll', triggerTicketEntry); // Clean up listener
     }
 
     // Check if claimed
@@ -482,7 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // 9. GA4 Event Tracking & Sticky CTA
     // ==========================================
-    
+
     // Helper to safely trigger GA4 events
     function trackEvent(eventName, params = {}) {
         if (typeof gtag === 'function') {
@@ -522,21 +525,21 @@ document.addEventListener('DOMContentLoaded', () => {
         // Since we can't easily wrap the anonymous function above without refactoring, 
         // we'll just add a second listener that runs in parallel for tracking.
         claimBtn.addEventListener('click', () => {
-             const userName = nameInput.value.trim();
-             if (userName.length >= 2) {
-                 trackEvent('campaign_click', {
-                     event_category: 'promotion',
-                     event_label: 'boleto_dorado_claim',
-                     value: 500 // Higher intent value
-                 });
-             }
+            const userName = nameInput.value.trim();
+            if (userName.length >= 2) {
+                trackEvent('campaign_click', {
+                    event_category: 'promotion',
+                    event_label: 'boleto_dorado_claim',
+                    value: 500 // Higher intent value
+                });
+            }
         });
     }
 
     // C. Sticky Mobile WhatsApp Button (Inject if missing)
     function injectStickyBtn() {
         if (window.innerWidth > 768) return; // Mobile only
-        
+
         // Check if already exists
         if (document.querySelector('.sticky-whatsapp')) return;
 
@@ -547,9 +550,10 @@ document.addEventListener('DOMContentLoaded', () => {
         stickyBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Cotizar Ahora';
         document.body.appendChild(stickyBtn);
 
-        // Show/Hide based on scroll (hide when at very top to avoid clutter, show after scroll)
+        // 🔴 FIX: Reduced threshold from 300px to 100px so the button appears sooner.
+        // Many users scroll very little before deciding to contact or leave.
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
+            if (window.scrollY > 100) {
                 stickyBtn.classList.add('visible');
             } else {
                 stickyBtn.classList.remove('visible');
