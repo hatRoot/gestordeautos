@@ -7,7 +7,7 @@
   <!-- PÁGINA PRINCIPAL -->
   <url>
     <loc>https://gestordeautos.com.mx/</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,7 +15,7 @@
   <!-- GESTORÍA EDOMEX — reemplacamiento, placas, cambio propietario -->
   <url>
     <loc>https://gestordeautos.com.mx/tramites-edomex.html</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
@@ -23,7 +23,7 @@
   <!-- REFRENDO MORELOS 2026 -->
   <url>
     <loc>https://gestordeautos.com.mx/refrendo-morelos.html</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
@@ -31,7 +31,7 @@
   <!-- ALTA DE PLACAS — EdoMex, CDMX, Morelos -->
   <url>
     <loc>https://gestordeautos.com.mx/alta-de-placas.html</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
@@ -39,7 +39,7 @@
   <!-- LICENCIA PERMANENTE CDMX -->
   <url>
     <loc>https://gestordeautos.com.mx/licencia-permanente-cdmx.html</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
@@ -47,7 +47,7 @@
   <!-- CAMBIO DE PROPIETARIO -->
   <url>
     <loc>https://gestordeautos.com.mx/cambio-de-propietario.html</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -55,7 +55,7 @@
   <!-- AVISO DE PRIVACIDAD -->
   <url>
     <loc>https://gestordeautos.com.mx/aviso-privacidad.html</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
