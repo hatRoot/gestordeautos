@@ -137,10 +137,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // 5. Golden Ticket Logic
+    // 5. Golden Ticket Logic & Mobile Menu
     // ==========================================
     const ticketModal = document.getElementById('goldenTicketModal');
     const openNavBtnMobile = document.getElementById('openNavTicket');
+    const openNavTicketOverlay = document.getElementById('openNavTicketOverlay');
     const closeBtn = document.getElementById('closeTicket');
     const nameInput = document.getElementById('ticketVisitorName');
     const folioSpan = document.getElementById('ticketFolio');
@@ -194,6 +195,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (openNavBtnMobile) openNavBtnMobile.addEventListener('click', openTicket);
+    if (openNavTicketOverlay) {
+        openNavTicketOverlay.addEventListener('click', () => {
+            const overlay = document.getElementById('mobileOverlay');
+            if (overlay) overlay.classList.remove('active');
+            openTicket();
+        });
+    }
+
+    // --- Mobile Menu Overlay Logic ---
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    const closeOverlay = document.getElementById('closeOverlay');
+    const overlayLinks = document.querySelectorAll('.overlay-link-js');
+
+    if (mobileMenuToggle && mobileOverlay) {
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileOverlay.classList.add('active');
+        });
+    }
+
+    if (closeOverlay && mobileOverlay) {
+        closeOverlay.addEventListener('click', () => {
+            mobileOverlay.classList.remove('active');
+        });
+    }
+
+    overlayLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (mobileOverlay) mobileOverlay.classList.remove('active');
+        });
+    });
 
     if (closeBtn && ticketModal) {
         closeBtn.addEventListener('click', () => {

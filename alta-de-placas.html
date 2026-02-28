@@ -331,9 +331,38 @@
                                 PLACAS</span><span class="text-hover">ERIKA</span></span>
                     </a>
                 </div>
+
+                <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Abrir Menú">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
     </header>
+
+    <!-- Mobile Overlay Menu (Apple-like) -->
+    <div id="mobileOverlay" class="mobile-overlay">
+        <button id="closeOverlay" class="close-overlay" aria-label="Cerrar Menú">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="overlay-content">
+            <a href="/#servicios" class="overlay-link overlay-link-js" data-i18n="nav_services">Servicios</a>
+            <a href="/#contacto" class="overlay-link overlay-link-js" data-i18n="nav_contact">Contacto</a>
+            <hr class="overlay-divider">
+            <button id="openNavTicketOverlay" class="nav-ticket-btn overlay-btn">
+                <i class="fas fa-ticket-alt"></i> BOLETO DORADO
+            </button>
+            <a href="https://wa.me/525535757364?text=Hola,%20me%20interesa%20una%20cotización"
+                class="btn btn-whatsapp overlay-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> COTIZACIONES 1
+            </a>
+            <a href="https://wa.me/525522917267?text=Hola,%20busco%20asesoría%20con%20Erika"
+                class="btn btn-whatsapp overlay-btn" target="_blank"
+                style="background: linear-gradient(135deg, #25d366, #128c7e);">
+                <i class="fab fa-whatsapp"></i> COTIZACIONES 2
+            </a>
+        </div>
+    </div>
+
 
     <main>
         <section class="ap-hero">
