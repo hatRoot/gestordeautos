@@ -422,8 +422,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const langToggle = document.getElementById('langToggle');
-    if (langToggle) {
+    const langToggleDesktop = document.getElementById('langToggle');
+    const langToggleOverlay = document.getElementById('langToggleOverlay');
+    const langToggles = [langToggleDesktop, langToggleOverlay].filter(el => el !== null);
+
+    if (langToggles.length > 0) {
         let currentLang = 'es';
         const userLang = navigator.language || navigator.userLanguage;
         if (userLang.startsWith('en')) {
@@ -432,7 +435,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function updateLanguage(lang) {
             currentLang = lang;
-            langToggle.textContent = lang === 'es' ? 'EN' : 'ES';
+            langToggles.forEach(btn => {
+                btn.textContent = lang === 'es' ? 'EN' : 'ES';
+            });
 
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
@@ -446,9 +451,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        langToggle.addEventListener('click', () => {
-            const newLang = currentLang === 'es' ? 'en' : 'es';
-            updateLanguage(newLang);
+        langToggles.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const newLang = currentLang === 'es' ? 'en' : 'es';
+                updateLanguage(newLang);
+            });
         });
     }
 
