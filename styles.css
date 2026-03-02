@@ -325,14 +325,16 @@ ul {
 }
 
 .header-slogan {
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: #e2e8f0;
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #fbbf24;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     margin-top: 0.25rem;
     opacity: 1;
     transition: all 0.5s ease;
+    display: block;
+    line-height: 1.2;
 }
 
 /* Scrolled State for New Elements */

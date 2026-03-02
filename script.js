@@ -347,7 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn_quote: '<i class="fab fa-whatsapp"></i> Cotizar Ahora',
 
             // Header
-            header_slogan: "Gestión vehicular rápida y segura.",
+            header_slogan: "Trámites 100% Genuinos",
 
             // Hero
             hero_title_main: "Gestoría Vehicular en Estado de México y CDMX",
@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn_quote: '<i class="fab fa-whatsapp"></i> Get Quote',
 
             // Header
-            header_slogan: "Fast and secure vehicle registration.",
+            header_slogan: "100% Genuine Procedures",
 
             // Hero
             hero_title_main: "Vehicle Registration Services CDMX & EdoMex",
