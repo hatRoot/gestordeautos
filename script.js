@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 6. Cover Flow Effect (Reviews)
+    // 6. Cover Flow Effect (Reviews) - OPTIMIZED
     // ==========================================
     const track = document.querySelector('.reviews-track');
     const cards = document.querySelectorAll('.review-card');
@@ -269,7 +269,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (track && cards.length > 0) {
         let currentScroll = track.scrollLeft;
         let targetScroll = track.scrollLeft;
-        const lerpFactor = 0.08;
+        let isMoving = false;
+        const lerpFactor = 0.1;
+
+        // Cache card data to avoid layout thrashing
+        let cardData = [];
+        const cacheCardData = () => {
+            const trackRect = track.getBoundingClientRect();
+            cardData = Array.from(cards).map(card => ({
+                element: card,
+                offsetCenter: card.offsetLeft + (card.offsetWidth / 2),
+                width: card.offsetWidth
+            }));
+        };
+
+        // Initial cache
+        cacheCardData();
+        window.addEventListener('resize', cacheCardData);
 
         function lerp(start, end, factor) {
             return start + (end - start) * factor;
@@ -277,46 +293,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function updateCoverFlow() {
             targetScroll = track.scrollLeft;
-            if (Math.abs(targetScroll - currentScroll) < 0.5) {
-                currentScroll = targetScroll;
-            } else {
+
+            // Only update positions if we haven't reached the target or the track is being scrolled
+            const diff = targetScroll - currentScroll;
+            if (Math.abs(diff) > 0.1) {
                 currentScroll = lerp(currentScroll, targetScroll, lerpFactor);
+            } else {
+                currentScroll = targetScroll;
             }
 
-            const center = currentScroll + (track.offsetWidth / 2);
+            const trackWidth = track.offsetWidth;
+            const center = currentScroll + (trackWidth / 2);
 
-            cards.forEach(card => {
-                const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
-                const distance = Math.abs(center - cardCenter);
+            for (let i = 0; i < cardData.length; i++) {
+                const card = cardData[i];
+                const distance = Math.abs(center - card.offsetCenter);
                 const maxDistance = 500;
 
-                // Reset
-                card.classList.remove('active', 'prev', 'next');
-                card.style.zIndex = Math.round(1000 - distance);
+                // Reset and Depth
+                const element = card.element;
+                element.style.zIndex = Math.round(1000 - distance);
 
                 let normDist = Math.min(1, distance / maxDistance);
-                const scale = 1.15 - (normDist * 0.35);
-                const rotRaw = normDist * 45;
-                const shift = 0;
-                const depth = -70 * normDist;
 
                 if (distance < 50) {
-                    card.classList.add('active');
-                    card.style.transform = `translateX(0px) scale(1.15) translateZ(100px) rotateY(0deg)`;
+                    element.style.transform = `scale(1.15) translateZ(100px) rotateY(0deg)`;
+                    element.style.opacity = 1;
                 } else {
-                    if (cardCenter < center) {
-                        card.classList.add('prev');
-                        card.style.transform = `translateX(${shift}px) scale(${scale}) translateZ(${depth}px) rotateY(${rotRaw}deg)`;
-                    } else {
-                        card.classList.add('next');
-                        card.style.transform = `translateX(${shift}px) scale(${scale}) translateZ(${depth}px) rotateY(-${rotRaw}deg)`;
-                    }
-                    card.style.opacity = 1 - (normDist * 0.6);
+                    const scale = 1.15 - (normDist * 0.35);
+                    const rotRaw = normDist * 45;
+                    const depth = -70 * normDist;
+                    const direction = card.offsetCenter < center ? 1 : -1;
+
+                    element.style.transform = `scale(${scale}) translateZ(${depth}px) rotateY(${direction * rotRaw}deg)`;
+                    element.style.opacity = 0.4 + (1 - normDist) * 0.6;
                 }
-            });
+            }
             window.requestAnimationFrame(updateCoverFlow);
         }
-        updateCoverFlow();
+
+        // Use a simpler trigger for the animation
+        window.requestAnimationFrame(updateCoverFlow);
     }
 
     // ==========================================
