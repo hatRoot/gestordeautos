@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             sessionStorage.setItem('ticketClaimed', 'true');
 
-            const finalMsg = `Hola me realisas un tramite vehicular?`;
+            const finalMsg = `Hola, ¿me realizas un trámite vehicular?`;
             const waUrl = `https://wa.me/525535757364?text=${encodeURIComponent(finalMsg)}`;
 
             window.open(waUrl, '_blank');
