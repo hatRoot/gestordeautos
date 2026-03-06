@@ -8,181 +8,12 @@
     --text-dark: #1e293b;
     --background-light: #f1f5f9;
     --white: #ffffff;
-    --institutional-blue: #1e3a8a;
     --glass-bg: rgba(255, 255, 255, 0.95);
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --iphone-safe-bottom: env(safe-area-inset-bottom);
-    --institutional-blue: #1e3a8a;
-}
-
-/* Floating WhatsApp */
-.floating-whatsapp {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    animation: slideInUp 0.5s ease-out;
-}
-
-.floating-btn {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.8rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    transition: var(--transition);
-    position: relative;
-}
-
-.floating-btn:hover {
-    transform: scale(1.1) translateY(-5px);
-}
-
-.floating-btn.wa-duran {
-    background: linear-gradient(135deg, #25d366, #128c7e);
-}
-
-.floating-btn.wa-erika {
-    background: linear-gradient(135deg, #25d366, #075e54);
-}
-
-.floating-btn .tooltip {
-    position: absolute;
-    right: 80px;
-    background: #1e293b;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: var(--transition);
-    box-shadow: var(--shadow-md);
-}
-
-.floating-btn:hover .tooltip {
-    opacity: 1;
-    right: 70px;
-}
-
-@keyframes slideInUp {
-    from {
-        transform: translateY(100px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@media (max-width: 768px) {
-    .floating-whatsapp {
-        bottom: 1.5rem;
-        right: 1.5rem;
-    }
-
-    .floating-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
-    }
-}
-
-.seo-hidden {
-    display: none !important;
-}
-
-/* --- TRUST BAR PREMIUM V3 --- */
-.trust-bar-premium {
-    padding: 6rem 0;
-    background: linear-gradient(to bottom, #f8fafc, #ffffff);
-    position: relative;
-    overflow: hidden;
-}
-
-.trust-flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-    position: relative;
-    z-index: 1;
-    flex-wrap: wrap;
-}
-
-.trust-item-v2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1.5rem;
-    padding: 2.5rem;
-    border-radius: 32px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-    flex: 1;
-    min-width: 300px;
-}
-
-.trust-item-v2:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 30px 60px rgba(15, 23, 42, 0.1);
-}
-
-.trust-icon-wrapper {
-    width: 80px;
-    height: 80px;
-    border-radius: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.2rem;
-    transition: all 0.4s ease;
-}
-
-.trust-icon-wrapper.blue {
-    background: #eff6ff;
-    color: #2563eb;
-}
-
-.trust-icon-wrapper.green {
-    background: #f0fdf4;
-    color: #22c55e;
-}
-
-.trust-icon-wrapper.yellow {
-    background: #fffbeb;
-    color: #f59e0b;
-}
-
-.trust-label {
-    font-size: 1.4rem;
-    font-weight: 900;
-    color: #0f172a;
-    letter-spacing: -0.5px;
-    line-height: 1.2;
-}
-
-.trust-sub {
-    font-size: 0.95rem;
-    color: #64748b;
-    font-weight: 500;
 }
 
 * {
@@ -4077,8 +3908,6 @@ ul {
     border-radius: 2rem;
     position: relative;
     overflow: hidden;
-    max-width: 1200px;
-    margin: 4rem auto;
 }
 
 .comparison-container {
@@ -4148,7 +3977,7 @@ ul {
 }
 
 .comparison-info {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 3rem auto 0;
     text-align: center;
 }
@@ -4169,7 +3998,7 @@ ul {
 .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform, opacity;
 }
 
@@ -4184,28 +4013,28 @@ ul {
 }
 
 #morelos-especial .apple-line-1 {
-    transition-delay: 0.07s;
-}
-
-#morelos-especial .apple-line-2 {
     transition-delay: 0.15s;
 }
 
+#morelos-especial .apple-line-2 {
+    transition-delay: 0.3s;
+}
+
 #morelos-especial .apple-line-3 {
-    transition-delay: 0.22s;
+    transition-delay: 0.45s;
 }
 
 #morelos-especial .apple-line-4 {
-    transition-delay: 0.3s;
+    transition-delay: 0.6s;
 }
 
 /* Grid and Wrapper Reveal delays */
 #morelos-especial .morelos-cards-grid.reveal {
-    transition-delay: 0.4s;
+    transition-delay: 0.75s;
 }
 
 #morelos-especial .comparison-wrapper.reveal {
-    transition-delay: 0.5s;
+    transition-delay: 0.9s;
 }
 
 /* Morelos Premium Cards & Buttons */
@@ -4220,9 +4049,8 @@ ul {
     border: 1px solid rgba(37, 99, 235, 0.2) !important;
     background: rgba(255, 255, 255, 0.8) !important;
     backdrop-filter: blur(10px);
-    padding: 3rem 2rem !important;
-    /* Large padding per user request */
-    min-height: 450px;
+    padding: 1.5rem 1rem !important;
+    /* Tightened padding */
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -4531,349 +4359,26 @@ details.seo-details[open] .seo-toggle-icon {
     }
 }
 
-/* --- ULTRA-PREMIUM TRUST BAR V3 --- */
-.trust-bar-premium {
-    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-    padding: 6rem 0;
-    border-bottom: 1px solid #e2e8f0;
-    position: relative;
-    overflow: hidden;
+/* Adjust internal SEO block margins when inside details */
+/* Performance Tweaks */
+.services,
+.reviews-section,
+.seo-content,
+.tramites-section,
+.footer {
+    content-visibility: auto;
+    contain-intrinsic-size: 1000px;
 }
 
-.trust-bar-premium::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(37, 99, 235, 0.03) 0%, transparent 70%);
-    animation: rotate-bg 30s linear infinite;
-    z-index: 0;
-}
-
-@keyframes rotate-bg {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.trust-flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4rem;
-    position: relative;
-    z-index: 1;
-    flex-wrap: wrap;
-}
-
-.trust-item-v2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 2rem;
-    padding: 2.5rem;
-    border-radius: 32px;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
-    flex: 1;
-    min-width: 320px;
-}
-
-.trust-item-v2:hover {
-    transform: translateY(-15px) scale(1.05);
-    background: #ffffff;
-    box-shadow: 0 40px 80px -20px rgba(15, 23, 42, 0.15);
-}
-
-.trust-icon-wrapper {
-    width: 100px;
-    height: 100px;
-    border-radius: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    transition: all 0.6s ease;
-}
-
-.trust-icon-wrapper.blue {
-    background: #eff6ff;
-    color: #2563eb;
-}
-
-.trust-icon-wrapper.green {
-    background: #f0fdf4;
-    color: #22c55e;
-}
-
-.trust-icon-wrapper.yellow {
-    background: #fffbeb;
-    color: #f59e0b;
-}
-
-.trust-item-v2:hover .trust-icon-wrapper {
-    transform: rotateY(180deg);
-}
-
-.trust-text-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.trust-label {
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: #0f172a;
-    letter-spacing: -1px;
-    line-height: 1.1;
-    text-transform: uppercase;
-}
-
-.trust-sub {
-    font-size: 1.1rem;
-    color: #475569;
-    font-weight: 600;
-    opacity: 0.8;
-}
-
-/* --- STATE PILLARS (SERVICES GRID REPLACEMENT) --- */
-.state-pillars-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 3rem;
-    margin-top: 4rem;
-}
-
-.pillar {
-    background: #ffffff;
-    border-radius: 40px;
-    padding: 0;
-    position: relative;
-    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-    border: 1px solid #eef2f6;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    height: 100%;
-}
-
-.pillar::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 12px;
-}
-
-.pillar.edomex::before {
-    background: #f97316;
-}
-
-.pillar.cdmx::before {
-    background: #2563eb;
-}
-
-.pillar.morelos::before {
-    background: #22c55e;
-}
-
-.pillar:hover {
-    transform: translateY(-20px);
-    box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.1);
-}
-
-.pillar-header {
-    padding: 3.5rem 2.5rem 2.5rem;
-    text-align: center;
-}
-
-.pillar-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 20px;
-    margin: 0 auto 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-}
-
-.edomex .pillar-icon {
-    background: #fff7ed;
-    color: #f97316;
-}
-
-.cdmx .pillar-icon {
-    background: #eff6ff;
-    color: #2563eb;
-}
-
-.morelos .pillar-icon {
-    background: #f0fdf4;
-    color: #22c55e;
-}
-
-.pillar-header h3 {
-    font-size: 2.2rem;
-    font-weight: 900;
-    color: #0f172a;
-    margin-bottom: 0.5rem;
-}
-
-.pillar-body {
-    padding: 0 3rem 3rem;
-    flex-grow: 1;
-}
-
-.pillar-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 2.5rem;
-}
-
-.pillar-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-    color: #334155;
-}
-
-.pillar-list li i {
-    margin-top: 3px;
-    font-size: 1.2rem;
-}
-
-.edomex li i {
-    color: #f97316;
-}
-
-.cdmx li i {
-    color: #2563eb;
-}
-
-.morelos li i {
-    color: #22c55e;
-}
-
-.pillar-list li strong {
-    display: block;
-    color: #0f172a;
-    font-size: 1.2rem;
-    margin-bottom: 0.2rem;
-}
-
-.pillar-footer {
-    padding: 0 3rem 4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.btn-pillar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
-    padding: 1.2rem;
-    border-radius: 20px;
-    font-weight: 800;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    text-decoration: none;
-}
-
-.btn-pillar-outline {
-    background: #f8fafc;
-    color: #475569;
-    border: 1px solid #e2e8f0;
-}
-
-.btn-pillar-primary {
-    color: #ffffff;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.edomex .btn-pillar-primary {
-    background: #f97316;
-}
-
-.cdmx .btn-pillar-primary {
-    background: #2563eb;
-}
-
-.morelos .btn-pillar-primary {
-    background: #22c55e;
-}
-
-.btn-pillar:hover {
-    transform: scale(1.02);
-    filter: brightness(1.1);
-}
-
-/* --- SERVICES GRID REFINEMENTS --- */
-.services-tabs {
-    background: #f8fafc;
-    padding: 0.75rem;
-    border-radius: 100px;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.tab-btn.active {
-    background: #0f172a;
-    color: #ffffff;
-    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
-}
-
-/* Performance and Striking Refinements */
-.section-title h2 {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 950;
-    letter-spacing: -2px;
-}
-
-/* Responsividad */
 @media (max-width: 768px) {
-    .trust-bar-premium {
-        padding: 4rem 0;
+    * {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
     }
 
-    .trust-label {
-        font-size: 1.4rem;
+    .header,
+    .mobile-overlay {
+        backdrop-filter: blur(4px) !important;
+        -webkit-backdrop-filter: blur(4px) !important;
     }
-
-    .trust-flex {
-        gap: 2rem;
-    }
-
-    .state-pillars-grid {
-        gap: 2rem;
-    }
-
-    .pillar-header h3 {
-        font-size: 1.8rem;
-    }
-}
-
-/* Clean up */
-.floating-whatsapp {
-    display: none;
-}
-
-.service-item {
-    cursor: pointer;
-    border-radius: 32px;
 }

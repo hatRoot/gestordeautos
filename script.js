@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             sessionStorage.setItem('ticketClaimed', 'true');
 
-            const finalMsg = `Hola, ¿me realizas un trámite vehicular?`;
+            const finalMsg = `Hola, soy *${userName}*. He generado mi *BOLETO DORADO* en GestorDeAutos.\nCódigo Único: *${currentFolio}*\nMe gustaría solicitar una cotización lo mas pronto posible.`;
             const waUrl = `https://wa.me/525535757364?text=${encodeURIComponent(finalMsg)}`;
 
             window.open(waUrl, '_blank');
@@ -586,7 +586,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (document.querySelector('.sticky-whatsapp')) return;
 
         const stickyBtn = document.createElement('a');
-        stickyBtn.href = "https://wa.me/525535757364?text=Hola%20me%20realisas%20un%20tramite%20vehicular?";
+        stickyBtn.href = "https://wa.me/525535757364?text=Hola,%20vi%20su%20web%20y%20quiero%20cotizar.";
         stickyBtn.className = "sticky-whatsapp";
         stickyBtn.target = "_blank";
         stickyBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Cotizar Ahora';
