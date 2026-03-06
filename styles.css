@@ -8,6 +8,7 @@
     --text-dark: #1e293b;
     --background-light: #f1f5f9;
     --white: #ffffff;
+    --institutional-blue: #1e3a8a;
     --glass-bg: rgba(255, 255, 255, 0.95);
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -99,6 +100,89 @@
         height: 50px;
         font-size: 1.5rem;
     }
+}
+
+.seo-hidden {
+    display: none !important;
+}
+
+/* --- TRUST BAR PREMIUM V3 --- */
+.trust-bar-premium {
+    padding: 6rem 0;
+    background: linear-gradient(to bottom, #f8fafc, #ffffff);
+    position: relative;
+    overflow: hidden;
+}
+
+.trust-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+}
+
+.trust-item-v2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+    padding: 2.5rem;
+    border-radius: 32px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    flex: 1;
+    min-width: 300px;
+}
+
+.trust-item-v2:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(15, 23, 42, 0.1);
+}
+
+.trust-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    transition: all 0.4s ease;
+}
+
+.trust-icon-wrapper.blue {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.trust-icon-wrapper.green {
+    background: #f0fdf4;
+    color: #22c55e;
+}
+
+.trust-icon-wrapper.yellow {
+    background: #fffbeb;
+    color: #f59e0b;
+}
+
+.trust-label {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #0f172a;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.trust-sub {
+    font-size: 0.95rem;
+    color: #64748b;
+    font-weight: 500;
 }
 
 * {
@@ -3993,6 +4077,8 @@ ul {
     border-radius: 2rem;
     position: relative;
     overflow: hidden;
+    max-width: 1200px;
+    margin: 4rem auto;
 }
 
 .comparison-container {
@@ -4062,7 +4148,7 @@ ul {
 }
 
 .comparison-info {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 3rem auto 0;
     text-align: center;
 }
@@ -4134,8 +4220,9 @@ ul {
     border: 1px solid rgba(37, 99, 235, 0.2) !important;
     background: rgba(255, 255, 255, 0.8) !important;
     backdrop-filter: blur(10px);
-    padding: 1.5rem 1rem !important;
-    /* Tightened padding */
+    padding: 3rem 2rem !important;
+    /* Large padding per user request */
+    min-height: 450px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
