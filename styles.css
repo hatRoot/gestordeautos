@@ -791,41 +791,39 @@ ul {
 /* Desktop Refinements */
 @media (min-width: 1024px) {
     .hero-content {
-        flex-direction: row;
+        flex-direction: row-reverse;
+        /* Text Right, Visual Left */
         align-items: center;
-        justify-content: flex-end;
-        /* Push content */
-        padding: 0;
-        max-width: 100%;
-        /* Break container */
+        justify-content: space-between;
+        padding: 0 5%;
+        max-width: 1400px;
+        margin: 0 auto;
+        min-height: 80vh;
     }
 
     .hero-visual {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 60%;
-        /* Take left 60% */
-        height: 100%;
+        position: relative;
+        width: 55%;
+        height: auto;
         margin: 0;
-        object-fit: cover;
+        order: 1;
     }
 
     .hero-moto {
-        height: 100%;
+        height: auto;
         width: 100%;
-        object-fit: cover;
-        object-position: right center;
-        mask-image: linear-gradient(to right, black 80%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+        max-width: 800px;
+        object-fit: contain;
+        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
     }
 
     .hero-text {
-        width: 40%;
-        max-width: 600px;
+        width: 45%;
+        max-width: 650px;
         margin: 0;
         text-align: left;
-        padding-right: 5%;
+        order: 2;
+        z-index: 10;
     }
 }
 
