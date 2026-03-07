@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             sessionStorage.setItem('ticketClaimed', 'true');
 
-            const finalMsg = "Hola, ¿me ayudas con un trámite vehicular?";
+            const finalMsg = "Hola, me urge un trámite vehicular, ¿me ayudas hoy?";
             const waUrl = `https://wa.me/525535757364?text=${encodeURIComponent(finalMsg)}`;
 
             window.open(waUrl, '_blank');
@@ -586,7 +586,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (document.querySelector('.sticky-whatsapp')) return;
 
         const stickyBtn = document.createElement('a');
-        stickyBtn.href = "https://wa.me/525535757364?text=Hola,%20%C2%BFme%20ayudas%20con%20un%20tr%C3%A1mite%20vehicular?";
+        stickyBtn.href = "https://wa.me/525535757364?text=Hola%2C%20me%20urge%20un%20tr%C3%A1mite%20vehicular%2C%20%C2%BFme%20ayudas%20hoy%3F";
         stickyBtn.className = "sticky-whatsapp";
         stickyBtn.target = "_blank";
         stickyBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Cotizar Ahora';
