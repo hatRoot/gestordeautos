@@ -985,12 +985,12 @@ ul {
 }
 
 .partners-track img {
-    height: 60px;
+    height: 70px; /* Slightly larger for clarity */
     width: auto;
     object-fit: contain;
-    filter: grayscale(100%); /* Manteniéndolos en blanco y negro como pediste antes pero sin opacidad */
-    opacity: 1; /* Eliminamos el difuminado */
-    transition: var(--transition);
+    filter: none; /* No more blurring or grayscale boxes */
+    opacity: 1; /* Fully visible */
+    transition: none;
 }
 
 .partners-track img:hover {
