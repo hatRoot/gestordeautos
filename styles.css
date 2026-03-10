@@ -971,11 +971,7 @@ ul {
     overflow: hidden;
     position: relative;
     margin-top: 2rem;
-    background: #fff;
-    padding: 30px 0;
-    /* Eliminamos cualquier máscara o degradado que pueda causar desenfoque */
-    mask-image: none !important;
-    -webkit-mask-image: none !important;
+    padding: 20px 0;
 }
 
 .partners-track {
@@ -987,18 +983,14 @@ ul {
 }
 
 .partners-track img {
-    height: 55px; /* Altura optimizada para nitidez */
+    height: 60px; /* Tamaño original de los atributos HTML */
     width: auto;
     object-fit: contain;
-    filter: grayscale(100%) contrast(1.5) brightness(0.9) !important; /* B&W de alta definición */
-    opacity: 1 !important;
-    transition: none !important;
-    image-rendering: -webkit-optimize-contrast !important; /* Máximo enfoque en navegadores */
-    image-rendering: crisp-edges !important;
+    margin: 0;
 }
 
 .partners-track img:hover {
-    opacity: 1;
+    transform: none;
 }
 
 @keyframes scroll {
