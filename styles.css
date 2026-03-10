@@ -988,9 +988,11 @@ ul {
     height: 60px;
     width: auto;
     object-fit: contain;
-    filter: grayscale(100%);
-    opacity: 0.7;
+    filter: grayscale(100%) contrast(150%) brightness(1.1);
+    opacity: 1; /* More defined */
     transition: var(--transition);
+    image-rendering: -webkit-optimize-contrast; /* Sharpness */
+    image-rendering: crisp-edges;
 }
 
 .partners-track img:hover {
