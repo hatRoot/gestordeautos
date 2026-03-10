@@ -988,8 +988,8 @@ ul {
     height: 60px;
     width: auto;
     object-fit: contain;
-    filter: grayscale(100%);
-    opacity: 0.7;
+    filter: grayscale(100%); /* Manteniéndolos en blanco y negro como pediste antes pero sin opacidad */
+    opacity: 1; /* Eliminamos el difuminado */
     transition: var(--transition);
 }
 
