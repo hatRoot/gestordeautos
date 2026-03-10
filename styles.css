@@ -985,14 +985,12 @@ ul {
 }
 
 .partners-track img {
-    height: 60px;
+    height: 45px; /* Slightly smaller for better sharpness on most screens */
     width: auto;
     object-fit: contain;
-    filter: grayscale(100%) contrast(150%) brightness(1.1);
-    opacity: 1; /* More defined */
-    transition: var(--transition);
-    image-rendering: -webkit-optimize-contrast; /* Sharpness */
-    image-rendering: crisp-edges;
+    filter: brightness(0); /* Black and white - solid black for definition */
+    opacity: 0.6;
+    transition: all 0.3s ease;
 }
 
 .partners-track img:hover {

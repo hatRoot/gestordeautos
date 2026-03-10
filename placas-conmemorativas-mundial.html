@@ -10,11 +10,10 @@
     <title>Edición Mundial 2026: Placas Conmemorativas México | Gestoría Premium</title>
     <meta name="description"
         content="Únete a la fiesta del fútbol con las Placas Conmemorativas del Mundial 2026. Trámite exclusivo, rápido y 100% legal en CDMX, EdoMex y Morelos.">
-    <link rel="canonical" href="https://gestordeautos.com.mx/placas-conmemorativas-mundial.html">
     <link rel="icon" type="image/jpeg" href="assets/images/logo.jpg">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Oswald:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     
@@ -22,9 +21,10 @@
         :root {
             --fifa-neon-green: #00FF00;
             --fifa-magenta: #FF00FF;
-            --fifa-cyan: #00FFFF;
             --fifa-dark: #020617;
-            --fifa-gold: #fbbf24;
+            --mex-yellow: #facc15;
+            --mex-white: #ffffff;
+            --mex-black: #000000;
         }
 
         body {
@@ -32,29 +32,27 @@
             color: #f8fafc;
         }
 
+        /* Festive Background - Aerial Stadium Vibe */
         .mundial-hero {
-            background: linear-gradient(rgba(2, 6, 23, 0.7), rgba(2, 6, 23, 0.95)), url('assets/images/placas_mundial_2026_mexico.png');
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(rgba(2, 6, 23, 0.4), rgba(2, 6, 23, 0.8)), 
+                        radial-gradient(circle at 50% 50%, rgba(0, 255, 0, 0.1) 0%, transparent 70%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
+            padding: 80px 0;
         }
 
-        /* Geometric FIFA Design Motifs */
-        .mundial-hero::before {
-            content: "26";
+        /* Stadium Lights Effect */
+        .stadium-light {
             position: absolute;
-            font-size: 40vw;
-            font-weight: 900;
-            color: rgba(0, 255, 0, 0.03);
-            right: -10vw;
-            top: 50%;
-            transform: translateY(-50%);
-            line-height: 1;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(90deg, transparent, transparent 49%, rgba(0, 255, 0, 0.05) 50%, transparent 51%);
             pointer-events: none;
+            opacity: 0.3;
         }
 
         .hero-tag {
@@ -66,13 +64,13 @@
             letter-spacing: 2px;
             display: inline-block;
             margin-bottom: 2rem;
-            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+            transform: skewX(-15deg);
         }
 
         .mundial-hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(2.5rem, 7vw, 5rem);
             font-weight: 900;
-            line-height: 0.9;
+            line-height: 0.95;
             text-transform: uppercase;
             margin-bottom: 2rem;
             color: #fff;
@@ -83,74 +81,127 @@
             display: block;
         }
 
-        .mundial-hero p {
-            font-size: 1.25rem;
-            max-width: 600px;
-            margin-bottom: 3rem;
-            border-left: 4px solid var(--fifa-magenta);
-            padding-left: 1.5rem;
-            color: #cbd5e1;
-        }
-
-        .section-header {
-            text-align: center;
+        /* REALISTIC PLATES DESIGN */
+        .plate-showcase {
             padding: 5rem 0;
-            background: linear-gradient(to bottom, var(--fifa-dark), #0f172a);
-        }
-
-        .section-header h2 {
-            font-size: 3rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-
-        .narrative-strip {
-            padding: 6rem 0;
-            background: #fff;
-            color: var(--fifa-dark);
             position: relative;
+            z-index: 5;
         }
 
-        .narrative-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+        .plate-stack {
+            position: relative;
+            height: 480px;
+            max-width: 800px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .plate-card {
+            position: absolute;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 2/1;
+            border-radius: 12px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 0 10px rgba(255,255,255,0.2);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
+            border: 4px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            left: 50%;
+            transform-origin: center;
+        }
+
+        /* Plate Details */
+        .plate-floral {
+            height: 15%;
+            background: url('https://www.transparenttextures.com/patterns/mexican-floral.png'), linear-gradient(90deg, #ff0000, #ff8c00, #ffd700, #32cd32);
+            background-size: contain;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+        }
+
+        .plate-body {
+            flex: 1;
+            position: relative;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            padding: 0 20px;
         }
 
-        .narrative-content h3 {
-            font-size: 2.5rem;
+        .plate-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 8rem;
+            font-weight: 700;
+            letter-spacing: 5px;
+            line-height: 1;
+            text-shadow: 2px 2px 0px rgba(255,255,255,0.1), -1px -1px 0px rgba(0,0,0,0.2);
+            margin-top: 10px;
+        }
+
+        .plate-axolotl {
+            position: absolute;
+            right: 15px;
+            bottom: 10px;
+            height: 60%;
+            opacity: 0.9;
+        }
+
+        .plate-badge-f {
+            position: absolute;
+            left: 15px;
+            top: 10px;
             font-weight: 900;
-            margin-bottom: 1.5rem;
-            color: var(--fifa-dark);
+            font-size: 2rem;
+            opacity: 0.2;
         }
 
-        .narrative-content p {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            color: #475569;
+        .plate-footer {
+            height: 20%;
+            background: rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            padding-bottom: 5px;
         }
 
-        .requisitos-mundial {
-            background: var(--fifa-dark);
-            padding: 6rem 0;
-            border-top: 10px solid var(--fifa-neon-green);
+        .plate-footer span {
+            font-size: 0.6rem;
+            opacity: 0.7;
         }
 
-        .req-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0;
-            padding: 3rem;
-            transition: all 0.3s;
+        /* Plate Variants */
+        .plate-yellow { 
+            background: var(--mex-yellow); 
+            color: var(--mex-black); 
+            z-index: 3;
+            transform: translateX(-50%) rotate(0deg);
+        }
+        
+        .plate-black { 
+            background: var(--mex-black); 
+            color: var(--mex-white); 
+            z-index: 2;
+            transform: translateX(-55%) translateY(40px) rotate(-8deg);
+            border-color: #334155;
+        }
+        
+        .plate-white { 
+            background: var(--mex-white); 
+            color: var(--mex-black); 
+            z-index: 1;
+            transform: translateX(-45%) translateY(80px) rotate(8deg);
         }
 
-        .req-card:hover {
-            border-color: var(--fifa-cyan);
-            background: rgba(255, 255, 255, 0.05);
-        }
+        /* Hover States - Spread and Reveal */
+        .plate-stack:hover .plate-yellow { transform: translateX(-50%) translateY(-100px) rotate(0deg) scale(1.1); z-index: 10; }
+        .plate-stack:hover .plate-black { transform: translateX(-160%) translateY(20px) rotate(-15deg); }
+        .plate-stack:hover .plate-white { transform: translateX(60%) translateY(20px) rotate(15deg); }
 
         .wa-btn-mundial {
             background: var(--fifa-neon-green);
@@ -165,6 +216,7 @@
             gap: 1rem;
             transition: all 0.3s;
             box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+            border-radius: 5px;
         }
 
         .wa-btn-mundial:hover {
@@ -173,19 +225,11 @@
             box-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
         }
 
-        .footer-mundial {
-            background: #000;
-            padding: 4rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
         @media(max-width: 768px) {
-            .narrative-grid {
-                grid-template-columns: 1fr;
-            }
-            .mundial-hero h1 {
-                font-size: 4rem;
-            }
+            .plate-card { max-width: 320px; }
+            .plate-number { font-size: 4rem; }
+            .plate-stack:hover .plate-black { transform: translateX(-110%) translateY(20px) rotate(-10deg); }
+            .plate-stack:hover .plate-white { transform: translateX(10%) translateY(20px) rotate(10deg); }
         }
     </style>
 </head>
@@ -209,79 +253,97 @@
 
     <main>
         <section class="mundial-hero">
+            <div class="stadium-light"></div>
             <div class="container">
-                <div class="hero-tag">We Are 26 · Socio Estratégico</div>
-                <h1>Edición <span class="highlight-text">Histórica</span> Mundial 2026</h1>
-                <p>Asegura el legado de tu vehículo con las placas oficiales conmemorativas. Un trámite exclusivo para quienes viven la pasión del fútbol sin complicaciones administrativas.</p>
-                <a href="https://wa.me/525535757364?text=Hola%2C%20estoy%20interesado%20en%20las%20placas%20conmemorativas%20del%20Mundial%202026" class="wa-btn-mundial">
-                    <i class="fab fa-whatsapp"></i> Iniciar Trámite Exclusivo
-                </a>
-            </div>
-        </section>
-
-        <section class="narrative-strip">
-            <div class="container">
-                <div class="narrative-grid">
-                    <div class="narrative-content">
-                        <h3>Viste tu auto para el evento más grande del mundo</h3>
-                        <p>El Mundial 2026 es un hito para México. Portar las placas conmemorativas no es solo una cuestión estética, es formar parte de la historia. Entendemos que el tiempo es tu recurso más valioso, por ello hemos diseñado un proceso de gestión directa para que tú solo disfrutes el resultado.</p>
-                        <p>Olvídate de procesos complejos y esperas prolongadas. Nuestra red de gestoría especializada garantiza que tu vehículo luzca la esencia del 26 con total validez legal y rapidez.</p>
-                    </div>
-                    <div class="narrative-image">
-                        <img src="assets/images/placas_mundial_2026_mexico.png" alt="Auto con placas mundial" style="width:100%; border-radius:10px; box-shadow: 0 40px 80px rgba(0,0,0,0.2);">
-                    </div>
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <div class="hero-tag">We Are 26 · Socio Estratégico</div>
+                    <h1>Colección <span class="highlight-text">Oficial</span> Mundial 2026</h1>
+                    <p style="margin: 0 auto 3rem; max-width: 700px;">Réplicas digitales e impresas de las placas conmemorativas. El legado de Ciudad de México en tu vehículo.</p>
                 </div>
-            </div>
-        </section>
 
-        <section class="requisitos-mundial">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Preparado para el 2026</h2>
-                    <p>Requisitos esenciales para la obtención de tu placa conmemorativa</p>
-                </div>
-                
-                <div class="req-card">
-                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:3rem;">
-                        <div>
-                            <h4 style="color:var(--fifa-neon-green); margin-bottom:1.5rem; text-transform:uppercase; letter-spacing:1px;">Titularidad</h4>
-                            <ul class="req-list" style="color:#cbd5e1;">
-                                <li><i class="fas fa-check" style="color:var(--fifa-cyan);"></i> Identificación Oficial Vigente</li>
-                                <li><i class="fas fa-check" style="color:var(--fifa-cyan);"></i> Factura Original o Carta Factura</li>
-                                <li><i class="fas fa-check" style="color:var(--fifa-cyan);"></i> Comprobante de Domicilio</li>
-                            </ul>
+                <div class="plate-stack">
+                    <!-- PLACA BLANCA -->
+                    <div class="plate-card plate-white">
+                        <div class="plate-floral"></div>
+                        <div class="plate-badge-f">F</div>
+                        <div class="plate-body">
+                            <span class="plate-number">A00-AAA</span>
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjD3X_8_W-A6-X80I7_D0H_L0Z-Zy_H_J0U_K-L_M_N_O_P_Q_R_S_T_U_V_W_X_Y_Z/s1600/ajolote-mexico.png" class="plate-axolotl" alt="Mexi">
                         </div>
-                        <div>
-                            <h4 style="color:var(--fifa-magenta); margin-bottom:1.5rem; text-transform:uppercase; letter-spacing:1px;">Validaciones</h4>
-                            <ul class="req-list" style="color:#cbd5e1;">
-                                <li><i class="fas fa-check" style="color:var(--fifa-cyan);"></i> Trámite de Baja (Si aplica)</li>
-                                <li><i class="fas fa-check" style="color:var(--fifa-cyan);"></i> Verificación al Corriente</li>
-                                <li><i class="fas fa-check" style="color:var(--fifa-cyan);"></i> Pago de Derechos 2026</li>
-                            </ul>
+                        <div class="plate-footer" style="background: #e11d48; color: white;">
+                            09 CIUDAD DE MÉXICO
+                            <span>TRANSPORTE PRIVADO AUTOMÓVIL</span>
                         </div>
-                        <div style="display:flex; align-items:center; justify-content:center;">
-                            <div style="text-align:center;">
-                                <p style="font-size:0.9rem; margin-bottom:1rem; color:var(--fifa-cyan);">Trámite disponible en:</p>
-                                <div style="display:flex; gap:1rem; font-weight:900; font-size:1.2rem;">
-                                    <span>CDMX</span> | <span>EDOMEX</span> | <span>MOR</span>
-                                </div>
-                            </div>
+                    </div>
+
+                    <!-- PLACA NEGRA -->
+                    <div class="plate-card plate-black">
+                        <div class="plate-floral"></div>
+                        <div class="plate-badge-f">F</div>
+                        <div class="plate-body">
+                            <span class="plate-number">A00-AAA</span>
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjD3X_8_W-A6-X80I7_D0H_L0Z-Zy_H_J0U_K-L_M_N_O_P_Q_R_S_T_U_V_W_X_Y_Z/s1600/ajolote-mexico.png" class="plate-axolotl" alt="Mexi">
+                        </div>
+                        <div class="plate-footer">
+                            09 CIUDAD DE MÉXICO
+                            <span>TRANSPORTE PRIVADO AUTOMÓVIL</span>
+                        </div>
+                    </div>
+
+                    <!-- PLACA AMARILLA (TOP) -->
+                    <div class="plate-card plate-yellow">
+                        <div class="plate-floral"></div>
+                        <div class="plate-badge-f">F</div>
+                        <div class="plate-body">
+                            <span class="plate-number">A00-AAA</span>
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjD3X_8_W-A6-X80I7_D0H_L0Z-Zy_H_J0U_K-L_M_N_O_P_Q_R_S_T_U_V_W_X_Y_Z/s1600/ajolote-mexico.png" class="plate-axolotl" alt="Mexi">
+                        </div>
+                        <div class="plate-footer">
+                            09 CIUDAD DE MÉXICO
+                            <span>TRANSPORTE PRIVADO AUTOMÓVIL</span>
                         </div>
                     </div>
                 </div>
 
                 <div style="text-align:center; margin-top:5rem;">
+                    <p style="font-weight: 800; color: var(--fifa-neon-green); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 2rem;">
+                        <i class="fas fa-mouse-pointer"></i> Pasa el mouse para inspeccionar la colección
+                    </p>
                     <a href="https://wa.me/525535757364?text=Hola%2C%20estoy%20interesado%20en%20las%20placas%20conmemorativas%20del%20Mundial%202026" class="wa-btn-mundial">
-                        <i class="fab fa-whatsapp"></i> Contactar a un Experto
+                        <i class="fab fa-whatsapp"></i> Iniciar Trámite Ahora
                     </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="sec" style="background:#fff; color:#000; padding: 6rem 0;">
+            <div class="container">
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:4rem; align-items:center;">
+                    <div>
+                        <h2 style="font-size:3rem; font-weight:900; margin-bottom:1.5rem; text-transform:uppercase;">El Corazón del 2026 en tu vehículo</h2>
+                        <p style="font-size:1.2rem; line-height:1.8; color:#475569;">No solo gestionamos un trámite, aseguramos tu participación en el evento más importante de la década. Con nuestras placas conmemorativas oficiales, tu auto portará la esencia de México y la pasión del fútbol mundial.</p>
+                        <div style="margin-top:2rem; display:flex; gap:2rem;">
+                            <div style="text-align:center;">
+                                <div style="font-size:2.5rem; font-weight:900; color:var(--fifa-magenta);">100%</div>
+                                <div style="font-size:0.8rem; text-transform:uppercase; font-weight:700;">Genuino</div>
+                            </div>
+                            <div style="text-align:center;">
+                                <div style="font-size:2.5rem; font-weight:900; color:var(--fifa-neon-green);">FAST</div>
+                                <div style="font-size:0.8rem; text-transform:uppercase; font-weight:700;">Delivery</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="assets/images/placas_mundial_2026_mexico.png" alt="Auto Mundial" style="width:100%; border-radius:15px; box-shadow:0 40px 80px rgba(0,0,0,0.1);">
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="footer-mundial">
-        <div class="container" style="text-align:center;">
-            <p style="opacity:0.5; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase;">Gestor de Autos · Partner Estratégico Vial Mundial 2026</p>
+    <footer class="footer-mundial" style="background:#000; padding:4rem 0; text-align:center; border-top:1px solid rgba(255,255,255,0.1);">
+        <div class="container">
+            <p style="opacity:0.5; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase;">Gestor de Autos · Partner Estratégico 2026</p>
         </div>
     </footer>
 
