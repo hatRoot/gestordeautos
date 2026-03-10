@@ -971,9 +971,10 @@ ul {
     overflow: hidden;
     position: relative;
     margin-top: 2rem;
-    /* Fade gradients on sides for smoothness */
-    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    background: #fff; /* Fondo blanco para que los logos se vean integrados */
+    padding: 20px 0;
+    mask-image: none !important; /* Quitar difuminado de los lados */
+    -webkit-mask-image: none !important;
 }
 
 .partners-track {
@@ -985,12 +986,13 @@ ul {
 }
 
 .partners-track img {
-    height: 70px; /* Slightly larger for clarity */
+    height: 60px; /* Tamaño original */
     width: auto;
     object-fit: contain;
-    filter: none; /* No more blurring or grayscale boxes */
-    opacity: 1; /* Fully visible */
+    filter: none !important; /* Quitar blanco y negro */
+    opacity: 1 !important; /* Quitar transparencia */
     transition: none;
+    display: block;
 }
 
 .partners-track img:hover {
