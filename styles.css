@@ -540,8 +540,6 @@ ul {
     padding: 0.6rem 1.4rem;
     border-radius: 50px;
     text-decoration: none;
-    filter: grayscale(100%);
-    opacity: 0.8;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -550,8 +548,6 @@ ul {
     transform: translateY(-2px);
     border-color: rgba(255, 255, 255, 0.4);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    filter: grayscale(0%);
-    opacity: 1;
 }
 
 .pill-content {
@@ -642,27 +638,21 @@ ul {
     /* Removed mask to show full character detail */
 }
 
-/* Feature Image Grayscale */
 .features-fox {
-    filter: grayscale(30%); /* Subtle grayscale */
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .features-visual:hover .features-fox {
-    filter: grayscale(0%);
     transform: scale(1.02);
 }
 
 /* Comparison Cards */
 .card-view img {
-    filter: grayscale(100%);
-    opacity: 0.9;
     transition: all 0.5s ease;
 }
 
 .card-view:hover img {
-    filter: grayscale(0%);
-    opacity: 1;
+    transform: scale(1.02);
 }
 
 .hero-text {
@@ -1198,12 +1188,10 @@ ul {
 }
 
 .service-icon i {
-    filter: grayscale(100%);
     transition: all 0.4s ease;
 }
 
 .service-item:hover .service-icon i {
-    filter: grayscale(0%);
     transform: scale(1.1);
 }
 
@@ -1422,21 +1410,16 @@ ul {
 }
 
 .review-card img {
-    filter: grayscale(100%);
-    opacity: 0.8;
     transition: all 0.4s ease;
 }
 
 .review-stars {
-    filter: grayscale(100%);
-    opacity: 0.7;
     transition: all 0.4s ease;
 }
 
 .review-card:hover img,
 .review-card:hover .review-stars {
-    filter: grayscale(0%);
-    opacity: 1;
+    transform: scale(1.05);
 }
 
 /* Text adjustments for light background */
