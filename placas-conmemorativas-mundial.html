@@ -105,95 +105,26 @@
             box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 0 10px rgba(255,255,255,0.2);
             transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             overflow: hidden;
-            border: 4px solid #e2e8f0;
             display: flex;
             flex-direction: column;
             left: 50%;
             transform-origin: center;
         }
 
-        /* Plate Details */
-        .plate-floral {
-            height: 15%;
-            background: url('https://www.transparenttextures.com/patterns/mexican-floral.png'), linear-gradient(90deg, #ff0000, #ff8c00, #ffd700, #32cd32);
-            background-size: contain;
-            border-bottom: 2px solid rgba(0,0,0,0.1);
-        }
-
-        .plate-body {
-            flex: 1;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 20px;
-        }
-
-        .plate-number {
-            font-family: 'Oswald', sans-serif;
-            font-size: 8rem;
-            font-weight: 700;
-            letter-spacing: 5px;
-            line-height: 1;
-            text-shadow: 2px 2px 0px rgba(255,255,255,0.1), -1px -1px 0px rgba(0,0,0,0.2);
-            margin-top: 10px;
-        }
-
-        .plate-axolotl {
-            position: absolute;
-            right: 15px;
-            bottom: 10px;
-            height: 60%;
-            opacity: 0.9;
-        }
-
-        .plate-badge-f {
-            position: absolute;
-            left: 15px;
-            top: 10px;
-            font-weight: 900;
-            font-size: 2rem;
-            opacity: 0.2;
-        }
-
-        .plate-footer {
-            height: 20%;
-            background: rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            padding-bottom: 5px;
-        }
-
-        .plate-footer span {
-            font-size: 0.6rem;
-            opacity: 0.7;
-        }
+        /* Plate Details removed - using real images now */
 
         /* Plate Variants */
         .plate-yellow { 
-            background: var(--mex-yellow); 
-            color: var(--mex-black); 
             z-index: 3;
             transform: translateX(-50%) rotate(0deg);
         }
         
         .plate-black { 
-            background: var(--mex-black); 
-            color: var(--mex-white); 
             z-index: 2;
             transform: translateX(-55%) translateY(40px) rotate(-8deg);
-            border-color: #334155;
         }
         
         .plate-white { 
-            background: var(--mex-white); 
-            color: var(--mex-black); 
             z-index: 1;
             transform: translateX(-45%) translateY(80px) rotate(8deg);
         }
@@ -263,46 +194,13 @@
 
                 <div class="plate-stack">
                     <!-- PLACA BLANCA -->
-                    <div class="plate-card plate-white">
-                        <div class="plate-floral"></div>
-                        <div class="plate-badge-f">F</div>
-                        <div class="plate-body">
-                            <span class="plate-number">A00-AAA</span>
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjD3X_8_W-A6-X80I7_D0H_L0Z-Zy_H_J0U_K-L_M_N_O_P_Q_R_S_T_U_V_W_X_Y_Z/s1600/ajolote-mexico.png" class="plate-axolotl" alt="Mexi">
-                        </div>
-                        <div class="plate-footer" style="background: #e11d48; color: white;">
-                            09 CIUDAD DE MÉXICO
-                            <span>TRANSPORTE PRIVADO AUTOMÓVIL</span>
-                        </div>
-                    </div>
+                    <img src="assets/images/mundial_blanca.png" class="plate-card plate-white" alt="Placa Mundial 2026 Blanca">
 
                     <!-- PLACA NEGRA -->
-                    <div class="plate-card plate-black">
-                        <div class="plate-floral"></div>
-                        <div class="plate-badge-f">F</div>
-                        <div class="plate-body">
-                            <span class="plate-number">A00-AAA</span>
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjD3X_8_W-A6-X80I7_D0H_L0Z-Zy_H_J0U_K-L_M_N_O_P_Q_R_S_T_U_V_W_X_Y_Z/s1600/ajolote-mexico.png" class="plate-axolotl" alt="Mexi">
-                        </div>
-                        <div class="plate-footer">
-                            09 CIUDAD DE MÉXICO
-                            <span>TRANSPORTE PRIVADO AUTOMÓVIL</span>
-                        </div>
-                    </div>
+                    <img src="assets/images/mundial_negra.png" class="plate-card plate-black" alt="Placa Mundial 2026 Negra">
 
-                    <!-- PLACA AMARILLA (TOP) -->
-                    <div class="plate-card plate-yellow">
-                        <div class="plate-floral"></div>
-                        <div class="plate-badge-f">F</div>
-                        <div class="plate-body">
-                            <span class="plate-number">A00-AAA</span>
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjD3X_8_W-A6-X80I7_D0H_L0Z-Zy_H_J0U_K-L_M_N_O_P_Q_R_S_T_U_V_W_X_Y_Z/s1600/ajolote-mexico.png" class="plate-axolotl" alt="Mexi">
-                        </div>
-                        <div class="plate-footer">
-                            09 CIUDAD DE MÉXICO
-                            <span>TRANSPORTE PRIVADO AUTOMÓVIL</span>
-                        </div>
-                    </div>
+                    <!-- PLACA ORO (TOP) -->
+                    <img src="assets/images/mundial_oro.png" class="plate-card plate-yellow" alt="Placa Mundial 2026 Oro">
                 </div>
 
                 <div style="text-align:center; margin-top:5rem;">
@@ -334,7 +232,7 @@
                         </div>
                     </div>
                     <div>
-                        <img src="assets/images/placas_mundial_2026_mexico.png" alt="Auto Mundial" style="width:100%; border-radius:15px; box-shadow:0 40px 80px rgba(0,0,0,0.1);">
+                        <img src="assets/images/mundial_oro.png" alt="Auto Mundial" style="width:100%; border-radius:15px; box-shadow:0 40px 80px rgba(0,0,0,0.3);">
                     </div>
                 </div>
             </div>
