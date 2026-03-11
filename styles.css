@@ -1004,18 +1004,18 @@ ul {
 .partners-track {
     display: flex;
     width: max-content;
-    gap: 3rem;
+    gap: 1.5rem; /* Menor separación */
     animation: scroll 30s linear infinite;
-    padding: 1rem 0;
+    padding: 1.5rem 0;
 }
 
 .partners-track img {
-    height: 55px; /* Altura fija para todos */
-    width: 130px;  /* Ancho fijo para crear un "box" uniforme */
-    object-fit: contain; /* Ajusta la imagen dentro del box sin deformar */
-    margin: 0 1rem; /* Espaciado lateral uniforme */
+    height: 75px; /* Más grandes */
+    width: 160px; /* Más grandes */
+    object-fit: contain;
+    margin: 0; /* Quitamos margen para usar solo gap */
     filter: grayscale(100%);
-    opacity: 0.6;
+    opacity: 0.7;
     transition: all 0.3s ease;
 }
 
@@ -1978,11 +1978,12 @@ ul {
 
     /* Mobile Partner Scroll Adjustments */
     .partners-track {
-        gap: 2rem;
+        gap: 1rem; /* Muy juntos en móvil */
     }
 
     .partners-track img {
-        height: 40px;
+        height: 55px; /* Más grandes en móvil también */
+        width: 120px;
     }
 
     /* Footer Adjustments */
