@@ -1010,10 +1010,10 @@ ul {
 }
 
 .partners-track img {
-    height: 45px;
-    width: auto;
-    object-fit: contain;
-    margin: 0;
+    height: 55px; /* Altura fija para todos */
+    width: 130px;  /* Ancho fijo para crear un "box" uniforme */
+    object-fit: contain; /* Ajusta la imagen dentro del box sin deformar */
+    margin: 0 1rem; /* Espaciado lateral uniforme */
     filter: grayscale(100%);
     opacity: 0.6;
     transition: all 0.3s ease;
