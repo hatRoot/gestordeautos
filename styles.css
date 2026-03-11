@@ -4082,7 +4082,7 @@ ul {
 .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Doble de rápido (era 0.8s) */
     will-change: transform, opacity;
 }
 
@@ -4097,28 +4097,28 @@ ul {
 }
 
 #morelos-especial .apple-line-1 {
-    transition-delay: 0.15s;
+    transition-delay: 0.08s;
 }
 
 #morelos-especial .apple-line-2 {
-    transition-delay: 0.3s;
+    transition-delay: 0.15s;
 }
 
 #morelos-especial .apple-line-3 {
-    transition-delay: 0.45s;
+    transition-delay: 0.22s;
 }
 
 #morelos-especial .apple-line-4 {
-    transition-delay: 0.6s;
+    transition-delay: 0.3s;
 }
 
 /* Grid and Wrapper Reveal delays */
 #morelos-especial .morelos-cards-grid.reveal {
-    transition-delay: 0.75s;
+    transition-delay: 0.38s;
 }
 
 #morelos-especial .comparison-wrapper.reveal {
-    transition-delay: 0.9s;
+    transition-delay: 0.45s;
 }
 
 /* Morelos Premium Cards & Buttons */
