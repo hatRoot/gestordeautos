@@ -1004,25 +1004,44 @@ ul {
 .partners-track {
     display: flex;
     width: max-content;
-    gap: 1.5rem; /* Menor separación */
+    gap: 1rem; /* Base gap */
     animation: scroll 30s linear infinite;
     padding: 1.5rem 0;
 }
 
 .partners-track img {
-    height: 75px; /* Más grandes */
-    width: 160px; /* Más grandes */
+    height: 50px; /* Base for small screens */
+    width: auto;
     object-fit: contain;
-    margin: 0; /* Quitamos margen para usar solo gap */
     filter: grayscale(100%);
     opacity: 0.7;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Individual tuning for visual weight (Mobile Default) */
+.logo-cdmx { height: 50px; }
+.logo-edomex { height: 60px; }
+.logo-morelos { height: 55px; }
+.logo-guerrero { height: 45px; }
+.logo-michoacan { height: 50px; }
+.logo-oaxaca { height: 45px; }
+
+/* Desktop Upscaling & Specific Balance */
+@media (min-width: 769px) {
+    .partners-track { gap: 2.5rem; }
+    .partners-track img { height: 70px; }
+    .logo-cdmx { height: 75px !important; }
+    .logo-edomex { height: 110px !important; } /* Major boost */
+    .logo-morelos { height: 95px !important; }
+    .logo-guerrero { height: 65px !important; }
+    .logo-michoacan { height: 75px !important; }
+    .logo-oaxaca { height: 70px !important; }
 }
 
 .partners-track img:hover {
     filter: grayscale(0%);
     opacity: 1;
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 @keyframes scroll {
@@ -1976,14 +1995,9 @@ ul {
         padding: 3rem 0;
     }
 
-    /* Mobile Partner Scroll Adjustments */
+    /* Mobile Partner Scroll Adjustments are now handled above by mobile-first styles */
     .partners-track {
-        gap: 1rem; /* Muy juntos en móvil */
-    }
-
-    .partners-track img {
-        height: 55px; /* Más grandes en móvil también */
-        width: 120px;
+        padding: 1rem 0;
     }
 
     /* Footer Adjustments */
