@@ -4449,3 +4449,58 @@ details.seo-details[open] .seo-toggle-icon {
         -webkit-backdrop-filter: blur(4px) !important;
     }
 }
+
+/* =========================================
+   iPhone & Mobile UI/UX Global Enhancements
+   ========================================= */
+@media screen and (max-width: 768px) {
+    /* Prevent horizontal scrolling & set exact width */
+    html, body {
+        width: 100vw;
+        max-width: 100%;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch;
+        -webkit-text-size-adjust: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Dynamic Viewport for iOS Safari Bottom Bar */
+    @supports (height: 100dvh) {
+        .hero, 
+        .mobile-overlay,
+        body {
+            min-height: 100dvh !important;
+        }
+    }
+
+    /* Prevent Safari Auto-Zoom on Inputs & Forms */
+    input, select, textarea, button {
+        font-size: 16px !important;
+        max-width: 100%;
+    }
+
+    /* Guarantee no elements bleed outside the window width */
+    img, video, iframe, canvas, table, div, section, footer {
+        max-width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    /* Force text to break if it overflows (URLs, emails) */
+    h1, h2, h3, h4, p, a, span {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    /* Safe Area Padding for iPhone Notches */
+    .container, section, header, footer {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+    }
+
+    /* Better Tap Targets */
+    .btn, a, button {
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+}
