@@ -291,16 +291,30 @@ document.addEventListener('DOMContentLoaded', () => {
             return start + (end - start) * factor;
         }
 
-        function updateCoverFlow() {
-            targetScroll = track.scrollLeft;
+        // Initialize and only run if scrolled or in view
+        let isTrackInView = false;
+        const visibilityObserver = new IntersectionObserver((entries) => {
+            isTrackInView = entries[0].isIntersecting;
+        }, { threshold: 0.05 });
+        visibilityObserver.observe(track);
 
-            // Only update positions if we haven't reached the target or the track is being scrolled
-            const diff = targetScroll - currentScroll;
-            if (Math.abs(diff) > 0.1) {
-                currentScroll = lerp(currentScroll, targetScroll, lerpFactor);
-            } else {
-                currentScroll = targetScroll;
+        function updateCoverFlow() {
+            if (!isTrackInView) {
+                window.requestAnimationFrame(updateCoverFlow);
+                return;
             }
+
+            targetScroll = track.scrollLeft;
+            const diff = targetScroll - currentScroll;
+
+            // Only recalculate if there's significant movement to save CPU
+            if (Math.abs(diff) < 0.1) {
+                currentScroll = targetScroll;
+                window.requestAnimationFrame(updateCoverFlow);
+                return;
+            }
+
+            currentScroll = lerp(currentScroll, targetScroll, lerpFactor);
 
             const trackWidth = track.offsetWidth;
             const center = currentScroll + (trackWidth / 2);
@@ -309,16 +323,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const card = cardData[i];
                 const distance = Math.abs(center - card.offsetCenter);
                 const maxDistance = 500;
-
-                // Reset and Depth
                 const element = card.element;
-                element.style.zIndex = Math.round(1000 - distance);
 
+                element.style.zIndex = Math.round(1000 - distance);
                 let normDist = Math.min(1, distance / maxDistance);
 
                 if (distance < 50) {
                     element.style.transform = `scale(1.15) translateZ(100px) rotateY(0deg)`;
-                    element.style.opacity = 1;
+                    element.style.opacity = "1";
                 } else {
                     const scale = 1.15 - (normDist * 0.35);
                     const rotRaw = normDist * 45;
@@ -326,13 +338,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     const direction = card.offsetCenter < center ? 1 : -1;
 
                     element.style.transform = `scale(${scale}) translateZ(${depth}px) rotateY(${direction * rotRaw}deg)`;
-                    element.style.opacity = 0.4 + (1 - normDist) * 0.6;
+                    element.style.opacity = (0.4 + (1 - normDist) * 0.6).toString();
                 }
             }
             window.requestAnimationFrame(updateCoverFlow);
         }
-
-        // Use a simpler trigger for the animation
         window.requestAnimationFrame(updateCoverFlow);
     }
 
