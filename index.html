@@ -24,7 +24,7 @@
     <link rel="canonical" href="https://gestordeautos.com.mx/">
     <meta name="robots" content="index, follow, max-image-preview:large">
 
-    <!-- Geo Tags for Local SEO (EdoMex, CDMX & Morelos) -->
+    <!-- Geo Tags for Local SEO -->
     <meta name="geo.region" content="MX-MEX">
     <meta name="geo.placename" content="Estado de México, Ciudad de México, Morelos">
     <meta name="geo.position" content="19.4326;-99.1332">
@@ -33,7 +33,6 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="48x48" href="assets/images/logo.jpg">
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/logo.jpg">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/logo.jpg">
     <link rel="shortcut icon" href="assets/images/logo.jpg">
     <meta name="theme-color" content="#2563eb">
@@ -54,10 +53,11 @@
         content="¿Necesitas placas, licencia o reemplacamiento en EdoMex o CDMX? ✅ Tramitamos todo por ti sin filas, sin estrés. +5,000 trámites exitosos. ¡Respuesta en minutos por WhatsApp!">
     <meta property="twitter:image" content="https://gestordeautos.com.mx/assets/images/logo.jpg">
 
+    <!-- Preload: imagen hero CORRECTA (hero-coyote, no hero-moto que no existe) -->
     <link rel="preload" as="image" href="assets/images/logo.jpg" fetchpriority="high">
-    <link rel="preload" as="image" href="assets/images/hero-moto.png" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/hero-coyote.png" fetchpriority="high">
 
-    <!-- JSON-LD Structured Data -->
+    <!-- JSON-LD: UN SOLO bloque consolidado (antes eran 4 scripts separados) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -66,24 +66,18 @@
           "@type": "WebSite",
           "@id": "https://gestordeautos.com.mx/#website",
           "name": "Gestor de Autos",
-          "alternateName": ["Gestoría Vehicular Online CDMX, EdoMex y Morelos", "Placas y Licencias en Línea", "Gestor de Trámites Vehiculares"],
           "url": "https://gestordeautos.com.mx",
-          "publisher": { "@id": "https://gestordeautos.com.mx/#organization" },
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://gestordeautos.com.mx/?s={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
+          "publisher": { "@id": "https://gestordeautos.com.mx/#organization" }
         },
         {
           "@type": "LocalBusiness",
           "@id": "https://gestordeautos.com.mx/#organization",
-          "name": "Gestor de Autos - Gestoría Vehicular #1 y Gestor Vehicular EdoMex, CDMX y Morelos",
+          "name": "Gestor de Autos - Gestoría Vehicular EdoMex, CDMX y Morelos",
           "image": "https://gestordeautos.com.mx/assets/images/logo.jpg",
           "logo": "https://gestordeautos.com.mx/assets/images/logo.jpg",
           "telephone": "+525535757364",
           "url": "https://gestordeautos.com.mx",
-          "description": "Líder en Gestoría Vehicular y Gestor Vehicular en CDMX, Estado de México y Morelos. Expertos en alta de placas, reemplacamiento y cambio de propietario con servicio seguro y garantizado.",
+          "description": "Líder en Gestoría Vehicular en CDMX, Estado de México y Morelos. +5,000 trámites exitosos. 100% online, sin filas.",
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "Servicio Digital y Domicilio",
@@ -92,29 +86,20 @@
             "postalCode": "52760",
             "addressCountry": "MX"
           },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 19.3592,
-            "longitude": -99.3582
-          },
+          "geo": { "@type": "GeoCoordinates", "latitude": 19.3592, "longitude": -99.3582 },
           "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
             "opens": "09:00",
             "closes": "20:00"
           },
           "contactPoint": [
-            { "@type": "ContactPoint", "telephone": "+525535757364", "contactType": "sales", "availableLanguage": ["es", "en"] }
-
+            { "@type": "ContactPoint", "telephone": "+525535757364", "contactType": "sales", "availableLanguage": ["es","en"] }
           ],
-          "sameAs": ["https://wa.me/525535757364?text=Hola%2C%20me%20urge%20un%20tr%C3%A1mite%20vehicular%2C%20%C2%BFme%20ayudas%20hoy%3F"],
+          "sameAs": ["https://wa.me/525535757364"],
           "areaServed": [
-            "Ciudad de México", "Estado de México", "CDMX", "Edomex", "Morelos", "Huixquilucan", "Interlomas", 
-            "Chalco", "Ixtapaluca", "Tlalnepantla", "Ecatepec", "Chapa de Mota",
-            "Texcoco", "Chimalhuacán", "Valle de Chalco", "La Paz", "Coacalco", "Cuautitlán Izcalli",
-            "Naucalpan de Juárez", "Atizapán de Zaragoza", "Metepec", "Toluca", "Cuernavaca", "Pachuca",
-            "Benito Juárez", "Miguel Hidalgo", "Coyoacán", "Cuauhtémoc", "Tlalpan",
-            "Santa Fe", "Polanco", "Condesa", "Roma Norte", "Lomas de Chapultepec", "Satélite", "Echegaray", "Lindavista"
+            "Ciudad de México","Estado de México","CDMX","Edomex","Morelos","Huixquilucan","Interlomas",
+            "Chalco","Ixtapaluca","Tlalnepantla","Ecatepec","Texcoco","Naucalpan de Juárez","Toluca","Cuernavaca"
           ],
           "priceRange": "$$",
           "aggregateRating": {
