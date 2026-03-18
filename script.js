@@ -360,8 +360,8 @@ document.addEventListener('DOMContentLoaded', () => {
             header_slogan: "Trámites 100% Genuinos",
 
             // Hero
-            hero_title_main: "Gestoría Vehicular en Estado de México y CDMX",
-            hero_title_sub: "Chalco · Ixtapaluca · Huixquilucan · Interlomas",
+            hero_title_main: "Gestoría Vehicular EdoMex ✅ | GESTOR DE PLACAS 2026",
+            hero_title_sub: "Especialistas en Reemplacamiento y Trámites en el Estado de México",
             hero_desc_bold: "¿Moto o Auto nuevos?",
             hero_desc_text: "Somos expertos en alta de placas, licencias, legalización y cambios de propietario en EdoMex, CDMX y todo México. ¡Trámites 100% online!",
             btn_view_services: "Ver Servicios",
