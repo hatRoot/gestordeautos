@@ -736,6 +736,49 @@
     </footer>
     <script src="script.js" defer></script>
     <script>window.addEventListener('scroll', () => { const h = document.querySelector('.header'); if (h) h.classList.toggle('scrolled', window.scrollY > 50); });</script>
+    <!-- Golden Ticket (Boleto Dorado) Modal -->
+    <div id="goldenTicketModal" class="golden-modal hidden">
+        <div class="golden-overlay"></div>
+        <div class="ticket-container">
+            <div class="ticket">
+                <!-- Close Button (X) -->
+                <button id="closeTicket" class="ticket-close-x" aria-label="Cerrar">&times;</button>
+
+                <div class="ticket-header">
+                    <span class="ticket-star">★</span>
+                    <span class="ticket-title">BOLETO DORADO</span>
+                    <span class="ticket-star">★</span>
+                    <span style="display:none">v3.0</span>
+                </div>
+
+                <div class="ticket-step">
+                    <div class="ticket-body">
+                        <h3>¡COTIZA TU TRÁMITE!</h3>
+                        <p>Mándanos un WhatsApp para tu cotización. Escribe tu nombre y envía este folio (o toma captura):</p>
+
+                        <div class="folio-box">
+                            <span class="folio-label">TU CÓDIGO ÚNICO:</span>
+                            <span id="ticketFolio" class="folio-number">...</span>
+                        </div>
+
+                        <label for="referralSource" class="ticket-label">¿Cómo nos conociste?</label>
+                        <select id="referralSource" class="ticket-select">
+                            <option value="G">GOOGLE MAPS / INTERNET</option>
+                            <option value="E">RECOMENDACIÓN DE ERIKA</option>
+                            <option value="O">RECOMENDACIÓN DE OSO</option>
+                        </select>
+
+                        <input type="text" id="ticketVisitorName" class="ticket-input" placeholder="Escribe tu nombre aquí..." maxlength="40">
+                    </div>
+                    <div class="ticket-footer">
+                        <a href="#" id="claimTicketBtn" class="btn-claim">
+                            <i class="fab fa-whatsapp"></i> ENVIAR POR WHATSAPP
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

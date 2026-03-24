@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             sessionStorage.setItem('ticketClaimed', 'true');
 
-            const finalMsg = "Hola, me urge un trámite vehicular, ¿me ayudas hoy?";
+            const finalMsg = `Hola, soy ${userName}. Mi folio es ${currentFolio}. Me urge un trámite vehicular, ¿me ayudas hoy?`;
             const waUrl = `https://wa.me/525535757364?text=${encodeURIComponent(finalMsg)}`;
 
             window.open(waUrl, '_blank');
