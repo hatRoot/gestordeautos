@@ -354,24 +354,12 @@
 
             <div class="header-contacts">
                 <div class="header-btns">
-                    <button id="openNavTicket" class="nav-ticket-btn">
-                        <i class="fas fa-ticket-alt"></i> BOLETO DORADO
-                    </button>
                     <a href="https://wa.me/525535757364?text=Hola%2C%20me%20urge%20un%20tr%C3%A1mite%20vehicular%2C%20%C2%BFme%20ayudas%20hoy%3F"
                         class="btn btn-whatsapp header-btn primary-tel" target="_blank">
                         <i class="fab fa-whatsapp"></i>
                         <span class="btn-text">
-                            <span class="text-default">COTIZACIONES 1</span>
-                            <span class="text-hover">DURAN</span>
-                        </span>
-                    </a>
-                    <a href="https://wa.me/525522917267?text=Hola%2C%20me%20urge%20un%20tr%C3%A1mite%20vehicular%2C%20%C2%BFme%20ayudas%20hoy%3F"
-                        class="btn btn-whatsapp header-btn erika-tel" target="_blank"
-                        style="background: linear-gradient(135deg, #25d366, #128c7e);">
-                        <i class="fab fa-whatsapp"></i>
-                        <span class="btn-text">
-                            <span class="text-default">COTIZACIONES 2</span>
-                            <span class="text-hover">ERIKA</span>
+                            <span class="text-default">COTIZAR AHORA</span>
+                            <span class="text-hover">WHATSAPP</span>
                         </span>
                     </a>
                 </div>
@@ -394,17 +382,9 @@
             <a href="#servicios" class="overlay-link overlay-link-js" data-i18n="nav_services">Servicios</a>
             <a href="#contacto" class="overlay-link overlay-link-js" data-i18n="nav_contact">Contacto</a>
             <hr class="overlay-divider">
-            <button id="openNavTicketOverlay" class="nav-ticket-btn overlay-btn">
-                <i class="fas fa-ticket-alt"></i> BOLETO DORADO
-            </button>
             <a href="https://wa.me/525535757364?text=Hola%2C%20me%20urge%20un%20tr%C3%A1mite%20vehicular%2C%20%C2%BFme%20ayudas%20hoy%3F"
                 class="btn btn-whatsapp overlay-btn" target="_blank">
-                <i class="fab fa-whatsapp"></i> COTIZACIONES 1
-            </a>
-            <a href="https://wa.me/525522917267?text=Hola%2C%20me%20urge%20un%20tr%C3%A1mite%20vehicular%2C%20%C2%BFme%20ayudas%20hoy%3F"
-                class="btn btn-whatsapp overlay-btn" target="_blank"
-                style="background: linear-gradient(135deg, #25d366, #128c7e);">
-                <i class="fab fa-whatsapp"></i> COTIZACIONES 2
+                <i class="fab fa-whatsapp"></i> COTIZAR POR WHATSAPP
             </a>
             <hr class="overlay-divider">
             <button id="langToggleOverlay" class="lang-btn"
@@ -440,11 +420,12 @@
                     </p>
                     <div class="hero-buttons">
                         <a href="https://wa.me/525535757364?text=Hola%2C%20me%20urge%20un%20tr%C3%A1mite%20vehicular%2C%20%C2%BFme%20ayudas%20hoy%3F"
-                            class="btn btn-whatsapp" target="_blank" aria-label="Cotizar trámite por WhatsApp">
+                            class="btn btn-primary" target="_blank" aria-label="Cotizar trámite por WhatsApp"
+                            style="background: linear-gradient(135deg, #1e40af, #1e3a8a);">
                             <i class="fab fa-whatsapp"></i> ¡Tramitar Online Ahora!
                         </a>
-                        <a href="#servicios" class="btn btn-primary"
-                            style="background-color: transparent; border: 2px solid white;"
+                        <a href="#servicios" class="btn btn-secondary"
+                            style="background-color: transparent; border: 2px solid white; color: white;"
                             data-i18n="btn_view_services">
                             Ver Servicios
                         </a>
@@ -2328,49 +2309,30 @@
 
 
     <!-- ============================================================ -->
-    <!-- BOTÓN FLOTANTE WHATSAPP (SIEMPRE VISIBLE) -->
+    <!-- BOTÓN FLOTANTE WHATSAPP (SIMPLIFICADO - SOLO MÓVIL) -->
     <!-- ============================================================ -->
     <div id="floatingWA" style="
         position: fixed;
         bottom: 24px;
-        right: 20px;
-        z-index: 9990;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 10px;
+        right: 24px;
+        z-index: 9999;
+        display: none; /* Solo visible en móvil */
     ">
-        <!-- Burbuja de texto -->
-        <div id="waBubble" style="
-            background: #fff;
-            color: #1e293b;
-            font-size: 0.82rem;
-            font-weight: 700;
-            padding: 8px 14px;
-            border-radius: 20px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-            border: 2px solid #25d366;
-            white-space: nowrap;
-            animation: waBubbleIn 0.5s ease 2s both, waBubbleFade 0.5s ease 8s forwards;
-        ">💬 ¡Cotiza tu trámite ahora!</div>
-
-        <!-- Botón principal -->
         <a href="https://wa.me/525535757364?text=Hola%2C%20me%20urge%20un%20tr%C3%A1mite%20vehicular%2C%20%C2%BFme%20ayudas%20hoy%3F"
            target="_blank"
            aria-label="Cotizar por WhatsApp"
            style="
-               width: 62px;
-               height: 62px;
+               width: 56px;
+               height: 56px;
                background: linear-gradient(135deg, #25d366, #128c7e);
                border-radius: 50%;
                display: flex;
                align-items: center;
                justify-content: center;
-               box-shadow: 0 6px 24px rgba(37,211,102,0.55);
+               box-shadow: 0 4px 12px rgba(37,211,102,0.4);
                text-decoration: none;
-               animation: waPulse 2.2s ease-in-out infinite;
            ">
-            <i class="fab fa-whatsapp" style="color:white; font-size:32px;"></i>
+            <i class="fab fa-whatsapp" style="color:white; font-size:24px;"></i>
         </a>
     </div>
 
@@ -2408,20 +2370,9 @@
     </div>
 
     <style>
-        @keyframes waPulse {
-            0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,0.55); transform: scale(1); }
-            50%       { box-shadow: 0 6px 36px rgba(37,211,102,0.85); transform: scale(1.08); }
-        }
-        @keyframes waBubbleIn {
-            from { opacity: 0; transform: translateX(20px); }
-            to   { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes waBubbleFade {
-            to { opacity: 0; pointer-events: none; }
-        }
         @media (max-width: 768px) {
             #mobileCallBar { display: block !important; }
-            #floatingWA    { bottom: 82px; }
+            #floatingWA { display: block !important; }
             body           { padding-bottom: 54px; }
         }
     </style>
