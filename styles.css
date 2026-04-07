@@ -982,7 +982,7 @@ ul {
     /* Tripled from 1.1rem */
 }
 
-/* Infinite Partner Scroll */
+/* Infinite Partner Scroll - OPTIMIZED */
 .partners-slider {
     width: 100%;
     overflow: hidden;
@@ -994,38 +994,57 @@ ul {
 .partners-track {
     display: flex;
     width: max-content;
-    gap: 1rem; /* Base gap */
-    animation: scroll 30s linear infinite;
+    gap: 2rem;
+    animation: scroll 15s linear infinite;
     padding: 1.5rem 0;
+    will-change: transform;
+}
+
+.partners-track:hover {
+    animation-play-state: paused;
 }
 
 .partners-track img {
-    height: 50px; /* Base for small screens */
+    height: 60px;
     width: auto;
+    max-width: 140px;
     object-fit: contain;
+    flex-shrink: 0;
     filter: grayscale(100%);
     opacity: 0.7;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Individual tuning for visual weight (Mobile Default) */
-.logo-cdmx { height: 50px; }
-.logo-edomex { height: 60px; }
-.logo-morelos { height: 55px; }
-.logo-guerrero { height: 45px; }
-.logo-michoacan { height: 50px; }
-.logo-oaxaca { height: 45px; }
+/* Unified proportions for all logos - consistent sizing */
+.logo-cdmx { height: 65px !important; }
+.logo-edomex { height: 75px !important; }
+.logo-morelos { height: 70px !important; }
+.logo-guerrero { height: 55px !important; }
+.logo-michoacan { height: 60px !important; }
+.logo-oaxaca { height: 58px !important; }
 
-/* Desktop Upscaling & Specific Balance */
+/* Desktop - slightly larger but proportional */
 @media (min-width: 769px) {
-    .partners-track { gap: 2.5rem; }
-    .partners-track img { height: 70px; }
+    .partners-track { gap: 3rem; }
+    .partners-track img { max-width: 160px; }
     .logo-cdmx { height: 75px !important; }
-    .logo-edomex { height: 110px !important; } /* Major boost */
-    .logo-morelos { height: 95px !important; }
+    .logo-edomex { height: 90px !important; }
+    .logo-morelos { height: 80px !important; }
     .logo-guerrero { height: 65px !important; }
-    .logo-michoacan { height: 75px !important; }
-    .logo-oaxaca { height: 70px !important; }
+    .logo-michoacan { height: 70px !important; }
+    .logo-oaxaca { height: 68px !important; }
+}
+
+/* Mobile - smaller gap, faster feel */
+@media (max-width: 768px) {
+    .partners-track { gap: 1.5rem; animation: scroll 12s linear infinite; }
+    .partners-track img { height: 50px; max-width: 120px; }
+    .logo-cdmx { height: 55px !important; }
+    .logo-edomex { height: 65px !important; }
+    .logo-morelos { height: 60px !important; }
+    .logo-guerrero { height: 48px !important; }
+    .logo-michoacan { height: 52px !important; }
+    .logo-oaxaca { height: 50px !important; }
 }
 
 .partners-track img:hover {
@@ -1038,7 +1057,6 @@ ul {
     0% {
         transform: translateX(0);
     }
-
     100% {
         transform: translateX(-50%);
         /* Moves exactly half the track (one full set) */
