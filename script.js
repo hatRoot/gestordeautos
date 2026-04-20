@@ -373,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Services
             services_title: "Nuestros Servicios",
-            services_subtitle: "Gestión especializada en CDMX, Estado de México, Morelos, Guerrero, Michoacán y Oaxaca.",
+            services_subtitle: "Gestión especializada en CDMX, Estado de México, Guerrero, Michoacán y Oaxaca.",
 
             // Tabs
             tab_control: "Placas & Trámites",
@@ -413,7 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Services
             services_title: "Our Services",
-            services_subtitle: "Specialized management in CDMX, State of Mexico, Morelos, Guerrero, Michoacán, and Oaxaca.",
+            services_subtitle: "Specialized management in CDMX, State of Mexico, Guerrero, Michoacán, and Oaxaca.",
 
             // Tabs
             tab_control: "Plates & Procedures",
@@ -473,18 +473,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // 8. Dynamic Content Rotation (SEO Freshness)
     // ==========================================
     const activityDataPool = [
-        { type: "Refrendo Morelos 2026", loc: "Huixquilucan / Interlomas", status: "Entregado", time: "11:45 AM", desc: "Gestión digital exitosa por WhatsApp." },
+        { type: "Permiso Provisional 30 días", loc: "Huixquilucan / Interlomas", status: "Entregado", time: "11:45 AM", desc: "Gestión diaria masiva de permisos de circulación." },
         { type: "Alta de Placas EdoMex 2026", loc: "Chalco", status: "Finalizado", time: "09:15 AM", desc: "Emplacamiento de vehículo nuevo sin filas." },
-        { type: "Licencia Permanente CDMX", loc: "Tlalnepantla", status: "Verificado", time: "04:30 PM", desc: "Asesoría integral y trámite garantizado." },
+        { type: "Licencia Permanente CDMX", loc: "Tlalnepantla", status: "Verificado", time: "04:30 PM", desc: "Resultado exitoso en 3 horas para cliente local." },
         { type: "Baja de Placas EdoMex", loc: "Ecatepec", status: "Completado", time: "10:20 AM", desc: "Cese de obligaciones vehiculares rápido." },
-        { type: "Cambio de Propietario", loc: "Naucalpan", status: "Entregado", time: "01:15 PM", desc: "Actualización de titularidad sin complicaciones." },
+        { type: "Cambio de Propietario", loc: "Naucalpan", status: "Entregado", time: "01:15 PM", desc: "Actualización de titularidad (refactura) en 6 horas." },
         { type: "Permiso Provisional 30 días", loc: "Ixtapaluca", status: "Finalizado", time: "12:00 PM", desc: "Permiso oficial para circular sin placas." },
-        { type: "Refrendo Morelos Online", loc: "Cuautitlán Izcalli", status: "Entregado", time: "08:45 AM", desc: "Pago de derechos procesado en línea." },
+        { type: "Alta de Placas EdoMex", loc: "Satélite", status: "Entregado", time: "08:45 AM", desc: "Gestión exprés de placas nuevas EdoMex." },
         { type: "Reposición de Tarjeta", loc: "Atizapán", status: "Verificado", time: "02:30 PM", desc: "Recuperación de circulación por extravío." },
         { type: "Regularización REPUVE", loc: "Chalco", status: "Completado", time: "03:50 PM", desc: "Inscripción certificada en el sistema federal." },
-        { type: "Alta de Placas CDMX", loc: "Interlomas", status: "Finalizado", time: "11:10 AM", desc: "Emplacamiento de lujo a domicilio." },
-        { type: "Licencia Tipo B", loc: "Nezahualcóyotl", status: "Entregado", time: "09:55 AM", desc: "Trámite de licencia de carga agilizado." },
-        { type: "Refrendo 2026", loc: "Chimalhuacán", status: "Finalizado", time: "10:15 AM", desc: "Pago anual de tenencia sin recargos." }
+        { type: "Alta de Placas EdoMex", loc: "Interlomas", status: "Finalizado", time: "11:10 AM", desc: "Emplacamiento de lujo a domicilio." },
+        { type: "Refrendo EdoMex 2026", loc: "Chimalhuacán", status: "Finalizado", time: "10:15 AM", desc: "Pago anual de tenencia sin recargos." }
     ];
 
     function getSeededRandom(seed) {
@@ -596,7 +595,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (document.querySelector('.sticky-whatsapp')) return;
 
         const stickyBtn = document.createElement('a');
-        stickyBtn.href = "https://wa.me/525535757364?text=Hola%2C%20me%20urge%20un%20tr%C3%A1mite%20vehicular%2C%20%C2%BFme%20ayudas%20hoy%3F";
+        stickyBtn.href = "https://wa.me/525535757364?text=Hola%2C%20necesito%20informes%20sobre%20permisos%20de%20circulaci%C3%B3n%20y%20placas%20EdoMex";
         stickyBtn.className = "sticky-whatsapp";
         stickyBtn.target = "_blank";
         stickyBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Cotizar Ahora';
