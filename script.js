@@ -554,7 +554,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Identify which button was clicked for clearer analytics
             let label = 'generic_whatsapp';
             if (link.classList.contains('primary-tel')) label = 'header_duran';
-            if (link.classList.contains('erika-tel')) label = 'header_erika';
             if (link.closest('.hero')) label = 'hero_cta';
             if (link.closest('.service-card') || link.closest('.service-card-edomex')) label = 'service_card';
             if (link.closest('.sticky-whatsapp')) label = 'sticky_mobile';
