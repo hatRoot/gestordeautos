@@ -614,4 +614,57 @@ document.addEventListener('DOMContentLoaded', () => {
     injectStickyBtn();
     // Re-check on resize
     window.addEventListener('resize', injectStickyBtn);
+
+    // ==========================================================================
+    // MINI HERO SLIDER AUTOMATION
+    // ==========================================================================
+    const miniSlider = document.querySelector('.mini-hero-slider');
+    if (miniSlider) {
+        const miniSlides = miniSlider.querySelectorAll('.mini-slide');
+        const miniDots = miniSlider.querySelectorAll('.mini-dot');
+        let currentMiniSlide = 0;
+        let miniInterval = null;
+
+        function goToMiniSlide(index) {
+            miniSlides[currentMiniSlide].classList.remove('active');
+            miniDots[currentMiniSlide].classList.remove('active');
+            miniDots[currentMiniSlide].setAttribute('aria-selected', 'false');
+
+            currentMiniSlide = (index + miniSlides.length) % miniSlides.length;
+
+            miniSlides[currentMiniSlide].classList.add('active');
+            miniDots[currentMiniSlide].classList.add('active');
+            miniDots[currentMiniSlide].setAttribute('aria-selected', 'true');
+        }
+
+        function nextMiniSlide() {
+            goToMiniSlide(currentMiniSlide + 1);
+        }
+
+        function startMiniAuto() {
+            if (!miniInterval) {
+                miniInterval = setInterval(nextMiniSlide, 5000);
+            }
+        }
+
+        function stopMiniAuto() {
+            if (miniInterval) {
+                clearInterval(miniInterval);
+                miniInterval = null;
+            }
+        }
+
+        miniDots.forEach((dot, idx) => {
+            dot.addEventListener('click', () => {
+                goToMiniSlide(idx);
+                stopMiniAuto();
+                startMiniAuto();
+            });
+        });
+
+        miniSlider.addEventListener('mouseenter', stopMiniAuto);
+        miniSlider.addEventListener('mouseleave', startMiniAuto);
+
+        startMiniAuto();
+    }
 });
