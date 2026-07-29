@@ -5486,3 +5486,242 @@ details.seo-details[open] .seo-toggle-icon {
     box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
     background: linear-gradient(135deg, #34d399, #10b981);
 }
+
+/* ==========================================================================
+   APPLE HIG MOBILE AUDIT & RESPONSIVE POLISH (WORLD-CLASS MOBILE UX)
+   ========================================================================== */
+
+/* 1. Global Viewport & Horizontal Overflow Lock */
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden !important;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+main {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* 2. Tablet & Mobile Responsive Adjustments (<= 768px) */
+@media (max-width: 768px) {
+
+    /* Header Navbar Mobile Optimization */
+    .header {
+        padding: 0.5rem 0 !important;
+        backdrop-filter: blur(16px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+        background-color: rgba(15, 23, 42, 0.85) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .header .container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .logo-img {
+        max-height: 38px !important;
+    }
+
+    .site-title {
+        font-size: 1.1rem !important;
+    }
+
+    .header-slogan {
+        font-size: 0.65rem !important;
+    }
+
+    /* Split Promo Top Section Mobile */
+    .split-promo-section {
+        padding-top: 85px !important;
+        padding-bottom: 2rem !important;
+    }
+
+    .split-promo-container {
+        grid-template-columns: 1fr !important;
+        gap: 1.75rem !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .promo-main-title {
+        font-size: 1.6rem !important;
+        line-height: 1.18 !important;
+        margin-bottom: 0.4rem !important;
+    }
+
+    .promo-subtitle {
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+        margin-bottom: 1rem !important;
+    }
+
+    /* Pillars Grid on Mobile */
+    .promo-pillars {
+        grid-template-columns: 1fr !important;
+        gap: 0.6rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .pillar-item {
+        padding: 0.65rem 0.75rem !important;
+        border-radius: 10px !important;
+    }
+
+    /* 4-Step Workflow Box on Mobile */
+    .promo-workflow-box {
+        padding: 0.8rem 0.9rem !important;
+        border-radius: 10px !important;
+    }
+
+    .workflow-steps {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.5rem !important;
+    }
+
+    .wf-step {
+        background: rgba(255, 255, 255, 0.03);
+        padding: 0.4rem 0.5rem;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .wf-label {
+        font-size: 0.7rem !important;
+    }
+
+    /* Mini Carousel Mobile Sizing */
+    .mini-hero-slider {
+        height: 250px !important;
+        border-radius: 14px !important;
+    }
+
+    .mini-slide-caption {
+        padding: 0.9rem !important;
+    }
+
+    .mini-title {
+        font-size: 1.25rem !important;
+        line-height: 1.15 !important;
+    }
+
+    .mini-desc {
+        font-size: 0.75rem !important;
+        margin-bottom: 0.6rem !important;
+    }
+
+    .mini-btn-gold {
+        font-size: 0.75rem !important;
+        padding: 0.4rem 0.9rem !important;
+        min-height: 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mini-arrow {
+        width: 34px !important;
+        height: 34px !important;
+        font-size: 0.75rem !important;
+    }
+
+    /* Hero Main Section Mobile */
+    .hero {
+        padding-top: 2rem !important;
+        padding-bottom: 2.5rem !important;
+    }
+
+    .hero h1 span[data-i18n="hero_title_main"] {
+        font-size: 1.75rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .hero h1 span[data-i18n="hero_title_sub"] {
+        font-size: 0.78rem !important;
+    }
+
+    /* Callout Banner Mobile */
+    .hero-econ-callout {
+        padding: 0.75rem 0.9rem !important;
+        gap: 0.75rem !important;
+        margin: 0.85rem 0 1rem 0 !important;
+        border-radius: 12px !important;
+    }
+
+    .econ-badge-icon {
+        padding: 0.35rem 0.6rem !important;
+        font-size: 0.78rem !important;
+    }
+
+    .econ-callout-text strong {
+        font-size: 0.85rem !important;
+    }
+
+    .econ-callout-text span {
+        font-size: 0.74rem !important;
+    }
+
+    /* Trámites por Estado Cards Mobile */
+    .state-services-section {
+        padding: 2.5rem 0 !important;
+    }
+
+    .state-sec-h2 {
+        font-size: 1.65rem !important;
+    }
+
+    .state-sec-p {
+        font-size: 0.88rem !important;
+    }
+
+    .state-cards-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+        margin-top: 1.75rem !important;
+    }
+
+    .state-card {
+        padding: 1.4rem 1.1rem !important;
+        border-radius: 16px !important;
+    }
+
+    .state-card-title {
+        font-size: 1.3rem !important;
+    }
+
+    .state-btn-wa, .state-btn-outline {
+        min-height: 44px !important; /* Apple HIG Touch Target Standard */
+        font-size: 0.85rem !important;
+    }
+}
+
+/* 3. Extra Small Mobile Devices (<= 480px - iPhone SE, Mini) */
+@media (max-width: 480px) {
+
+    .promo-main-title {
+        font-size: 1.4rem !important;
+    }
+
+    .hero h1 span[data-i18n="hero_title_main"] {
+        font-size: 1.5rem !important;
+    }
+
+    .hero-buttons .btn {
+        width: 100% !important;
+        min-height: 46px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .econ-callout-arrow {
+        display: none !important; /* Save horizontal space on tight screens */
+    }
+
+    .mini-hero-slider {
+        height: 240px !important;
+    }
+}
