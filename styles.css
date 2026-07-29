@@ -5024,11 +5024,20 @@ details.seo-details[open] .seo-toggle-icon {
 }
 
 .mini-title {
-    font-size: 1.15rem;
-    font-weight: 800;
-    line-height: 1.25;
-    margin-bottom: 0.25rem;
+    font-size: 1.55rem;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 0.35rem;
     color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95), 0 0 4px rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width: 640px) {
+    .mini-title {
+        font-size: 1.25rem;
+    }
 }
 
 .mini-desc {
