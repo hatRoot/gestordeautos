@@ -184,6 +184,7 @@ function checkTagBalance(file, html) {
 // RUNNER
 // ══════════════════════════════════════════════════════════════════════════
 console.log(C.bold('\n🔍 GESTOR DE AUTOS — Arnés de Seguridad\n'));
+console.log(C.cyan('   📖 Manual: harness/README.md  |  Ejecución manual: node harness/check.js\n'));
 
 const HTML_FILES = [
   'index.html',
