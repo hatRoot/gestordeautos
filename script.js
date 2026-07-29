@@ -616,12 +616,14 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', injectStickyBtn);
 
     // ==========================================================================
-    // MINI HERO SLIDER AUTOMATION
+    // MINI HERO SLIDER AUTOMATION & CONTROLS
     // ==========================================================================
     const miniSlider = document.querySelector('.mini-hero-slider');
     if (miniSlider) {
         const miniSlides = miniSlider.querySelectorAll('.mini-slide');
         const miniDots = miniSlider.querySelectorAll('.mini-dot');
+        const miniPrevBtn = miniSlider.querySelector('.mini-arrow.prev');
+        const miniNextBtn = miniSlider.querySelector('.mini-arrow.next');
         let currentMiniSlide = 0;
         let miniInterval = null;
 
@@ -641,10 +643,13 @@ document.addEventListener('DOMContentLoaded', () => {
             goToMiniSlide(currentMiniSlide + 1);
         }
 
+        function prevMiniSlide() {
+            goToMiniSlide(currentMiniSlide - 1);
+        }
+
         function startMiniAuto() {
-            if (!miniInterval) {
-                miniInterval = setInterval(nextMiniSlide, 5000);
-            }
+            stopMiniAuto();
+            miniInterval = setInterval(nextMiniSlide, 5000);
         }
 
         function stopMiniAuto() {
@@ -654,10 +659,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        if (miniNextBtn) {
+            miniNextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                nextMiniSlide();
+                startMiniAuto();
+            });
+        }
+
+        if (miniPrevBtn) {
+            miniPrevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                prevMiniSlide();
+                startMiniAuto();
+            });
+        }
+
         miniDots.forEach((dot, idx) => {
             dot.addEventListener('click', () => {
                 goToMiniSlide(idx);
-                stopMiniAuto();
                 startMiniAuto();
             });
         });
