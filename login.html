@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Administrativo | Gestor de Autos</title>
+    <meta name="description" content="Portal de acceso seguro para gestión de trámites y liberaciones en módulo de Gestor de Autos.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0b1120;
+            --card-bg: rgba(255, 255, 255, 0.96);
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --mac-accent: #007aff;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0b1329 0%, #172554 50%, #1e1b4b 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: var(--text-dark);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .ambient-glow {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, rgba(37, 99, 235, 0) 70%);
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .login-card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 420px;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(16px);
+            padding: 38px 32px;
+            animation: fadeIn 0.35s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .logo-area {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .logo-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 54px;
+            height: 54px;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            border-radius: 14px;
+            font-size: 24px;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 16px -4px rgba(37, 99, 235, 0.4);
+        }
+
+        .logo-area h1 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-area p {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        /* Selector de pestañas Iniciar Sesión / Registrarse */
+        .auth-tabs {
+            display: flex;
+            background: #f1f5f9;
+            padding: 3px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #64748b;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .auth-tab.active {
+            background: #ffffff;
+            color: #0f172a;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: #64748b;
+            margin-bottom: 6px;
+            text-transform: lowercase;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 14px;
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 14px 12px 40px;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            color: #0f172a;
+            background: #f8fafc;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .form-input::placeholder {
+            color: #94a3b8;
+        }
+
+        .form-input:focus {
+            background: #ffffff;
+            border-color: var(--mac-accent);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15);
+        }
+
+        .options-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            margin-bottom: 22px;
+            color: #64748b;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
+            border: none;
+            border-radius: var(--radius-md);
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(29, 78, 216, 0.35);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(180deg, #2563eb 0%, #1e40af 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(29, 78, 216, 0.45);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .alert-msg {
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.84rem;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .alert-msg.error {
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+            display: block;
+        }
+
+        .alert-msg.success {
+            background: #ecfdf5;
+            color: #047857;
+            border: 1px solid #a7f3d0;
+            display: block;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .back-link a {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .back-link a:hover {
+            color: #1e293b;
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-glow"></div>
+
+    <div class="login-card">
+        <div class="logo-area">
+            <div class="logo-badge">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h1>Panel Administrativo</h1>
+            <p>Gestor de Autos • Sistema de Módulos</p>
+        </div>
+
+        <!-- Pestañas para Iniciar Sesión o Registrarse -->
+        <div class="auth-tabs">
+            <button type="button" class="auth-tab active" id="tabLogin" onclick="switchMode('login')">Iniciar Sesión</button>
+            <button type="button" class="auth-tab" id="tabSignup" onclick="switchMode('signup')">Crear Cuenta</button>
+        </div>
+
+        <div id="alertBox" class="alert-msg"></div>
+
+        <form id="loginForm" autocomplete="on">
+            <div class="form-group">
+                <label for="username">usuario</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="username" class="form-input" placeholder="tu-correo@ejemplo.com" required autofocus>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">password</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" class="form-input" placeholder="••••••••" required minlength="6">
+                </div>
+            </div>
+
+            <div class="options-row" id="rememberRow">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="rememberMe" checked>
+                    <span>Recordar sesión</span>
+                </label>
+            </div>
+
+            <button type="submit" class="btn-submit" id="btnSubmit">
+                <span id="btnText">Iniciar Sesión</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </form>
+
+        <div class="back-link">
+            <a href="index.html"><i class="fas fa-arrow-left"></i> Volver a la página principal</a>
+        </div>
+    </div>
+
+    <!-- SDK de Supabase JS v2 -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Cliente de Supabase -->
+    <script src="supabase-client.js"></script>
+    <!-- Base de datos local (fallback/historial) -->
+    <script src="db.js"></script>
+    
+    <script>
+        let currentMode = 'login'; // 'login' o 'signup'
+        const loginForm = document.getElementById('loginForm');
+        const alertBox = document.getElementById('alertBox');
+        const btnSubmit = document.getElementById('btnSubmit');
+        const btnText = document.getElementById('btnText');
+        const tabLogin = document.getElementById('tabLogin');
+        const tabSignup = document.getElementById('tabSignup');
+
+        // Detectar si el usuario viene de un enlace de confirmación de Supabase
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                if (window.gaSupabase && window.gaSupabase.client) {
+                    const { data: { session } } = await window.gaSupabase.client.auth.getSession();
+                    if (session && session.user) {
+                        localStorage.setItem('ga_active_session', JSON.stringify({
+                            user: session.user.email,
+                            loginTime: Date.now(),
+                            auth: true
+                        }));
+                        window.location.href = 'dashboard.html';
+                    }
+                }
+            } catch (e) {
+                console.warn(e);
+            }
+        });
+
+        function switchMode(mode) {
+            currentMode = mode;
+            alertBox.style.display = 'none';
+            if (mode === 'login') {
+                tabLogin.classList.add('active');
+                tabSignup.classList.remove('active');
+                btnText.textContent = 'Iniciar Sesión';
+            } else {
+                tabSignup.classList.add('active');
+                tabLogin.classList.remove('active');
+                btnText.textContent = 'Crear Cuenta y Entrar';
+            }
+        }
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const rememberMe = document.getElementById('rememberMe').checked;
+
+            if (!email || !password) {
+                showAlert('Por favor ingresa tu correo y contraseña.', 'error');
+                return;
+            }
+
+            btnSubmit.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${currentMode === 'login' ? 'Iniciando sesión...' : 'Creando cuenta...'}`;
+            btnSubmit.disabled = true;
+
+            try {
+                if (currentMode === 'signup') {
+                    // REGISTRO EN SUPABASE
+                    const { data, error } = await window.gaSupabase.signUp(email, password);
+                    if (error) {
+                        if (error.message.includes('User already registered')) {
+                            throw new Error('Este correo ya está registrado en Supabase. Haz clic en "Iniciar Sesión".');
+                        }
+                        throw error;
+                    }
+
+                    // Si Supabase devuelve usuario pero la sesión es null (requiere confirmación por correo)
+                    if (data?.user && !data?.session) {
+                        showAlert('¡Cuenta creada! Revisa tu correo para confirmarla, o desactiva "Confirm email" en Supabase para entrar directo.', 'success');
+                        btnSubmit.innerHTML = '<span>Crear Cuenta y Entrar</span> <i class="fas fa-arrow-right"></i>';
+                        btnSubmit.disabled = false;
+                        return;
+                    }
+
+                } else {
+                    // INICIO DE SESIÓN EN SUPABASE
+                    const { data, error } = await window.gaSupabase.login(email, password);
+                    if (error) {
+                        if (error.message.includes('Email logins are disabled')) {
+                            throw new Error('El inicio por correo está deshabilitado en Supabase. En tu panel de Supabase ve a Sign In / Providers > Email y activa el interruptor "Enable Email Provider".');
+                        }
+                        if (error.message.includes('Email not confirmed')) {
+                            throw new Error('Tu correo requiere confirmación. Desactiva "Confirm email" en tu panel de Supabase para entrar sin confirmación previa.');
+                        }
+                        if (error.message.includes('Invalid login credentials')) {
+                            throw new Error('Contraseña incorrecta o usuario no registrado. Si no te has registrado, selecciona "Crear Cuenta".');
+                        }
+                        throw error;
+                    }
+                }
+
+                // Guardar registro de acceso en la base de datos
+                if (window.appDB) {
+                    await window.appDB.registrarAcceso(email, 'Autenticado con Supabase');
+                }
+
+                // Guardar la sesión activa
+                const sessionData = {
+                    user: email,
+                    loginTime: Date.now(),
+                    auth: true
+                };
+
+                if (rememberMe) {
+                    localStorage.setItem('ga_active_session', JSON.stringify(sessionData));
+                } else {
+                    sessionStorage.setItem('ga_active_session', JSON.stringify(sessionData));
+                }
+
+                showAlert('Acceso autorizado. Entrando al Dashboard...', 'success');
+
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 300);
+
+            } catch (err) {
+                console.error(err);
+                showAlert(err.message || 'Error al autenticar con la base de datos.', 'error');
+                btnSubmit.innerHTML = `<span>${currentMode === 'login' ? 'Iniciar Sesión' : 'Crear Cuenta y Entrar'}</span> <i class="fas fa-arrow-right"></i>`;
+                btnSubmit.disabled = false;
+            }
+        });
+
+        function showAlert(msg, type) {
+            alertBox.textContent = msg;
+            alertBox.className = `alert-msg ${type}`;
+        }
+    </script>
+</body>
+</html>

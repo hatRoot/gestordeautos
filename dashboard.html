@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard • Liberaciones en Módulo | Gestor de Autos</title>
+    
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Estilos estilo macOS Lion -->
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <!-- Ventana Principal estilo macOS Lion -->
+    <div class="mac-app-window">
+        
+        <!-- Barra de Título / Toolbar de Aluminio Clásico Apple Lion -->
+        <header class="mac-window-header">
+            <div class="mac-traffic-lights">
+                <div class="traffic-light close" title="Cerrar" onclick="window.location.href='index.html'"></div>
+                <div class="traffic-light minimize" title="Minimizar"></div>
+                <div class="traffic-light maximize" title="Maximizar"></div>
+            </div>
+
+            <div class="mac-window-title">
+                <i class="fas fa-car" style="color: #2b7de9;"></i>
+                <span>Gestor de Autos — Panel de Control</span>
+            </div>
+
+            <div class="mac-toolbar-actions">
+                <div class="mac-search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="macSearchInput" class="mac-search-input" placeholder="Buscar folio, notas...">
+                </div>
+                <button class="mac-btn" id="btnOpenTrash" title="Ver eliminados y restaurar">
+                    <i class="fas fa-trash-restore" style="color: #64748b;"></i>
+                    <span>Papelera</span>
+                </button>
+                <button class="mac-btn mac-btn-primary" id="btnNewItem">
+                    <i class="fas fa-plus"></i>
+                    <span>Nueva Liberación</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Contenedor Principal: Barra Lateral Izquierda + Área de Contenido -->
+        <div class="mac-app-body">
+            
+            <!-- BARRA LATERAL IZQUIERDA (SIDEBAR ESTILO FINDER LION) -->
+            <aside class="mac-sidebar">
+                <div class="mac-sidebar-section">
+                    <div class="mac-sidebar-title">Módulos de Gestión</div>
+                    <ul class="mac-sidebar-menu">
+                        <!-- PRIMER MENÚ: LIBERACIONES EN MÓDULO -->
+                        <li class="mac-sidebar-item active" data-menu="liberaciones">
+                            <div class="mac-sidebar-item-left">
+                                <i class="fas fa-key"></i>
+                                <span>Liberaciones en módulo</span>
+                            </div>
+                            <span class="mac-badge" id="badgeLiberacionesCount">0</span>
+                        </li>
+                        <li class="mac-sidebar-item" data-menu="logout">
+                            <div class="mac-sidebar-item-left">
+                                <i class="fas fa-sign-out-alt" style="color: #dc2626;"></i>
+                                <span style="color: #dc2626; font-weight: 600;">Cerrar Sesión</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Footer del Sidebar con Usuario -->
+                <div class="mac-sidebar-footer">
+                    <div class="mac-user-info">
+                        <div class="mac-user-avatar">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="mac-user-details">
+                            <div class="mac-user-name" id="currentUserName">Administrador</div>
+                            <div class="mac-user-role"><i class="fas fa-circle" style="color: #10b981; font-size: 8px;"></i> En línea</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ÁREA DE CONTENIDO DERECHA -->
+            <main class="mac-content-area">
+                
+                <!-- Encabezado de la vista actual -->
+                <div class="mac-view-header">
+                    <div class="mac-view-title">
+                        <h2 id="viewTitleH2">Liberaciones en Módulo</h2>
+                        <p id="viewSubtitle">Gestión y control de trámites de liberación y estatus en módulo.</p>
+                    </div>
+
+                    <div class="mac-filter-pills" id="filterPills">
+                        <button class="mac-filter-btn active" data-filter="todos">Todos</button>
+                        <button class="mac-filter-btn" data-filter="liberacion">Liberaciones</button>
+                        <button class="mac-filter-btn" data-filter="tramite">Trámites</button>
+                        <button class="mac-filter-btn" data-filter="en-proceso">En proceso</button>
+                        <button class="mac-filter-btn" data-filter="concluido">Concluidos</button>
+                    </div>
+                </div>
+
+                <!-- VISTA: TABLA DE CELDAS ESTILO macOS LION (LIBERACIONES EN MÓDULO) -->
+                <div class="mac-table-container" id="liberacionesView">
+                    <table class="mac-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 130px;">Folio</th>
+                                <th style="width: 105px;">Fecha</th>
+                                <th style="width: 130px;">Tipo de trabajo</th>
+                                <th style="width: 130px;">RFC Contribuyente</th>
+                                <th style="width: 90px;">Costo</th>
+                                <th>Notas del Trámite</th>
+                                <th style="width: 130px;">Estatus</th>
+                                <th style="width: 85px; text-align: center;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="liberacionesTableBody">
+                            <!-- Filas cargadas dinámicamente desde la Base de Datos -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Barra de Estado Inferior -->
+                <footer class="mac-status-bar">
+                    <div id="totalCount">0 ítems</div>
+                    <div></div>
+                </footer>
+            </main>
+        </div>
+
+        <!-- MODAL / SHEET DESPLEGABLE ESTILO macOS LION PARA NUEVO/EDITAR -->
+        <div class="mac-sheet-overlay" id="itemSheetOverlay">
+            <div class="mac-sheet">
+                <div class="mac-sheet-title" id="sheetTitle">
+                    <i class="fas fa-plus-circle" style="color: #2b7de9;"></i>
+                    <span>Nueva Liberación o Trámite</span>
+                </div>
+
+                <form id="liberacionForm">
+                    <input type="hidden" id="itemId">
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="mac-form-row">
+                            <label for="itemFolio">Folio</label>
+                            <input type="text" id="itemFolio" class="mac-input" placeholder="Ingresa folio..." required>
+                        </div>
+
+                        <div class="mac-form-row">
+                            <label for="itemFecha">Fecha</label>
+                            <input type="date" id="itemFecha" class="mac-input" required>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <!-- TIPO DE TRABAJO: LIBERACIÓN O TRÁMITE -->
+                        <div class="mac-form-row">
+                            <label for="itemTipo">Tipo de trabajo</label>
+                            <select id="itemTipo" class="mac-select" required onchange="updateCostoAuto()">
+                                <option value="Liberación">Liberación</option>
+                                <option value="Trámite">Trámite</option>
+                            </select>
+                        </div>
+
+                        <!-- ESTATUS: EN PROCESO O CONCLUIDO -->
+                        <div class="mac-form-row">
+                            <label for="itemEstatus">Estatus</label>
+                            <select id="itemEstatus" class="mac-select" required>
+                                <option value="En proceso">En proceso</option>
+                                <option value="Concluido">Concluido</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <!-- RFC CONTRIBUYENTE -->
+                        <div class="mac-form-row">
+                            <label for="itemRfc">RFC Contribuyente</label>
+                            <input type="text" id="itemRfc" class="mac-input" placeholder="XAXX010101000" maxlength="13" style="text-transform: uppercase;">
+                        </div>
+
+                        <!-- COSTO AUTOMÁTICO -->
+                        <div class="mac-form-row">
+                            <label for="itemCosto">Costo sugerido</label>
+                            <div style="position: relative; display: flex; align-items: center;">
+                                <span style="position: absolute; left: 8px; color: #64748b; font-weight: 600;">$</span>
+                                <input type="text" id="itemCosto" class="mac-input" style="padding-left: 20px; color: #475569; background: #f8fafc; font-weight: 600;" value="300" placeholder="0.00">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mac-form-row">
+                        <label for="itemNotas">Notas / Observaciones (Opcional)</label>
+                        <textarea id="itemNotas" class="mac-textarea" rows="3" placeholder="Detalle de liberación de corralón, documentos pendientes, sellos o pagos..."></textarea>
+                    </div>
+
+                    <div class="mac-sheet-actions">
+                        <button type="button" class="mac-btn" id="btnCancelSheet">Cancelar</button>
+                        <button type="submit" class="mac-btn mac-btn-primary" id="btnSaveSheet">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        <!-- MODAL / SHEET DE PAPELERA DE RECICLAJE (RESTAURAR ELIMINADOS) -->
+        <div class="mac-sheet-overlay" id="trashSheetOverlay">
+            <div class="mac-sheet" style="width: 580px;">
+                <div class="mac-sheet-title">
+                    <i class="fas fa-trash-restore" style="color: #2b7de9;"></i>
+                    <span>Papelera de Reciclaje — Registros Eliminados</span>
+                </div>
+                
+                <p style="font-size: 11.5px; color: #64748b; margin-bottom: 12px;">
+                    Aquí se guardan tus registros eliminados aunque recargues la página. Puedes restaurar cualquiera con 1 clic.
+                </p>
+
+                <div style="max-height: 280px; overflow-y: auto; background: #ffffff; border: 1px solid #c9c9c9; border-radius: 4px; margin-bottom: 16px;">
+                    <table class="mac-table" style="font-size: 11.5px;">
+                        <thead>
+                            <tr>
+                                <th>Folio</th>
+                                <th>Tipo</th>
+                                <th>Eliminado el</th>
+                                <th style="text-align: center;">Restaurar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="trashTableBody">
+                            <!-- Filas de papelera -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mac-sheet-actions">
+                    <button type="button" class="mac-btn" id="btnCloseTrash">Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notificación Toast para Recuperar / Deshacer eliminación -->
+        <div class="mac-undo-toast" id="undoToast">
+            <span><i class="fas fa-trash-alt" style="color: #f87171; margin-right: 6px;"></i> Registro eliminado</span>
+            <button type="button" class="mac-undo-btn" id="btnUndoDelete"><i class="fas fa-undo"></i> Deshacer (⌘Z)</button>
+        </div>
+
+    </div>
+
+    <!-- Scripts de Supabase, DB y Funcionalidad -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-client.js"></script>
+    <script src="db.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
