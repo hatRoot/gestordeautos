@@ -586,34 +586,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // C. Sticky Mobile WhatsApp Button (Inject if missing)
+    // C. Sticky Mobile WhatsApp Button handling
     function injectStickyBtn() {
-        if (window.innerWidth > 768) return; // Mobile only
-
-        // Check if already exists
-        if (document.querySelector('.sticky-whatsapp')) return;
-
-        const stickyBtn = document.createElement('a');
-        stickyBtn.href = "https://wa.me/525535757364?text=Hola%2C%20necesito%20informes%20sobre%20permisos%20de%20circulaci%C3%B3n%20y%20placas%20EdoMex";
-        stickyBtn.className = "sticky-whatsapp";
-        stickyBtn.target = "_blank";
-        stickyBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Cotizar Ahora';
-        document.body.appendChild(stickyBtn);
-
-        // 🔴 FIX: Reduced threshold from 300px to 100px so the button appears sooner.
-        // Many users scroll very little before deciding to contact or leave.
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                stickyBtn.classList.add('visible');
-            } else {
-                stickyBtn.classList.remove('visible');
-            }
-        });
+        // No duplicate injection - handled by static floatingWA
     }
-
     injectStickyBtn();
-    // Re-check on resize
-    window.addEventListener('resize', injectStickyBtn);
 
     // ==========================================================================
     // MINI HERO SLIDER AUTOMATION & CONTROLS

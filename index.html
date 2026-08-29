@@ -2116,39 +2116,6 @@
         </a>
     </div>
 
-    <!-- Barra fija inferior en móvil -->
-    <div id="mobileCallBar" style="
-        position: fixed;
-        bottom: 0; left: 0; right: 0;
-        z-index: 9980;
-        display: none;
-    ">
-        <div style="display: grid; grid-template-columns: 1fr 1fr;">
-            <a href="tel:+525535757364"
-               style="
-                   display: flex; align-items: center; justify-content: center; gap: 8px;
-                   padding: 15px 8px;
-                   background: #1d4ed8;
-                   color: white; font-weight: 800; font-size: 0.95rem;
-                   text-decoration: none;
-                   border-right: 1px solid rgba(255,255,255,0.2);
-               ">
-                <i class="fas fa-phone-alt"></i> Llamar
-            </a>
-            <a href="https://wa.me/525535757364?text=Hola%2C%20me%20urge%20un%20tr%C3%A1mite%20vehicular%2C%20%C2%BFme%20ayudas%20hoy%3F"
-               target="_blank"
-               style="
-                   display: flex; align-items: center; justify-content: center; gap: 8px;
-                   padding: 15px 8px;
-                   background: #25d366;
-                   color: white; font-weight: 800; font-size: 0.95rem;
-                   text-decoration: none;
-               ">
-                <i class="fab fa-whatsapp"></i> WhatsApp
-            </a>
-        </div>
-    </div>
-
     <style>
         /* Igualar altura de cards de servicios */
         .services-grid {
@@ -2175,9 +2142,7 @@
         }
         
         @media (max-width: 768px) {
-            #mobileCallBar { display: block !important; }
-            #floatingWA { display: block !important; }
-            body           { padding-bottom: 54px; }
+            #floatingWA { display: flex !important; }
         }
     </style>
 
