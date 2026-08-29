@@ -5023,6 +5023,11 @@ details.seo-details[open] .seo-toggle-icon {
     color: #0f172a;
 }
 
+.tag-emerald {
+    background: #059669;
+    color: #ffffff;
+}
+
 .mini-title {
     font-size: 1.55rem;
     font-weight: 900;
