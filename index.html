@@ -2249,30 +2249,26 @@
             const closePopupSmooth = () => {
                 if (!overlay) return;
                 overlay.classList.add('closing');
-                try {
-                    sessionStorage.setItem('licenciaPopupDismissed', 'true');
-                } catch(e) {}
                 setTimeout(() => {
                     overlay.classList.remove('active');
                     overlay.classList.remove('closing');
-                }, 350);
+                }, 300);
             };
 
-            // Mostrar a los 4 segundos para permitir que el usuario lea primero el encabezado de EdoMex
+            // Mostrar a los 1.5 segundos
             setTimeout(() => {
-                try {
-                    if (sessionStorage.getItem('licenciaPopupDismissed') === 'true') {
-                        return;
-                    }
-                } catch(e) {}
                 if (overlay) {
                     overlay.classList.add('active');
                 }
-            }, 4000);
+            }, 1500);
 
             // Cerrar con la X
             if (btnClose) {
-                btnClose.addEventListener('click', closePopupSmooth);
+                btnClose.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    closePopupSmooth();
+                });
             }
 
             // Cerrar al hacer clic en el fondo oscuro

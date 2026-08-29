@@ -17,17 +17,17 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(15, 23, 42, 0.78);
+    background: rgba(15, 23, 42, 0.82);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    z-index: 99999;
+    z-index: 999999;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 24px 16px;
+    padding: 16px;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .licencia-popup-overlay.active {
@@ -38,19 +38,19 @@
 /* Tarjeta Modal Vertical */
 .licencia-popup-card {
     background: #ffffff;
-    border-radius: 24px;
-    max-width: 440px;
+    border-radius: 20px;
+    max-width: 400px;
     width: 100%;
-    overflow: visible;
     position: relative;
-    box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.2);
     display: flex;
     flex-direction: column;
-    transform: scale(0.88) translateY(30px);
+    transform: scale(0.92) translateY(20px);
     opacity: 0;
-    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease;
-    border: 2px solid rgba(188, 149, 92, 0.35);
-    max-height: 92vh;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+    border: 2px solid rgba(188, 149, 92, 0.45);
+    max-height: 94vh;
+    overflow: hidden;
 }
 
 .licencia-popup-overlay.active .licencia-popup-card {
@@ -64,78 +64,79 @@
 }
 
 .licencia-popup-overlay.closing .licencia-popup-card {
-    transform: scale(0.9) translateY(20px) !important;
+    transform: scale(0.92) translateY(20px) !important;
     opacity: 0 !important;
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease !important;
+    transition: transform 0.25s ease, opacity 0.25s ease !important;
 }
 
-/* Botón de Cerrar (X) - Rojo Contraste, Sobresaliendo de la Esquina */
+/* Botón de Cerrar (X) - Siempre Visible Dentro del Banner */
 .licencia-popup-close {
     position: absolute;
-    top: -18px;
-    right: -18px;
-    width: 48px;
-    height: 48px;
+    top: 12px;
+    right: 12px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-    border: 3.5px solid #ffffff;
+    background: rgba(220, 38, 38, 0.95);
+    border: 2.5px solid #ffffff;
     color: #ffffff;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 800;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 100;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 8px 24px rgba(220, 38, 38, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
 }
 
-.licencia-popup-close:hover {
-    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-    transform: scale(1.15) rotate(90deg);
-    box-shadow: 0 10px 28px rgba(220, 38, 38, 0.65), 0 4px 14px rgba(0, 0, 0, 0.4);
+.licencia-popup-close:hover,
+.licencia-popup-close:active {
+    background: #b91c1c;
+    transform: scale(1.1);
 }
 
 /* Imagen Vertical Superior */
 .licencia-popup-media {
     position: relative;
     width: 100%;
-    height: 420px;
+    height: 230px;
     background: #f1f5f9;
     overflow: hidden;
-    border-radius: 22px 22px 0 0;
+    border-radius: 18px 18px 0 0;
+    flex-shrink: 0;
 }
 
 .licencia-popup-media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top;
+    object-position: center 25%;
     display: block;
 }
 
 .licencia-media-badge {
     position: absolute;
-    top: 14px;
-    left: 14px;
+    top: 12px;
+    left: 12px;
     background: linear-gradient(135deg, var(--cdmx-guinda), #831843);
     color: #ffffff;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 0.76rem;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.74rem;
     font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 6px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    gap: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.35);
     z-index: 10;
 }
 
 /* Cuerpo del Contenido Inferior */
 .licencia-popup-body {
-    padding: 20px 22px 24px 22px;
+    padding: 16px 18px 18px 18px;
     display: flex;
     flex-direction: column;
     background: #ffffff;
@@ -143,7 +144,7 @@
     align-items: center;
     position: relative;
     z-index: 5;
-    box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.08);
+    overflow-y: auto;
 }
 
 .licencia-gov-header {
@@ -153,15 +154,14 @@
     background: linear-gradient(135deg, var(--cdmx-guinda) 0%, #9d2449 100%);
     color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.4);
-    padding: 7px 16px;
-    border-radius: 30px;
-    font-size: 0.96rem;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.92rem;
     font-weight: 800;
     letter-spacing: -0.01em;
-    margin-bottom: 14px;
-    box-shadow: 0 5px 16px rgba(105, 28, 50, 0.4);
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(105, 28, 50, 0.35);
     line-height: 1.2;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     white-space: nowrap;
     max-width: 100%;
 }
@@ -172,21 +172,20 @@
 }
 
 .licencia-popup-desc {
-    font-size: 0.92rem;
+    font-size: 0.88rem;
     font-weight: 700;
     color: #1e293b;
-    line-height: 1.42;
-    margin-bottom: 15px;
-    letter-spacing: -0.01em;
+    line-height: 1.35;
+    margin-bottom: 12px;
 }
 
 /* Lista de Puntos Clave */
 .licencia-popup-features {
     list-style: none;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 5px;
     text-align: left;
     width: 100%;
     padding: 0 4px;
@@ -196,14 +195,14 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    color: #1e293b;
+    color: #334155;
 }
 
 .licencia-popup-features li i {
     color: var(--cdmx-verde);
-    font-size: 0.92rem;
+    font-size: 0.88rem;
     flex-shrink: 0;
 }
 
@@ -212,32 +211,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     width: 100%;
     background: linear-gradient(135deg, var(--cdmx-guinda) 0%, #9d2449 100%);
     color: #ffffff;
-    padding: 13px 20px;
-    border-radius: 12px;
+    padding: 12px 18px;
+    border-radius: 10px;
     text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 700;
-    box-shadow: 0 6px 18px rgba(105, 28, 50, 0.35);
-    transition: all 0.25s ease;
+    font-size: 0.92rem;
+    font-weight: 800;
+    box-shadow: 0 5px 15px rgba(105, 28, 50, 0.35);
+    transition: all 0.2s ease;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.licencia-popup-cta:hover {
+.licencia-popup-cta:hover,
+.licencia-popup-cta:active {
     background: linear-gradient(135deg, var(--cdmx-guinda-dark) 0%, var(--cdmx-guinda) 100%);
     transform: translateY(-2px);
-    box-shadow: 0 10px 22px rgba(105, 28, 50, 0.45);
+    box-shadow: 0 8px 18px rgba(105, 28, 50, 0.45);
     color: #ffffff;
 }
 
 .licencia-popup-subtext {
-    font-size: 0.73rem;
+    font-size: 0.72rem;
     color: #64748b;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -247,20 +247,34 @@
 /* Responsivo en móviles pequeños */
 @media (max-width: 480px) {
     .licencia-popup-card {
-        max-width: 95%;
-        max-height: 94vh;
-        overflow-y: auto;
+        max-width: 92%;
+        border-radius: 18px;
     }
 
     .licencia-popup-media {
-        height: 320px;
+        height: 190px;
     }
 
     .licencia-popup-body {
-        padding: 18px 16px 20px 16px;
+        padding: 14px 14px 16px 14px;
     }
 
-    .licencia-popup-title {
-        font-size: 1.2rem;
+    .licencia-gov-header {
+        font-size: 0.85rem;
+        padding: 5px 12px;
+    }
+
+    .licencia-popup-desc {
+        font-size: 0.82rem;
+        margin-bottom: 10px;
+    }
+
+    .licencia-popup-features li {
+        font-size: 0.76rem;
+    }
+
+    .licencia-popup-cta {
+        padding: 11px 14px;
+        font-size: 0.88rem;
     }
 }
