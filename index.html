@@ -60,8 +60,9 @@
     <meta property="twitter:image" content="https://gestordeautos.com.mx/assets/images/logo1.png">
 
     <!-- Preload: imagen hero/banner principal LCP -->
-    <link rel="preload" as="image" href="assets/images/hero_slide_placas_edomex.png" fetchpriority="high">
-    <link rel="preload" as="image" href="assets/images/logo1.png" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/hero_slide_placas_edomex.webp" fetchpriority="high" type="image/webp">
+    <link rel="preload" as="image" href="assets/images/hero-coyote.webp" fetchpriority="high" type="image/webp">
+    <link rel="preload" as="image" href="assets/images/logo1.webp" fetchpriority="high" type="image/webp">
 
     <!-- JSON-LD: UN SOLO bloque consolidado (antes eran 4 scripts separados) -->
     <script type="application/ld+json">
@@ -312,9 +313,12 @@
         <div class="container nav">
             <a href="#" class="logo">
                 <div class="logo-container">
-                    <img loading="lazy" decoding="async" src="assets/images/logo1.png"
-                        alt="Gestoría Vehicular Placas Estado de México - #1 en EdoMex 2026" class="logo-img"
-                        fetchpriority="high">
+                    <picture>
+                        <source srcset="assets/images/logo1.webp" type="image/webp">
+                        <img loading="eager" decoding="async" src="assets/images/logo1.png"
+                            alt="Gestoría Vehicular Placas Estado de México - #1 en EdoMex 2026" class="logo-img"
+                            fetchpriority="high" width="38" height="38">
+                    </picture>
                 </div>
                 <div class="logo-text">
                     <div class="site-title">GESTOR DE <span>AUTOS</span></div>
@@ -433,7 +437,10 @@
                         <div class="mini-slider-wrapper">
                             <!-- Slide 1 (EdoMex - Prioridad 1) -->
                             <div class="mini-slide active">
-                                <img src="assets/images/hero_slide_placas_edomex.png" alt="Placas EdoMex Vencidas" class="mini-slide-img" fetchpriority="high" loading="eager" width="800" height="800">
+                                <picture>
+                                    <source srcset="assets/images/hero_slide_placas_edomex.webp" type="image/webp">
+                                    <img src="assets/images/hero_slide_placas_edomex.png" alt="Placas EdoMex Vencidas" class="mini-slide-img" fetchpriority="high" loading="eager" width="800" height="800" decoding="async">
+                                </picture>
                                 <div class="mini-slide-overlay"></div>
                                 <div class="mini-slide-caption">
                                     <span class="mini-tag tag-amber">EVITA MULTAS</span>
@@ -444,7 +451,10 @@
                             </div>
                             <!-- Slide 2 (CDMX - Prioridad 2) -->
                             <div class="mini-slide">
-                                <img src="assets/images/hero_slide_licencia.png" alt="Licencia Permanente CDMX" class="mini-slide-img" loading="lazy" decoding="async" width="800" height="800">
+                                <picture>
+                                    <source srcset="assets/images/hero_slide_licencia.webp" type="image/webp">
+                                    <img src="assets/images/hero_slide_licencia.png" alt="Licencia Permanente CDMX" class="mini-slide-img" loading="lazy" decoding="async" width="800" height="800">
+                                </picture>
                                 <div class="mini-slide-overlay"></div>
                                 <div class="mini-slide-caption">
                                     <span class="mini-tag tag-red">ÚLTIMOS DÍAS</span>
@@ -455,7 +465,10 @@
                             </div>
                             <!-- Slide 3 (Morelos) -->
                             <div class="mini-slide">
-                                <img src="assets/images/hero_slide_tramites_morelos.png" alt="Trámites Vehiculares Morelos" class="mini-slide-img" loading="lazy" decoding="async" width="800" height="800">
+                                <picture>
+                                    <source srcset="assets/images/hero_slide_tramites_morelos.webp" type="image/webp">
+                                    <img src="assets/images/hero_slide_tramites_morelos.png" alt="Trámites Vehiculares Morelos" class="mini-slide-img" loading="lazy" decoding="async" width="800" height="800">
+                                </picture>
                                 <div class="mini-slide-overlay"></div>
                                 <div class="mini-slide-caption">
                                     <span class="mini-tag tag-emerald">ESTADO DE MORELOS</span>
@@ -466,7 +479,10 @@
                             </div>
                             <!-- Slide 4 -->
                             <div class="mini-slide">
-                                <img src="assets/images/hero_slide_tramites_exitosos.png" alt="Trámites Exitosos" class="mini-slide-img" loading="lazy" decoding="async" width="800" height="800">
+                                <picture>
+                                    <source srcset="assets/images/hero_slide_tramites_exitosos.webp" type="image/webp">
+                                    <img src="assets/images/hero_slide_tramites_exitosos.png" alt="Trámites Exitosos" class="mini-slide-img" loading="lazy" decoding="async" width="800" height="800">
+                                </picture>
                                 <div class="mini-slide-overlay"></div>
                                 <div class="mini-slide-caption">
                                     <span class="mini-tag tag-gold">5.0 ★ GOOGLE</span>
@@ -607,9 +623,12 @@
 
                 <div class="hero-visual">
                     <!-- Overlapping composition -->
-                    <img loading="lazy" decoding="async" src="assets/images/hero-coyote.png"
-                        alt="Especialista en Placas Estado de México - Gestoría Vehicular EdoMex" class="hero-moto"
-                        fetchpriority="high" width="900" height="900">
+                    <picture>
+                        <source srcset="assets/images/hero-coyote.webp" type="image/webp">
+                        <img loading="eager" decoding="async" src="assets/images/hero-coyote.png"
+                            alt="Especialista en Placas Estado de México - Gestoría Vehicular EdoMex" class="hero-moto"
+                            fetchpriority="high" width="900" height="900">
+                    </picture>
 
                     <!-- Mobile Animated Overlay -->
                     <div class="mobile-hero-overlay">
@@ -660,28 +679,18 @@
                         Michoacán y Oaxaca.</p>
                     <div class="partners-slider">
                         <div class="partners-track">
-                            <img loading="lazy" decoding="async" src="assets/images/partners/cdmx.png"
-                                alt="Gobierno Ciudad de México" class="logo-cdmx">
-                            <img loading="lazy" decoding="async" src="assets/images/partners/edomex.png"
-                                alt="Gobierno Estado de México" class="logo-edomex">
-                            <img loading="lazy" decoding="async"
-                                src="assets/images/partners/guerrero.png" alt="Gobierno Guerrero" class="logo-guerrero">
-                            <img loading="lazy" decoding="async"
-                                src="assets/images/partners/michoacan.png" alt="Gobierno Michoacán" class="logo-michoacan">
-                            <img loading="lazy" decoding="async" src="assets/images/partners/oaxaca.png"
-                                alt="Gobierno Oaxaca" class="logo-oaxaca">
+                            <picture><source srcset="assets/images/partners/cdmx.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/images/partners/cdmx.png" alt="Gobierno Ciudad de México" class="logo-cdmx"></picture>
+                            <picture><source srcset="assets/images/partners/edomex.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/images/partners/edomex.png" alt="Gobierno Estado de México" class="logo-edomex"></picture>
+                            <picture><source srcset="assets/images/partners/guerrero.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/images/partners/guerrero.png" alt="Gobierno Guerrero" class="logo-guerrero"></picture>
+                            <picture><source srcset="assets/images/partners/michoacan.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/images/partners/michoacan.png" alt="Gobierno Michoacán" class="logo-michoacan"></picture>
+                            <picture><source srcset="assets/images/partners/oaxaca.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/images/partners/oaxaca.png" alt="Gobierno Oaxaca" class="logo-oaxaca"></picture>
 
                             <!-- Set 2 (Duplicate for Loop) -->
-                            <img loading="lazy" decoding="async" src="assets/images/partners/cdmx.png"
-                                alt="Gobierno CDMX" class="logo-cdmx">
-                            <img loading="lazy" decoding="async" src="assets/images/partners/edomex.png"
-                                alt="Gobierno Estado de México" class="logo-edomex">
-                            <img loading="lazy" decoding="async"
-                                src="assets/images/partners/guerrero.png" alt="Gobierno Guerrero" class="logo-guerrero">
-                            <img loading="lazy" decoding="async"
-                                src="assets/images/partners/michoacan.png" alt="Gobierno Michoacán" class="logo-michoacan">
-                            <img loading="lazy" decoding="async" src="assets/images/partners/oaxaca.png"
-                                alt="Gobierno Oaxaca" class="logo-oaxaca">
+                            <picture><source srcset="assets/images/partners/cdmx.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/images/partners/cdmx.png" alt="Gobierno CDMX" class="logo-cdmx"></picture>
+                            <picture><source srcset="assets/images/partners/edomex.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/images/partners/edomex.png" alt="Gobierno Estado de México" class="logo-edomex"></picture>
+                            <picture><source srcset="assets/images/partners/guerrero.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/images/partners/guerrero.png" alt="Gobierno Guerrero" class="logo-guerrero"></picture>
+                            <picture><source srcset="assets/images/partners/michoacan.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/images/partners/michoacan.png" alt="Gobierno Michoacán" class="logo-michoacan"></picture>
+                            <picture><source srcset="assets/images/partners/oaxaca.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/images/partners/oaxaca.png" alt="Gobierno Oaxaca" class="logo-oaxaca"></picture>
                         </div>
                     </div>
                 </div>
@@ -1182,9 +1191,12 @@
 
                     <div class="features-visual">
                         <div id="foxBubble" class="fox-bubble">¿Ya tienes tu boleto Dorado?</div>
-                        <img loading="lazy" loading="lazy" decoding="async" src="assets/images/fox-thumbs.png"
-                            alt="Gestor de Autos - Servicio 100% garantizado y legal" class="features-fox" width="500"
-                            height="500">
+                        <picture>
+                            <source srcset="assets/images/fox-thumbs.webp" type="image/webp">
+                            <img loading="lazy" decoding="async" src="assets/images/fox-thumbs.png"
+                                alt="Gestor de Autos - Servicio 100% garantizado y legal" class="features-fox" width="500"
+                                height="500">
+                        </picture>
                     </div>
 
                 </div>
@@ -1355,9 +1367,12 @@
 
                 <!-- Trophy Wall Section -->
                 <div class="trophy-wall-container">
-                    <img loading="lazy" loading="lazy" decoding="async" src="assets/images/carros.jpg"
-                        alt="Gestoría vehicular en Chalco, Ixtapaluca y Huixquilucan - Expertos en Placas"
-                        class="trophy-car-img" width="800" height="600">
+                    <picture>
+                        <source srcset="assets/images/carros.webp" type="image/webp">
+                        <img loading="lazy" decoding="async" src="assets/images/carros.jpg"
+                            alt="Gestoría vehicular en Chalco, Ixtapaluca y Huixquilucan - Expertos en Placas"
+                            class="trophy-car-img" width="800" height="600">
+                    </picture>
 
                     <div class="trophy-overlay">
                         <div class="google-badge premium-badge">
@@ -1740,8 +1755,11 @@
                     <div class="tramite-card">
                         <h3 class="tramite-title">Permiso de Circulación Provisional</h3>
                         <div class="tramite-image">
-                            <img loading="lazy" decoding="async" src="assets/images/permiso_2026.png"
-                                alt="Permiso Provisional Guerrero 2026 Uso Demostrativo" width="300" height="200">
+                            <picture>
+                                <source srcset="assets/images/permiso_2026.webp" type="image/webp">
+                                <img loading="lazy" decoding="async" src="assets/images/permiso_2026.png"
+                                    alt="Permiso Provisional Guerrero 2026 Uso Demostrativo" width="300" height="200">
+                            </picture>
                         </div>
                         <p class="tramite-validity">VÁLIDO EN TODA LA REPÚBLICA MEXICANA</p>
 
@@ -1762,9 +1780,12 @@
                     <div class="tramite-card">
                         <h3 class="tramite-title">Licencia Permanente Tipo A de Ciudad de México</h3>
                         <div class="tramite-image">
-                            <img loading="lazy" decoding="async" src="assets/images/licencia_morada.png"
-                                alt="Licencia Permanente Tipo A Morada" width="280" height="180"
-                                style="max-width: 280px;">
+                            <picture>
+                                <source srcset="assets/images/licencia_morada.webp" type="image/webp">
+                                <img loading="lazy" decoding="async" src="assets/images/licencia_morada.png"
+                                    alt="Licencia Permanente Tipo A Morada" width="280" height="180"
+                                    style="max-width: 280px;">
+                            </picture>
                         </div>
                         <p class="tramite-validity">VÁLIDO EN TODA LA REPÚBLICA MEXICANA</p>
 
@@ -1915,10 +1936,13 @@
 
     <!-- Gold Certificate Badge -->
     <div class="gold-badge" style="display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-        <img loading="lazy" loading="lazy" decoding="async" src="assets/images/gold.png"
-            alt="Certificación Premium - Gestoría Vehicular #1"
-            style="max-width: 150px; width: 100%; height: auto; margin-left: 1rem; margin-right: 1rem; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));"
-            width="150" height="150">
+        <picture>
+            <source srcset="assets/images/gold.webp" type="image/webp">
+            <img loading="lazy" decoding="async" src="assets/images/gold.png"
+                alt="Certificación Premium - Gestoría Vehicular #1"
+                style="max-width: 150px; width: 100%; height: auto; margin-left: 1rem; margin-right: 1rem; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));"
+                width="150" height="150">
+        </picture>
     </div>
 
     <!-- Friendly Fox pointing to WhatsApp -->
@@ -2169,7 +2193,10 @@
 
             <!-- Columna Izquierda: Imagen de la persona con la licencia oficial CDMX Tipo A -->
             <div class="licencia-popup-media">
-                <img src="assets/images/licencia-permanente-popup.jpg" alt="Licencia Permanente Tipo A CDMX" loading="lazy" decoding="async" width="700" height="938">
+                <picture>
+                    <source srcset="assets/images/licencia-permanente-popup.webp" type="image/webp">
+                    <img src="assets/images/licencia-permanente-popup.jpg" alt="Licencia Permanente Tipo A CDMX" loading="lazy" decoding="async" width="700" height="938">
+                </picture>
                 <div class="licencia-media-badge">
                     <i class="fas fa-check-circle" style="color: #4ade80;"></i>
                     <span>Vigencia de por vida</span>

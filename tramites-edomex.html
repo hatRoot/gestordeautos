@@ -41,8 +41,8 @@
     <meta name="geo.position" content="19.3592;-99.3582">
     <meta name="ICBM" content="19.3592, -99.3582">
     <!-- Preload LCP Assets -->
-    <link rel="preload" as="image" href="assets/images/hero-bg.png" fetchpriority="high">
-    <link rel="preload" as="image" href="assets/images/logo1.png" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/hero-bg.webp" fetchpriority="high" type="image/webp">
+    <link rel="preload" as="image" href="assets/images/logo1.webp" fetchpriority="high" type="image/webp">
 
     <meta name="theme-color" content="#2563eb">
 
@@ -197,7 +197,7 @@
     <style>
         /* Specific overrides for this landing page if needed */
         .edomex-hero {
-            background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('assets/images/hero-bg.png');
+            background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('assets/images/hero-bg.webp');
             /* Reuse hero bg or specific edomex one */
             padding-top: 100px;
             padding-bottom: 2rem;
@@ -260,8 +260,11 @@
         <div class="container nav">
             <a href="/" class="logo">
                 <div class="logo-container">
-                    <img loading="lazy" decoding="async" src="assets/images/logo1.png"
-                        alt="Trámites Vehiculares Estado de México - Gestoría Placas EdoMex 2026" class="logo-img" fetchpriority="high">
+                    <picture>
+                        <source srcset="assets/images/logo1.webp" type="image/webp">
+                        <img loading="eager" decoding="async" src="assets/images/logo1.png"
+                            alt="Trámites Vehiculares Estado de México - Gestoría Placas EdoMex 2026" class="logo-img" fetchpriority="high" width="38" height="38">
+                    </picture>
                 </div>
                 <div class="logo-text">
                     <div class="site-title">GESTOR DE <span>AUTOS</span></div>

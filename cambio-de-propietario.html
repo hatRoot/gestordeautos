@@ -31,7 +31,7 @@
 
 
     <!-- Preload LCP Assets -->
-    <link rel="preload" as="image" href="assets/images/logo1.png" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/logo1.webp" fetchpriority="high" type="image/webp">
 
     <meta name="theme-color" content="#2563eb">
     <meta property="og:type" content="website">
@@ -318,8 +318,14 @@
     <header class="header">
         <div class="container nav">
             <a href="/" class="logo">
-                <div class="logo-container"><img loading="lazy" src="assets/images/logo1.png" alt="Cambio de Propietario Estado de México - Traspaso Vehicular EdoMex 2026"
-                        class="logo-img" loading="eager"></div>
+                <div class="logo-container">
+                    <picture>
+                        <source srcset="assets/images/logo1.webp" type="image/webp">
+                        <img loading="eager" decoding="async" src="assets/images/logo1.png"
+                            alt="Cambio de Propietario Estado de México - Traspaso Vehicular EdoMex 2026"
+                            class="logo-img" fetchpriority="high" width="38" height="38">
+                    </picture>
+                </div>
                 <div class="logo-text">
                     <div class="site-title">GESTOR DE <span>AUTOS</span></div>
                     <div class="header-slogan" data-i18n="header_slogan">Trámites 100% Genuinos</div>

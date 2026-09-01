@@ -35,7 +35,7 @@
     <meta name="geo.placename" content="Ciudad de México">
     <meta name="geo.position" content="19.4326;-99.1332">
     <!-- Preload LCP Hero Image -->
-    <link rel="preload" as="image" href="assets/images/licencia-permanente-popup.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/licencia-permanente-popup.webp" fetchpriority="high" type="image/webp">
     <meta name="theme-color" content="#691C32">
 
     <!-- Open Graph -->
@@ -566,8 +566,11 @@
         <div class="container nav">
             <a href="/" class="logo">
                 <div class="logo-container">
-                    <img loading="lazy" decoding="async" src="assets/images/logo1.png"
-                        alt="Gestor de Autos - Licencia Permanente CDMX" class="logo-img" fetchpriority="high">
+                    <picture>
+                        <source srcset="assets/images/logo1.webp" type="image/webp">
+                        <img loading="eager" decoding="async" src="assets/images/logo1.png"
+                            alt="Gestor de Autos - Licencia Permanente CDMX" class="logo-img" fetchpriority="high" width="38" height="38">
+                    </picture>
                 </div>
                 <div class="logo-text">
                     <div class="site-title">GESTOR DE <span>AUTOS</span></div>
@@ -633,7 +636,10 @@
                     <!-- Columna Derecha: Foto de la Licencia -->
                     <div>
                         <div class="cdmx-hero-media">
-                            <img src="assets/images/licencia-permanente-popup.jpg" alt="Licencia Permanente Tipo A CDMX" loading="eager" fetchpriority="high" width="700" height="938">
+                            <picture>
+                                <source srcset="assets/images/licencia-permanente-popup.webp" type="image/webp">
+                                <img src="assets/images/licencia-permanente-popup.jpg" alt="Licencia Permanente Tipo A CDMX" loading="eager" fetchpriority="high" width="700" height="938" decoding="async">
+                            </picture>
                             <div class="cdmx-media-pill">
                                 <i class="fas fa-shield-alt" style="color: #4ade80; font-size: 1.1rem;"></i>
                                 <span>Plástico Oficial de la Ciudad de México · Vigencia Indefinida</span>

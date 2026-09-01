@@ -26,7 +26,7 @@
     <meta name="geo.placename" content="Interlomas, Satélite, Lomas Verdes, Huixquilucan, Naucalpan, Estado de México, Querétaro, Morelos, México">
 
     <!-- Preload LCP Assets -->
-    <link rel="preload" as="image" href="assets/images/logo1.png" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/logo1.webp" fetchpriority="high" type="image/webp">
 
     <meta name="theme-color" content="#090e1a">
     <meta property="og:type" content="website">
@@ -715,7 +715,10 @@
         <div class="container nav">
             <a href="/" class="logo">
                 <div class="logo-container">
-                    <img loading="eager" src="assets/images/logo1.png" alt="Alta de Placas EdoMex 2026" class="logo-img" width="38" height="38">
+                    <picture>
+                        <source srcset="assets/images/logo1.webp" type="image/webp">
+                        <img loading="eager" src="assets/images/logo1.png" alt="Alta de Placas EdoMex 2026" class="logo-img" width="38" height="38" decoding="async">
+                    </picture>
                 </div>
                 <div class="logo-text">
                     <div class="site-title">GESTOR DE <span>AUTOS</span></div>
