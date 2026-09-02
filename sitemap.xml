@@ -45,6 +45,13 @@
         <priority>0.8</priority>
     </url>
 
+    <!-- Placas Conmemorativas Mundial -->
+    <url>
+        <loc>https://gestordeautos.com.mx/placas-conmemorativas-mundial.html</loc>
+        <lastmod>2026-04-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
 
     <!-- Aviso de Privacidad -->
     <url>
