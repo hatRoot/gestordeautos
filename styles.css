@@ -494,7 +494,7 @@ ul {
     position: relative;
     height: auto;
     min-height: auto;
-    background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.8)), url('assets/images/hero-bg.jpg');
+    background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.8)), url('assets/images/hero-bg.webp');
     background-size: cover;
     background-position: center;
     display: flex;

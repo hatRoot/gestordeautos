@@ -63,8 +63,8 @@
     <meta property="twitter:image" content="https://gestordeautos.com.mx/assets/images/logo1.png">
 
     <!-- Preload: imagen hero CORRECTA (hero-coyote, no hero-moto que no existe) -->
-    <link rel="preload" as="image" href="assets/images/logo1.png" fetchpriority="high" imagesizes="(max-width: 600px) 100vw, 200px" imagesrcset="assets/images/logo1.png 1x">
-    <link rel="preload" as="image" href="assets/images/hero-coyote.png" fetchpriority="high" imagesizes="(max-width: 768px) 100vw, 600px" imagesrcset="assets/images/hero-coyote.png 1x">
+    <link rel="preload" as="image" href="assets/images/logo1.webp" fetchpriority="high" imagesizes="(max-width: 600px) 100vw, 200px" imagesrcset="assets/images/logo1.webp 1x">
+    <link rel="preload" as="image" href="assets/images/hero-coyote.webp" fetchpriority="high" imagesizes="(max-width: 768px) 100vw, 600px" imagesrcset="assets/images/hero-coyote.webp 1x">
 
     <!-- JSON-LD: UN SOLO bloque consolidado (antes eran 4 scripts separados) -->
     <script type="application/ld+json">
@@ -314,7 +314,7 @@
         <div class="container nav">
             <a href="#" class="logo">
                 <div class="logo-container">
-                    <img loading="lazy" decoding="async" src="assets/images/logo1.png"
+                    <img loading="lazy" decoding="async" src="assets/images/logo1.webp"
                         alt="Gestoría Vehicular Placas Estado de México - #1 en EdoMex 2026" class="logo-img"
                         fetchpriority="high">
                 </div>
@@ -330,10 +330,13 @@
                         class="btn btn-whatsapp header-btn primary-tel" target="_blank">
                         <i class="fab fa-whatsapp"></i>
                         <span class="btn-text">
-                            <span class="text-default">COTIZAR AHORA</span>
-                            <span class="text-hover">WHATSAPP</span>
+                            <span class="text-default">GESTOR</span>
+                            <span class="text-hover">DURAN</span>
                         </span>
                     </a>
+                    <button id="openNavTicket" class="nav-ticket-btn">
+                        <i class="fas fa-ticket-alt"></i> BOLETO DORADO
+                    </button>
                 </div>
                 <button id="langToggle" class="lang-btn" aria-label="Switch Language">
                     ES
@@ -354,9 +357,12 @@
             <a href="#servicios" class="overlay-link overlay-link-js" data-i18n="nav_services">Servicios</a>
             <a href="#contacto" class="overlay-link overlay-link-js" data-i18n="nav_contact">Contacto</a>
             <hr class="overlay-divider">
+            <button id="openNavTicketOverlay" class="nav-ticket-btn overlay-btn">
+                <i class="fas fa-ticket-alt"></i> BOLETO DORADO
+            </button>
             <a href="https://wa.me/525535757364?text=Hola%2C%20me%20urge%20un%20tr%C3%A1mite%20vehicular%2C%20%C2%BFme%20ayudas%20hoy%3F"
                 class="btn btn-whatsapp overlay-btn" target="_blank">
-                <i class="fab fa-whatsapp"></i> COTIZAR POR WHATSAPP
+                <i class="fab fa-whatsapp"></i> COTIZACIONES
             </a>
             <hr class="overlay-divider">
             <button id="langToggleOverlay" class="lang-btn"
@@ -367,65 +373,50 @@
 
 
     <main>
-        <!-- Split Promo Section (CRO Top Banner with Mini Carousel) -->
+        <!-- SPLIT PROMO SECTION (NEW HIGH IMPACT HERO) -->
         <section class="split-promo-section">
             <div class="container split-promo-container">
-                <!-- Left Column: Copy, Trust Points & Process Workflow -->
+                <!-- Left Column: Emotional Hook & Urgency -->
                 <div class="split-promo-left">
-                    <div class="promo-badge">
-                        <i class="fas fa-shield-alt"></i> TRÁMITES 100% EN LÍNEA Y A DOMICILIO
+                    <div class="promo-badge-gold">
+                        <i class="fas fa-shield-alt"></i> GESTORÍA VEHICULAR #1 EDOMEX Y CDMX
                     </div>
-                    <h2 class="promo-main-title">NO SALGAS DE TU CASA</h2>
+                    <h1 class="promo-main-title">
+                        ¡NO SALGAS DE TU CASA!<br>
+                        <span>NOSOTROS HACEMOS TUS TRÁMITES</span>
+                    </h1>
                     <p class="promo-subtitle">
-                        Nosotros hacemos todo tu trámite de placas, licencia o cambio de propietario. Tú solo lo recibes de forma segura en la puerta de tu casa u oficina.
+                        Olvídate de las filas en SEMOVI y el estrés de perder tu día. Tramitamos tus placas, permisos y
+                        licencias con entrega segura y directa en tu domicilio.
                     </p>
 
-                    <!-- Trust Pillars Grid -->
-                    <div class="promo-pillars">
-                        <div class="pillar-item">
-                            <div class="pillar-icon"><i class="fas fa-user-check"></i></div>
-                            <div class="pillar-text">
-                                <strong>Confiable</strong>
-                                <span>Gestores expertos con más de 18 años en CDMX y EdoMex.</span>
-                            </div>
+                    <!-- Trust Stats Mini-Bar -->
+                    <div class="promo-stats-row">
+                        <div class="promo-stat">
+                            <span class="stat-num">+18</span>
+                            <span class="stat-lbl">Años de Exp.</span>
                         </div>
-                        <div class="pillar-item">
-                            <div class="pillar-icon"><i class="fas fa-couch"></i></div>
-                            <div class="pillar-text">
-                                <strong>Cómodo</strong>
-                                <span>Sin filas ni vueltas innecesarias. Gestionamos todo por ti.</span>
-                            </div>
+                        <div class="promo-stat-divider"></div>
+                        <div class="promo-stat">
+                            <span class="stat-num">100%</span>
+                            <span class="stat-lbl">Genuinos / QR</span>
                         </div>
-                        <div class="pillar-item">
-                            <div class="pillar-icon"><i class="fas fa-lock"></i></div>
-                            <div class="pillar-text">
-                                <strong>Seguro</strong>
-                                <span>Trámites 100% genuinos y validados ante las autoridades.</span>
-                            </div>
+                        <div class="promo-stat-divider"></div>
+                        <div class="promo-stat">
+                            <span class="stat-num">24-48h</span>
+                            <span class="stat-lbl">Entrega Express</span>
                         </div>
                     </div>
 
-                    <!-- 4-Step Process Bar -->
-                    <div class="promo-workflow-box">
-                        <h3 class="workflow-heading"><i class="fas fa-tasks"></i> PROCESO 100% EN LÍNEA:</h3>
-                        <div class="workflow-steps">
-                            <div class="wf-step">
-                                <span class="wf-num">1</span>
-                                <span class="wf-label">Escríbenos por WhatsApp</span>
-                            </div>
-                            <div class="wf-step">
-                                <span class="wf-num">2</span>
-                                <span class="wf-label">Cotizamos tu trámite</span>
-                            </div>
-                            <div class="wf-step">
-                                <span class="wf-num">3</span>
-                                <span class="wf-label">Gestionamos en sistema</span>
-                            </div>
-                            <div class="wf-step">
-                                <span class="wf-num">4</span>
-                                <span class="wf-label">Te entregamos a domicilio</span>
-                            </div>
-                        </div>
+                    <!-- Direct Action Buttons -->
+                    <div class="promo-cta-group">
+                        <a href="https://wa.me/525535757364?text=Hola%2C%20me%20urge%20un%20tr%C3%A1mite%20vehicular%2C%20%C2%BFme%20ayudas%20hoy%3F"
+                            class="btn-promo-wa" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Cotizar Trámite por WhatsApp
+                        </a>
+                        <a href="#servicios" class="btn-promo-ghost">
+                            Ver Catálogo <i class="fas fa-arrow-down"></i>
+                        </a>
                     </div>
                 </div>
 
@@ -435,7 +426,7 @@
                         <div class="mini-slider-wrapper">
                             <!-- Slide 1 -->
                             <div class="mini-slide active">
-                                <img src="assets/images/hero_slide_licencia.png" alt="Licencia Permanente CDMX" class="mini-slide-img">
+                                <img src="assets/images/hero_slide_licencia.webp" alt="Licencia Permanente CDMX" class="mini-slide-img">
                                 <div class="mini-slide-overlay"></div>
                                 <div class="mini-slide-caption">
                                     <span class="mini-tag tag-red">ÚLTIMOS DÍAS</span>
@@ -446,7 +437,7 @@
                             </div>
                             <!-- Slide 2 -->
                             <div class="mini-slide">
-                                <img src="assets/images/hero_slide_placas_edomex.png" alt="Placas EdoMex Vencidas" class="mini-slide-img">
+                                <img src="assets/images/hero_slide_placas_edomex.webp" alt="Placas EdoMex Vencidas" class="mini-slide-img">
                                 <div class="mini-slide-overlay"></div>
                                 <div class="mini-slide-caption">
                                     <span class="mini-tag tag-amber">EVITA MULTAS</span>
@@ -457,7 +448,7 @@
                             </div>
                             <!-- Slide 3 -->
                             <div class="mini-slide">
-                                <img src="assets/images/hero_slide_tramites_exitosos.png" alt="Trámites Exitosos" class="mini-slide-img">
+                                <img src="assets/images/hero_slide_tramites_exitosos.webp" alt="Trámites Exitosos" class="mini-slide-img">
                                 <div class="mini-slide-overlay"></div>
                                 <div class="mini-slide-caption">
                                     <span class="mini-tag tag-gold">5.0 ★ GOOGLE</span>
@@ -489,7 +480,7 @@
         <section id="inicio" class="hero">
             <div class="container hero-content">
                 <div class="hero-text">
-                    <h1 style="font-size: 2.5rem; line-height: 1.2;">
+                    <h2 style="font-size: 2.5rem; line-height: 1.2;">
                         <span style="font-weight: 800; color: white; display: block; text-transform: uppercase;"
                             data-i18n="hero_title_main">GESTORÍA VEHICULAR #1 Y GESTOR DE PLACAS</span>
                         <span
@@ -501,7 +492,7 @@
                             style="font-family: 'Yellowtail', cursive; font-size: 1.2em; color: #fbbf24; text-shadow: 2px 2px 0 #000; display: block; margin-top: 0.5rem;">
                             Tu Gestor Vehicular de Confianza
                         </span>
-                    </h1>
+                    </h2>
 
                     <!-- Economic & Fast Google Reviews Banner -->
                     <a href="https://maps.app.goo.gl/HEGvNwtQ4kYn3rpS7" target="_blank" class="hero-econ-callout" title="Ver reseñas en Google Maps">
@@ -597,7 +588,7 @@
 
                 <div class="hero-visual">
                     <!-- Overlapping composition -->
-                    <img loading="lazy" decoding="async" src="assets/images/hero-coyote.png"
+                    <img loading="lazy" decoding="async" src="assets/images/hero-coyote.webp"
                         alt="Especialista en Placas Estado de México - Gestoría Vehicular EdoMex" class="hero-moto"
                         fetchpriority="high" width="900" height="900">
 
@@ -650,27 +641,27 @@
                         Michoacán y Oaxaca.</p>
                     <div class="partners-slider">
                         <div class="partners-track">
-                            <img loading="lazy" decoding="async" src="assets/images/partners/cdmx.png"
+                            <img loading="lazy" decoding="async" src="assets/images/partners/cdmx.webp"
                                 alt="Gobierno Ciudad de México" class="logo-cdmx">
-                            <img loading="lazy" decoding="async" src="assets/images/partners/edomex.png"
+                            <img loading="lazy" decoding="async" src="assets/images/partners/edomex.webp"
                                 alt="Gobierno Estado de México" class="logo-edomex">
                             <img loading="lazy" decoding="async"
-                                src="assets/images/partners/guerrero.png" alt="Gobierno Guerrero" class="logo-guerrero">
+                                src="assets/images/partners/guerrero.webp" alt="Gobierno Guerrero" class="logo-guerrero">
                             <img loading="lazy" decoding="async"
-                                src="assets/images/partners/michoacan.png" alt="Gobierno Michoacán" class="logo-michoacan">
-                            <img loading="lazy" decoding="async" src="assets/images/partners/oaxaca.png"
+                                src="assets/images/partners/michoacan.webp" alt="Gobierno Michoacán" class="logo-michoacan">
+                            <img loading="lazy" decoding="async" src="assets/images/partners/oaxaca.webp"
                                 alt="Gobierno Oaxaca" class="logo-oaxaca">
 
                             <!-- Set 2 (Duplicate for Loop) -->
-                            <img loading="lazy" decoding="async" src="assets/images/partners/cdmx.png"
+                            <img loading="lazy" decoding="async" src="assets/images/partners/cdmx.webp"
                                 alt="Gobierno CDMX" class="logo-cdmx">
-                            <img loading="lazy" decoding="async" src="assets/images/partners/edomex.png"
+                            <img loading="lazy" decoding="async" src="assets/images/partners/edomex.webp"
                                 alt="Gobierno Estado de México" class="logo-edomex">
                             <img loading="lazy" decoding="async"
-                                src="assets/images/partners/guerrero.png" alt="Gobierno Guerrero" class="logo-guerrero">
+                                src="assets/images/partners/guerrero.webp" alt="Gobierno Guerrero" class="logo-guerrero">
                             <img loading="lazy" decoding="async"
-                                src="assets/images/partners/michoacan.png" alt="Gobierno Michoacán" class="logo-michoacan">
-                            <img loading="lazy" decoding="async" src="assets/images/partners/oaxaca.png"
+                                src="assets/images/partners/michoacan.webp" alt="Gobierno Michoacán" class="logo-michoacan">
+                            <img loading="lazy" decoding="async" src="assets/images/partners/oaxaca.webp"
                                 alt="Gobierno Oaxaca" class="logo-oaxaca">
                         </div>
                     </div>
@@ -1172,7 +1163,7 @@
 
                     <div class="features-visual">
                         <div id="foxBubble" class="fox-bubble">¿Ya tienes tu boleto Dorado?</div>
-                        <img loading="lazy" loading="lazy" decoding="async" src="assets/images/fox-thumbs.png"
+                        <img loading="lazy" decoding="async" src="assets/images/fox-thumbs.webp"
                             alt="Gestor de Autos - Servicio 100% garantizado y legal" class="features-fox" width="500"
                             height="500">
                     </div>
@@ -1345,7 +1336,7 @@
 
                 <!-- Trophy Wall Section -->
                 <div class="trophy-wall-container">
-                    <img loading="lazy" loading="lazy" decoding="async" src="assets/images/carros.jpg"
+                    <img loading="lazy" decoding="async" src="assets/images/carros.webp"
                         alt="Gestoría vehicular en Chalco, Ixtapaluca y Huixquilucan - Expertos en Placas"
                         class="trophy-car-img" width="800" height="600">
 
@@ -1730,7 +1721,7 @@
                     <div class="tramite-card">
                         <h3 class="tramite-title">Permiso de Circulación Provisional</h3>
                         <div class="tramite-image">
-                            <img loading="lazy" decoding="async" src="assets/images/permiso_2026.png"
+                            <img loading="lazy" decoding="async" src="assets/images/permiso_2026.webp"
                                 alt="Permiso Provisional Guerrero 2026 Uso Demostrativo" width="300" height="200">
                         </div>
                         <p class="tramite-validity">VÁLIDO EN TODA LA REPÚBLICA MEXICANA</p>
@@ -1752,7 +1743,7 @@
                     <div class="tramite-card">
                         <h3 class="tramite-title">Licencia Permanente Tipo A de Ciudad de México</h3>
                         <div class="tramite-image">
-                            <img loading="lazy" decoding="async" src="assets/images/licencia_morada.png"
+                            <img loading="lazy" decoding="async" src="assets/images/licencia_morada.webp"
                                 alt="Licencia Permanente Tipo A Morada" width="280" height="180"
                                 style="max-width: 280px;">
                         </div>
@@ -1766,11 +1757,15 @@
                             </li>
                             <li class="req-item">
                                 <strong>Identificación Oficial</strong>
-                                <span>(1 copia)</span>
+                                <span>(INE / Pasaporte)</span>
                             </li>
                             <li class="req-item">
-                                <strong>Comprobante de domicilio</strong>
-                                <span>(1 copia)</span>
+                                <strong>Comprobante de Domicilio</strong>
+                                <span>(CDMX no mayor a 3 meses)</span>
+                            </li>
+                            <li class="req-item">
+                                <strong>Línea de captura pagada</strong>
+                                <span>(Clave 01)</span>
                             </li>
                         </ul>
 
@@ -1905,7 +1900,7 @@
 
     <!-- Gold Certificate Badge -->
     <div class="gold-badge" style="display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-        <img loading="lazy" loading="lazy" decoding="async" src="assets/images/gold.png"
+        <img loading="lazy" decoding="async" src="assets/images/gold.webp"
             alt="Certificación Premium - Gestoría Vehicular #1"
             style="max-width: 150px; width: 100%; height: auto; margin-left: 1rem; margin-right: 1rem; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));"
             width="150" height="150">
