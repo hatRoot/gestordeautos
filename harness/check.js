@@ -252,9 +252,6 @@ function checkMetaTags(file, html) {
 // CHECK 12 [v2.0] — Integridad de Navegación de Escritorio
 // ══════════════════════════════════════════════════════════════════════════
 function checkDesktopNavigation(file, html) {
-  if (!html.includes('class="nav-links"')) {
-    fail(`[${file}] Falta el contenedor de navegación de escritorio (.nav-links).`);
-  }
   if (!html.includes('class="header-contacts"')) {
     fail(`[${file}] Falta el contenedor de contactos de cabecera (.header-contacts).`);
   }

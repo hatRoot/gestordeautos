@@ -420,39 +420,7 @@ ul {
     gap: 0.5rem;
 }
 
-.nav-links {
-    display: none;
-}
 
-.nav-links a {
-    color: var(--white);
-    font-weight: 600;
-    transition: var(--transition);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-}
-
-.nav-links a:hover {
-    color: #60a5fa;
-}
-
-/* Desktop: Show nav-links as flex */
-@media (min-width: 769px) {
-    .nav-links {
-        display: flex !important;
-        gap: 1.8rem;
-        margin-left: auto;
-        margin-right: 1.5rem;
-        font-size: 0.95rem;
-        align-items: center;
-    }
-}
-
-/* Mobile: Hide desktop nav-links */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none !important;
-    }
-}
 
 /* Desktop: Show language button */
 @media (min-width: 769px) {
