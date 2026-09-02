@@ -183,62 +183,77 @@ ul {
         display: none !important;
     }
 
-    .header-btn,
-    .nav-ticket-btn {
-        width: 100%;
-        max-width: 280px;
-        min-width: unset;
-        font-size: 0.95rem;
-        padding: 0.75rem 1rem !important;
-    }
-
-    /* Reduce header height on mobile */
+    /* Header Móvil Compacto Horizontal 50px */
     .header {
-        padding: 0.5rem 0;
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999 !important;
+        padding: 6px 0 !important;
+        background: rgba(11, 19, 41, 0.94) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
     }
 
     .nav {
-        flex-direction: column;
-        height: auto !important;
-        gap: 0.5rem;
-        padding: 0.5rem 0;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        height: 48px !important;
+        gap: 0 !important;
+        padding: 0 12px !important;
     }
 
     .logo {
-        margin-right: 0;
-        margin-bottom: 0.25rem;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        text-decoration: none !important;
     }
 
     .logo-img {
-        height: 60px !important;
-        width: 60px !important;
+        height: 36px !important;
+        width: 36px !important;
+        max-height: 36px !important;
     }
 
     .site-title {
-        font-size: 1.8rem !important;
+        font-size: 1.15rem !important;
+        line-height: 1.1 !important;
+        margin: 0 !important;
+    }
+
+    .header-slogan {
+        font-size: 0.6rem !important;
+        display: block !important;
     }
 
     .header-contacts {
-        margin-left: 0;
-        width: 100%;
-        justify-content: center;
+        display: none !important;
     }
 
     .mobile-menu-toggle {
-        margin-left: 0;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        padding: 0.5rem;
-        font-size: 1.2rem;
+        margin: 0 !important;
+        width: 40px !important;
+        height: 40px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        font-size: 1.2rem !important;
+        border-radius: 8px !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        color: #ffffff !important;
     }
 
     .lang-btn {
         display: none !important;
-        /* Managed in overlay */
     }
 }
-
 /* --- END CONSOLIDATED HEADER BUTTONS --- */
 
 
