@@ -4312,21 +4312,27 @@ ul {
     }
 }
 
-/* --- Apple-like Mobile Menu --- */
+/* --- Apple-like Menu Button --- */
 .mobile-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--white);
-    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 1.25rem;
     cursor: pointer;
-    margin-left: 0.5rem;
+    transition: all 0.2s ease;
+    padding: 0;
+    margin: 0;
 }
 
-@media (max-width: 768px) {
-    .mobile-menu-toggle {
-        display: block;
-    }
+.mobile-menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .mobile-overlay {
