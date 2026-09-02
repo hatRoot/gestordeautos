@@ -269,6 +269,7 @@ const CORE_HTML_FILES = [
   'licencia-permanente-cdmx.html',
   'tramites-edomex.html',
   'cambio-de-propietario.html',
+  'placas-conmemorativas-mundial.html',
 ];
 
 CORE_HTML_FILES.forEach((file) => {
