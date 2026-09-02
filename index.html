@@ -312,7 +312,7 @@
     <!-- Header -->
     <header class="header">
         <div class="container nav">
-            <a href="#" class="logo">
+            <a href="/" class="logo">
                 <div class="logo-container">
                     <img loading="lazy" decoding="async" src="assets/images/logo1.webp"
                         alt="Gestoría Vehicular Placas Estado de México - #1 en EdoMex 2026" class="logo-img"
@@ -341,10 +341,12 @@
                 <button id="langToggle" class="lang-btn" aria-label="Switch Language">
                     ES
                 </button>
-                <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Abrir Menú">
-                    <i class="fas fa-bars"></i>
-                </button>
             </div>
+
+            <!-- Botón Hamburguesa independiente para Móvil -->
+            <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Abrir Menú">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
@@ -390,21 +392,28 @@
                         licencias con entrega segura y directa en tu domicilio.
                     </p>
 
-                    <!-- Trust Stats Mini-Bar -->
-                    <div class="promo-stats-row">
-                        <div class="promo-stat">
-                            <span class="stat-num">+18</span>
-                            <span class="stat-lbl">Años de Exp.</span>
+                    <!-- Trust Pillars Grid -->
+                    <div class="promo-pillars">
+                        <div class="pillar-item">
+                            <div class="pillar-icon"><i class="fas fa-shield-alt"></i></div>
+                            <div class="pillar-text">
+                                <strong>100% Legal y Oficial</strong>
+                                <span>Validación directa ante sistemas del gobierno</span>
+                            </div>
                         </div>
-                        <div class="promo-stat-divider"></div>
-                        <div class="promo-stat">
-                            <span class="stat-num">100%</span>
-                            <span class="stat-lbl">Genuinos / QR</span>
+                        <div class="pillar-item">
+                            <div class="pillar-icon"><i class="fas fa-bolt"></i></div>
+                            <div class="pillar-text">
+                                <strong>Sin Filas ni Citas</strong>
+                                <span>Nosotros gestionamos todo por ti en 24-48 hrs</span>
+                            </div>
                         </div>
-                        <div class="promo-stat-divider"></div>
-                        <div class="promo-stat">
-                            <span class="stat-num">24-48h</span>
-                            <span class="stat-lbl">Entrega Express</span>
+                        <div class="pillar-item">
+                            <div class="pillar-icon"><i class="fas fa-truck"></i></div>
+                            <div class="pillar-text">
+                                <strong>A Tu Domicilio</strong>
+                                <span>Recibe tus placas y documentos en tu puerta</span>
+                            </div>
                         </div>
                     </div>
 
@@ -2069,35 +2078,6 @@
 
 
     </footer>
-
-
-    <!-- ============================================================ -->
-    <!-- BOTÓN FLOTANTE WHATSAPP (SIMPLIFICADO - SOLO MÓVIL) -->
-    <!-- ============================================================ -->
-    <div id="floatingWA" style="
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        z-index: 9999;
-        display: none; /* Solo visible en móvil */
-    ">
-        <a href="https://wa.me/525535757364?text=Hola%2C%20me%20urge%20un%20tr%C3%A1mite%20vehicular%2C%20%C2%BFme%20ayudas%20hoy%3F"
-           target="_blank"
-           aria-label="Cotizar por WhatsApp"
-           style="
-               width: 56px;
-               height: 56px;
-               background: linear-gradient(135deg, #25d366, #128c7e);
-               border-radius: 50%;
-               display: flex;
-               align-items: center;
-               justify-content: center;
-               box-shadow: 0 4px 12px rgba(37,211,102,0.4);
-               text-decoration: none;
-           ">
-            <i class="fab fa-whatsapp" style="color:white; font-size:24px;"></i>
-        </a>
-    </div>
 
     <!-- Barra fija inferior en móvil -->
     <div id="mobileCallBar" style="
