@@ -71,6 +71,9 @@ const FORBIDDEN = [
   { pattern: /Reparamos tu Mac/i,                               reason: 'Texto de negocio Mac — no aplica a Gestor de Autos' },
   { pattern: /Apple Consulting/i,                               reason: 'Texto Apple — no aplica a Gestor de Autos' },
   { pattern: /Lic\.\s*Erika/i,                                  reason: 'Nombre de tercero no debe aparecer públicamente' },
+  { pattern: /Boleto\s*Dorado/i,                                reason: 'Boleto Dorado eliminado definitivamente del sitio' },
+  { pattern: /goldenTicketModal/i,                              reason: 'Modal de Boleto Dorado eliminado definitivamente' },
+  { pattern: /openNavTicket/i,                                  reason: 'Botón de Boleto Dorado eliminado definitivamente' },
 ];
 
 function checkForbiddenStrings(file, content) {
@@ -246,6 +249,18 @@ function checkMetaTags(file, html) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════
+// CHECK 12 [v2.0] — Integridad de Navegación de Escritorio
+// ══════════════════════════════════════════════════════════════════════════
+function checkDesktopNavigation(file, html) {
+  if (!html.includes('class="nav-links"')) {
+    fail(`[${file}] Falta el contenedor de navegación de escritorio (.nav-links).`);
+  }
+  if (!html.includes('class="header-contacts"')) {
+    fail(`[${file}] Falta el contenedor de contactos de cabecera (.header-contacts).`);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════════
 // RUNNER
 // ══════════════════════════════════════════════════════════════════════════
 console.log(C.bold('\n🔍 GESTOR DE AUTOS — Arnés de Seguridad v2.0\n'));
@@ -267,6 +282,7 @@ CORE_HTML_FILES.forEach((file) => {
   checkForbiddenStrings(file, content);
   checkImages(file, content);
   checkMobileCallBar(file, content);
+  checkDesktopNavigation(file, content);
   checkH1Count(file, content);
   checkAntiSpam(file, content);
   checkInternalLinks(file, content);

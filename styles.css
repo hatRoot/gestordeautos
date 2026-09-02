@@ -426,63 +426,32 @@ ul {
 
 .nav-links a {
     color: var(--white);
-    font-weight: 500;
+    font-weight: 600;
     transition: var(--transition);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .nav-links a:hover {
-    color: var(--accent-color);
+    color: #60a5fa;
 }
 
 /* Desktop: Show nav-links as flex */
 @media (min-width: 769px) {
     .nav-links {
-        display: flex;
-        gap: 1.5rem;
+        display: flex !important;
+        gap: 1.8rem;
+        margin-left: auto;
         margin-right: 1.5rem;
         font-size: 0.95rem;
         align-items: center;
     }
 }
 
-/* Golden Ticket Button */
-.nav-ticket-btn {
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-    color: #1a1a1a;
-    border: none;
-    padding: 0.45rem 0.9rem;
-    border-radius: 18px;
-    font-weight: 700;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.35rem;
-    white-space: nowrap;
-}
-
-.nav-ticket-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(251, 191, 36, 0.6);
-    background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
-}
-
-.nav-ticket-btn i {
-    font-size: 1.1rem;
-}
-
-/* Mobile: Adjust button layout */
+/* Mobile: Hide desktop nav-links */
 @media (max-width: 768px) {
-
-    /* Hide nav-links completely on mobile */
     .nav-links {
         display: none !important;
     }
-
-    /* Redundant mobile block removed */
 }
 
 /* Desktop: Show language button */
@@ -490,8 +459,6 @@ ul {
     .lang-btn {
         display: flex !important;
     }
-
-    /* Desktop: Golden ticket shown in header-btns */
 }
 
 .header-contacts {
@@ -499,7 +466,12 @@ ul {
     flex-direction: row;
     align-items: center;
     gap: 0.6rem;
-    margin-left: auto;
+}
+
+@media (max-width: 768px) {
+    .header-contacts {
+        display: none !important;
+    }
 }
 
 /* Language button - desktop compact */
@@ -534,16 +506,15 @@ ul {
     background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.8)), url('assets/images/hero-bg.webp');
     background-size: cover;
     background-position: center;
-    display: flex;
-    align-items: center;
     color: var(--white);
-    padding-top: 3.5rem;
-    padding-bottom: 4rem;
+    padding-top: 3rem;
+    padding-bottom: 3.5rem;
 }
 
 @media (max-width: 768px) {
     .hero {
-        padding-top: 2.5rem;
+        padding-top: 1.5rem;
+        padding-bottom: 2rem;
     }
 }
 
@@ -710,8 +681,7 @@ ul {
     text-align: center;
     max-width: 800px;
     padding: 0 1.5rem;
-    margin-top: -100px;
-    /* Overlap the image bottom */
+    margin: 0 auto;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
     /* Strong shadow for readability */
 }
@@ -1889,7 +1859,7 @@ ul {
     }
 
     .hero {
-        padding-top: 200px;
+        padding-top: 2.5rem;
     }
 
     .hero h1 {
@@ -1978,16 +1948,13 @@ ul {
     }
 
     /* Hero Adjustments */
-    /* Hero Adjustments */
     .hero {
-        padding-top: 240px;
-        /* Reduced from 280px */
+        padding-top: 1.5rem;
         text-align: center;
         height: auto;
-        min-height: 100vh;
-        padding-bottom: 3rem;
+        min-height: auto;
+        padding-bottom: 2.5rem;
         background-position: center;
-        /* Center bg on mobile */
     }
 
     .hero-content {
@@ -3414,12 +3381,10 @@ ul {
         line-height: 1.3;
     }
 
-    /* Push Hero text down to account for taller header */
+    /* Hero text mobile */
     .hero-text {
-        margin-top: 100px;
-        /* Significantly increased to avoid overlap with large mobile header */
-        padding-top: 6rem;
-        /* Ensures text is well below the centered logo/menu area */
+        margin-top: 0;
+        padding-top: 0;
     }
 }
 
@@ -4269,33 +4234,12 @@ ul {
 }
 
 /* Sticky Mobile WhatsApp Button - RESTAURADO y POTENCIADO */
-.sticky-whatsapp {
-    position: fixed;
-    bottom: max(env(safe-area-inset-bottom, 20px), 20px);
-    right: 20px;
-    background: linear-gradient(135deg, #25D366, #128C7E);
-    color: white !important;
-    padding: 12px 24px;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1rem;
-    font-weight: 700;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-    z-index: 5500;
-    text-decoration: none;
-    transition: all 0.3s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
-    opacity: 0;
-    transform: translateY(20px);
-}
-
+.sticky-whatsapp,
 .sticky-whatsapp.visible {
-    pointer-events: auto;
-    opacity: 1;
-    transform: translateY(0);
-    animation: pulseWhatsapp 2s infinite;
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
 }
 
 @keyframes pulseWhatsapp {
@@ -4314,7 +4258,7 @@ ul {
 
 /* --- Apple-like Menu Button --- */
 .mobile-menu-toggle {
-    display: flex;
+    display: none !important;
     align-items: center;
     justify-content: center;
     width: 42px;
@@ -4328,6 +4272,12 @@ ul {
     transition: all 0.2s ease;
     padding: 0;
     margin: 0;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: flex !important;
+    }
 }
 
 .mobile-menu-toggle:hover {
@@ -4352,6 +4302,12 @@ ul {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 769px) {
+    .mobile-overlay {
+        display: none !important;
+    }
 }
 
 .mobile-overlay.active {
@@ -4540,7 +4496,6 @@ details.seo-details[open] .seo-toggle-icon {
     
     /* Dynamic Viewport for iOS Safari Bottom Bar */
     @supports (height: 100dvh) {
-        .hero, 
         .mobile-overlay,
         body {
             min-height: 100dvh !important;
@@ -4580,230 +4535,6 @@ details.seo-details[open] .seo-toggle-icon {
 }
 
 /* ============================================================ */
-/* GOLDEN TICKET (BOLETO DORADO) STYLES v2 */
-/* ============================================================ */
-.golden-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
-}
-
-.golden-modal.visible {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.golden-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(8px);
-}
-
-.ticket-container {
-    position: relative;
-    perspective: 1000px;
-    width: 95%;
-    max-width: 450px;
-}
-
-.ticket {
-    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 25%, #c5a000 50%, #ffed4e 75%, #ffd700 100%);
-    padding: 2.5rem 1.5rem;
-    border-radius: 12px;
-    position: relative;
-    text-align: center;
-    color: #1a1a1a;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(255, 255, 255, 0.4);
-    border: 4px double #b08d57;
-    font-family: 'Inter', sans-serif;
-    animation: ticketEntry 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-@keyframes ticketEntry {
-    from {
-        transform: scale(0.8) rotateX(-30deg);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1) rotateX(0);
-        opacity: 1;
-    }
-}
-
-.ticket-close-x {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: transparent;
-    border: none;
-    font-size: 2rem;
-    line-height: 1;
-    cursor: pointer;
-    color: #8b6508;
-    transition: transform 0.3s;
-    z-index: 10;
-    font-weight: 300;
-}
-
-.ticket-close-x:hover {
-    transform: scale(1.2) rotate(90deg);
-    color: #000;
-}
-
-.ticket-header {
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-    padding-bottom: 1rem;
-    margin-bottom: 1.5rem;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    align-items: center;
-}
-
-.ticket-title {
-    font-weight: 900;
-    letter-spacing: 4px;
-    font-size: 1.2rem;
-}
-
-.ticket-star {
-    color: #8b6508;
-    font-size: 1.5rem;
-}
-
-.ticket-body h3 {
-    font-size: 2rem;
-    margin-bottom: 0.8rem;
-    font-weight: 900;
-    color: #1a1a1a;
-}
-
-.ticket-body p {
-    font-size: 0.95rem;
-    line-height: 1.4;
-    color: #333;
-}
-
-.ticket-input {
-    width: 100%;
-    padding: 0.8rem;
-    border-radius: 8px;
-    border: 2px solid #b08d57;
-    background: rgba(255, 255, 255, 0.9);
-    margin-top: 1.5rem;
-    font-size: 1.1rem;
-    text-align: center;
-    font-weight: 600;
-    outline: none;
-}
-
-.ticket-input:focus {
-    border-color: #000;
-    background: #fff;
-}
-
-.folio-box {
-    background: rgba(0, 0, 0, 0.05);
-    border: 2px dashed #8b6508;
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 8px;
-}
-
-.folio-label {
-    display: block;
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: #8b6508;
-    margin-bottom: 0.2rem;
-}
-
-.folio-number {
-    font-size: 1.6rem;
-    font-weight: 900;
-    letter-spacing: 2px;
-    font-family: 'Courier New', monospace;
-}
-
-.ticket-benefit {
-    font-size: 1rem;
-    margin-top: 1rem;
-}
-
-.ticket-footer {
-    margin-top: 1.5rem;
-}
-
-.btn-claim {
-    background: #1a1a1a;
-    color: #ffd700;
-    padding: 0.8rem 2rem;
-    border-radius: 50px;
-    font-weight: 800;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    width: 100%;
-    font-size: 1rem;
-}
-
-.btn-claim:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    background: #000;
-}
-
-.ticket-label {
-    display: block;
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: #1a1a1a;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-    text-align: left;
-}
-
-.ticket-select {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    border: 2px solid #b08d57;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.9);
-    color: #1a1a1a;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-bottom: 1rem;
-}
-
-.ticket-select:focus {
-    outline: none;
-    border-color: #ffd700;
-    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
-}
-
-.ticket-select option {
-    padding: 0.5rem;
-    background: white;
-    color: #1a1a1a;
-}
-
-.hidden {
-    display: none !important;
-}
 
 /* ==========================================================================
    SPLIT PROMO SECTION WITH MINI CAROUSEL
@@ -5750,11 +5481,18 @@ main {
         background: #fbbf24 !important;
     }
 
-    /* Hero Main Section Mobile (Reduced Dead Gap) */
+    /* Hero Main Section Mobile (Clean Spacing - No Dead Gap) */
     .hero {
         padding-top: 1rem !important;
         padding-bottom: 2rem !important;
         margin-top: 0 !important;
+        min-height: auto !important;
+        height: auto !important;
+    }
+
+    .hero-text {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
     }
 
     .hero h2 span[data-i18n="hero_title_main"],

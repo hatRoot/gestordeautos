@@ -324,7 +324,26 @@
                 </div>
             </a>
 
-            <!-- Botón Hamburguesa elegante a la derecha -->
+            <!-- Desktop Navigation Links -->
+            <nav class="nav-links" aria-label="Navegación principal">
+                <a href="#inicio" data-i18n="nav_home">Inicio</a>
+                <a href="#servicios" data-i18n="nav_services">Servicios</a>
+                <a href="#contacto" data-i18n="nav_contact">Contacto</a>
+            </nav>
+
+            <div class="header-contacts">
+                <a href="https://wa.me/525535757364?text=Hola%2C%20me%20urge%20un%20tr%C3%A1mite%20vehicular%2C%20%C2%BFme%20ayudas%20hoy%3F"
+                    class="btn btn-whatsapp header-btn primary-tel" target="_blank" aria-label="Cotizaciones WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                    <span class="btn-text">
+                        <span class="text-default">COTIZACIONES</span>
+                        <span class="text-hover">WHATSAPP</span>
+                    </span>
+                </a>
+                <button id="langToggle" class="lang-btn" aria-label="Cambiar Idioma">ES</button>
+            </div>
+
+            <!-- Botón Hamburguesa independiente para Móvil (Oculto en Escritorio) -->
             <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Abrir Menú">
                 <i class="fas fa-bars"></i>
             </button>
@@ -340,9 +359,6 @@
             <a href="#servicios" class="overlay-link overlay-link-js" data-i18n="nav_services">Servicios</a>
             <a href="#contacto" class="overlay-link overlay-link-js" data-i18n="nav_contact">Contacto</a>
             <hr class="overlay-divider">
-            <button id="openNavTicketOverlay" class="nav-ticket-btn overlay-btn">
-                <i class="fas fa-ticket-alt"></i> BOLETO DORADO
-            </button>
             <a href="https://wa.me/525535757364?text=Hola%2C%20me%20urge%20un%20tr%C3%A1mite%20vehicular%2C%20%C2%BFme%20ayudas%20hoy%3F"
                 class="btn btn-whatsapp overlay-btn" target="_blank">
                 <i class="fab fa-whatsapp"></i> COTIZACIONES
@@ -1155,7 +1171,7 @@
                     </div>
 
                     <div class="features-visual">
-                        <div id="foxBubble" class="fox-bubble">¿Ya tienes tu boleto Dorado?</div>
+                        <div id="foxBubble" class="fox-bubble">¡Trámites rápidos y 100% legales!</div>
                         <img loading="lazy" decoding="async" src="assets/images/fox-thumbs.webp"
                             alt="Gestor de Autos - Servicio 100% garantizado y legal" class="features-fox" width="500"
                             height="500">
@@ -1901,58 +1917,6 @@
 
     <!-- Friendly Fox pointing to WhatsApp -->
 
-
-    <!-- Golden Ticket v2 / Boleto Dorado (Personalizado) -->
-    <div id="goldenTicketModal" class="golden-modal hidden">
-        <div class="golden-overlay"></div>
-        <div class="ticket-container">
-            <div class="ticket">
-                <!-- Close Button (X) -->
-                <button id="closeTicket" class="ticket-close-x" aria-label="Cerrar">&times;</button>
-
-                <div class="ticket-header">
-                    <span class="ticket-star">★</span>
-                    <span class="ticket-title">BOLETO DORADO</span>
-                    <span class="ticket-star">★</span>
-                    <span style="display:none">v3.0</span>
-                </div>
-
-                <div class="ticket-step">
-                    <div class="ticket-body">
-                        <h3>¡COTIZA TU TRÁMITE!</h3>
-                        <p>Mándanos un WhatsApp para tu cotización. Escribe tu nombre y envía este folio (o toma
-                            captura):</p>
-
-                        <div class="folio-box">
-                            <span class="folio-label">TU CÓDIGO ÚNICO:</span>
-                            <span id="ticketFolio" class="folio-number">...</span>
-                        </div>
-
-                        <label for="referralSource" class="ticket-label">¿Cómo nos conociste?</label>
-                        <select id="referralSource" class="ticket-select">
-                            <option value="G">GOOGLE MAPS / INTERNET</option>
-                            <option value="O">RECOMENDACIÓN DE OSO</option>
-                        </select>
-
-                        <input type="text" id="ticketVisitorName" class="ticket-input"
-                            placeholder="Escribe tu nombre aquí..." maxlength="40">
-                    </div>
-                    <div class="ticket-footer">
-                        <a href="#" id="claimTicketBtn" class="btn-claim">
-                            <i class="fab fa-whatsapp"></i> ENVIAR POR WHATSAPP
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <!-- Golden Ticket styles moved to styles.css -->
-
-
-    <!-- Golden Ticket Logic moved to script.js -->
 
     <!-- Footer -->
     <!-- Recent Activity Section for SEO Freshness -->
