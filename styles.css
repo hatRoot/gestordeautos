@@ -5583,4 +5583,12 @@ main {
     #permisos-showcase .tramite-card {
         padding: 1.5rem 1.2rem !important;
     }
+
+    /* Fixed Bottom Bar on Mobile for maximum conversions */
+    #mobileCallBar {
+        display: block !important;
+    }
+    body {
+        padding-bottom: 54px;
+    }
 }
