@@ -616,7 +616,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', injectStickyBtn);
 
     // ==========================================================================
-    // MINI HERO SLIDER AUTOMATION & CONTROLS
+    // MINI HERO CAROUSEL LOGIC
     // ==========================================================================
     const miniSlider = document.querySelector('.mini-hero-slider');
     if (miniSlider) {
@@ -628,15 +628,20 @@ document.addEventListener('DOMContentLoaded', () => {
         let miniInterval = null;
 
         function goToMiniSlide(index) {
+            if (!miniSlides || miniSlides.length === 0) return;
             miniSlides[currentMiniSlide].classList.remove('active');
-            miniDots[currentMiniSlide].classList.remove('active');
-            miniDots[currentMiniSlide].setAttribute('aria-selected', 'false');
+            if (miniDots && miniDots[currentMiniSlide]) {
+                miniDots[currentMiniSlide].classList.remove('active');
+                miniDots[currentMiniSlide].setAttribute('aria-selected', 'false');
+            }
 
             currentMiniSlide = (index + miniSlides.length) % miniSlides.length;
 
             miniSlides[currentMiniSlide].classList.add('active');
-            miniDots[currentMiniSlide].classList.add('active');
-            miniDots[currentMiniSlide].setAttribute('aria-selected', 'true');
+            if (miniDots && miniDots[currentMiniSlide]) {
+                miniDots[currentMiniSlide].classList.add('active');
+                miniDots[currentMiniSlide].setAttribute('aria-selected', 'true');
+            }
         }
 
         function nextMiniSlide() {
@@ -659,28 +664,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        if (miniNextBtn) {
-            miniNextBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                nextMiniSlide();
-                startMiniAuto();
+        if (miniNextBtn) miniNextBtn.addEventListener('click', () => { nextMiniSlide(); startMiniAuto(); });
+        if (miniPrevBtn) miniPrevBtn.addEventListener('click', () => { prevMiniSlide(); startMiniAuto(); });
+
+        if (miniDots && miniDots.length > 0) {
+            miniDots.forEach((dot, idx) => {
+                dot.addEventListener('click', () => {
+                    goToMiniSlide(idx);
+                    startMiniAuto();
+                });
             });
         }
-
-        if (miniPrevBtn) {
-            miniPrevBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                prevMiniSlide();
-                startMiniAuto();
-            });
-        }
-
-        miniDots.forEach((dot, idx) => {
-            dot.addEventListener('click', () => {
-                goToMiniSlide(idx);
-                startMiniAuto();
-            });
-        });
 
         miniSlider.addEventListener('mouseenter', stopMiniAuto);
         miniSlider.addEventListener('mouseleave', startMiniAuto);
