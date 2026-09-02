@@ -1,3 +1,11 @@
 User-agent: *
 Allow: /
+
+# Desindexar rutas privadas y administrativas (Crawl Budget Optimization)
+Disallow: /dashboard.html
+Disallow: /dashboard.css
+Disallow: /dashboard.js
+Disallow: /login.html
+Disallow: /harness/
+
 Sitemap: https://gestordeautos.com.mx/sitemap.xml
