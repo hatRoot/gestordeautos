@@ -137,9 +137,73 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
+    // 5. Golden Ticket Logic & Mobile Menu
     // ==========================================
-    // 5. Mobile Menu Overlay Logic
-    // ==========================================
+    const ticketModal = document.getElementById('goldenTicketModal');
+    const openNavBtnMobile = document.getElementById('openNavTicket');
+    const openNavTicketOverlay = document.getElementById('openNavTicketOverlay');
+    const closeBtn = document.getElementById('closeTicket');
+    const nameInput = document.getElementById('ticketVisitorName');
+    const folioSpan = document.getElementById('ticketFolio');
+    const claimBtn = document.getElementById('claimTicketBtn');
+    const referralSelect = document.getElementById('referralSource');
+
+    let currentFolio = "";
+    let ticketShown = false;
+
+    // Unique Code Generator
+    function generateUniqueCode(source) {
+        const now = new Date();
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = String(now.getFullYear()).slice(-2);
+        const dateStr = `${day}${month}${year}`;
+
+        let counter = parseInt(localStorage.getItem('ticketCounter') || '5000', 10);
+        counter += 1;
+        localStorage.setItem('ticketCounter', counter.toString());
+
+        const counterStr = String(counter).padStart(4, '0');
+
+        // Map prefixes properly
+        let prefixSource = source;
+        if (source === 'G') prefixSource = 'G';
+        if (source === 'E') prefixSource = 'E';
+        if (source === 'O') prefixSource = 'O';
+
+        return `${prefixSource}-${dateStr}-${counterStr}`;
+    }
+
+    // Boleto Dorado: solo se abre con el botón, NO automáticamente.
+
+    function openTicket() {
+        if (!referralSelect || !folioSpan || !ticketModal) return;
+        const selectedSource = referralSelect.value;
+        currentFolio = generateUniqueCode(selectedSource);
+        folioSpan.textContent = currentFolio;
+
+        ticketModal.classList.remove('hidden');
+        setTimeout(() => ticketModal.classList.add('visible'), 10);
+    }
+
+    if (referralSelect && folioSpan) {
+        referralSelect.addEventListener('change', () => {
+            const selectedSource = referralSelect.value;
+            currentFolio = generateUniqueCode(selectedSource);
+            folioSpan.textContent = currentFolio;
+        });
+    }
+
+    if (openNavBtnMobile) openNavBtnMobile.addEventListener('click', openTicket);
+    if (openNavTicketOverlay) {
+        openNavTicketOverlay.addEventListener('click', () => {
+            const overlay = document.getElementById('mobileOverlay');
+            if (overlay) overlay.classList.remove('active');
+            openTicket();
+        });
+    }
+
+    // --- Mobile Menu Overlay Logic ---
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const mobileOverlay = document.getElementById('mobileOverlay');
     const closeOverlay = document.getElementById('closeOverlay');
@@ -148,25 +212,53 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mobileMenuToggle && mobileOverlay) {
         mobileMenuToggle.addEventListener('click', () => {
             mobileOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
         });
     }
 
     if (closeOverlay && mobileOverlay) {
         closeOverlay.addEventListener('click', () => {
             mobileOverlay.classList.remove('active');
-            document.body.style.overflow = '';
         });
     }
 
     overlayLinks.forEach(link => {
         link.addEventListener('click', () => {
-            if (mobileOverlay) {
-                mobileOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
+            if (mobileOverlay) mobileOverlay.classList.remove('active');
         });
     });
+
+    if (closeBtn && ticketModal) {
+        closeBtn.addEventListener('click', () => {
+            ticketModal.classList.remove('visible');
+            setTimeout(() => {
+                ticketModal.classList.add('hidden');
+            }, 500);
+        });
+    }
+
+    if (claimBtn && nameInput) {
+        claimBtn.addEventListener('click', (e) => {
+            const userName = nameInput.value.trim();
+            if (userName.length < 2) {
+                e.preventDefault();
+                nameInput.style.borderColor = "#ef4444";
+                nameInput.placeholder = "Escribe tu nombre";
+                return;
+            }
+
+            sessionStorage.setItem('ticketClaimed', 'true');
+
+            const finalMsg = `Hola, soy ${userName}. Mi folio es ${currentFolio}. Me urge un trámite vehicular, ¿me ayudas hoy?`;
+            const waUrl = `https://wa.me/525535757364?text=${encodeURIComponent(finalMsg)}`;
+
+            window.open(waUrl, '_blank');
+
+            if (ticketModal) {
+                ticketModal.classList.remove('visible');
+                setTimeout(() => ticketModal.classList.add('hidden'), 500);
+            }
+        });
+    }
 
     // ==========================================
     // 6. Cover Flow Effect (Reviews) - OPTIMIZED
@@ -465,6 +557,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (link.closest('.hero')) label = 'hero_cta';
             if (link.closest('.service-card') || link.closest('.service-card-edomex')) label = 'service_card';
             if (link.closest('.sticky-whatsapp')) label = 'sticky_mobile';
+            if (link.closest('.golden-ticket-modal')) label = 'golden_ticket_claim';
+
             trackEvent('generate_lead', {
                 currency: "MXN",
                 value: 100, // Estimated lead value
@@ -475,15 +569,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // C. Sticky Mobile WhatsApp Button (Only inject if mobileCallBar is NOT present)
-    function injectStickyBtn() {
-        // If mobileCallBar is present on mobile, never inject redundant floating button
-        if (document.getElementById('mobileCallBar')) {
-            const existingSticky = document.querySelector('.sticky-whatsapp');
-            if (existingSticky) existingSticky.remove();
-            return;
-        }
+    // B. Track Boleto Dorado Claims (Specific Event)
+    if (claimBtn) {
+        // We attach to the existing listener logic by wrapping or adding a new one. 
+        // Since we can't easily wrap the anonymous function above without refactoring, 
+        // we'll just add a second listener that runs in parallel for tracking.
+        claimBtn.addEventListener('click', () => {
+            const userName = nameInput.value.trim();
+            if (userName.length >= 2) {
+                trackEvent('campaign_click', {
+                    event_category: 'promotion',
+                    event_label: 'boleto_dorado_claim',
+                    value: 500 // Higher intent value
+                });
+            }
+        });
+    }
 
+    // C. Sticky Mobile WhatsApp Button (Inject if missing)
+    function injectStickyBtn() {
         if (window.innerWidth > 768) return; // Mobile only
 
         // Check if already exists
@@ -496,6 +600,8 @@ document.addEventListener('DOMContentLoaded', () => {
         stickyBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Cotizar Ahora';
         document.body.appendChild(stickyBtn);
 
+        // 🔴 FIX: Reduced threshold from 300px to 100px so the button appears sooner.
+        // Many users scroll very little before deciding to contact or leave.
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
                 stickyBtn.classList.add('visible');
@@ -510,7 +616,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', injectStickyBtn);
 
     // ==========================================================================
-    // MINI HERO CAROUSEL LOGIC
+    // MINI HERO SLIDER AUTOMATION & CONTROLS
     // ==========================================================================
     const miniSlider = document.querySelector('.mini-hero-slider');
     if (miniSlider) {
@@ -522,20 +628,15 @@ document.addEventListener('DOMContentLoaded', () => {
         let miniInterval = null;
 
         function goToMiniSlide(index) {
-            if (!miniSlides || miniSlides.length === 0) return;
             miniSlides[currentMiniSlide].classList.remove('active');
-            if (miniDots && miniDots[currentMiniSlide]) {
-                miniDots[currentMiniSlide].classList.remove('active');
-                miniDots[currentMiniSlide].setAttribute('aria-selected', 'false');
-            }
+            miniDots[currentMiniSlide].classList.remove('active');
+            miniDots[currentMiniSlide].setAttribute('aria-selected', 'false');
 
             currentMiniSlide = (index + miniSlides.length) % miniSlides.length;
 
             miniSlides[currentMiniSlide].classList.add('active');
-            if (miniDots && miniDots[currentMiniSlide]) {
-                miniDots[currentMiniSlide].classList.add('active');
-                miniDots[currentMiniSlide].setAttribute('aria-selected', 'true');
-            }
+            miniDots[currentMiniSlide].classList.add('active');
+            miniDots[currentMiniSlide].setAttribute('aria-selected', 'true');
         }
 
         function nextMiniSlide() {
@@ -558,17 +659,28 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        if (miniNextBtn) miniNextBtn.addEventListener('click', () => { nextMiniSlide(); startMiniAuto(); });
-        if (miniPrevBtn) miniPrevBtn.addEventListener('click', () => { prevMiniSlide(); startMiniAuto(); });
-
-        if (miniDots && miniDots.length > 0) {
-            miniDots.forEach((dot, idx) => {
-                dot.addEventListener('click', () => {
-                    goToMiniSlide(idx);
-                    startMiniAuto();
-                });
+        if (miniNextBtn) {
+            miniNextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                nextMiniSlide();
+                startMiniAuto();
             });
         }
+
+        if (miniPrevBtn) {
+            miniPrevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                prevMiniSlide();
+                startMiniAuto();
+            });
+        }
+
+        miniDots.forEach((dot, idx) => {
+            dot.addEventListener('click', () => {
+                goToMiniSlide(idx);
+                startMiniAuto();
+            });
+        });
 
         miniSlider.addEventListener('mouseenter', stopMiniAuto);
         miniSlider.addEventListener('mouseleave', startMiniAuto);

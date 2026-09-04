@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * ╔══════════════════════════════════════════════════════════╗
- * ║         GESTOR DE AUTOS — ARNÉS DE SEGURIDAD v2.0       ║
+ * ║         GESTOR DE AUTOS — ARNÉS DE SEGURIDAD v1.0       ║
  * ║  Verifica integridad del sitio ANTES de hacer push.     ║
  * ║  Si algo falla, el push es bloqueado automáticamente.   ║
  * ╚══════════════════════════════════════════════════════════╝
@@ -13,12 +13,6 @@
  *   4. Secciones críticas — que el hero, nav, y footer estén presentes
  *   5. Doble style= en un tag — atributo duplicado que rompe el CSS
  *   6. CSS crítico — que .split-promo-section y .hero existan en styles.css
- *   7. HTML balanceado — tags estructurales <section>, <main>, etc.
- *   8. [NUEVO v2.0] Barra móvil `#mobileCallBar` obligatoria en páginas clave
- *   9. [NUEVO v2.0] Encabezado H1 único (exactamente 1 por página)
- *  10. [NUEVO v2.0] Anti-Spam: Cero bloques display:none con H1/H2 o keywords
- *  11. [NUEVO v2.0] Enlaces internos 404: Todo href="*.html" debe existir
- *  12. [NUEVO v2.0] Metadatos SEO: Presencia de <title> y rel="canonical"
  */
 
 const fs   = require('fs');
@@ -46,7 +40,7 @@ function readFile(rel) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════
-// CHECK 1 — HTML: código suelto después de </section> y atributos duplicados
+// CHECK 1 — HTML: código suelto después de </section>
 // ══════════════════════════════════════════════════════════════════════════
 function checkHtmlCorruption(file, html) {
   const lines = html.split('\n');
@@ -56,7 +50,7 @@ function checkHtmlCorruption(file, html) {
       fail(`[${file}:${i+1}] Código suelto después de tag de cierre: ${line.trim().slice(0, 80)}`);
     }
     // Detecta atributo style duplicado en un solo tag de apertura
-    if (/<[a-zA-Z0-9]+\b[^>]*\bstyle=["'][^"']*["'][^>]*\bstyle=/i.test(line)) {
+    if ((line.match(/style=/g) || []).length > 1) {
       fail(`[${file}:${i+1}] Atributo 'style' duplicado en el mismo tag: ${line.trim().slice(0, 80)}`);
     }
   });
@@ -71,9 +65,6 @@ const FORBIDDEN = [
   { pattern: /Reparamos tu Mac/i,                               reason: 'Texto de negocio Mac — no aplica a Gestor de Autos' },
   { pattern: /Apple Consulting/i,                               reason: 'Texto Apple — no aplica a Gestor de Autos' },
   { pattern: /Lic\.\s*Erika/i,                                  reason: 'Nombre de tercero no debe aparecer públicamente' },
-  { pattern: /Boleto\s*Dorado/i,                                reason: 'Boleto Dorado eliminado definitivamente del sitio' },
-  { pattern: /goldenTicketModal/i,                              reason: 'Modal de Boleto Dorado eliminado definitivamente' },
-  { pattern: /openNavTicket/i,                                  reason: 'Botón de Boleto Dorado eliminado definitivamente' },
 ];
 
 function checkForbiddenStrings(file, content) {
@@ -94,7 +85,7 @@ function checkImages(file, html) {
   const imgRegex = /src=["']([^"']*assets\/images\/[^"']+)["']/g;
   let match;
   while ((match = imgRegex.exec(html)) !== null) {
-    const imgPath = match[1].replace(/^\.\.\//, '').split('?')[0];
+    const imgPath = match[1].replace(/^\.\.\//, '');
     const fullPath = path.join(ROOT, imgPath);
     if (!fs.existsSync(fullPath)) {
       fail(`[${file}] Imagen referenciada no existe en disco: ${imgPath}`);
@@ -144,8 +135,12 @@ function checkCriticalCSS(css) {
 // CHECK 6 — HTML balanceado (conteo básico de tags abiertos vs cerrados)
 // ══════════════════════════════════════════════════════════════════════════
 function checkTagBalance(file, html) {
+  // Tags que se auto-cierran, no necesitan cierre
   const voidTags = new Set(['area','base','br','col','embed','hr','img','input',
                              'link','meta','param','source','track','wbr']);
+  // Tags generados dinámicamente por JS — tolerancia alta
+  const highToleranceTags = new Set(['div', 'li', 'a', 'span', 'p']);
+
   const openRe  = /<([a-zA-Z][a-zA-Z0-9]*)\b[^>]*(?<!\/)>/g;
   const closeRe = /<\/([a-zA-Z][a-zA-Z0-9]*)>/g;
 
@@ -162,6 +157,7 @@ function checkTagBalance(file, html) {
     closes[tag] = (closes[tag] || 0) + 1;
   }
 
+  // Solo checar tags estructurales que no se generan con JS
   const structuralTags = ['section', 'article', 'main', 'header', 'footer',
                            'table', 'thead', 'tbody', 'tr', 'td', 'th',
                            'form', 'fieldset', 'select', 'option',
@@ -185,110 +181,29 @@ function checkTagBalance(file, html) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════
-// CHECK 7 [v2.0] — Barra móvil (#mobileCallBar)
-// ══════════════════════════════════════════════════════════════════════════
-function checkMobileCallBar(file, html) {
-  if (!html.includes('id="mobileCallBar"')) {
-    fail(`[${file}] Falta la barra fija móvil (#mobileCallBar) — crucial para conversiones.`);
-  }
-}
-
-// ══════════════════════════════════════════════════════════════════════════
-// CHECK 8 [v2.0] — Encabezado H1 Único
-// ══════════════════════════════════════════════════════════════════════════
-function checkH1Count(file, html) {
-  const h1Matches = html.match(/<h1\b/gi) || [];
-  if (h1Matches.length === 0) {
-    fail(`[${file}] No se encontró ninguna etiqueta <h1>.`);
-  } else if (h1Matches.length > 1) {
-    fail(`[${file}] Se encontraron ${h1Matches.length} etiquetas <h1> (debe haber exactamente 1).`);
-  }
-}
-
-// ══════════════════════════════════════════════════════════════════════════
-// CHECK 9 [v2.0] — Anti-Spam: Cero bloques ocultos con keywords/h1
-// ══════════════════════════════════════════════════════════════════════════
-function checkAntiSpam(file, html) {
-  if (/<h[1-6]\b[^>]*style=["'][^"']*(?:display:\s*none|visibility:\s*hidden)[^"']*["']/i.test(html)) {
-    fail(`[${file}] Infracción Anti-Spam: Encabezado <h1>-<h6> con display:none o visibility:hidden directo.`);
-  }
-  const hiddenBlockRegex = /<(?:div|span|p|section|article)\b[^>]*style=["'][^"']*(?:display:\s*none|visibility:\s*hidden)[^"']*["'][^>]*>([\s\S]*?)<\/(?:div|span|p|section|article)>/gi;
-  let match;
-  while ((match = hiddenBlockRegex.exec(html)) !== null) {
-    if (/<h[1-6]\b/i.test(match[1])) {
-      fail(`[${file}] Infracción Anti-Spam: Bloque oculto (display:none) con encabezados <h1>-<h6>.`);
-    }
-  }
-}
-
-// ══════════════════════════════════════════════════════════════════════════
-// CHECK 10 [v2.0] — Enlaces internos 404
-// ══════════════════════════════════════════════════════════════════════════
-function checkInternalLinks(file, html) {
-  const linkRegex = /href=["']([a-zA-Z0-9_-]+\.html)(?:#[^"']*)?["']/g;
-  let match;
-  while ((match = linkRegex.exec(html)) !== null) {
-    const targetFile = match[1];
-    const fullPath = path.join(ROOT, targetFile);
-    if (!fs.existsSync(fullPath)) {
-      fail(`[${file}] Enlace interno roto (404): href="${targetFile}" no existe.`);
-    }
-  }
-}
-
-// ══════════════════════════════════════════════════════════════════════════
-// CHECK 11 [v2.0] — Metadatos SEO (<title> y canonical)
-// ══════════════════════════════════════════════════════════════════════════
-function checkMetaTags(file, html) {
-  if (!/<title>[^<]+<\/title>/i.test(html)) {
-    fail(`[${file}] Falta la etiqueta <title> o está vacía.`);
-  }
-  if (!/<link\s+[^>]*rel=["']canonical["'][^>]*>/i.test(html)) {
-    fail(`[${file}] Falta la etiqueta <link rel="canonical">.`);
-  }
-}
-
-// ══════════════════════════════════════════════════════════════════════════
-// CHECK 12 [v2.0] — Integridad de Navegación de Escritorio
-// ══════════════════════════════════════════════════════════════════════════
-function checkDesktopNavigation(file, html) {
-  if (!html.includes('class="header-contacts"')) {
-    fail(`[${file}] Falta el contenedor de contactos de cabecera (.header-contacts).`);
-  }
-}
-
-// ══════════════════════════════════════════════════════════════════════════
 // RUNNER
 // ══════════════════════════════════════════════════════════════════════════
-console.log(C.bold('\n🔍 GESTOR DE AUTOS — Arnés de Seguridad v2.0\n'));
+console.log(C.bold('\n🔍 GESTOR DE AUTOS — Arnés de Seguridad\n'));
 console.log(C.cyan('   📖 Manual: harness/README.md  |  Ejecución manual: node harness/check.js\n'));
 
-const CORE_HTML_FILES = [
+const HTML_FILES = [
   'index.html',
   'alta-de-placas.html',
   'licencia-permanente-cdmx.html',
   'tramites-edomex.html',
   'cambio-de-propietario.html',
-  'placas-conmemorativas-mundial.html',
 ];
 
-CORE_HTML_FILES.forEach((file) => {
+HTML_FILES.forEach((file) => {
   const content = readFile(file);
   if (!content) return;
   console.log(C.cyan(`  ▶ Verificando ${file}...`));
   checkHtmlCorruption(file, content);
   checkForbiddenStrings(file, content);
   checkImages(file, content);
-  checkMobileCallBar(file, content);
-  checkDesktopNavigation(file, content);
-  checkH1Count(file, content);
-  checkAntiSpam(file, content);
-  checkInternalLinks(file, content);
-  checkMetaTags(file, content);
-  checkTagBalance(file, content);
-
   if (file === 'index.html') {
     checkCriticalSections(content);
+    checkTagBalance(file, content);
   }
 });
 

@@ -7,7 +7,7 @@
     <!-- Inicio / Home - Optimizado SEO para Placas Estado de México -->
     <url>
         <loc>https://gestordeautos.com.mx/</loc>
-        <lastmod>2026-09-03</lastmod>
+        <lastmod>2026-04-01</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
@@ -15,7 +15,7 @@
     <!-- Trámites EdoMex - Página principal de servicios -->
     <url>
         <loc>https://gestordeautos.com.mx/tramites-edomex.html</loc>
-        <lastmod>2026-09-03</lastmod>
+        <lastmod>2026-04-01</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
@@ -23,7 +23,7 @@
     <!-- Alta de Placas - Optimizado para Placas Nuevas Estado de México -->
     <url>
         <loc>https://gestordeautos.com.mx/alta-de-placas.html</loc>
-        <lastmod>2026-09-03</lastmod>
+        <lastmod>2026-04-01</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
@@ -31,7 +31,7 @@
     <!-- Cambio de Propietario - Optimizado para Traspaso Vehicular -->
     <url>
         <loc>https://gestordeautos.com.mx/cambio-de-propietario.html</loc>
-        <lastmod>2026-09-03</lastmod>
+        <lastmod>2026-04-01</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
@@ -40,18 +40,11 @@
     <!-- Licencia Permanente CDMX -->
     <url>
         <loc>https://gestordeautos.com.mx/licencia-permanente-cdmx.html</loc>
-        <lastmod>2026-09-03</lastmod>
+        <lastmod>2026-03-18</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
 
-    <!-- Placas Conmemorativas Mundial -->
-    <url>
-        <loc>https://gestordeautos.com.mx/placas-conmemorativas-mundial.html</loc>
-        <lastmod>2026-04-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
 
     <!-- Aviso de Privacidad -->
     <url>
