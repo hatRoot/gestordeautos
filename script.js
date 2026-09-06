@@ -586,8 +586,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // C. Sticky Mobile WhatsApp Button (Inject if missing)
+    // C. Sticky Mobile WhatsApp Button (Only inject if mobileCallBar is NOT present)
     function injectStickyBtn() {
+        // If mobileCallBar is present on mobile, never inject redundant floating button
+        if (document.getElementById('mobileCallBar')) {
+            const existingSticky = document.querySelector('.sticky-whatsapp');
+            if (existingSticky) existingSticky.remove();
+            return;
+        }
+
         if (window.innerWidth > 768) return; // Mobile only
 
         // Check if already exists

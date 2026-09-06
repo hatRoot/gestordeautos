@@ -192,45 +192,108 @@ ul {
         padding: 0.75rem 1rem !important;
     }
 
-    /* Reduce header height on mobile */
+    /* Header Móvil Compacto Horizontal 54px */
     .header {
-        padding: 0.5rem 0;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 54px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        z-index: 9999 !important;
+        background: rgba(11, 19, 41, 0.96) !important;
+        backdrop-filter: blur(16px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        display: flex !important;
+        align-items: center !important;
     }
 
+    .header .container.nav,
+    .header .nav,
     .nav {
-        flex-direction: column;
-        height: auto !important;
-        gap: 0.5rem;
-        padding: 0.5rem 0;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        height: 54px !important;
+        padding: 0 1rem !important;
+        margin: 0 auto !important;
+        max-width: 100% !important;
+        gap: 0 !important;
     }
 
     .logo {
-        margin-right: 0;
-        margin-bottom: 0.25rem;
+        margin: 0 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 10px !important;
+        text-decoration: none !important;
+    }
+
+    .logo-container {
+        display: flex !important;
+        align-items: center !important;
     }
 
     .logo-img {
-        height: 60px !important;
-        width: 60px !important;
+        height: 36px !important;
+        width: 36px !important;
+        max-height: 36px !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+    }
+
+    .logo-text {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
     }
 
     .site-title {
-        font-size: 1.8rem !important;
+        font-size: 1.1rem !important;
+        font-weight: 800 !important;
+        color: #ffffff !important;
+        line-height: 1.1 !important;
+        margin: 0 !important;
+    }
+
+    .site-title span {
+        color: #3b82f6 !important;
+    }
+
+    .header-slogan {
+        font-size: 0.6rem !important;
+        color: #94a3b8 !important;
+        line-height: 1 !important;
+        margin-top: 2px !important;
+        display: block !important;
     }
 
     .header-contacts {
-        margin-left: 0;
-        width: 100%;
-        justify-content: center;
+        display: none !important;
     }
 
     .mobile-menu-toggle {
-        margin-left: 0;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        padding: 0.5rem;
-        font-size: 1.2rem;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 10px !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        color: #ffffff !important;
+        font-size: 1.2rem !important;
+        cursor: pointer !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        flex-shrink: 0 !important;
     }
 
     .lang-btn {
@@ -5504,6 +5567,16 @@ main {
     width: 100%;
     overflow-x: hidden;
 }
+/* Barra fija inferior en móvil (Llamar y WhatsApp) */
+#mobileCallBar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+    display: none;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.25);
+}
 
 /* 2. Tablet & Mobile Responsive Adjustments (<= 768px) */
 @media (max-width: 768px) {
@@ -5536,44 +5609,44 @@ main {
 
     /* Split Promo Top Section Mobile */
     .split-promo-section {
-        padding-top: 85px !important;
-        padding-bottom: 2rem !important;
+        padding-top: 68px !important;
+        padding-bottom: 0.75rem !important;
     }
 
     .split-promo-container {
         grid-template-columns: 1fr !important;
-        gap: 1.75rem !important;
+        gap: 1rem !important;
         padding-left: 1rem !important;
         padding-right: 1rem !important;
     }
 
     .promo-main-title {
-        font-size: 1.6rem !important;
+        font-size: 1.55rem !important;
         line-height: 1.18 !important;
-        margin-bottom: 0.4rem !important;
+        margin-bottom: 0.35rem !important;
     }
 
     .promo-subtitle {
-        font-size: 0.9rem !important;
+        font-size: 0.88rem !important;
         line-height: 1.4 !important;
-        margin-bottom: 1rem !important;
+        margin-bottom: 0.75rem !important;
     }
 
     /* Pillars Grid on Mobile */
     .promo-pillars {
         grid-template-columns: 1fr !important;
-        gap: 0.6rem !important;
-        margin-bottom: 1rem !important;
+        gap: 0.5rem !important;
+        margin-bottom: 0.75rem !important;
     }
 
     .pillar-item {
-        padding: 0.65rem 0.75rem !important;
+        padding: 0.55rem 0.75rem !important;
         border-radius: 10px !important;
     }
 
     /* 4-Step Workflow Box on Mobile */
     .promo-workflow-box {
-        padding: 0.8rem 0.9rem !important;
+        padding: 0.75rem 0.85rem !important;
         border-radius: 10px !important;
     }
 
@@ -5595,43 +5668,105 @@ main {
 
     /* Mini Carousel Mobile Sizing */
     .mini-hero-slider {
-        height: 250px !important;
+        height: 220px !important;
         border-radius: 14px !important;
+        margin-bottom: 0.25rem !important;
     }
 
     .mini-slide-caption {
-        padding: 0.9rem !important;
+        padding: 0.85rem !important;
     }
 
     .mini-title {
-        font-size: 1.25rem !important;
+        font-size: 1.2rem !important;
         line-height: 1.15 !important;
     }
 
     .mini-desc {
         font-size: 0.75rem !important;
-        margin-bottom: 0.6rem !important;
+        margin-bottom: 0.5rem !important;
     }
 
     .mini-btn-gold {
         font-size: 0.75rem !important;
-        padding: 0.4rem 0.9rem !important;
-        min-height: 38px;
+        padding: 0.35rem 0.85rem !important;
+        min-height: 36px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
     }
 
     .mini-arrow {
-        width: 34px !important;
-        height: 34px !important;
+        width: 32px !important;
+        height: 32px !important;
         font-size: 0.75rem !important;
     }
 
-    /* Hero Main Section Mobile */
+    .mini-slider-dots {
+        position: absolute !important;
+        top: 10px !important;
+        right: 10px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 6px !important;
+        background: rgba(15, 23, 42, 0.75) !important;
+        padding: 4px 8px !important;
+        border-radius: 20px !important;
+        z-index: 10 !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    }
+
+    .mini-dot {
+        appearance: none !important;
+        -webkit-appearance: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        outline: none !important;
+        width: 8px !important;
+        height: 8px !important;
+        min-width: 8px !important;
+        min-height: 8px !important;
+        max-height: 8px !important;
+        border-radius: 50% !important;
+        background: rgba(255, 255, 255, 0.4) !important;
+        box-sizing: border-box !important;
+        cursor: pointer !important;
+        line-height: 0 !important;
+        display: block !important;
+    }
+
+    .mini-dot.active {
+        width: 18px !important;
+        height: 8px !important;
+        min-width: 18px !important;
+        min-height: 8px !important;
+        max-height: 8px !important;
+        border-radius: 4px !important;
+        background: #fbbf24 !important;
+        box-shadow: 0 0 8px rgba(251, 191, 36, 0.8) !important;
+    }
+
+    /* Hero Main Section Mobile (Sin aire muerto) */
     .hero {
-        padding-top: 2rem !important;
-        padding-bottom: 2.5rem !important;
+        padding-top: 0.75rem !important;
+        padding-bottom: 1.5rem !important;
+        margin-top: 0 !important;
+    }
+
+    /* Ocultar botones flotantes redundantes que tapen la barra inferior */
+    .sticky-whatsapp,
+    #floatingWA {
+        display: none !important;
+    }
+
+    /* Activar barra fija inferior en móvil */
+    #mobileCallBar {
+        display: block !important;
+    }
+    body {
+        padding-bottom: 54px !important;
     }
 
     .hero h1 span[data-i18n="hero_title_main"] {

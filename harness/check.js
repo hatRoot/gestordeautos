@@ -181,6 +181,23 @@ function checkTagBalance(file, html) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════
+// CHECK 7 — Enlaces internos rotos (archivos .html que no existen)
+// ══════════════════════════════════════════════════════════════════════════
+function checkInternalLinks(file, html) {
+  const linkRegex = /href=["']([^"'#?]+\.html)(?:[#?][^"']*)?["']/g;
+  let match;
+  while ((match = linkRegex.exec(html)) !== null) {
+    const target = match[1];
+    if (target.startsWith('http://') || target.startsWith('https://')) continue;
+    const cleanTarget = target.replace(/^\//, '');
+    const fullPath = path.join(ROOT, cleanTarget);
+    if (!fs.existsSync(fullPath)) {
+      fail(`[${file}] Enlace roto a archivo inexistente: "${target}"`);
+    }
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════════
 // RUNNER
 // ══════════════════════════════════════════════════════════════════════════
 console.log(C.bold('\n🔍 GESTOR DE AUTOS — Arnés de Seguridad\n'));
@@ -192,6 +209,7 @@ const HTML_FILES = [
   'licencia-permanente-cdmx.html',
   'tramites-edomex.html',
   'cambio-de-propietario.html',
+  'placas-conmemorativas-mundial.html',
 ];
 
 HTML_FILES.forEach((file) => {
@@ -201,6 +219,7 @@ HTML_FILES.forEach((file) => {
   checkHtmlCorruption(file, content);
   checkForbiddenStrings(file, content);
   checkImages(file, content);
+  checkInternalLinks(file, content);
   if (file === 'index.html') {
     checkCriticalSections(content);
     checkTagBalance(file, content);
