@@ -586,36 +586,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // C. Sticky Mobile WhatsApp Button (Only inject if mobileCallBar is NOT present)
+    // C. Sticky WhatsApp Button (Desktop floating button; on Mobile mobileCallBar handles it)
     function injectStickyBtn() {
-        // If mobileCallBar is present on mobile, never inject redundant floating button
-        if (document.getElementById('mobileCallBar')) {
+        // En móvil (<= 768px), mobileCallBar ya cubre la conversión inferior 50/50.
+        // Se elimina el botón flotante para evitar encimamiento según Protocolo.
+        if (window.innerWidth <= 768) {
             const existingSticky = document.querySelector('.sticky-whatsapp');
             if (existingSticky) existingSticky.remove();
             return;
         }
 
-        if (window.innerWidth > 768) return; // Mobile only
-
-        // Check if already exists
+        // En escritorio (> 768px), mobileCallBar está oculto (display: none).
+        // Inyectamos el botón flotante de WhatsApp siempre visible.
         if (document.querySelector('.sticky-whatsapp')) return;
 
+        // Contexto inteligente del mensaje según la URL
+        let waMsg = "Hola%2C%20necesito%20cotizar%20un%20tr%C3%A1mite%20de%20Placas%20EdoMex";
+        const path = window.location.pathname;
+        if (path.includes('licencia')) {
+            waMsg = "Hola%2C%20necesito%20tramitar%20mi%20Licencia%20Permanente%20CDMX";
+        } else if (path.includes('alta-de-placas')) {
+            waMsg = "Hola%2C%20necesito%20cotizar%20el%20Alta%20de%20Placas%20EdoMex";
+        } else if (path.includes('cambio-de-propietario')) {
+            waMsg = "Hola%2C%20necesito%20cotizar%20el%20Cambio%20de%20Propietario%20EdoMex";
+        } else if (path.includes('tramites-edomex')) {
+            waMsg = "Hola%2C%20necesito%20asesor%C3%ADa%20para%20un%20tr%C3%A1mite%20vehicular%20en%20EdoMex";
+        }
+
         const stickyBtn = document.createElement('a');
-        stickyBtn.href = "https://wa.me/525535757364?text=Hola%2C%20necesito%20informes%20sobre%20permisos%20de%20circulaci%C3%B3n%20y%20placas%20EdoMex";
+        stickyBtn.href = `https://wa.me/525535757364?text=${waMsg}`;
         stickyBtn.className = "sticky-whatsapp";
         stickyBtn.target = "_blank";
-        stickyBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Cotizar Ahora';
+        stickyBtn.setAttribute('aria-label', 'Cotizar Trámite por WhatsApp');
+        stickyBtn.innerHTML = '<i class="fab fa-whatsapp" style="font-size: 1.25rem;"></i> Cotizar por WhatsApp';
         document.body.appendChild(stickyBtn);
 
-        // 🔴 FIX: Reduced threshold from 300px to 100px so the button appears sooner.
-        // Many users scroll very little before deciding to contact or leave.
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
+        const checkScroll = () => {
+            if (window.scrollY > 80) {
                 stickyBtn.classList.add('visible');
             } else {
                 stickyBtn.classList.remove('visible');
             }
-        });
+        };
+
+        window.addEventListener('scroll', checkScroll, { passive: true });
+        checkScroll();
     }
 
     injectStickyBtn();

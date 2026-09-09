@@ -5076,6 +5076,43 @@ details.seo-details[open] .seo-toggle-icon {
     line-height: 1.2;
 }
 
+/* CTA Action inside Split Promo */
+.promo-cta-action {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.promo-cta-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    font-size: 1rem !important;
+    font-weight: 800 !important;
+    padding: 0.8rem 1.6rem !important;
+    border-radius: 50px !important;
+    background: linear-gradient(135deg, #25D366, #128C7E) !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.promo-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5) !important;
+}
+
+@media (max-width: 768px) {
+    .promo-cta-action {
+        justify-content: center;
+    }
+    .promo-cta-btn {
+        width: 100% !important;
+    }
+}
+
 /* Right Column: Mini Carousel */
 .split-promo-right {
     position: relative;
