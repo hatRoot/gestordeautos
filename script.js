@@ -622,7 +622,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(stickyBtn);
 
         const checkScroll = () => {
-            if (window.scrollY > 80) {
+            // Mostrar botón flotante solo después de pasar el hero principal para no saturar
+            if (window.scrollY > 600) {
                 stickyBtn.classList.add('visible');
             } else {
                 stickyBtn.classList.remove('visible');
