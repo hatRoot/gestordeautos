@@ -622,8 +622,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(stickyBtn);
 
         const checkScroll = () => {
-            // Mostrar botón flotante rápidamente al hacer scroll
-            if (window.scrollY > 100) {
+            // En escritorio: mostrar botón flotante solo al pasar el hero para evitar duplicar con el botón principal
+            if (window.scrollY > 550) {
                 stickyBtn.classList.add('visible');
             } else {
                 stickyBtn.classList.remove('visible');
