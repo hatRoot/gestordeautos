@@ -618,11 +618,20 @@ document.addEventListener('DOMContentLoaded', async () => {
             msj += `*TOTAL A LIQUIDAR:* ${total}\n`;
             msj += `─────────────────────────\n`;
             msj += `*ESTATUS LEGAL:* 100% oficial y verificable en portal del gobierno.\n`;
-            msj += `[Datos Bancarios se adjuntarán a continuación]`;
+            msj += `─────────────────────────\n`;
+            msj += `🏦 *DATOS BANCARIOS PARA PAGO (BBVA):*\n`;
+            msj += `• *Titular:* Joel Emmanuel Duran Mendoza\n`;
+            msj += `• *Banco:* BBVA México\n`;
+            msj += `• *CLABE (SPEI):* 012180015766935846\n`;
+            msj += `• *Cuenta BBVA:* 1576693584\n`;
+            msj += `• *Tarjeta Débito (OXXO/7-Eleven):* 4152314669183751\n`;
+            msj += `• *Celular Vinculado (Dimo/SPEI):* 55 3575 7364\n`;
+            msj += `─────────────────────────\n`;
+            msj += `*Favor de enviar tu comprobante de pago por este chat para procesar tu trámite.*`;
 
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(msj).then(() => {
-                    alert('✅ Cotización copiada al portapapeles. ¡Lista para pegar en WhatsApp!');
+                    alert('✅ Cotización con datos bancarios copiada al portapapeles. ¡Lista para enviar por WhatsApp!');
                 }).catch(() => {
                     prompt('Copia tu cotización para WhatsApp:', msj);
                 });
@@ -631,6 +640,32 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
+
+    // Copiado rápido de datos bancarios individuales
+    window.copiarDatoBancario = function(texto, btn) {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(texto).then(() => {
+                const span = btn ? btn.querySelector('span') : null;
+                const orig = span ? span.textContent : '';
+                if (span) span.textContent = '¡Copiado!';
+                if (btn) {
+                    btn.style.background = '#10b981';
+                    btn.style.borderColor = '#059669';
+                    btn.style.color = '#ffffff';
+                }
+                setTimeout(() => {
+                    if (span) span.textContent = orig;
+                    if (btn) {
+                        btn.style.background = '';
+                        btn.style.borderColor = '';
+                        btn.style.color = '';
+                    }
+                }, 1800);
+            });
+        } else {
+            prompt('Copiar dato bancario:', texto);
+        }
+    };
 
     if (btnImprimirCotizador) {
         btnImprimirCotizador.addEventListener('click', () => {

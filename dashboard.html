@@ -247,18 +247,75 @@
                             </div>
                         </div>
 
-                        <!-- Tarjeta 3: Sección de Datos Bancarios (EN ESPERA DE LOS DATOS DE JOEL) -->
+                        <!-- Tarjeta 3: Sección de Datos Bancarios Oficiales -->
                         <div class="cot-card cot-banking-card" id="seccionDatosBancarios" style="margin-top: 16px;">
-                            <div class="cot-card-header">
-                                <i class="fas fa-university" style="color: #f97316;"></i>
-                                <h3>Datos Bancarios para Transferencia</h3>
-                            </div>
-                            <div class="cot-banking-placeholder" id="bankingDataContainer">
-                                <div class="cot-banking-waiting">
-                                    <i class="fas fa-hourglass-half" style="font-size: 24px; color: #f97316; margin-bottom: 8px;"></i>
-                                    <p style="font-weight: 600; color: #1e293b;">Sección en espera de Datos Bancarios</p>
-                                    <p style="font-size: 12px; color: #64748b; margin-top: 4px;">Esperando los datos bancarios oficiales de Joel para insertarlos en esta sección.</p>
+                            <div class="cot-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-university" style="color: #004481;"></i>
+                                    <h3>Datos Bancarios Oficiales para Pago</h3>
                                 </div>
+                                <span class="cot-bank-badge" style="background: #004481; color: #ffffff; font-weight: 700; font-size: 11px; padding: 3px 8px; border-radius: 4px;">BBVA México</span>
+                            </div>
+
+                            <div class="cot-banking-grid">
+                                <div class="cot-bank-field">
+                                    <span class="cot-bank-label">Titular de la Cuenta:</span>
+                                    <div class="cot-bank-value-row">
+                                        <strong class="cot-bank-val">Joel Emmanuel Duran Mendoza</strong>
+                                    </div>
+                                </div>
+
+                                <div class="cot-bank-field">
+                                    <span class="cot-bank-label">Banco y Producto:</span>
+                                    <div class="cot-bank-value-row">
+                                        <strong class="cot-bank-val">BBVA (Libretón Básico Cuenta Digital)</strong>
+                                    </div>
+                                </div>
+
+                                <div class="cot-bank-field cot-bank-field-highlight">
+                                    <span class="cot-bank-label">CLABE Interbancaria (Transferencias SPEI):</span>
+                                    <div class="cot-bank-value-row">
+                                        <code class="cot-bank-code" id="bankClabe">012 180 01576693584 6</code>
+                                        <button type="button" class="cot-bank-copy-btn" onclick="copiarDatoBancario('012180015766935846', this)" title="Copiar CLABE">
+                                            <i class="far fa-copy"></i> <span>Copiar</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="cot-bank-field">
+                                    <span class="cot-bank-label">Número de Cuenta BBVA (Prácticaja / Sucursal):</span>
+                                    <div class="cot-bank-value-row">
+                                        <code class="cot-bank-code" id="bankCuenta">157 669 3584</code>
+                                        <button type="button" class="cot-bank-copy-btn" onclick="copiarDatoBancario('1576693584', this)" title="Copiar Cuenta">
+                                            <i class="far fa-copy"></i> <span>Copiar</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="cot-bank-field">
+                                    <span class="cot-bank-label">Tarjeta de Débito (Depósito en OXXO / 7-Eleven):</span>
+                                    <div class="cot-bank-value-row">
+                                        <code class="cot-bank-code" id="bankTarjeta">4152 3146 6918 3751</code>
+                                        <button type="button" class="cot-bank-copy-btn" onclick="copiarDatoBancario('4152314669183751', this)" title="Copiar Tarjeta">
+                                            <i class="far fa-copy"></i> <span>Copiar</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="cot-bank-field">
+                                    <span class="cot-bank-label">Celular Vinculado (Transferencia Dimo / Rápida):</span>
+                                    <div class="cot-bank-value-row">
+                                        <code class="cot-bank-code" id="bankCelular">55 3575 7364</code>
+                                        <button type="button" class="cot-bank-copy-btn" onclick="copiarDatoBancario('5535757364', this)" title="Copiar Teléfono">
+                                            <i class="far fa-copy"></i> <span>Copiar</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cot-bank-notes">
+                                <i class="fas fa-info-circle" style="color: #0284c7;"></i>
+                                <span>Una vez realizado el depósito o transferencia, favor de enviar la foto o PDF del comprobante al WhatsApp <strong>55 3575 7364</strong> para iniciar el trámite de inmediato.</span>
                             </div>
                         </div>
 
