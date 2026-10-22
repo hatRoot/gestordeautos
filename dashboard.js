@@ -401,20 +401,251 @@ document.addEventListener('DOMContentLoaded', async () => {
             item.classList.add('active');
 
             if (menu === 'liberaciones') {
-                liberacionesView.style.display = 'flex';
+                if (cotizadorView) cotizadorView.style.display = 'none';
+                liberacionesView.style.display = 'block';
+                if (filterPills) filterPills.style.display = 'flex';
                 viewTitleH2.textContent = 'Liberaciones en Módulo';
                 viewSubtitle.textContent = 'Gestión y control de trámites de liberación y estatus en módulo.';
                 btnNewItem.style.display = 'inline-flex';
                 await loadData();
+            } else if (menu === 'cotizador') {
+                liberacionesView.style.display = 'none';
+                if (filterPills) filterPills.style.display = 'none';
+                btnNewItem.style.display = 'none';
+                if (cotizadorView) cotizadorView.style.display = 'flex';
+                viewTitleH2.textContent = 'Cotizador Vehicular';
+                viewSubtitle.textContent = 'Generador de presupuestos para clientes y empresas con desglose y datos bancarios.';
             } else {
                 // Otros módulos demostrativos
-                liberacionesView.style.display = 'flex';
+                if (cotizadorView) cotizadorView.style.display = 'none';
+                liberacionesView.style.display = 'block';
                 const menuTitle = item.querySelector('span')?.textContent || 'Módulo';
                 viewTitleH2.textContent = menuTitle;
                 viewSubtitle.textContent = `Registros y trámites correspondientes a ${menuTitle}.`;
             }
         });
     });
+
+    // =====================================================================
+    // LÓGICA DEL COTIZADOR VEHICULAR
+    // =====================================================================
+    const cotizadorView = document.getElementById('cotizadorView');
+    const conceptosBody = document.getElementById('conceptosBody');
+    const btnAddConcepto = document.getElementById('btnAddConcepto');
+    const btnToggleIva = document.getElementById('btnToggleIva');
+    const cotSubtotalText = document.getElementById('cotSubtotalText');
+    const cotIvaRow = document.getElementById('cotIvaRow');
+    const cotIvaText = document.getElementById('cotIvaText');
+    const cotTotalText = document.getElementById('cotTotalText');
+    const btnLimpiarCotizador = document.getElementById('btnLimpiarCotizador');
+    const btnCopiarWhatsApp = document.getElementById('btnCopiarWhatsApp');
+    const btnImprimirCotizador = document.getElementById('btnImprimirCotizador');
+
+    let isIvaActive = false;
+
+    function formatMoney(amount) {
+        return '$' + Number(amount || 0).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function recalcularTotales() {
+        let subtotal = 0;
+        const rows = conceptosBody ? conceptosBody.querySelectorAll('tr') : [];
+
+        rows.forEach(row => {
+            const cantInput = row.querySelector('.cot-cant-input');
+            const precioInput = row.querySelector('.cot-precio-input');
+            const subtotalEl = row.querySelector('.cot-row-subtotal');
+
+            const cant = parseFloat(cantInput?.value) || 0;
+            const precio = parseFloat(precioInput?.value) || 0;
+            const rowSubtotal = cant * precio;
+
+            if (subtotalEl) {
+                subtotalEl.textContent = formatMoney(rowSubtotal);
+            }
+            subtotal += rowSubtotal;
+        });
+
+        if (cotSubtotalText) cotSubtotalText.textContent = formatMoney(subtotal);
+
+        const iva = isIvaActive ? (subtotal * 0.16) : 0;
+        if (cotIvaText) cotIvaText.textContent = formatMoney(iva);
+        if (cotIvaRow) cotIvaRow.style.display = isIvaActive ? 'flex' : 'none';
+
+        const total = subtotal + iva;
+        if (cotTotalText) cotTotalText.textContent = formatMoney(total);
+    }
+
+    function agregarFilaConcepto(desc = '', cant = 1, precio = '') {
+        if (!conceptosBody) return;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>
+                <input type="text" class="cot-row-input cot-desc-input" placeholder="Ej. Alta de Placas EdoMex / Gestoría" value="${escapeHtml(desc)}">
+            </td>
+            <td style="text-align: center;">
+                <input type="number" class="cot-row-input cot-cant-input" value="${cant}" min="1" style="text-align: center; width: 60px;">
+            </td>
+            <td style="text-align: right;">
+                <input type="number" class="cot-row-input cot-precio-input" placeholder="0.00" value="${precio}" min="0" step="50" style="text-align: right; width: 100px;">
+            </td>
+            <td style="text-align: right; font-weight: 700; color: #1e293b;" class="cot-row-subtotal">
+                $0.00
+            </td>
+            <td style="text-align: center;">
+                <button type="button" class="cot-delete-btn" title="Eliminar concepto">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </td>
+        `;
+
+        const cantInput = tr.querySelector('.cot-cant-input');
+        const precioInput = tr.querySelector('.cot-precio-input');
+        const btnDelete = tr.querySelector('.cot-delete-btn');
+
+        cantInput.addEventListener('input', recalcularTotales);
+        precioInput.addEventListener('input', recalcularTotales);
+
+        btnDelete.addEventListener('click', () => {
+            if (conceptosBody.children.length > 1) {
+                tr.remove();
+                recalcularTotales();
+            } else {
+                tr.querySelector('.cot-desc-input').value = '';
+                cantInput.value = 1;
+                precioInput.value = '';
+                recalcularTotales();
+            }
+        });
+
+        conceptosBody.appendChild(tr);
+        recalcularTotales();
+    }
+
+    // Inicializar Cotizador con ejemplos prácticos
+    if (conceptosBody) {
+        agregarFilaConcepto('Alta de Placas Particulares Estado de México', 1, 2800);
+        agregarFilaConcepto('Gestoría vehicular y entrega exprés a domicilio', 1, 600);
+    }
+
+    if (btnAddConcepto) {
+        btnAddConcepto.addEventListener('click', () => {
+            agregarFilaConcepto('', 1, '');
+        });
+    }
+
+    if (btnToggleIva) {
+        btnToggleIva.addEventListener('click', () => {
+            isIvaActive = !isIvaActive;
+            btnToggleIva.classList.toggle('active', isIvaActive);
+            const textEl = document.getElementById('ivaToggleText');
+            if (textEl) {
+                textEl.textContent = isIvaActive ? 'IVA (16%) Incluido' : 'Agregar IVA (16%)';
+            }
+            recalcularTotales();
+        });
+    }
+
+    if (btnLimpiarCotizador) {
+        btnLimpiarCotizador.addEventListener('click', () => {
+            if (confirm('¿Deseas limpiar todos los campos del cotizador?')) {
+                const clienteInput = document.getElementById('cotCliente');
+                const serieInput = document.getElementById('cotSerie');
+                const marcaInput = document.getElementById('cotMarca');
+                const modeloInput = document.getElementById('cotModelo');
+                const anioInput = document.getElementById('cotAnio');
+
+                if (clienteInput) clienteInput.value = '';
+                if (serieInput) serieInput.value = '';
+                if (marcaInput) marcaInput.value = '';
+                if (modeloInput) modeloInput.value = '';
+                if (anioInput) anioInput.value = '';
+
+                if (conceptosBody) {
+                    conceptosBody.innerHTML = '';
+                    agregarFilaConcepto('', 1, '');
+                }
+
+                if (isIvaActive && btnToggleIva) {
+                    btnToggleIva.click();
+                } else {
+                    recalcularTotales();
+                }
+            }
+        });
+    }
+
+    if (btnCopiarWhatsApp) {
+        btnCopiarWhatsApp.addEventListener('click', () => {
+            const cliente = document.getElementById('cotCliente')?.value.trim() || 'Cliente';
+            const gestor = document.getElementById('cotGestor')?.value.trim() || 'Ing. Joel Durán';
+            const vin = document.getElementById('cotSerie')?.value.trim() || 'N/A';
+            const marca = document.getElementById('cotMarca')?.value.trim() || '';
+            const modelo = document.getElementById('cotModelo')?.value.trim() || '';
+            const anio = document.getElementById('cotAnio')?.value.trim() || '';
+
+            const vehiculoStr = [marca, modelo, anio].filter(Boolean).join(' ') || 'Vehículo sin especificar';
+
+            const filas = conceptosBody ? conceptosBody.querySelectorAll('tr') : [];
+            let conceptosTexto = '';
+
+            filas.forEach(row => {
+                const desc = row.querySelector('.cot-desc-input')?.value.trim();
+                const cant = row.querySelector('.cot-cant-input')?.value || 1;
+                const precio = row.querySelector('.cot-precio-input')?.value || 0;
+                const rowTotal = cant * precio;
+                if (desc) {
+                    conceptosTexto += `• *${desc}* (x${cant}): ${formatMoney(rowTotal)}\n`;
+                }
+            });
+
+            const subtotal = cotSubtotalText ? cotSubtotalText.textContent : '$0.00';
+            const total = cotTotalText ? cotTotalText.textContent : '$0.00';
+
+            let msj = `📋 *COTIZACIÓN DE TRÁMITES VEHICULARES*\n`;
+            msj += `*Gestor:* ${gestor}\n`;
+            msj += `*Cliente:* ${cliente}\n`;
+            msj += `*Vehículo:* ${vehiculoStr}\n`;
+            msj += `*Serie/VIN:* ${vin}\n`;
+            msj += `─────────────────────────\n`;
+            msj += `*CONCEPTOS:*\n${conceptosTexto || '• Trámite vehicular\n'}`;
+            msj += `─────────────────────────\n`;
+            msj += `*Subtotal:* ${subtotal}\n`;
+            if (isIvaActive) {
+                const iva = cotIvaText ? cotIvaText.textContent : '$0.00';
+                msj += `*IVA (16%):* ${iva}\n`;
+            }
+            msj += `*TOTAL A LIQUIDAR:* ${total}\n`;
+            msj += `─────────────────────────\n`;
+            msj += `*ESTATUS LEGAL:* 100% oficial y verificable en portal del gobierno.\n`;
+            msj += `[Datos Bancarios se adjuntarán a continuación]`;
+
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(msj).then(() => {
+                    alert('✅ Cotización copiada al portapapeles. ¡Lista para pegar en WhatsApp!');
+                }).catch(() => {
+                    prompt('Copia tu cotización para WhatsApp:', msj);
+                });
+            } else {
+                prompt('Copia tu cotización para WhatsApp:', msj);
+            }
+        });
+    }
+
+    if (btnImprimirCotizador) {
+        btnImprimirCotizador.addEventListener('click', () => {
+            window.print();
+        });
+    }
+
+    // Activar pestaña por parámetro de URL (?tab=cotizador)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('tab') === 'cotizador') {
+        const cotItem = document.querySelector('.mac-sidebar-item[data-menu="cotizador"]');
+        if (cotItem) {
+            cotItem.click();
+        }
+    }
 
     // 13. Papelera de Reciclaje Persistente (Recuperar incluso tras recargar)
     const btnOpenTrash = document.getElementById('btnOpenTrash');

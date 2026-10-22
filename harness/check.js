@@ -105,12 +105,22 @@ function checkCriticalSections(html) {
     { selector: 'id="contacto"',               label: 'Sección Contacto' },
     { selector: '</footer>',                   label: 'Footer' },
     { selector: 'class="header"',              label: 'Barra de navegación (header)' },
+    { selector: 'id="mobileCallBar"',          label: 'Barra fija móvil (#mobileCallBar)' },
   ];
   required.forEach(({ selector, label }) => {
     if (!html.includes(selector)) {
       fail(`[index.html] Sección crítica FALTANTE: ${label} (busca: ${selector})`);
     }
   });
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// CHECK 4B — Política de Doble Dispositivo (Dual Viewport: Escritorio y Móvil)
+// ══════════════════════════════════════════════════════════════════════════
+function checkDualViewportPolicy(file, html) {
+  if (!html.includes('name="viewport"')) {
+    fail(`[${file}] Falta etiqueta meta viewport para soporte móvil/escritorio.`);
+  }
 }
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -220,6 +230,7 @@ HTML_FILES.forEach((file) => {
   checkForbiddenStrings(file, content);
   checkImages(file, content);
   checkInternalLinks(file, content);
+  checkDualViewportPolicy(file, content);
   if (file === 'index.html') {
     checkCriticalSections(content);
     checkTagBalance(file, content);

@@ -13,6 +13,15 @@ Tú operas siempre como el **PROJECT MANAGER (Orquestador)**. Tu trabajo consist
 
 ---
 
+## POLÍTICA OBLIGATORIA DE DOBLE DISPOSITIVO (DUAL VIEWPORT)
+El sitio opera y se valida en **DOS modos fundamentales e independientes**:
+1. 🖥️ **Modo Escritorio (Desktop: > 1024px):** Disposición horizontal amplia, navegación completa, tipografías y contenedores centrados, barra fija móvil oculta (`#mobileCallBar { display: none }`).
+2. 📱 **Modo Móvil (Smartphone: 360px a 430px):** Layout vertical compacto, header de máx 54px–60px, navegación colapsable, barra fija de llamada y WhatsApp activa en la base (`#mobileCallBar`), sin colisión con botones flotantes y cero desbordamiento horizontal (`overflow-x: hidden`).
+
+*Regla de Oro:* Todo cambio en el diseño, estructura o scripts debe configurarse y probarse considerando ambas vistas por separado para que una no desconfigure o rompa a la otra.
+
+---
+
 ## EQUIPO DE ESPECIALISTAS Y REGLAS DE ORO
 
 ### 1. 🔍 Experto en SEO Técnico & Arquitectura Web

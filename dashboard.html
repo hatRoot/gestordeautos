@@ -62,6 +62,14 @@
                             </div>
                             <span class="mac-badge" id="badgeLiberacionesCount">0</span>
                         </li>
+                        <!-- SEGUNDO MENÚ: COTIZADOR VEHICULAR -->
+                        <li class="mac-sidebar-item" data-menu="cotizador">
+                            <div class="mac-sidebar-item-left">
+                                <i class="fas fa-file-invoice-dollar" style="color: #ea580c;"></i>
+                                <span>Cotizador Vehicular</span>
+                            </div>
+                            <span class="mac-badge" style="background: #f97316; color: #ffffff; font-weight: 700; font-size: 10px; padding: 1px 6px;">PRO</span>
+                        </li>
                         <li class="mac-sidebar-item" data-menu="logout">
                             <div class="mac-sidebar-item-left">
                                 <i class="fas fa-sign-out-alt" style="color: #dc2626;"></i>
@@ -123,6 +131,138 @@
                             <!-- Filas cargadas dinámicamente desde la Base de Datos -->
                         </tbody>
                     </table>
+                </div>
+
+                <!-- VISTA: COTIZADOR VEHICULAR PROFESIONAL -->
+                <div class="cotizador-container" id="cotizadorView" style="display: none;">
+                    <div class="cotizador-scroll-area">
+                        
+                        <!-- Tarjeta 1: Datos Generales (Cliente, Gestor y Vehículo) -->
+                        <div class="cot-card">
+                            <div class="cot-card-header">
+                                <i class="fas fa-id-card" style="color: #2b7de9;"></i>
+                                <h3>Información del Cliente y Vehículo</h3>
+                            </div>
+                            <div class="cot-form-grid">
+                                <div class="cot-form-group">
+                                    <label for="cotCliente">Nombre del Cliente o Empresa</label>
+                                    <input type="text" id="cotCliente" class="mac-input" placeholder="Ej. Juan Pérez / Corporativo Transportes S.A.">
+                                </div>
+                                <div class="cot-form-group">
+                                    <label for="cotGestor">Gestor Vehicular Responsable</label>
+                                    <input type="text" id="cotGestor" class="mac-input" value="Ing. Joel Durán" placeholder="Nombre del gestor">
+                                </div>
+                                <div class="cot-form-group">
+                                    <label for="cotSerie">Número de Serie (VIN)</label>
+                                    <input type="text" id="cotSerie" class="mac-input" placeholder="Ej. 3VW2K7AJ8EM123456" maxlength="17" style="text-transform: uppercase;">
+                                </div>
+                                <div class="cot-form-group">
+                                    <label for="cotMarca">Marca</label>
+                                    <input type="text" id="cotMarca" class="mac-input" placeholder="Ej. Volkswagen, Nissan, Chevrolet">
+                                </div>
+                                <div class="cot-form-group">
+                                    <label for="cotModelo">Modelo</label>
+                                    <input type="text" id="cotModelo" class="mac-input" placeholder="Ej. Jetta, Versa, Aveo, Taos">
+                                </div>
+                                <div class="cot-form-group">
+                                    <label for="cotAnio">Año</label>
+                                    <input type="number" id="cotAnio" class="mac-input" placeholder="Ej. 2023" min="1950" max="2027">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 2: Conceptos y Costos -->
+                        <div class="cot-card" style="margin-top: 16px;">
+                            <div class="cot-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-list-check" style="color: #2b7de9;"></i>
+                                    <h3>Conceptos de Trámites y Gestoría</h3>
+                                </div>
+                                <button type="button" class="mac-btn mac-btn-primary" id="btnAddConcepto">
+                                    <i class="fas fa-plus"></i>
+                                    <span>Agregar Concepto</span>
+                                </button>
+                            </div>
+
+                            <div class="cot-table-wrapper">
+                                <table class="cot-table" id="tablaConceptos">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 48%;">Descripción del Concepto / Trámite</th>
+                                            <th style="width: 14%; text-align: center;">Unidad / Cant.</th>
+                                            <th style="width: 18%; text-align: right;">Precio Unitario ($)</th>
+                                            <th style="width: 14%; text-align: right;">Subtotal ($)</th>
+                                            <th style="width: 6%; text-align: center;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="conceptosBody">
+                                        <!-- Filas dinámicas -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Panel de Totales e IVA -->
+                            <div class="cot-totals-box">
+                                <div class="cot-totals-left">
+                                    <!-- Botón Opcional para Agregar IVA -->
+                                    <div class="cot-iva-toggle-container">
+                                        <button type="button" class="cot-iva-toggle-btn" id="btnToggleIva">
+                                            <span class="cot-toggle-switch" id="ivaSwitchKnob"></span>
+                                            <span id="ivaToggleText">Agregar IVA (16%)</span>
+                                        </button>
+                                        <span class="cot-iva-hint">Opcional: Actívalo para incluir IVA en el total.</span>
+                                    </div>
+                                </div>
+
+                                <div class="cot-totals-right">
+                                    <div class="cot-summary-row">
+                                        <span>Subtotal Conceptos:</span>
+                                        <strong id="cotSubtotalText">$0.00</strong>
+                                    </div>
+                                    <div class="cot-summary-row" id="cotIvaRow" style="display: none; color: #64748b;">
+                                        <span>IVA (16%):</span>
+                                        <strong id="cotIvaText">$0.00</strong>
+                                    </div>
+                                    <div class="cot-summary-row cot-total-highlight">
+                                        <span>Total a Liquidar:</span>
+                                        <strong id="cotTotalText">$0.00</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Acciones rápidas del Cotizador -->
+                            <div class="cot-actions-bar">
+                                <button type="button" class="mac-btn" id="btnLimpiarCotizador">
+                                    <i class="fas fa-eraser"></i>
+                                    <span>Limpiar</span>
+                                </button>
+                                <button type="button" class="mac-btn" id="btnCopiarWhatsApp" style="color: #059669; font-weight: 600;">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <span>Copiar para WhatsApp</span>
+                                </button>
+                                <button type="button" class="mac-btn" id="btnImprimirCotizador">
+                                    <i class="fas fa-print"></i>
+                                    <span>Imprimir / PDF</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 3: Sección de Datos Bancarios (EN ESPERA DE LOS DATOS DE JOEL) -->
+                        <div class="cot-card cot-banking-card" id="seccionDatosBancarios" style="margin-top: 16px;">
+                            <div class="cot-card-header">
+                                <i class="fas fa-university" style="color: #f97316;"></i>
+                                <h3>Datos Bancarios para Transferencia</h3>
+                            </div>
+                            <div class="cot-banking-placeholder" id="bankingDataContainer">
+                                <div class="cot-banking-waiting">
+                                    <i class="fas fa-hourglass-half" style="font-size: 24px; color: #f97316; margin-bottom: 8px;"></i>
+                                    <p style="font-weight: 600; color: #1e293b;">Sección en espera de Datos Bancarios</p>
+                                    <p style="font-size: 12px; color: #64748b; margin-top: 4px;">Esperando los datos bancarios oficiales de Joel para insertarlos en esta sección.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
                 <!-- Barra de Estado Inferior -->
