@@ -439,12 +439,42 @@ document.addEventListener('DOMContentLoaded', async () => {
     const cotTotalText = document.getElementById('cotTotalText');
     const btnLimpiarCotizador = document.getElementById('btnLimpiarCotizador');
     const btnCopiarWhatsApp = document.getElementById('btnCopiarWhatsApp');
-    const btnImprimirCotizador = document.getElementById('btnImprimirCotizador');
+    const cotFolioInput = document.getElementById('cotFolio');
+    const btnGenFolio = document.getElementById('btnGenFolio');
+    const cotFechaInput = document.getElementById('cotFecha');
+    const btnGenerarPdf = document.getElementById('btnGenerarPdf');
+    const btnImprimirCotizador = document.getElementById('btnImprimirCotizador'); // Fallback si existiera
 
     let isIvaActive = false;
 
     function formatMoney(amount) {
         return '$' + Number(amount || 0).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function generarFolioAleatorio() {
+        const anio = new Date().getFullYear();
+        const randomNum = Math.floor(1000 + Math.random() * 9000);
+        return `COT-${anio}-${randomNum}`;
+    }
+
+    // Inicializar Folio y Fecha del día
+    if (cotFolioInput && !cotFolioInput.value) {
+        cotFolioInput.value = generarFolioAleatorio();
+    }
+    if (btnGenFolio) {
+        btnGenFolio.addEventListener('click', () => {
+            if (cotFolioInput) {
+                cotFolioInput.value = generarFolioAleatorio();
+                btnGenFolio.style.transform = 'rotate(180deg)';
+                btnGenFolio.style.transition = 'transform 0.3s ease';
+                setTimeout(() => {
+                    btnGenFolio.style.transform = '';
+                }, 300);
+            }
+        });
+    }
+    if (cotFechaInput && !cotFechaInput.value) {
+        cotFechaInput.value = new Date().toISOString().split('T')[0];
     }
 
     function recalcularTotales() {
@@ -555,6 +585,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const modeloInput = document.getElementById('cotModelo');
                 const anioInput = document.getElementById('cotAnio');
 
+                if (cotFolioInput) cotFolioInput.value = generarFolioAleatorio();
+                if (cotFechaInput) cotFechaInput.value = new Date().toISOString().split('T')[0];
                 if (clienteInput) clienteInput.value = '';
                 if (serieInput) serieInput.value = '';
                 if (marcaInput) marcaInput.value = '';
@@ -575,8 +607,139 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    // Preparar el documento imprimible para PDF
+    function prepararDocumentoPdf() {
+        const folio = cotFolioInput?.value.trim() || generarFolioAleatorio();
+        if (cotFolioInput && !cotFolioInput.value) cotFolioInput.value = folio;
+
+        const fechaVal = cotFechaInput?.value || new Date().toISOString().split('T')[0];
+        let fechaFormateada = fechaVal;
+        if (fechaVal && fechaVal.includes('-')) {
+            const parts = fechaVal.split('-');
+            if (parts.length === 3) {
+                fechaFormateada = `${parts[2]}/${parts[1]}/${parts[0]}`;
+            }
+        }
+
+        const cliente = document.getElementById('cotCliente')?.value.trim() || 'Cliente Particular';
+        const gestor = document.getElementById('cotGestor')?.value.trim() || 'Ing. Joel Durán';
+        const vin = document.getElementById('cotSerie')?.value.trim() || 'No registrado';
+        const marca = document.getElementById('cotMarca')?.value.trim() || '';
+        const modelo = document.getElementById('cotModelo')?.value.trim() || '';
+        const anio = document.getElementById('cotAnio')?.value.trim() || '';
+
+        const vehiculoStr = [marca, modelo].filter(Boolean).join(' ') || 'Vehículo sin especificar';
+
+        // Inyectar datos en la plantilla de impresión
+        const pdfFolioDisplay = document.getElementById('pdfFolioDisplay');
+        const pdfFechaDisplay = document.getElementById('pdfFechaDisplay');
+        const pdfGestorDisplay = document.getElementById('pdfGestorDisplay');
+        const pdfClienteDisplay = document.getElementById('pdfClienteDisplay');
+        const pdfVehiculoDisplay = document.getElementById('pdfVehiculoDisplay');
+        const pdfVinDisplay = document.getElementById('pdfVinDisplay');
+        const pdfAnioDisplay = document.getElementById('pdfAnioDisplay');
+
+        if (pdfFolioDisplay) pdfFolioDisplay.textContent = folio;
+        if (pdfFechaDisplay) pdfFechaDisplay.textContent = fechaFormateada;
+        if (pdfGestorDisplay) pdfGestorDisplay.textContent = gestor;
+        if (pdfClienteDisplay) pdfClienteDisplay.textContent = cliente;
+        if (pdfVehiculoDisplay) pdfVehiculoDisplay.textContent = vehiculoStr;
+        if (pdfVinDisplay) pdfVinDisplay.textContent = vin;
+        if (pdfAnioDisplay) pdfAnioDisplay.textContent = anio || 'No especificado';
+
+        const pdfSignName = document.querySelector('.pdf-sign-name');
+        if (pdfSignName) pdfSignName.textContent = gestor;
+
+        // Inyectar tabla de conceptos clonada
+        const pdfTableBody = document.getElementById('pdfTableBody');
+        if (pdfTableBody && conceptosBody) {
+            pdfTableBody.innerHTML = '';
+            const filas = conceptosBody.querySelectorAll('tr');
+            let count = 0;
+
+            filas.forEach(row => {
+                const desc = row.querySelector('.cot-desc-input')?.value.trim();
+                const cant = parseFloat(row.querySelector('.cot-cant-input')?.value) || 1;
+                const precio = parseFloat(row.querySelector('.cot-precio-input')?.value) || 0;
+                const rowTotal = cant * precio;
+
+                if (desc || precio > 0) {
+                    count++;
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td style="text-align: center; color: #64748b; font-weight: 600;">${count}</td>
+                        <td><strong>${escapeHtml(desc || 'Trámite Vehicular')}</strong></td>
+                        <td style="text-align: center;">${cant}</td>
+                        <td style="text-align: right;">${formatMoney(precio)}</td>
+                        <td style="text-align: right; font-weight: 700; color: #0f172a;">${formatMoney(rowTotal)}</td>
+                    `;
+                    pdfTableBody.appendChild(tr);
+                }
+            });
+
+            if (count === 0) {
+                pdfTableBody.innerHTML = `
+                    <tr>
+                        <td style="text-align: center; color: #64748b;">1</td>
+                        <td><strong>Trámite y Gestoría Vehicular Especializada</strong></td>
+                        <td style="text-align: center;">1</td>
+                        <td style="text-align: right;">$0.00</td>
+                        <td style="text-align: right; font-weight: 700;">$0.00</td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Inyectar totales
+        const pdfSubtotalDisplay = document.getElementById('pdfSubtotalDisplay');
+        const pdfIvaRowDisplay = document.getElementById('pdfIvaRowDisplay');
+        const pdfIvaDisplay = document.getElementById('pdfIvaDisplay');
+        const pdfTotalDisplay = document.getElementById('pdfTotalDisplay');
+
+        if (pdfSubtotalDisplay && cotSubtotalText) {
+            pdfSubtotalDisplay.textContent = cotSubtotalText.textContent;
+        }
+        if (pdfIvaRowDisplay && pdfIvaDisplay) {
+            if (isIvaActive) {
+                pdfIvaRowDisplay.style.display = 'flex';
+                pdfIvaDisplay.textContent = cotIvaText ? cotIvaText.textContent : '$0.00';
+            } else {
+                pdfIvaRowDisplay.style.display = 'none';
+            }
+        }
+        if (pdfTotalDisplay && cotTotalText) {
+            pdfTotalDisplay.textContent = cotTotalText.textContent;
+        }
+
+        return { folio, cliente };
+    }
+
+    // Botón Generar PDF
+    if (btnGenerarPdf) {
+        btnGenerarPdf.addEventListener('click', () => {
+            const { folio, cliente } = prepararDocumentoPdf();
+            const origTitle = document.title;
+            const cleanClient = cliente.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ_-]/g, '_').substring(0, 30);
+            document.title = `Cotizacion_${folio}_${cleanClient}`;
+            window.print();
+            setTimeout(() => {
+                document.title = origTitle;
+            }, 1500);
+        });
+    }
+
+    // Compatibilidad si aún se llama a imprimir directamente
+    if (btnImprimirCotizador) {
+        btnImprimirCotizador.addEventListener('click', () => {
+            prepararDocumentoPdf();
+            window.print();
+        });
+    }
+
     if (btnCopiarWhatsApp) {
         btnCopiarWhatsApp.addEventListener('click', () => {
+            const folio = cotFolioInput?.value.trim() || 'COT-2026-0001';
+            const fechaVal = cotFechaInput?.value || new Date().toISOString().split('T')[0];
             const cliente = document.getElementById('cotCliente')?.value.trim() || 'Cliente';
             const gestor = document.getElementById('cotGestor')?.value.trim() || 'Ing. Joel Durán';
             const vin = document.getElementById('cotSerie')?.value.trim() || 'N/A';
@@ -603,6 +766,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             const total = cotTotalText ? cotTotalText.textContent : '$0.00';
 
             let msj = `📋 *COTIZACIÓN DE TRÁMITES VEHICULARES*\n`;
+            msj += `*Folio:* ${folio}\n`;
+            msj += `*Fecha:* ${fechaVal}\n`;
             msj += `*Gestor:* ${gestor}\n`;
             msj += `*Cliente:* ${cliente}\n`;
             msj += `*Vehículo:* ${vehiculoStr}\n`;
@@ -631,7 +796,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(msj).then(() => {
-                    alert('✅ Cotización con datos bancarios copiada al portapapeles. ¡Lista para enviar por WhatsApp!');
+                    alert('✅ Cotización con folio y datos bancarios copiada al portapapeles. ¡Lista para enviar por WhatsApp!');
                 }).catch(() => {
                     prompt('Copia tu cotización para WhatsApp:', msj);
                 });
@@ -666,12 +831,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             prompt('Copiar dato bancario:', texto);
         }
     };
-
-    if (btnImprimirCotizador) {
-        btnImprimirCotizador.addEventListener('click', () => {
-            window.print();
-        });
-    }
 
     // Activar pestaña por parámetro de URL (?tab=cotizador)
     const urlParams = new URLSearchParams(window.location.search);

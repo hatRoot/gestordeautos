@@ -1114,6 +1114,12 @@ body {
 }
 
 /* Responsive Móvil vs Escritorio */
+@media (max-width: 1024px) {
+    .cot-form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .cot-form-grid {
         grid-template-columns: 1fr;
@@ -1132,4 +1138,390 @@ body {
         flex: 1;
     }
 }
+
+/* =========================================================
+   HOJA DE COTIZACIÓN PROFESIONAL / DOCUMENTO PDF
+   ========================================================= */
+.pdf-quotation-document {
+    display: none;
+    background: #ffffff;
+    color: #1e293b;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    line-height: 1.4;
+    box-sizing: border-box;
+}
+
+/* =========================================================
+   REGLAS DE IMPRESIÓN Y EXPORTACIÓN A PDF (@media print)
+   ========================================================= */
+@media print {
+    @page {
+        size: letter portrait;
+        margin: 8mm 10mm;
+    }
+
+    html, body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Ocultar toda la interfaz del sistema macOS */
+    .mac-app-window,
+    .mac-window-header,
+    .mac-sidebar,
+    .mac-view-header,
+    .mac-status-bar,
+    .mac-sheet-overlay,
+    .mac-undo-toast,
+    .cot-actions-bar,
+    #adminSecretBtn,
+    #mobileCallBar {
+        display: none !important;
+    }
+
+    /* Mostrar exclusivamente el documento formal */
+    #printableCotizacion {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+    }
+
+    .pdf-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-bottom: 2px solid #1e3a8a;
+        padding-bottom: 10px;
+        margin-bottom: 12px;
+    }
+
+    .pdf-header-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .pdf-logo-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .pdf-brand-text h2 {
+        font-size: 18px;
+        font-weight: 800;
+        color: #0f172a;
+        margin: 0;
+        letter-spacing: 0.5px;
+    }
+
+    .pdf-brand-text span {
+        font-size: 10.5px;
+        color: #2563eb;
+        font-weight: 600;
+    }
+
+    .pdf-company-contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        font-size: 9.5px;
+        color: #64748b;
+        margin-top: 4px;
+    }
+
+    .pdf-header-meta {
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 6px;
+    }
+
+    .pdf-meta-badge {
+        background: #1e3a8a;
+        color: #ffffff;
+        font-size: 11px;
+        font-weight: 800;
+        padding: 3px 12px;
+        border-radius: 4px;
+        letter-spacing: 0.8px;
+        display: inline-block;
+    }
+
+    .pdf-meta-table {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 4px;
+        padding: 6px 10px;
+        font-size: 10px;
+        min-width: 180px;
+    }
+
+    .pdf-meta-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 2px;
+    }
+
+    .pdf-meta-lbl {
+        color: #64748b;
+        font-weight: 600;
+    }
+
+    .pdf-meta-val {
+        color: #0f172a;
+        font-weight: 700;
+    }
+
+    /* Info Grid */
+    .pdf-info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .pdf-info-card {
+        background: #f8fafc;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        padding: 8px 12px;
+    }
+
+    .pdf-info-title {
+        font-size: 10px;
+        font-weight: 800;
+        color: #1e3a8a;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 4px;
+        margin-bottom: 6px;
+        letter-spacing: 0.5px;
+    }
+
+    .pdf-info-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        margin-bottom: 3px;
+    }
+
+    .pdf-lbl {
+        color: #64748b;
+    }
+
+    .pdf-val {
+        color: #0f172a;
+        font-weight: 600;
+        text-align: right;
+    }
+
+    .pdf-vin-code {
+        font-family: monospace;
+        font-weight: 700;
+        background: #e2e8f0;
+        padding: 1px 4px;
+        border-radius: 3px;
+        color: #0f172a;
+        font-size: 9.5px;
+    }
+
+    /* Tabla de Conceptos */
+    .pdf-table-section {
+        margin-bottom: 12px;
+    }
+
+    .pdf-section-title {
+        font-size: 10px;
+        font-weight: 800;
+        color: #1e3a8a;
+        margin-bottom: 6px;
+        letter-spacing: 0.5px;
+    }
+
+    .pdf-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 10.5px;
+    }
+
+    .pdf-table th {
+        background: #0f172a !important;
+        color: #ffffff !important;
+        padding: 6px 10px;
+        font-size: 9.5px;
+        font-weight: 700;
+        border: 1px solid #0f172a;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+    }
+
+    .pdf-table td {
+        padding: 6px 10px;
+        border: 1px solid #e2e8f0;
+        color: #1e293b;
+    }
+
+    .pdf-table tbody tr:nth-child(even) td {
+        background: #f8fafc !important;
+    }
+
+    /* Totales */
+    .pdf-totals-section {
+        display: grid;
+        grid-template-columns: 1fr 240px;
+        gap: 14px;
+        margin-bottom: 12px;
+        page-break-inside: avoid;
+    }
+
+    .pdf-terms-box {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-size: 9.5px;
+        color: #475569;
+    }
+
+    .pdf-terms-title {
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 4px;
+    }
+
+    .pdf-terms-box p {
+        margin: 2px 0;
+        line-height: 1.35;
+    }
+
+    .pdf-totals-table {
+        background: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        padding: 8px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .pdf-total-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10.5px;
+        color: #475569;
+    }
+
+    .pdf-total-grand {
+        font-size: 13px;
+        font-weight: 800;
+        color: #0f172a;
+        border-top: 1.5px solid #cbd5e1;
+        padding-top: 6px;
+        margin-top: 2px;
+    }
+
+    .pdf-total-grand strong {
+        color: #059669;
+        font-size: 15px;
+    }
+
+    .pdf-currency-note {
+        font-size: 8.5px;
+        text-align: right;
+        color: #94a3b8;
+    }
+
+    /* Ficha Bancaria en PDF */
+    .pdf-bank-section {
+        background: #f0f7ff;
+        border: 1px solid #93c5fd;
+        border-radius: 6px;
+        padding: 8px 12px;
+        margin-bottom: 12px;
+        page-break-inside: avoid;
+    }
+
+    .pdf-bank-header {
+        font-size: 10px;
+        font-weight: 800;
+        color: #004481;
+        border-bottom: 1px solid #bfdbfe;
+        padding-bottom: 4px;
+        margin-bottom: 6px;
+        letter-spacing: 0.5px;
+    }
+
+    .pdf-bank-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .pdf-bank-item {
+        display: flex;
+        justify-content: space-between;
+        font-size: 9.5px;
+        margin-bottom: 3px;
+    }
+
+    .pdf-bank-item .lbl {
+        color: #475569;
+        font-weight: 600;
+    }
+
+    .pdf-bank-item .val {
+        color: #0f172a;
+    }
+
+    /* Footer con Firma */
+    .pdf-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding-top: 10px;
+        border-top: 1px solid #e2e8f0;
+        page-break-inside: avoid;
+    }
+
+    .pdf-footer-note {
+        font-size: 9px;
+        color: #94a3b8;
+        max-width: 60%;
+    }
+
+    .pdf-signature-box {
+        text-align: center;
+        width: 180px;
+    }
+
+    .pdf-sign-line {
+        border-top: 1px solid #334155;
+        margin-bottom: 4px;
+    }
+
+    .pdf-sign-name {
+        font-size: 10px;
+        font-weight: 700;
+        color: #0f172a;
+    }
+
+    .pdf-sign-title {
+        font-size: 8.5px;
+        color: #64748b;
+    }
+}
+
 

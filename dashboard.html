@@ -145,6 +145,19 @@
                             </div>
                             <div class="cot-form-grid">
                                 <div class="cot-form-group">
+                                    <label for="cotFolio">Folio de Cotización</label>
+                                    <div style="display: flex; gap: 6px;">
+                                        <input type="text" id="cotFolio" class="mac-input" placeholder="COT-2026-0001" style="font-weight: 700; color: #1e3a8a; letter-spacing: 0.5px;">
+                                        <button type="button" class="mac-btn" id="btnGenFolio" title="Generar nuevo folio" style="padding: 4px 8px;">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="cot-form-group">
+                                    <label for="cotFecha">Fecha de Expedición</label>
+                                    <input type="date" id="cotFecha" class="mac-input">
+                                </div>
+                                <div class="cot-form-group">
                                     <label for="cotCliente">Nombre del Cliente o Empresa</label>
                                     <input type="text" id="cotCliente" class="mac-input" placeholder="Ej. Juan Pérez / Corporativo Transportes S.A.">
                                 </div>
@@ -240,9 +253,9 @@
                                     <i class="fab fa-whatsapp"></i>
                                     <span>Copiar para WhatsApp</span>
                                 </button>
-                                <button type="button" class="mac-btn" id="btnImprimirCotizador">
-                                    <i class="fas fa-print"></i>
-                                    <span>Imprimir / PDF</span>
+                                <button type="button" class="mac-btn mac-btn-primary" id="btnGenerarPdf" style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: #ffffff; border: 1px solid #991b1b; font-weight: 700; padding: 6px 14px; box-shadow: 0 2px 6px rgba(220, 38, 38, 0.35);">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>Generar PDF</span>
                                 </button>
                             </div>
                         </div>
@@ -440,6 +453,192 @@
             <span><i class="fas fa-trash-alt" style="color: #f87171; margin-right: 6px;"></i> Registro eliminado</span>
             <button type="button" class="mac-undo-btn" id="btnUndoDelete"><i class="fas fa-undo"></i> Deshacer (⌘Z)</button>
         </div>
+
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- PLANTILLA DE COTIZACIÓN PROFESIONAL PARA IMPRESIÓN Y GENERACIÓN DE PDF    -->
+    <!-- ========================================================================= -->
+    <div id="printableCotizacion" class="pdf-quotation-document">
+        
+        <!-- HEADER DE LA COTIZACIÓN -->
+        <header class="pdf-header">
+            <div class="pdf-header-brand">
+                <div class="pdf-logo-box">
+                    <i class="fas fa-car" style="color: #1e3a8a; font-size: 28px;"></i>
+                    <div class="pdf-brand-text">
+                        <h2>GESTOR DE AUTOS</h2>
+                        <span>Gestoría Vehicular Integral CDMX & EdoMex</span>
+                    </div>
+                </div>
+                <div class="pdf-company-contact">
+                    <div><i class="fas fa-globe"></i> gestordeautos.com.mx</div>
+                    <div><i class="fab fa-whatsapp"></i> 55 3575 7364</div>
+                    <div><i class="fas fa-envelope"></i> contacto@gestordeautos.com.mx</div>
+                    <div><i class="fas fa-map-marker-alt"></i> CDMX y Área Metropolitana</div>
+                </div>
+            </div>
+
+            <div class="pdf-header-meta">
+                <div class="pdf-meta-badge">PRESUPUESTO FORMAL</div>
+                <div class="pdf-meta-table">
+                    <div class="pdf-meta-row">
+                        <span class="pdf-meta-lbl">FOLIO:</span>
+                        <strong class="pdf-meta-val" id="pdfFolioDisplay">COT-2026-0001</strong>
+                    </div>
+                    <div class="pdf-meta-row">
+                        <span class="pdf-meta-lbl">FECHA:</span>
+                        <strong class="pdf-meta-val" id="pdfFechaDisplay">22/10/2026</strong>
+                    </div>
+                    <div class="pdf-meta-row">
+                        <span class="pdf-meta-lbl">VIGENCIA:</span>
+                        <span class="pdf-meta-val">15 Días Naturales</span>
+                    </div>
+                    <div class="pdf-meta-row">
+                        <span class="pdf-meta-lbl">GESTOR:</span>
+                        <span class="pdf-meta-val" id="pdfGestorDisplay">Ing. Joel Durán</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="pdf-divider"></div>
+
+        <!-- BLOQUES DE INFORMACIÓN (CLIENTE Y VEHÍCULO) -->
+        <section class="pdf-info-grid">
+            <div class="pdf-info-card">
+                <div class="pdf-info-title">
+                    <i class="fas fa-user-tie"></i> DATOS DEL CLIENTE / SOLICITANTE
+                </div>
+                <div class="pdf-info-body">
+                    <div class="pdf-info-row">
+                        <span class="pdf-lbl">Cliente o Empresa:</span>
+                        <strong class="pdf-val" id="pdfClienteDisplay">Cliente Particular</strong>
+                    </div>
+                    <div class="pdf-info-row">
+                        <span class="pdf-lbl">Tipo de Trámite:</span>
+                        <span class="pdf-val">Gestoría Vehicular Personalizada</span>
+                    </div>
+                    <div class="pdf-info-row">
+                        <span class="pdf-lbl">Canal de Entrega:</span>
+                        <span class="pdf-val">Entrega Directa a Domicilio / Oficina</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pdf-info-card">
+                <div class="pdf-info-title">
+                    <i class="fas fa-car-side"></i> FICHA TÉCNICA DE LA UNIDAD
+                </div>
+                <div class="pdf-info-body">
+                    <div class="pdf-info-row">
+                        <span class="pdf-lbl">Vehículo:</span>
+                        <strong class="pdf-val" id="pdfVehiculoDisplay">Vehículo no especificado</strong>
+                    </div>
+                    <div class="pdf-info-row">
+                        <span class="pdf-lbl">Número de Serie (VIN):</span>
+                        <code class="pdf-vin-code" id="pdfVinDisplay">No registrado</code>
+                    </div>
+                    <div class="pdf-info-row">
+                        <span class="pdf-lbl">Año Modelo:</span>
+                        <span class="pdf-val" id="pdfAnioDisplay">2026</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TABLA DE CONCEPTOS -->
+        <section class="pdf-table-section">
+            <div class="pdf-section-title">DESGLOSE DE SERVICIOS Y HONORARIOS</div>
+            <table class="pdf-table">
+                <thead>
+                    <tr>
+                        <th style="width: 6%; text-align: center;">#</th>
+                        <th style="width: 54%;">Descripción del Trámite o Concepto</th>
+                        <th style="width: 10%; text-align: center;">Cant.</th>
+                        <th style="width: 15%; text-align: right;">Precio Unit.</th>
+                        <th style="width: 15%; text-align: right;">Importe</th>
+                    </tr>
+                </thead>
+                <tbody id="pdfTableBody">
+                    <!-- Filas dinámicas clonadas desde JavaScript -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- TOTALES Y DESGLOSE -->
+        <section class="pdf-totals-section">
+            <div class="pdf-terms-box">
+                <div class="pdf-terms-title"><i class="fas fa-shield-alt"></i> GARANTÍA Y ESTATUS LEGAL:</div>
+                <p>• Trámites 100% legales y oficiales, verificables directamente en los portales oficiales de gobierno (SEMOVI CDMX y Secretaría de Finanzas EdoMex).</p>
+                <p>• El presupuesto incluye derechos de trámite, gestoría profesional, integración de expediente y entrega exprés.</p>
+            </div>
+
+            <div class="pdf-totals-table">
+                <div class="pdf-total-row">
+                    <span>Subtotal de Conceptos:</span>
+                    <strong id="pdfSubtotalDisplay">$0.00</strong>
+                </div>
+                <div class="pdf-total-row" id="pdfIvaRowDisplay" style="display: none;">
+                    <span>IVA Trasladado (16%):</span>
+                    <strong id="pdfIvaDisplay">$0.00</strong>
+                </div>
+                <div class="pdf-total-row pdf-total-grand">
+                    <span>TOTAL A LIQUIDAR:</span>
+                    <strong id="pdfTotalDisplay">$0.00</strong>
+                </div>
+                <div class="pdf-currency-note">Pesos Mexicanos (MXN)</div>
+            </div>
+        </section>
+
+        <!-- FICHA BANCARIA PARA PAGO -->
+        <section class="pdf-bank-section">
+            <div class="pdf-bank-header">
+                <i class="fas fa-university"></i> DATOS BANCARIOS OFICIALES PARA TRANSFERENCIA (SPEI / DEPÓSITO)
+            </div>
+            <div class="pdf-bank-grid">
+                <div class="pdf-bank-col">
+                    <div class="pdf-bank-item">
+                        <span class="lbl">BANCO:</span>
+                        <span class="val">BBVA México (Libretón Cuenta Digital)</span>
+                    </div>
+                    <div class="pdf-bank-item">
+                        <span class="lbl">TITULAR:</span>
+                        <span class="val"><strong>Joel Emmanuel Duran Mendoza</strong></span>
+                    </div>
+                    <div class="pdf-bank-item">
+                        <span class="lbl">NO. DE CUENTA:</span>
+                        <span class="val"><strong style="letter-spacing: 0.5px;">157 669 3584</strong></span>
+                    </div>
+                </div>
+                <div class="pdf-bank-col">
+                    <div class="pdf-bank-item">
+                        <span class="lbl">CLABE INTERBANCARIA:</span>
+                        <span class="val"><strong style="letter-spacing: 1px; color: #004481;">012 180 01576693584 6</strong></span>
+                    </div>
+                    <div class="pdf-bank-item">
+                        <span class="lbl">TARJETA DÉBITO (OXXO):</span>
+                        <span class="val"><strong style="letter-spacing: 0.5px;">4152 3146 6918 3751</strong></span>
+                    </div>
+                    <div class="pdf-bank-item">
+                        <span class="lbl">ENVÍO DE COMPROBANTE:</span>
+                        <span class="val">WhatsApp Oficial: <strong>55 3575 7364</strong></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PIE DE FIRMA Y SELLO -->
+        <footer class="pdf-footer">
+            <div class="pdf-footer-note">
+                Presupuesto formal emitido de forma digital por <strong>Gestor de Autos México</strong>.
+            </div>
+            <div class="pdf-signature-box">
+                <div class="pdf-sign-line"></div>
+                <div class="pdf-sign-name">Ing. Joel Durán</div>
+                <div class="pdf-sign-title">Gestor Vehicular Autorizado • Gestor de Autos</div>
+            </div>
+        </footer>
 
     </div>
 
