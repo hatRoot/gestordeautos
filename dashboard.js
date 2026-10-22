@@ -446,6 +446,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const btnImprimirCotizador = document.getElementById('btnImprimirCotizador'); // Fallback si existiera
 
     let isIvaActive = false;
+    let currentSecurityHash = '';
 
     function formatMoney(amount) {
         return '$' + Number(amount || 0).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -455,6 +456,152 @@ document.addEventListener('DOMContentLoaded', async () => {
         const anio = new Date().getFullYear();
         const randomNum = Math.floor(1000 + Math.random() * 9000);
         return `COT-${anio}-${randomNum}`;
+    }
+
+    function generarTokenSeguridad() {
+        const anio = new Date().getFullYear();
+        const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        let rand = '';
+        for (let i = 0; i < 5; i++) {
+            rand += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        const timeCode = Date.now().toString(36).toUpperCase().slice(-3);
+        return `GA-${anio}-${rand}-${timeCode}`;
+    }
+
+    function renderQr(containerId, text, size) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = '';
+        if (typeof QRCode !== 'undefined') {
+            try {
+                new QRCode(container, {
+                    text: text,
+                    width: size,
+                    height: size,
+                    colorDark: '#0f172a',
+                    colorLight: '#ffffff',
+                    correctLevel: QRCode.CorrectLevel.M
+                });
+            } catch (e) {
+                console.warn('Error al generar QRCode:', e);
+            }
+        }
+    }
+
+    function actualizarQr(folio, total) {
+        currentSecurityHash = generarTokenSeguridad();
+        const cleanTotal = total || (cotTotalText ? cotTotalText.textContent : '$0.00');
+        
+        // Enlace de validación oficial por WhatsApp
+        const qrUrl = `https://wa.me/525535757364?text=${encodeURIComponent(
+            `Hola Gestor de Autos, solicito validar la autenticidad del Presupuesto Folio *${folio}* por *${cleanTotal}*. Código de seguridad: *${currentSecurityHash}*.`
+        )}`;
+
+        // Renderizar en la vista previa (1/3)
+        renderQr('prevQrCode', qrUrl, 52);
+        const prevHashEl = document.getElementById('prevSecurityHash');
+        if (prevHashEl) prevHashEl.textContent = currentSecurityHash;
+
+        // Renderizar en el documento imprimible PDF
+        renderQr('pdfQrCode', qrUrl, 75);
+        const pdfHashEl = document.getElementById('pdfSecurityHash');
+        if (pdfHashEl) pdfHashEl.textContent = currentSecurityHash;
+    }
+
+    function actualizarVistaPreviaCarta(regenerateQr = false) {
+        const folio = cotFolioInput?.value.trim() || 'COT-2026-0001';
+        const fechaVal = cotFechaInput?.value || new Date().toISOString().split('T')[0];
+        let fechaFormateada = fechaVal;
+        if (fechaVal && fechaVal.includes('-')) {
+            const parts = fechaVal.split('-');
+            if (parts.length === 3) fechaFormateada = `${parts[2]}/${parts[1]}/${parts[0]}`;
+        }
+
+        const cliente = document.getElementById('cotCliente')?.value.trim() || 'Cliente Particular';
+        const gestor = document.getElementById('cotGestor')?.value.trim() || 'Ing. Joel Durán';
+        const vin = document.getElementById('cotSerie')?.value.trim() || 'No registrado';
+        const marca = document.getElementById('cotMarca')?.value.trim() || '';
+        const modelo = document.getElementById('cotModelo')?.value.trim() || '';
+        const anio = document.getElementById('cotAnio')?.value.trim() || '';
+        const vehiculoStr = [marca, modelo, anio].filter(Boolean).join(' ') || 'Vehículo sin especificar';
+
+        // Elementos del mini sheet (1/3)
+        const prevFolio = document.getElementById('prevFolio');
+        const prevFecha = document.getElementById('prevFecha');
+        const prevCliente = document.getElementById('prevCliente');
+        const prevVehiculo = document.getElementById('prevVehiculo');
+        const prevVin = document.getElementById('prevVin');
+        const prevGestor = document.getElementById('prevGestor');
+
+        if (prevFolio) prevFolio.textContent = folio;
+        if (prevFecha) prevFecha.textContent = fechaFormateada;
+        if (prevCliente) prevCliente.textContent = cliente;
+        if (prevVehiculo) prevVehiculo.textContent = vehiculoStr;
+        if (prevVin) prevVin.textContent = vin;
+        if (prevGestor) prevGestor.textContent = gestor;
+
+        // Tabla de conceptos miniatura
+        const prevTableBody = document.getElementById('prevTableBody');
+        if (prevTableBody && conceptosBody) {
+            prevTableBody.innerHTML = '';
+            const filas = conceptosBody.querySelectorAll('tr');
+            let count = 0;
+
+            filas.forEach(row => {
+                const desc = row.querySelector('.cot-desc-input')?.value.trim();
+                const cant = parseFloat(row.querySelector('.cot-cant-input')?.value) || 1;
+                const precio = parseFloat(row.querySelector('.cot-precio-input')?.value) || 0;
+                const rowTotal = cant * precio;
+
+                if (desc || precio > 0) {
+                    count++;
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td style="text-align: center; color: #64748b;">${count}</td>
+                        <td><strong>${escapeHtml(desc || 'Trámite Vehicular')}</strong></td>
+                        <td style="text-align: center;">${cant}</td>
+                        <td style="text-align: right; font-weight: 700; color: #0f172a;">${formatMoney(rowTotal)}</td>
+                    `;
+                    prevTableBody.appendChild(tr);
+                }
+            });
+
+            if (count === 0) {
+                prevTableBody.innerHTML = `
+                    <tr>
+                        <td style="text-align: center; color: #64748b;">1</td>
+                        <td><strong>Trámite y Gestoría Vehicular</strong></td>
+                        <td style="text-align: center;">1</td>
+                        <td style="text-align: right; font-weight: 700;">$0.00</td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Totales miniatura
+        const prevSubtotal = document.getElementById('prevSubtotal');
+        const prevIvaRow = document.getElementById('prevIvaRow');
+        const prevIva = document.getElementById('prevIva');
+        const prevTotal = document.getElementById('prevTotal');
+
+        const subtotalText = cotSubtotalText ? cotSubtotalText.textContent : '$0.00';
+        const totalText = cotTotalText ? cotTotalText.textContent : '$0.00';
+
+        if (prevSubtotal) prevSubtotal.textContent = subtotalText;
+        if (prevIvaRow && prevIva) {
+            if (isIvaActive) {
+                prevIvaRow.style.display = 'flex';
+                prevIva.textContent = cotIvaText ? cotIvaText.textContent : '$0.00';
+            } else {
+                prevIvaRow.style.display = 'none';
+            }
+        }
+        if (prevTotal) prevTotal.textContent = totalText;
+
+        if (regenerateQr || !currentSecurityHash) {
+            actualizarQr(folio, totalText);
+        }
     }
 
     // Inicializar Folio y Fecha del día
@@ -470,11 +617,28 @@ document.addEventListener('DOMContentLoaded', async () => {
                 setTimeout(() => {
                     btnGenFolio.style.transform = '';
                 }, 300);
+                actualizarVistaPreviaCarta(true);
             }
         });
     }
     if (cotFechaInput && !cotFechaInput.value) {
         cotFechaInput.value = new Date().toISOString().split('T')[0];
+    }
+
+    // Escuchar cambios en campos de texto para actualizar la vista previa en vivo
+    ['cotCliente', 'cotSerie', 'cotMarca', 'cotModelo', 'cotAnio', 'cotGestor', 'cotFecha'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', () => {
+                actualizarVistaPreviaCarta(false);
+            });
+        }
+    });
+
+    if (cotFolioInput) {
+        cotFolioInput.addEventListener('input', () => {
+            actualizarVistaPreviaCarta(true);
+        });
     }
 
     function recalcularTotales() {
@@ -504,6 +668,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const total = subtotal + iva;
         if (cotTotalText) cotTotalText.textContent = formatMoney(total);
+
+        // Sincronizar en tiempo real con la hoja carta (1/3)
+        actualizarVistaPreviaCarta(true);
     }
 
     function agregarFilaConcepto(desc = '', cant = 1, precio = '') {
@@ -603,6 +770,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 } else {
                     recalcularTotales();
                 }
+                actualizarVistaPreviaCarta(true);
             }
         });
     }
@@ -647,7 +815,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (pdfVinDisplay) pdfVinDisplay.textContent = vin;
         if (pdfAnioDisplay) pdfAnioDisplay.textContent = anio || 'No especificado';
 
-        const pdfSignName = document.querySelector('.pdf-sign-name');
+        const pdfSignName = document.getElementById('pdfSignName');
         if (pdfSignName) pdfSignName.textContent = gestor;
 
         // Inyectar tabla de conceptos clonada
@@ -711,6 +879,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             pdfTotalDisplay.textContent = cotTotalText.textContent;
         }
 
+        // Asegurar que el QR impreso esté sincronizado con el folio y total
+        actualizarQr(folio, cotTotalText ? cotTotalText.textContent : '$0.00');
+
         return { folio, cliente };
     }
 
@@ -772,6 +943,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             let msj = `📋 *COTIZACIÓN DE TRÁMITES VEHICULARES*\n`;
             msj += `*Folio:* ${folio}\n`;
             msj += `*Fecha:* ${fechaVal}\n`;
+            if (currentSecurityHash) {
+                msj += `*Código de Validación:* ${currentSecurityHash}\n`;
+            }
             msj += `*Gestor:* ${gestor}\n`;
             msj += `*Cliente:* ${cliente}\n`;
             msj += `*Vehículo:* ${vehiculoStr}\n`;
