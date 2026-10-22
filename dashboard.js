@@ -721,10 +721,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             const origTitle = document.title;
             const cleanClient = cliente.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ_-]/g, '_').substring(0, 30);
             document.title = `Cotizacion_${folio}_${cleanClient}`;
-            window.print();
+            
+            // Garantizar que el navegador procese los cambios del DOM antes de abrir el modal de impresión
             setTimeout(() => {
-                document.title = origTitle;
-            }, 1500);
+                window.print();
+                setTimeout(() => {
+                    document.title = origTitle;
+                }, 1000);
+            }, 60);
         });
     }
 

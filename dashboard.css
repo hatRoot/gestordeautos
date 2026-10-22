@@ -1168,12 +1168,15 @@ body {
         padding: 0 !important;
         width: 100% !important;
         height: auto !important;
+        min-height: auto !important;
+        display: block !important;
+        position: static !important;
         overflow: visible !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
-    /* Ocultar toda la interfaz del sistema macOS */
+    /* Ocultar absolutamente toda la interfaz del sistema macOS */
     .mac-app-window,
     .mac-window-header,
     .mac-sidebar,
@@ -1185,16 +1188,23 @@ body {
     #adminSecretBtn,
     #mobileCallBar {
         display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        overflow: hidden !important;
     }
 
     /* Mostrar exclusivamente el documento formal */
-    #printableCotizacion {
+    #printableCotizacion,
+    .pdf-quotation-document {
         display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
         width: 100% !important;
         max-width: 100% !important;
         margin: 0 auto !important;
         padding: 0 !important;
         background: #ffffff !important;
+        position: static !important;
     }
 
     .pdf-header {
@@ -1250,8 +1260,10 @@ body {
     }
 
     .pdf-meta-badge {
-        background: #1e3a8a;
-        color: #ffffff;
+        background: #1e3a8a !important;
+        color: #1e3a8a !important;
+        border: 1.5px solid #1e3a8a !important;
+        background-color: #eff6ff !important;
         font-size: 11px;
         font-weight: 800;
         padding: 3px 12px;
@@ -1358,12 +1370,13 @@ body {
     }
 
     .pdf-table th {
-        background: #0f172a !important;
-        color: #ffffff !important;
+        background: #f1f5f9 !important;
+        color: #0f172a !important;
         padding: 6px 10px;
         font-size: 9.5px;
-        font-weight: 700;
-        border: 1px solid #0f172a;
+        font-weight: 800;
+        border: 1px solid #94a3b8 !important;
+        border-bottom: 2px solid #0f172a !important;
         text-transform: uppercase;
         letter-spacing: 0.4px;
     }
