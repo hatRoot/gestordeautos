@@ -4978,17 +4978,24 @@ details.seo-details[open] .seo-toggle-icon {
 .promo-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.55rem;
     align-self: flex-start;
-    background: rgba(37, 99, 235, 0.2);
-    border: 1px solid rgba(59, 130, 246, 0.4);
-    color: #60a5fa;
-    padding: 0.35rem 0.9rem;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.25) 0%, rgba(30, 58, 138, 0.4) 100%);
+    border: 1.5px solid rgba(96, 165, 250, 0.6);
+    color: #bae6fd;
+    padding: 0.45rem 1.1rem;
     border-radius: 50px;
-    font-size: 0.75rem;
+    font-size: 0.88rem;
     font-weight: 800;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
     margin-bottom: 0.75rem;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+.promo-badge i {
+    font-size: 1.05rem;
+    color: #38bdf8;
+    filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.6));
 }
 
 .promo-main-title {
@@ -5803,7 +5810,25 @@ main {
 
     .promo-badge {
         order: 1 !important;
-        margin-bottom: 0.25rem !important;
+        font-size: clamp(0.85rem, 3.8vw, 1rem) !important;
+        font-weight: 900 !important;
+        letter-spacing: 0.5px !important;
+        padding: 0.55rem 1.15rem !important;
+        margin-bottom: 0.45rem !important;
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.35) 0%, rgba(30, 58, 138, 0.5) 100%) !important;
+        border: 1.5px solid rgba(96, 165, 250, 0.75) !important;
+        color: #bae6fd !important;
+        box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+        gap: 0.6rem !important;
+        align-self: flex-start !important;
+        display: inline-flex !important;
+        align-items: center !important;
+    }
+
+    .promo-badge i {
+        font-size: 1.15rem !important;
+        color: #38bdf8 !important;
+        filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.75)) !important;
     }
 
     .promo-main-title {
