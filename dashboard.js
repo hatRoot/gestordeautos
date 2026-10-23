@@ -415,6 +415,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (cotizadorView) cotizadorView.style.display = 'flex';
                 viewTitleH2.textContent = 'Cotizador Vehicular';
                 viewSubtitle.textContent = 'Generador de presupuestos para clientes y empresas con desglose y datos bancarios.';
+                actualizarVistaPreviaCarta(false);
             } else {
                 // Otros módulos demostrativos
                 if (cotizadorView) cotizadorView.style.display = 'none';
@@ -469,6 +470,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         return `GA-${anio}-${rand}-${timeCode}`;
     }
 
+    let qrDebounceTimer = null;
+
     function renderQr(containerId, text, size) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -489,16 +492,31 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    function actualizarQr(folio, total) {
-        currentSecurityHash = generarTokenSeguridad();
-        const cleanTotal = total || (cotTotalText ? cotTotalText.textContent : '$0.00');
-        
-        // Enlace de validación oficial por WhatsApp
-        const qrUrl = `https://wa.me/525535757364?text=${encodeURIComponent(
-            `Hola Gestor de Autos, solicito validar la autenticidad del Presupuesto Folio *${folio}* por *${cleanTotal}*. Código de seguridad: *${currentSecurityHash}*.`
-        )}`;
+    function actualizarQr(forceNewHash = false) {
+        if (forceNewHash || !currentSecurityHash) {
+            currentSecurityHash = generarTokenSeguridad();
+        }
 
-        // Renderizar en la vista previa (1/3)
+        const folio = cotFolioInput?.value.trim() || 'COT-2026-0001';
+        const cleanTotal = cotTotalText ? cotTotalText.textContent : '$0.00';
+        const cliente = document.getElementById('cotCliente')?.value.trim() || 'Cliente Particular';
+        const marca = document.getElementById('cotMarca')?.value.trim() || '';
+        const modelo = document.getElementById('cotModelo')?.value.trim() || '';
+        const anio = document.getElementById('cotAnio')?.value.trim() || '';
+        const vehiculoStr = [marca, modelo, anio].filter(Boolean).join(' ') || 'Vehículo sin especificar';
+        const vin = document.getElementById('cotSerie')?.value.trim() || '';
+
+        // Enlace de validación oficial por WhatsApp con todos los datos reales y actualizados
+        let qrMsg = `Hola Gestor de Autos, solicito validar la cotización Folio: *${folio}*\n`;
+        qrMsg += `*Cliente:* ${cliente}\n`;
+        qrMsg += `*Vehículo:* ${vehiculoStr}`;
+        if (vin) qrMsg += ` (VIN: ${vin})`;
+        qrMsg += `\n*Total a Liquidar:* ${cleanTotal}\n`;
+        qrMsg += `*Código de Seguridad:* ${currentSecurityHash}`;
+
+        const qrUrl = `https://wa.me/525535757364?text=${encodeURIComponent(qrMsg)}`;
+
+        // Renderizar en la vista previa del tercio derecho (1/3)
         renderQr('prevQrCode', qrUrl, 52);
         const prevHashEl = document.getElementById('prevSecurityHash');
         if (prevHashEl) prevHashEl.textContent = currentSecurityHash;
@@ -509,7 +527,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (pdfHashEl) pdfHashEl.textContent = currentSecurityHash;
     }
 
-    function actualizarVistaPreviaCarta(regenerateQr = false) {
+    function actualizarVistaPreviaCarta(forceNewHash = false) {
+        if (forceNewHash) {
+            currentSecurityHash = generarTokenSeguridad();
+        } else if (!currentSecurityHash) {
+            currentSecurityHash = generarTokenSeguridad();
+        }
+
         const folio = cotFolioInput?.value.trim() || 'COT-2026-0001';
         const fechaVal = cotFechaInput?.value || new Date().toISOString().split('T')[0];
         let fechaFormateada = fechaVal;
@@ -599,9 +623,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         if (prevTotal) prevTotal.textContent = totalText;
 
-        if (regenerateQr || !currentSecurityHash) {
-            actualizarQr(folio, totalText);
-        }
+        // Debounce para redibujar el código QR con los datos actualizados sin ralentizar la escritura
+        clearTimeout(qrDebounceTimer);
+        qrDebounceTimer = setTimeout(() => {
+            actualizarQr(false);
+        }, 50);
     }
 
     // Inicializar Folio y Fecha del día
@@ -696,10 +722,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             </td>
         `;
 
+        const descInput = tr.querySelector('.cot-desc-input');
         const cantInput = tr.querySelector('.cot-cant-input');
         const precioInput = tr.querySelector('.cot-precio-input');
         const btnDelete = tr.querySelector('.cot-delete-btn');
 
+        if (descInput) {
+            descInput.addEventListener('input', () => {
+                actualizarVistaPreviaCarta(false);
+            });
+        }
         cantInput.addEventListener('input', recalcularTotales);
         precioInput.addEventListener('input', recalcularTotales);
 
