@@ -1917,6 +1917,10 @@ ul {
     display: inline-block;
     width: 18px;
     height: 18px;
+    min-width: 18px;
+    min-height: 18px !important;
+    max-height: 18px !important;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     background-color: #f97316;
     border: 2px solid rgba(255, 255, 255, 0.4);
@@ -1930,6 +1934,13 @@ ul {
 .admin-secret-btn:hover {
     transform: scale(1.18);
     box-shadow: 0 4px 10px rgba(249, 115, 22, 0.6);
+}
+
+/* Ocultar por completo en móviles y tablets (solo visible en modo escritorio) */
+@media (max-width: 1024px) {
+    .admin-secret-btn {
+        display: none !important;
+    }
 }
 
 
