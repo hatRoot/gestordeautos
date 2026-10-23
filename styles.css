@@ -4936,8 +4936,36 @@ details.seo-details[open] .seo-toggle-icon {
 
 @media (max-width: 1024px) {
     .split-promo-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .split-promo-left,
+    .split-promo-right {
+        display: contents;
+    }
+    .promo-badge {
+        order: 1;
+    }
+    .promo-main-title {
+        order: 2;
+    }
+    .promo-subtitle {
+        order: 3;
+    }
+    .split-promo-right,
+    .mini-hero-slider {
+        order: 4;
+        width: 100%;
+    }
+    .promo-pillars {
+        order: 5;
+    }
+    .promo-workflow-box {
+        order: 6;
+    }
+    .promo-cta-action {
+        order: 7;
     }
 }
 
@@ -5750,42 +5778,62 @@ main {
         font-size: 0.65rem !important;
     }
 
-    /* Split Promo Top Section Mobile - Cero aire muerto */
+    /* Split Promo Top Section Mobile - Cero aire muerto y Carrusel Inmediato en Primeros 3 Segundos */
     .split-promo-section {
         padding-top: 60px !important;
-        padding-bottom: 0 !important;
+        padding-bottom: 1.5rem !important;
         margin-bottom: 0 !important;
         border-bottom: none !important;
     }
 
     .split-promo-container {
-        grid-template-columns: 1fr !important;
-        gap: 0.75rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.65rem !important;
         padding-left: 1rem !important;
         padding-right: 1rem !important;
         margin-bottom: 0 !important;
-        padding-bottom: 0 !important;
+        padding-bottom: 0.5rem !important;
     }
 
+    .split-promo-left,
     .split-promo-right {
-        margin-bottom: 0 !important;
-        padding-bottom: 0 !important;
+        display: contents !important;
+    }
+
+    .promo-badge {
+        order: 1 !important;
+        margin-bottom: 0.25rem !important;
     }
 
     .promo-main-title {
+        order: 2 !important;
         font-size: 1.55rem !important;
         line-height: 1.18 !important;
-        margin-bottom: 0.35rem !important;
+        margin-bottom: 0.25rem !important;
     }
 
     .promo-subtitle {
+        order: 3 !important;
         font-size: 0.88rem !important;
-        line-height: 1.4 !important;
+        line-height: 1.38 !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    /* Mini Carousel Mobile Sizing: Inmediatamente abajo del texto en orden 4 */
+    .split-promo-right,
+    .mini-hero-slider {
+        order: 4 !important;
+        width: 100% !important;
+        height: 220px !important;
+        border-radius: 14px !important;
+        margin-top: 0.15rem !important;
         margin-bottom: 0.75rem !important;
     }
 
-    /* Pillars Grid on Mobile */
+    /* Pillars Grid on Mobile: orden 5 */
     .promo-pillars {
+        order: 5 !important;
         grid-template-columns: 1fr !important;
         gap: 0.5rem !important;
         margin-bottom: 0.75rem !important;
@@ -5796,10 +5844,12 @@ main {
         border-radius: 10px !important;
     }
 
-    /* 4-Step Workflow Box on Mobile */
+    /* 4-Step Workflow Box on Mobile: orden 6 */
     .promo-workflow-box {
+        order: 6 !important;
         padding: 0.75rem 0.85rem !important;
         border-radius: 10px !important;
+        margin-bottom: 0.75rem !important;
     }
 
     .workflow-steps {
@@ -5818,11 +5868,12 @@ main {
         font-size: 0.7rem !important;
     }
 
-    /* Mini Carousel Mobile Sizing */
-    .mini-hero-slider {
-        height: 220px !important;
-        border-radius: 14px !important;
-        margin-bottom: 0.25rem !important;
+    /* Botón CTA de WhatsApp: orden 7 con separación contra barra fija inferior */
+    .promo-cta-action {
+        order: 7 !important;
+        margin-top: 0.25rem !important;
+        margin-bottom: 1.75rem !important;
+        padding-bottom: 1rem !important;
     }
 
     .mini-slide-caption {
