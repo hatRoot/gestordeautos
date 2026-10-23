@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Estilos estilo macOS Lion -->
-    <link rel="stylesheet" href="dashboard.css?v=5">
+    <link rel="stylesheet" href="dashboard.css?v=6">
 </head>
 <body>
 
@@ -443,12 +443,16 @@
                                     <div class="mini-bank-card">
                                         <div class="mini-bank-title">
                                             <span><i class="fas fa-university"></i> BBVA México (Cuenta Oficial)</span>
-                                            <span style="font-size: 8px; color: #004481; font-weight: 700;">SPEI / Prácticaja</span>
+                                            <img src="assets/images/bbva-logo.jpg" alt="BBVA" class="mini-bbva-logo">
                                         </div>
                                         <div class="mini-bank-data">
                                             <div>CLABE: <strong style="color: #004481;">012 180 01576693584 6</strong></div>
                                             <div>Cuenta: <strong>157 669 3584</strong> • Tarjeta Débito: <strong>4152 3146 6918 3751</strong></div>
                                             <div>Titular: <strong>Joel Emmanuel Duran Mendoza</strong></div>
+                                        </div>
+                                        <div class="mini-bank-notes">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span>Una vez realizado el depósito o transferencia, favor de enviar foto o PDF del comprobante al WhatsApp <strong>55 3575 7364</strong> para iniciar el trámite de inmediato.</span>
                                         </div>
                                     </div>
 
@@ -742,7 +746,10 @@
         <!-- FICHA BANCARIA PARA PAGO -->
         <section class="pdf-bank-section">
             <div class="pdf-bank-header">
-                <i class="fas fa-university"></i> DATOS BANCARIOS OFICIALES PARA TRANSFERENCIA (SPEI / DEPÓSITO)
+                <div class="pdf-bank-header-left">
+                    <i class="fas fa-university"></i> DATOS BANCARIOS OFICIALES PARA TRANSFERENCIA (SPEI / DEPÓSITO)
+                </div>
+                <img src="assets/images/bbva-logo.jpg" alt="BBVA" class="pdf-bbva-logo">
             </div>
             <div class="pdf-bank-grid">
                 <div class="pdf-bank-col">
@@ -769,10 +776,15 @@
                         <span class="val"><strong style="letter-spacing: 0.5px;">4152 3146 6918 3751</strong></span>
                     </div>
                     <div class="pdf-bank-item">
-                        <span class="lbl">ENVÍO DE COMPROBANTE:</span>
-                        <span class="val">WhatsApp Oficial: <strong>55 3575 7364</strong></span>
+                        <span class="lbl">CELULAR VINCULADO:</span>
+                        <span class="val">Dimo / SPEI: <strong>55 3575 7364</strong></span>
                     </div>
                 </div>
+            </div>
+            <!-- NOTA OFICIAL DE COMPROBANTE -->
+            <div class="pdf-bank-notes">
+                <i class="fas fa-info-circle"></i>
+                <span>Una vez realizado el depósito o transferencia, favor de enviar la foto o PDF del comprobante al WhatsApp <strong>55 3575 7364</strong> para iniciar el trámite de inmediato.</span>
             </div>
         </section>
 
@@ -807,6 +819,6 @@
     <script src="supabase-client.js"></script>
     <script src="db.js"></script>
     <script src="qrcode.min.js"></script>
-    <script src="dashboard.js?v=5"></script>
+    <script src="dashboard.js?v=6"></script>
 </body>
 </html>

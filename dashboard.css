@@ -1146,6 +1146,38 @@ body {
     line-height: 1.35;
 }
 
+.mini-bbva-logo {
+    height: 12px;
+    width: auto;
+    border-radius: 2px;
+    object-fit: contain;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.mini-bank-notes {
+    background: #e0f2fe;
+    border: 1px solid #bae6fd;
+    border-radius: 3px;
+    padding: 3px 5px;
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 6.8px;
+    color: #0369a1;
+    line-height: 1.25;
+}
+
+.mini-bank-notes i {
+    font-size: 7.5px;
+    color: #0284c7;
+    flex-shrink: 0;
+}
+
+.mini-bank-notes strong {
+    color: #0c4a6e;
+}
+
 .mini-footer-section {
     display: flex;
     justify-content: space-between;
@@ -1930,6 +1962,17 @@ body {
         padding-bottom: 4px;
         margin-bottom: 6px;
         letter-spacing: 0.5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .pdf-bbva-logo {
+        height: 16px;
+        width: auto;
+        border-radius: 3px;
+        object-fit: contain;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
 
     .pdf-bank-grid {
@@ -1952,6 +1995,30 @@ body {
 
     .pdf-bank-item .val {
         color: #0f172a;
+    }
+
+    .pdf-bank-notes {
+        background: #f0f9ff;
+        border: 1px solid #bae6fd;
+        border-radius: 4px;
+        padding: 5px 8px;
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 8px;
+        color: #0369a1;
+        line-height: 1.35;
+    }
+
+    .pdf-bank-notes i {
+        font-size: 10px;
+        color: #0284c7;
+        flex-shrink: 0;
+    }
+
+    .pdf-bank-notes strong {
+        color: #0c4a6e;
     }
 
     /* Footer con Firma y QR */
