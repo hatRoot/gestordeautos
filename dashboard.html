@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Estilos estilo macOS Lion -->
-    <link rel="stylesheet" href="dashboard.css?v=4">
+    <link rel="stylesheet" href="dashboard.css?v=5">
 </head>
 <body>
 
@@ -378,7 +378,7 @@
                                             </div>
                                             <div class="mini-meta-item">
                                                 <span class="lbl">VIGENCIA:</span>
-                                                <span class="val">15 Días</span>
+                                                <strong class="val" style="color: #dc2626;">24 Horas</strong>
                                             </div>
                                         </div>
                                     </div>
@@ -459,7 +459,6 @@
                                             <div class="mini-qr-text">
                                                 <span class="mini-qr-title">VALIDACIÓN QR</span>
                                                 <span class="mini-qr-desc">Escanea para verificar</span>
-                                                <code id="prevSecurityHash">GA-AUTH</code>
                                             </div>
                                         </div>
                                         <div class="mini-sign-box">
@@ -467,6 +466,13 @@
                                             <strong class="mini-sign-name" id="prevGestor">Ing. Joel Durán</strong>
                                             <div class="mini-sign-lbl">Gestor Vehicular Autorizado</div>
                                         </div>
+                                    </div>
+
+                                    <!-- DOMINIO WEB Y TÉRMINOS Y CONDICIONES -->
+                                    <div class="mini-legal-bar">
+                                        <a href="https://gestordeautos.com.mx" target="_blank" class="mini-legal-site">www.GestorDeAutos.com.mx</a>
+                                        <span class="mini-legal-sep">•</span>
+                                        <a href="aviso-privacidad.html" target="_blank" class="mini-legal-link">Términos y Condiciones</a>
                                     </div>
 
                                 </div>
@@ -634,7 +640,7 @@
                     </div>
                     <div class="pdf-meta-row">
                         <span class="pdf-meta-lbl">VIGENCIA:</span>
-                        <span class="pdf-meta-val">15 Días Naturales</span>
+                        <strong class="pdf-meta-val" style="color: #dc2626;">24 Horas</strong>
                     </div>
                     <div class="pdf-meta-row">
                         <span class="pdf-meta-lbl">GESTOR:</span>
@@ -777,11 +783,15 @@
                 <div class="pdf-qr-meta">
                     <strong>VALIDACIÓN DIGITAL OFICIAL</strong>
                     <span>Escanea para verificar autenticidad</span>
-                    <code id="pdfSecurityHash">GA-AUTH-0000</code>
                 </div>
             </div>
             <div class="pdf-footer-note">
                 Presupuesto formal emitido de forma digital por <strong>Gestor de Autos México</strong>. Trámites 100% legales y oficiales verificables directamente ante las dependencias de gobierno correspondientes.
+                <div class="pdf-legal-bar">
+                    <span class="pdf-legal-site">www.GestorDeAutos.com.mx</span>
+                    <span class="pdf-legal-sep">•</span>
+                    <a href="https://gestordeautos.com.mx/aviso-privacidad.html" target="_blank" class="pdf-legal-link">Términos y Condiciones</a>
+                </div>
             </div>
             <div class="pdf-signature-box">
                 <div class="pdf-sign-line"></div>
@@ -797,6 +807,6 @@
     <script src="supabase-client.js"></script>
     <script src="db.js"></script>
     <script src="qrcode.min.js"></script>
-    <script src="dashboard.js?v=4"></script>
+    <script src="dashboard.js?v=5"></script>
 </body>
 </html>

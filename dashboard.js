@@ -512,19 +512,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         qrMsg += `*Vehículo:* ${vehiculoStr}`;
         if (vin) qrMsg += ` (VIN: ${vin})`;
         qrMsg += `\n*Total a Liquidar:* ${cleanTotal}\n`;
-        qrMsg += `*Código de Seguridad:* ${currentSecurityHash}`;
+        qrMsg += `*Vigencia:* 24 Horas\n`;
+        qrMsg += `*Código de Validación:* ${currentSecurityHash}\n`;
+        qrMsg += `🌐 www.GestorDeAutos.com.mx`;
 
         const qrUrl = `https://wa.me/525535757364?text=${encodeURIComponent(qrMsg)}`;
 
         // Renderizar en la vista previa del tercio derecho (1/3)
         renderQr('prevQrCode', qrUrl, 52);
-        const prevHashEl = document.getElementById('prevSecurityHash');
-        if (prevHashEl) prevHashEl.textContent = currentSecurityHash;
 
         // Renderizar en el documento imprimible PDF
         renderQr('pdfQrCode', qrUrl, 75);
-        const pdfHashEl = document.getElementById('pdfSecurityHash');
-        if (pdfHashEl) pdfHashEl.textContent = currentSecurityHash;
     }
 
     function actualizarVistaPreviaCarta(forceNewHash = false) {
@@ -975,6 +973,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             let msj = `📋 *COTIZACIÓN DE TRÁMITES VEHICULARES*\n`;
             msj += `*Folio:* ${folio}\n`;
             msj += `*Fecha:* ${fechaVal}\n`;
+            msj += `*Vigencia:* 24 Horas\n`;
             if (currentSecurityHash) {
                 msj += `*Código de Validación:* ${currentSecurityHash}\n`;
             }
@@ -1002,7 +1001,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             msj += `• *Tarjeta Débito (OXXO/7-Eleven):* 4152314669183751\n`;
             msj += `• *Celular Vinculado (Dimo/SPEI):* 55 3575 7364\n`;
             msj += `─────────────────────────\n`;
-            msj += `*Favor de enviar tu comprobante de pago por este chat para procesar tu trámite.*`;
+            msj += `*Favor de enviar tu comprobante de pago por este chat para procesar tu trámite.*\n`;
+            msj += `─────────────────────────\n`;
+            msj += `🌐 *Sitio Web:* www.GestorDeAutos.com.mx\n`;
+            msj += `📄 *Términos y Condiciones:* https://gestordeautos.com.mx/aviso-privacidad.html`;
 
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(msj).then(() => {
