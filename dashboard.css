@@ -853,6 +853,33 @@ body {
     letter-spacing: 0.5px;
 }
 
+.preview-panel-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.preview-zoom-btn {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #1e3a8a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+}
+
+.preview-zoom-btn:hover {
+    background: #eff6ff;
+    border-color: #93c5fd;
+    color: #1d4ed8;
+}
+
 .preview-panel-status {
     display: flex;
     align-items: center;
@@ -884,6 +911,7 @@ body {
     display: flex;
     justify-content: center;
     background: #e2e8f0;
+    transition: all 0.3s ease;
 }
 
 /* Hoja Carta con proporción 8.5 x 11 (215.9mm x 279.4mm) */
@@ -902,6 +930,45 @@ body {
     font-size: 9.5px;
     color: #1e293b;
     box-sizing: border-box;
+    transition: max-width 0.3s ease, font-size 0.3s ease, padding 0.3s ease;
+}
+
+/* Modo Agrandado (Zoom 100%) para la vista previa */
+.letter-sheet-paper.zoomed {
+    max-width: 680px;
+    font-size: 11px;
+    padding: 22px 26px;
+    gap: 12px;
+}
+
+.mini-brand-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.letter-sheet-paper.zoomed .mini-brand-img {
+    width: 44px;
+    height: 44px;
+}
+
+.mini-contact-sep {
+    color: #cbd5e1;
+    margin: 0 4px;
+}
+
+.mini-token-code {
+    font-family: monospace;
+    font-size: 7.5px;
+    font-weight: 700;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    color: #1e3a8a;
+    padding: 1px 4px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
 }
 
 .mini-pdf-header {
@@ -1629,7 +1696,8 @@ body {
 /* =========================================================
    HOJA DE COTIZACIÓN PROFESIONAL / DOCUMENTO PDF
    ========================================================= */
-.pdf-quotation-document {
+.pdf-quotation-document,
+.pdf-remision-document {
     display: none;
     background: #ffffff;
     color: #1e293b;
@@ -1645,7 +1713,7 @@ body {
 @media print {
     @page {
         size: letter portrait;
-        margin: 8mm 10mm;
+        margin: 6mm 8mm;
     }
 
     html, body {
@@ -1672,6 +1740,7 @@ body {
     .mac-sheet-overlay,
     .mac-undo-toast,
     .cot-actions-bar,
+    .rem-subnav-bar,
     #adminSecretBtn,
     #mobileCallBar {
         display: none !important;
@@ -1680,9 +1749,15 @@ body {
         overflow: hidden !important;
     }
 
-    /* Mostrar exclusivamente el documento formal */
+    /* Ocultar ambos por defecto para evitar superposición */
     #printableCotizacion,
-    .pdf-quotation-document {
+    #printableRemisionDoc {
+        display: none !important;
+    }
+
+    /* Mostrar documento de Cotización cuando corresponde */
+    body:not(.printing-remision) #printableCotizacion,
+    body.printing-cotizacion #printableCotizacion {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
@@ -1692,6 +1767,23 @@ body {
         padding: 0 !important;
         background: #ffffff !important;
         position: static !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+    }
+
+    /* Mostrar documento de Nota de Remisión cuando corresponde */
+    body.printing-remision #printableRemisionDoc {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        position: static !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
     }
 
     .pdf-header {
@@ -1699,14 +1791,14 @@ body {
         justify-content: space-between;
         align-items: flex-start;
         border-bottom: 2px solid #1e3a8a;
-        padding-bottom: 10px;
-        margin-bottom: 12px;
+        padding-bottom: 8px;
+        margin-bottom: 8px;
     }
 
     .pdf-header-brand {
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: 4px;
     }
 
     .pdf-logo-box {
@@ -1715,16 +1807,25 @@ body {
         gap: 10px;
     }
 
+    .pdf-brand-img {
+        width: 44px;
+        height: 44px;
+        object-fit: contain;
+        border-radius: 6px;
+        flex-shrink: 0;
+    }
+
     .pdf-brand-text h2 {
-        font-size: 18px;
+        font-size: 17px;
         font-weight: 800;
         color: #0f172a;
         margin: 0;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.4px;
+        line-height: 1.1;
     }
 
     .pdf-brand-text span {
-        font-size: 10.5px;
+        font-size: 10px;
         color: #2563eb;
         font-weight: 600;
     }
@@ -1732,10 +1833,10 @@ body {
     .pdf-company-contact {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
-        font-size: 9.5px;
+        gap: 8px;
+        font-size: 9px;
         color: #64748b;
-        margin-top: 4px;
+        margin-top: 3px;
     }
 
     .pdf-header-meta {
@@ -1743,7 +1844,7 @@ body {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        gap: 6px;
+        gap: 4px;
     }
 
     .pdf-meta-badge {
@@ -1751,11 +1852,11 @@ body {
         color: #1e3a8a !important;
         border: 1.5px solid #1e3a8a !important;
         background-color: #eff6ff !important;
-        font-size: 11px;
+        font-size: 10.5px;
         font-weight: 800;
-        padding: 3px 12px;
+        padding: 2px 10px;
         border-radius: 4px;
-        letter-spacing: 0.8px;
+        letter-spacing: 0.6px;
         display: inline-block;
     }
 
@@ -1763,8 +1864,8 @@ body {
         background: #f8fafc;
         border: 1px solid #e2e8f0;
         border-radius: 4px;
-        padding: 6px 10px;
-        font-size: 10px;
+        padding: 5px 8px;
+        font-size: 9.5px;
         min-width: 180px;
     }
 
@@ -1785,36 +1886,48 @@ body {
         font-weight: 700;
     }
 
+    .pdf-token-code {
+        font-family: monospace;
+        font-size: 8.5px;
+        font-weight: 700;
+        background: #eff6ff !important;
+        border: 1px solid #bfdbfe !important;
+        color: #1e3a8a !important;
+        padding: 1px 4px;
+        border-radius: 3px;
+        letter-spacing: 0.3px;
+    }
+
     /* Info Grid */
     .pdf-info-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 12px;
-        margin-bottom: 12px;
+        gap: 10px;
+        margin-bottom: 8px;
     }
 
     .pdf-info-card {
         background: #f8fafc;
         border: 1px solid #cbd5e1;
-        border-radius: 6px;
-        padding: 8px 12px;
+        border-radius: 5px;
+        padding: 6px 10px;
     }
 
     .pdf-info-title {
-        font-size: 10px;
+        font-size: 9.5px;
         font-weight: 800;
         color: #1e3a8a;
         border-bottom: 1px solid #e2e8f0;
-        padding-bottom: 4px;
-        margin-bottom: 6px;
-        letter-spacing: 0.5px;
+        padding-bottom: 3px;
+        margin-bottom: 5px;
+        letter-spacing: 0.4px;
     }
 
     .pdf-info-row {
         display: flex;
         justify-content: space-between;
-        font-size: 10px;
-        margin-bottom: 3px;
+        font-size: 9.5px;
+        margin-bottom: 2px;
     }
 
     .pdf-lbl {
@@ -1834,33 +1947,34 @@ body {
         padding: 1px 4px;
         border-radius: 3px;
         color: #0f172a;
-        font-size: 9.5px;
+        font-size: 9px;
     }
 
     /* Tabla de Conceptos */
     .pdf-table-section {
-        margin-bottom: 12px;
+        margin-bottom: 8px;
     }
 
     .pdf-section-title {
-        font-size: 10px;
+        font-size: 9.5px;
         font-weight: 800;
         color: #1e3a8a;
-        margin-bottom: 6px;
-        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+        letter-spacing: 0.4px;
     }
 
     .pdf-table {
         width: 100%;
         border-collapse: collapse;
-        font-size: 10.5px;
+        font-size: 10px;
+        font-variant-numeric: tabular-nums;
     }
 
     .pdf-table th {
         background: #f1f5f9 !important;
         color: #0f172a !important;
-        padding: 6px 10px;
-        font-size: 9.5px;
+        padding: 5px 8px;
+        font-size: 9px;
         font-weight: 800;
         border: 1px solid #94a3b8 !important;
         border-bottom: 2px solid #0f172a !important;
@@ -1869,7 +1983,7 @@ body {
     }
 
     .pdf-table td {
-        padding: 6px 10px;
+        padding: 5px 8px;
         border: 1px solid #e2e8f0;
         color: #1e293b;
     }
@@ -1882,64 +1996,64 @@ body {
     .pdf-totals-section {
         display: grid;
         grid-template-columns: 1fr 240px;
-        gap: 14px;
-        margin-bottom: 12px;
+        gap: 12px;
+        margin-bottom: 8px;
         page-break-inside: avoid;
     }
 
     .pdf-terms-box {
         background: #f8fafc;
         border: 1px solid #e2e8f0;
-        border-radius: 6px;
-        padding: 8px 12px;
-        font-size: 9.5px;
+        border-radius: 5px;
+        padding: 6px 10px;
+        font-size: 9px;
         color: #475569;
     }
 
     .pdf-terms-title {
         font-weight: 800;
         color: #0f172a;
-        margin-bottom: 4px;
+        margin-bottom: 3px;
     }
 
     .pdf-terms-box p {
         margin: 2px 0;
-        line-height: 1.35;
+        line-height: 1.3;
     }
 
     .pdf-totals-table {
         background: #f1f5f9;
         border: 1px solid #cbd5e1;
-        border-radius: 6px;
-        padding: 8px 12px;
+        border-radius: 5px;
+        padding: 6px 10px;
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 3px;
     }
 
     .pdf-total-row {
         display: flex;
         justify-content: space-between;
-        font-size: 10.5px;
+        font-size: 10px;
         color: #475569;
     }
 
     .pdf-total-grand {
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 800;
         color: #0f172a;
         border-top: 1.5px solid #cbd5e1;
-        padding-top: 6px;
+        padding-top: 4px;
         margin-top: 2px;
     }
 
     .pdf-total-grand strong {
         color: #059669;
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .pdf-currency-note {
-        font-size: 8.5px;
+        font-size: 8px;
         text-align: right;
         color: #94a3b8;
     }
@@ -1948,27 +2062,27 @@ body {
     .pdf-bank-section {
         background: #f0f7ff;
         border: 1px solid #93c5fd;
-        border-radius: 6px;
-        padding: 8px 12px;
-        margin-bottom: 12px;
+        border-radius: 5px;
+        padding: 6px 10px;
+        margin-bottom: 8px;
         page-break-inside: avoid;
     }
 
     .pdf-bank-header {
-        font-size: 10px;
+        font-size: 9.5px;
         font-weight: 800;
         color: #004481;
         border-bottom: 1px solid #bfdbfe;
-        padding-bottom: 4px;
-        margin-bottom: 6px;
-        letter-spacing: 0.5px;
+        padding-bottom: 3px;
+        margin-bottom: 5px;
+        letter-spacing: 0.4px;
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
     .pdf-bbva-logo {
-        height: 16px;
+        height: 15px;
         width: auto;
         border-radius: 3px;
         object-fit: contain;
@@ -1978,14 +2092,14 @@ body {
     .pdf-bank-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 12px;
+        gap: 10px;
     }
 
     .pdf-bank-item {
         display: flex;
         justify-content: space-between;
-        font-size: 9.5px;
-        margin-bottom: 3px;
+        font-size: 9px;
+        margin-bottom: 2px;
     }
 
     .pdf-bank-item .lbl {
@@ -2001,18 +2115,18 @@ body {
         background: #f0f9ff;
         border: 1px solid #bae6fd;
         border-radius: 4px;
-        padding: 5px 8px;
-        margin-top: 8px;
+        padding: 4px 6px;
+        margin-top: 6px;
         display: flex;
         align-items: center;
-        gap: 8px;
-        font-size: 8px;
+        gap: 6px;
+        font-size: 7.5px;
         color: #0369a1;
-        line-height: 1.35;
+        line-height: 1.25;
     }
 
     .pdf-bank-notes i {
-        font-size: 10px;
+        font-size: 9px;
         color: #0284c7;
         flex-shrink: 0;
     }
@@ -2026,10 +2140,10 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-top: 10px;
+        padding-top: 8px;
         border-top: 1px solid #e2e8f0;
         page-break-inside: avoid;
-        gap: 12px;
+        gap: 10px;
     }
 
     .pdf-qr-box {
@@ -2040,8 +2154,8 @@ body {
 
     .pdf-qr-render canvas,
     .pdf-qr-render img {
-        width: 60px !important;
-        height: 60px !important;
+        width: 58px !important;
+        height: 58px !important;
         display: block;
         border: 1px solid #cbd5e1;
         padding: 2px;
@@ -2076,18 +2190,18 @@ body {
     }
 
     .pdf-footer-note {
-        font-size: 8px;
+        font-size: 7.5px;
         color: #64748b;
-        max-width: 45%;
-        line-height: 1.35;
+        max-width: 48%;
+        line-height: 1.3;
     }
 
     .pdf-legal-bar {
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 5px;
         font-size: 7.5px;
-        margin-top: 4px;
+        margin-top: 3px;
         color: #475569;
     }
 
@@ -2108,23 +2222,23 @@ body {
 
     .pdf-signature-box {
         text-align: center;
-        width: 150px;
+        width: 140px;
         flex-shrink: 0;
     }
 
     .pdf-sign-line {
         border-top: 1px solid #334155;
-        margin-bottom: 4px;
+        margin-bottom: 3px;
     }
 
     .pdf-sign-name {
-        font-size: 9.5px;
+        font-size: 9px;
         font-weight: 700;
         color: #0f172a;
     }
 
     .pdf-sign-title {
-        font-size: 8px;
+        font-size: 7.5px;
         color: #64748b;
     }
 }
@@ -2165,5 +2279,298 @@ body {
         max-width: 100%;
     }
 }
+
+/* =====================================================================
+   MÓDULO: NOTAS DE REMISIÓN PROFESIONALES (ESTILO macOS LION)
+   ===================================================================== */
+
+/* Barra de pestañas y sub-navegación */
+.rem-subnav-bar {
+    background: #ffffff;
+    border-bottom: 1px solid #d1d5db;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    flex-shrink: 0;
+}
+
+.rem-tabs-group {
+    display: flex;
+    gap: 6px;
+    background: #e2e8f0;
+    padding: 3px;
+    border-radius: 6px;
+}
+
+.rem-tab-btn {
+    border: none;
+    background: transparent;
+    padding: 6px 14px;
+    border-radius: 5px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+}
+
+.rem-tab-btn:hover {
+    color: #0f172a;
+}
+
+.rem-tab-btn.active {
+    background: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.rem-tab-badge {
+    background: #10b981;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 10px;
+}
+
+/* Banner de Captura Automática e Importación */
+.rem-import-banner {
+    background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+    border: 1px solid #bae6fd;
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 1px 3px rgba(2, 132, 199, 0.06);
+}
+
+.rem-import-banner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.rem-import-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    color: #0369a1;
+}
+
+.rem-import-sub {
+    font-size: 11px;
+    color: #64748b;
+}
+
+.rem-import-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Desglose Financiero Remisión */
+.rem-financial-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 14px;
+    margin-top: 14px;
+    gap: 20px;
+}
+
+.rem-financial-left {
+    flex: 1 1 55%;
+}
+
+.rem-financial-right {
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+}
+
+/* Checklist de Documentos Entregados */
+.rem-checklist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 8px 12px;
+    margin-top: 8px;
+}
+
+.rem-check-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+    color: #334155;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.rem-check-item:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+.rem-check-item input[type="checkbox"] {
+    accent-color: #10b981;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+/* Historial y Estadísticas de Remisiones */
+.rem-historial-container {
+    background: #f1f4f9;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.rem-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.rem-stat-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-left: 4px solid #10b981;
+    border-radius: 6px;
+    padding: 12px 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.rem-stat-val {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.2;
+}
+
+.rem-stat-lbl {
+    font-size: 11px;
+    color: #64748b;
+    font-weight: 600;
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* Toolbar Historial */
+.rem-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.rem-toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 280px;
+}
+
+.rem-search-box {
+    position: relative;
+    flex: 1;
+    max-width: 320px;
+}
+
+.rem-search-box i {
+    position: absolute;
+    left: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+.rem-search-box input {
+    padding-left: 28px !important;
+    width: 100%;
+}
+
+.rem-toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Mini checklist y firmas miniatura */
+.mini-checklist-box {
+    margin-top: 6px;
+    padding: 5px 8px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+}
+
+.mini-checklist-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 3px;
+}
+
+.mini-check-tag {
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 8px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.mini-dual-signatures {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px dashed #cbd5e1;
+}
+
+/* Adaptabilidad Móvil para Remisiones */
+@media (max-width: 900px) {
+    .rem-financial-box {
+        flex-direction: column;
+    }
+    .rem-financial-right {
+        border-top: 1px solid #cbd5e1;
+        padding-top: 10px;
+    }
+    .rem-checklist-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 

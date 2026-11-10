@@ -70,6 +70,14 @@
                             </div>
                             <span class="mac-badge" style="background: #f97316; color: #ffffff; font-weight: 700; font-size: 10px; padding: 1px 6px;">PRO</span>
                         </li>
+                        <!-- TERCER MENÚ: NOTAS DE REMISIÓN -->
+                        <li class="mac-sidebar-item" data-menu="remisiones">
+                            <div class="mac-sidebar-item-left">
+                                <i class="fas fa-receipt" style="color: #10b981;"></i>
+                                <span>Notas de Remisión</span>
+                            </div>
+                            <span class="mac-badge" id="badgeRemisionesCount" style="background: #10b981; color: #ffffff; font-weight: 700; font-size: 10px; padding: 1px 6px;">0</span>
+                        </li>
                         <li class="mac-sidebar-item" data-menu="logout">
                             <div class="mac-sidebar-item-left">
                                 <i class="fas fa-sign-out-alt" style="color: #dc2626;"></i>
@@ -184,6 +192,14 @@
                                     <label for="cotAnio">Año</label>
                                     <input type="number" id="cotAnio" class="mac-input" placeholder="Ej. 2023" min="1950" max="2027">
                                 </div>
+                                <div class="cot-form-group">
+                                    <label for="cotTiempoEntrega">Tiempo Estimado de Entrega</label>
+                                    <input type="text" id="cotTiempoEntrega" class="mac-input" value="24 a 48 Horas Hábiles" placeholder="Ej. 24 a 48 Horas Hábiles">
+                                </div>
+                                <div class="cot-form-group">
+                                    <label for="cotModalidad">Modalidad de Entrega</label>
+                                    <input type="text" id="cotModalidad" class="mac-input" value="Entrega exprés a domicilio / oficina" placeholder="Ej. A domicilio / oficina">
+                                </div>
                             </div>
                         </div>
 
@@ -228,6 +244,14 @@
                                         </button>
                                         <span class="cot-iva-hint">Opcional: Actívalo para incluir IVA en el total.</span>
                                     </div>
+                                    <!-- Botón Opcional para Desglosar Anticipo -->
+                                    <div class="cot-iva-toggle-container" style="margin-top: 8px;">
+                                        <button type="button" class="cot-iva-toggle-btn" id="btnToggleAnticipo">
+                                            <span class="cot-toggle-switch" id="anticipoSwitchKnob"></span>
+                                            <span id="anticipoToggleText">Desglosar Anticipo (50%)</span>
+                                        </button>
+                                        <span class="cot-iva-hint">Calcula anticipo de inicio y saldo contra entrega.</span>
+                                    </div>
                                 </div>
 
                                 <div class="cot-totals-right">
@@ -243,6 +267,14 @@
                                         <span>Total a Liquidar:</span>
                                         <strong id="cotTotalText">$0.00</strong>
                                     </div>
+                                    <div class="cot-summary-row" id="cotAnticipoRow" style="display: none; color: #0284c7;">
+                                        <span>Anticipo Inicial (50%):</span>
+                                        <strong id="cotAnticipoText">$0.00</strong>
+                                    </div>
+                                    <div class="cot-summary-row" id="cotSaldoRow" style="display: none; color: #d97706;">
+                                        <span>Saldo a la Entrega:</span>
+                                        <strong id="cotSaldoText">$0.00</strong>
+                                    </div>
                                 </div>
                             </div>
 
@@ -251,6 +283,10 @@
                                 <button type="button" class="mac-btn" id="btnLimpiarCotizador">
                                     <i class="fas fa-eraser"></i>
                                     <span>Limpiar</span>
+                                </button>
+                                <button type="button" class="mac-btn" id="btnGuardarCotizacion" style="color: #2563eb; font-weight: 600;" title="Guardar cotización y descargar archivo JSON a cualquier carpeta">
+                                    <i class="fas fa-save"></i>
+                                    <span>Guardar Cotización (.json)</span>
                                 </button>
                                 <button type="button" class="mac-btn" id="btnCopiarWhatsApp" style="color: #059669; font-weight: 600;">
                                     <i class="fab fa-whatsapp"></i>
@@ -342,27 +378,34 @@
                                 <div class="preview-panel-badge">
                                     <i class="fas fa-file-invoice"></i> Vista Previa Carta (PDF)
                                 </div>
-                                <div class="preview-panel-status">
-                                    <span class="preview-pulse-dot"></span>
-                                    <span>En vivo</span>
+                                <div class="preview-panel-actions">
+                                    <button type="button" class="preview-zoom-btn" id="btnZoomPreview" title="Alternar tamaño real / compacto">
+                                        <i class="fas fa-expand-alt"></i> <span id="zoomBtnText">Agrandar</span>
+                                    </button>
+                                    <div class="preview-panel-status">
+                                        <span class="preview-pulse-dot"></span>
+                                        <span>En vivo</span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="letter-sheet-viewport">
+                            <div class="letter-sheet-viewport" id="previewViewport">
                                 <div class="letter-sheet-paper" id="miniLetterSheet">
                                     
                                     <!-- HEADER CARTA MINIATURA -->
                                     <div class="mini-pdf-header">
                                         <div class="mini-brand-box">
                                             <div class="mini-brand-logo">
-                                                <i class="fas fa-car" style="color: #1e3a8a; font-size: 16px;"></i>
+                                                <img src="assets/images/logo1.png" alt="Gestor de Autos" class="mini-brand-img">
                                                 <div>
                                                     <div class="mini-brand-name">GESTOR DE AUTOS</div>
-                                                    <div class="mini-brand-sub">CDMX & EdoMex</div>
+                                                    <div class="mini-brand-sub">Gestoría Vehicular • CDMX y EdoMex</div>
                                                 </div>
                                             </div>
                                             <div class="mini-contact-info">
-                                                <span><i class="fab fa-whatsapp"></i> 55 3575 7364</span>
+                                                <span><i class="fab fa-whatsapp" style="color: #25D366;"></i> 55 3575 7364</span>
+                                                <span class="mini-contact-sep">•</span>
+                                                <span><i class="fas fa-globe"></i> gestordeautos.com.mx</span>
                                             </div>
                                         </div>
 
@@ -374,11 +417,15 @@
                                             </div>
                                             <div class="mini-meta-item">
                                                 <span class="lbl">FECHA:</span>
-                                                <strong class="val" id="prevFecha">22/10/2026</strong>
+                                                <strong class="val" id="prevFecha">23/10/2026</strong>
                                             </div>
                                             <div class="mini-meta-item">
                                                 <span class="lbl">VIGENCIA:</span>
                                                 <strong class="val" style="color: #dc2626;">24 Horas</strong>
+                                            </div>
+                                            <div class="mini-meta-item">
+                                                <span class="lbl">TOKEN:</span>
+                                                <code class="mini-token-code" id="prevSecurityHash">GA-2026-AUTH</code>
                                             </div>
                                         </div>
                                     </div>
@@ -388,14 +435,16 @@
                                     <!-- DATOS CLIENTE Y VEHÍCULO -->
                                     <div class="mini-info-grid">
                                         <div class="mini-info-card">
-                                            <div class="mini-card-head"><i class="fas fa-user-tie"></i> CLIENTE / EMPRESA:</div>
+                                            <div class="mini-card-head"><i class="fas fa-user-tie"></i> CLIENTE / SOLICITANTE:</div>
                                             <strong class="mini-info-val" id="prevCliente">Cliente Particular</strong>
-                                            <div class="mini-info-sub">Entrega exprés a domicilio / oficina</div>
+                                            <div class="mini-info-sub"><i class="fas fa-truck-fast"></i> <span id="prevModalidad">Entrega exprés a domicilio / oficina</span></div>
+                                            <div class="mini-info-sub"><i class="fas fa-clock"></i> <span id="prevTiempoEntrega">24 a 48 Horas Hábiles</span></div>
                                         </div>
                                         <div class="mini-info-card">
                                             <div class="mini-card-head"><i class="fas fa-car-side"></i> FICHA DE LA UNIDAD:</div>
                                             <strong class="mini-info-val" id="prevVehiculo">Vehículo sin especificar</strong>
                                             <div class="mini-info-sub">VIN: <code id="prevVin" class="mini-vin-code">No registrado</code></div>
+                                            <div class="mini-info-sub">Gestor: <strong id="prevGestorHeader">Ing. Joel Durán</strong></div>
                                         </div>
                                     </div>
 
@@ -405,14 +454,15 @@
                                         <table class="mini-table">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 8%; text-align: center;">#</th>
-                                                    <th style="width: 52%;">Concepto</th>
-                                                    <th style="width: 15%; text-align: center;">Cant.</th>
-                                                    <th style="width: 25%; text-align: right;">Importe</th>
+                                                    <th style="width: 7%; text-align: center;">#</th>
+                                                    <th style="width: 47%;">Concepto</th>
+                                                    <th style="width: 12%; text-align: center;">Cant.</th>
+                                                    <th style="width: 17%; text-align: right;">P. Unit.</th>
+                                                    <th style="width: 17%; text-align: right;">Importe</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="prevTableBody">
-                                                <!-- Filas vivas actualizadas dinámicamente -->
+                                                <!-- Filas dinámicas -->
                                             </tbody>
                                         </table>
                                     </div>
@@ -421,7 +471,7 @@
                                     <div class="mini-totals-box">
                                         <div class="mini-guarantee-note">
                                             <i class="fas fa-shield-alt" style="color: #10b981;"></i>
-                                            <span>Trámites 100% oficiales y verificables en portal de gobierno.</span>
+                                            <span>Trámites 100% oficiales ante SEMOVI CDMX y Finanzas EdoMex. Verificables en portal de gobierno.</span>
                                         </div>
                                         <div class="mini-totals-table">
                                             <div class="mini-total-row">
@@ -433,8 +483,16 @@
                                                 <strong id="prevIva">$0.00</strong>
                                             </div>
                                             <div class="mini-total-row mini-total-grand">
-                                                <span>TOTAL:</span>
+                                                <span>TOTAL A LIQUIDAR:</span>
                                                 <strong id="prevTotal">$0.00</strong>
+                                            </div>
+                                            <div class="mini-total-row mini-anticipo-row" id="prevAnticipoRow" style="display: none;">
+                                                <span>Anticipo inicio (50%):</span>
+                                                <strong id="prevAnticipo" style="color: #0284c7;">$0.00</strong>
+                                            </div>
+                                            <div class="mini-total-row mini-saldo-row" id="prevSaldoRow" style="display: none;">
+                                                <span>Saldo contra entrega:</span>
+                                                <strong id="prevSaldo" style="color: #d97706;">$0.00</strong>
                                             </div>
                                         </div>
                                     </div>
@@ -442,17 +500,22 @@
                                     <!-- FICHA BANCARIA BBVA RESUMIDA -->
                                     <div class="mini-bank-card">
                                         <div class="mini-bank-title">
-                                            <span><i class="fas fa-university"></i> BBVA México (Cuenta Oficial)</span>
+                                            <div style="display: flex; align-items: center; gap: 6px;">
+                                                <i class="fas fa-university" style="color: #004481;"></i>
+                                                <span>BBVA México (Cuenta Oficial)</span>
+                                            </div>
                                             <img src="assets/images/bbva-logo.jpg" alt="BBVA" class="mini-bbva-logo">
                                         </div>
-                                        <div class="mini-bank-data">
-                                            <div>CLABE: <strong style="color: #004481;">012 180 01576693584 6</strong></div>
-                                            <div>Cuenta: <strong>157 669 3584</strong> • Tarjeta Débito: <strong>4152 3146 6918 3751</strong></div>
-                                            <div>Titular: <strong>Joel Emmanuel Duran Mendoza</strong></div>
+                                        <div class="mini-bank-grid">
+                                            <div>CLABE (SPEI): <strong style="color: #004481; font-family: monospace;">012 180 01576693584 6</strong></div>
+                                            <div>Cuenta: <strong style="font-family: monospace;">157 669 3584</strong></div>
+                                            <div>Tarjeta (OXXO): <strong style="font-family: monospace;">4152 3146 6918 3751</strong></div>
+                                            <div>Dimo / Celular: <strong>55 3575 7364</strong></div>
+                                            <div style="grid-column: span 2;">Titular: <strong>Joel Emmanuel Duran Mendoza</strong></div>
                                         </div>
                                         <div class="mini-bank-notes">
                                             <i class="fas fa-info-circle"></i>
-                                            <span>Una vez realizado el depósito o transferencia, favor de enviar foto o PDF del comprobante al WhatsApp <strong>55 3575 7364</strong> para iniciar el trámite de inmediato.</span>
+                                            <span>Enviar comprobante por WhatsApp al <strong>55 3575 7364</strong> para iniciar el trámite de inmediato.</span>
                                         </div>
                                     </div>
 
@@ -461,8 +524,8 @@
                                         <div class="mini-qr-box">
                                             <div id="prevQrCode" class="mini-qr-render"></div>
                                             <div class="mini-qr-text">
-                                                <span class="mini-qr-title">VALIDACIÓN QR</span>
-                                                <span class="mini-qr-desc">Escanea para verificar</span>
+                                                <span class="mini-qr-title">VALIDACIÓN OFICIAL</span>
+                                                <span class="mini-qr-desc">Escanea con tu celular</span>
                                             </div>
                                         </div>
                                         <div class="mini-sign-box">
@@ -485,6 +548,563 @@
 
                     </div>
                 </div>
+
+                <!-- VISTA: NOTAS DE REMISIÓN PROFESIONAL -->
+                <div class="cotizador-container" id="remisionesView" style="display: none; flex-direction: column;">
+                    
+                    <!-- BARRA DE PESTAÑAS SUB-VISTA (ESTILO macOS LION) -->
+                    <div class="rem-subnav-bar">
+                        <div class="rem-tabs-group">
+                            <button type="button" class="rem-tab-btn active" id="btnTabRemEditor">
+                                <i class="fas fa-edit"></i>
+                                <span>Editor de Nota de Remisión</span>
+                            </button>
+                            <button type="button" class="rem-tab-btn" id="btnTabRemHistorial">
+                                <i class="fas fa-list-alt"></i>
+                                <span>Historial y Eliminación</span>
+                                <span class="rem-tab-badge" id="remHistorialCountBadge">0</span>
+                            </button>
+                        </div>
+                        <div class="rem-quick-actions">
+                            <button type="button" class="mac-btn mac-btn-primary" id="btnRemNewNoteTop" style="background: #10b981; border-color: #059669; color: #fff;">
+                                <i class="fas fa-plus"></i>
+                                <span>Nueva Nota</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- SUB-VISTA 1: EDITOR DE REMISIÓN (SPLIT WORKSPACE 2/3 + 1/3) -->
+                    <div id="remEditorSection" class="cotizador-split-workspace">
+                        
+                        <!-- COLUMNA IZQUIERDA: FORMULARIO (2/3) -->
+                        <div class="cotizador-form-column">
+                            
+                            <!-- BANNER DE CAPTURA RÁPIDA / IMPORTACIÓN DE COTIZACIÓN -->
+                            <div class="rem-import-banner">
+                                <div class="rem-import-banner-header">
+                                    <div class="rem-import-title">
+                                        <i class="fas fa-magic" style="color: #0284c7;"></i>
+                                        <strong>Captura Automática desde Cotización</strong>
+                                    </div>
+                                    <span class="rem-import-sub">Importa una cotización previa desde archivo o captura directamente</span>
+                                </div>
+                                <div class="rem-import-controls">
+                                    <!-- Botón para cargar archivo manual desde cualquier carpeta -->
+                                    <input type="file" id="remFileInputCotizacion" accept=".json,application/json" style="display: none;">
+                                    <button type="button" class="mac-btn" id="btnRemCargarArchivo" style="background: #f0fdf4; border-color: #86efac; color: #15803d; font-weight: 700;">
+                                        <i class="fas fa-folder-open"></i>
+                                        <span>Seleccionar Cotización desde Carpeta (.json)</span>
+                                    </button>
+                                    
+                                    <!-- Selector de cotizaciones guardadas en sistema -->
+                                    <div style="display: flex; align-items: center; gap: 6px; flex: 1; min-width: 200px;">
+                                        <select id="remSelectCotRecientes" class="mac-select" style="font-size: 11.5px; padding: 4px 8px;">
+                                            <option value="">-- O elegir cotización reciente guardada --</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Botón para importar texto de WhatsApp -->
+                                    <button type="button" class="mac-btn" id="btnRemPegarWhatsApp" title="Pegar texto de cotización enviado por WhatsApp">
+                                        <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+                                        <span>Pegar texto WhatsApp</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Tarjeta 1: Folios y Datos de Emisión -->
+                            <div class="cot-card" style="margin-top: 14px;">
+                                <div class="cot-card-header">
+                                    <i class="fas fa-receipt" style="color: #10b981;"></i>
+                                    <h3>Datos Generales de la Nota de Remisión</h3>
+                                </div>
+                                <div class="cot-form-grid">
+                                    <div class="cot-form-group">
+                                        <label for="remFolio">Folio de Remisión</label>
+                                        <div style="display: flex; gap: 6px;">
+                                            <input type="text" id="remFolio" class="mac-input" placeholder="REM-2026-0001" style="font-weight: 700; color: #047857; letter-spacing: 0.5px;">
+                                            <button type="button" class="mac-btn" id="btnGenFolioRem" title="Generar nuevo folio" style="padding: 4px 8px;">
+                                                <i class="fas fa-sync-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="cot-form-group">
+                                        <label for="remCotizacionOrigen">Folio Cotización Origen</label>
+                                        <input type="text" id="remCotizacionOrigen" class="mac-input" placeholder="COT-2026-XXXX (opcional)">
+                                    </div>
+                                    <div class="cot-form-group">
+                                        <label for="remFecha">Fecha de Emisión</label>
+                                        <input type="date" id="remFecha" class="mac-input">
+                                    </div>
+                                    <div class="cot-form-group">
+                                        <label for="remEstatus">Estatus del Servicio</label>
+                                        <select id="remEstatus" class="mac-select" style="font-weight: 600;">
+                                            <option value="En proceso">🟡 En proceso (Trámite activo)</option>
+                                            <option value="Anticipo pagado">🔵 Anticipo pagado (Saldo pendiente)</option>
+                                            <option value="Liquidada">🟢 Liquidada (Pagada 100%)</option>
+                                            <option value="Entregada">🟣 Entregada de conformidad</option>
+                                        </select>
+                                    </div>
+                                    <div class="cot-form-group" style="grid-column: span 2;">
+                                        <label for="remCliente">Nombre del Cliente o Empresa</label>
+                                        <input type="text" id="remCliente" class="mac-input" placeholder="Ej. Juan Pérez / Corporativo Transportes S.A.">
+                                    </div>
+                                    <div class="cot-form-group">
+                                        <label for="remTelefono">Teléfono / WhatsApp</label>
+                                        <input type="text" id="remTelefono" class="mac-input" placeholder="Ej. 55 1234 5678">
+                                    </div>
+                                    <div class="cot-form-group">
+                                        <label for="remGestor">Gestor Responsable</label>
+                                        <input type="text" id="remGestor" class="mac-input" value="Ing. Joel Durán">
+                                    </div>
+                                    <div class="cot-form-group" style="grid-column: span 2;">
+                                        <label for="remDireccionEntrega">Lugar / Modalidad de Entrega</label>
+                                        <input type="text" id="remDireccionEntrega" class="mac-input" value="Entrega directa a domicilio / oficina" placeholder="Dirección del cliente o punto de encuentro">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tarjeta 2: Ficha Técnica de la Unidad -->
+                            <div class="cot-card" style="margin-top: 16px;">
+                                <div class="cot-card-header">
+                                    <i class="fas fa-car" style="color: #2b7de9;"></i>
+                                    <h3>Ficha Técnica del Vehículo</h3>
+                                </div>
+                                <div class="cot-form-grid">
+                                    <div class="cot-form-group">
+                                        <label for="remSerie">Número de Serie (VIN)</label>
+                                        <input type="text" id="remSerie" class="mac-input" placeholder="Ej. 3VW2K7AJ8EM123456" maxlength="17" style="text-transform: uppercase;">
+                                    </div>
+                                    <div class="cot-form-group">
+                                        <label for="remPlacas">Placas (Anteriores / Asignadas)</label>
+                                        <input type="text" id="remPlacas" class="mac-input" placeholder="Ej. NGE-123-A / En trámite" style="text-transform: uppercase;">
+                                    </div>
+                                    <div class="cot-form-group">
+                                        <label for="remMarca">Marca</label>
+                                        <input type="text" id="remMarca" class="mac-input" placeholder="Ej. Nissan, Volkswagen, Chevrolet">
+                                    </div>
+                                    <div class="cot-form-group">
+                                        <label for="remModelo">Modelo</label>
+                                        <input type="text" id="remModelo" class="mac-input" placeholder="Ej. Versa, Jetta, Aveo">
+                                    </div>
+                                    <div class="cot-form-group">
+                                        <label for="remAnio">Año</label>
+                                        <input type="number" id="remAnio" class="mac-input" placeholder="Ej. 2024" min="1950" max="2027">
+                                    </div>
+                                    <div class="cot-form-group">
+                                        <label for="remColor">Color / Tipo</label>
+                                        <input type="text" id="remColor" class="mac-input" placeholder="Ej. Blanco / Sedán">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tarjeta 3: Conceptos, Anticipo y Desglose Financiero -->
+                            <div class="cot-card" style="margin-top: 16px;">
+                                <div class="cot-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <i class="fas fa-list-check" style="color: #10b981;"></i>
+                                        <h3>Servicios Amparados y Liquidación</h3>
+                                    </div>
+                                    <button type="button" class="mac-btn mac-btn-primary" id="btnRemAddConcepto">
+                                        <i class="fas fa-plus"></i>
+                                        <span>Agregar Concepto</span>
+                                    </button>
+                                </div>
+                                <div class="cot-table-container">
+                                    <table class="cot-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 50%;">Descripción del Servicio</th>
+                                                <th style="width: 14%; text-align: center;">Cantidad</th>
+                                                <th style="width: 18%; text-align: right;">P. Unitario</th>
+                                                <th style="width: 18%; text-align: right;">Importe</th>
+                                                <th style="width: 40px; text-align: center;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="remConceptosBody">
+                                            <!-- Filas dinámicas -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Panel Financiero de Remisión (Totales, Anticipo, Saldo) -->
+                                <div class="rem-financial-box">
+                                    <div class="rem-financial-left">
+                                        <div class="cot-form-group">
+                                            <label for="remAnticipoInput">Monto de Anticipo Recibido ($)</label>
+                                            <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+                                                <input type="number" id="remAnticipoInput" class="mac-input" value="0" min="0" step="10" style="font-weight: 700; color: #0284c7; max-width: 160px;">
+                                                <button type="button" class="mac-btn" id="btnRemAnticipo50" style="padding: 4px 8px;" title="Fijar 50%">50%</button>
+                                                <button type="button" class="mac-btn" id="btnRemAnticipo100" style="padding: 4px 8px;" title="Liquidar 100%">100%</button>
+                                                <button type="button" class="mac-btn" id="btnRemAnticipoCero" style="padding: 4px 8px;" title="Sin anticipo">$0</button>
+                                            </div>
+                                        </div>
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+                                            <div class="cot-form-group">
+                                                <label for="remMetodoPago">Método de Pago Anticipo</label>
+                                                <select id="remMetodoPago" class="mac-select">
+                                                    <option value="Transferencia SPEI (BBVA)">Transferencia SPEI (BBVA)</option>
+                                                    <option value="Depósito Prácticaja BBVA">Depósito Prácticaja BBVA</option>
+                                                    <option value="Depósito OXXO / Tarjeta">Depósito OXXO / Tarjeta</option>
+                                                    <option value="Efectivo contra entrega">Efectivo contra entrega</option>
+                                                    <option value="Tarjeta / Terminal">Tarjeta / Terminal</option>
+                                                </select>
+                                            </div>
+                                            <div class="cot-form-group">
+                                                <label for="remReferenciaPago">Referencia o Folio de Pago</label>
+                                                <input type="text" id="remReferenciaPago" class="mac-input" placeholder="Ej. Rastreo SPEI / Comprobante">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="rem-financial-right">
+                                        <div class="cot-summary-row">
+                                            <span>Subtotal:</span>
+                                            <strong id="remSubtotalText">$0.00</strong>
+                                        </div>
+                                        <div class="cot-summary-row cot-total-highlight">
+                                            <span>Total General:</span>
+                                            <strong id="remTotalText">$0.00</strong>
+                                        </div>
+                                        <div class="cot-summary-row" style="color: #0284c7; font-weight: 700;">
+                                            <span>Anticipo Recibido:</span>
+                                            <strong id="remAnticipoText">$0.00</strong>
+                                        </div>
+                                        <div class="cot-summary-row" style="color: #dc2626; font-size: 14px; font-weight: 800; border-top: 1px dashed #cbd5e1; padding-top: 6px; margin-top: 6px;">
+                                            <span>SALDO POR LIQUIDAR:</span>
+                                            <strong id="remSaldoText">$0.00</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tarjeta 4: Checklist de Documentos y Placas Entregadas / Recibidas -->
+                            <div class="cot-card" style="margin-top: 16px;">
+                                <div class="cot-card-header">
+                                    <i class="fas fa-boxes-packing" style="color: #f59e0b;"></i>
+                                    <h3>Documentos y Materiales Entregados / Amparados</h3>
+                                </div>
+                                <div class="rem-checklist-grid">
+                                    <label class="rem-check-item">
+                                        <input type="checkbox" id="chkDocPlacas" class="rem-doc-chk" checked>
+                                        <span><i class="fas fa-id-card"></i> Par de Placas Metálicas Oficiales</span>
+                                    </label>
+                                    <label class="rem-check-item">
+                                        <input type="checkbox" id="chkDocTarjeta" class="rem-doc-chk" checked>
+                                        <span><i class="fas fa-sim-card"></i> Tarjeta de Circulación con Chip</span>
+                                    </label>
+                                    <label class="rem-check-item">
+                                        <input type="checkbox" id="chkDocEngomado" class="rem-doc-chk" checked>
+                                        <span><i class="fas fa-stamp"></i> Calcomanía / Engomado Fiscal</span>
+                                    </label>
+                                    <label class="rem-check-item">
+                                        <input type="checkbox" id="chkDocDerechos" class="rem-doc-chk" checked>
+                                        <span><i class="fas fa-file-invoice-dollar"></i> Hoja de Pago de Derechos Oficial</span>
+                                    </label>
+                                    <label class="rem-check-item">
+                                        <input type="checkbox" id="chkDocBaja" class="rem-doc-chk">
+                                        <span><i class="fas fa-file-excel"></i> Comprobante Oficial de Baja de Placas</span>
+                                    </label>
+                                    <label class="rem-check-item">
+                                        <input type="checkbox" id="chkDocLicencia" class="rem-doc-chk">
+                                        <span><i class="fas fa-id-badge"></i> Licencia de Conducir Oficial</span>
+                                    </label>
+                                    <label class="rem-check-item">
+                                        <input type="checkbox" id="chkDocFactura" class="rem-doc-chk">
+                                        <span><i class="fas fa-file-shield"></i> Factura Original / Título Devuelto</span>
+                                    </label>
+                                    <label class="rem-check-item">
+                                        <input type="checkbox" id="chkDocVerificacion" class="rem-doc-chk">
+                                        <span><i class="fas fa-smog"></i> Holograma / Verificación Vehicular</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Tarjeta 5: Observaciones y Condiciones -->
+                            <div class="cot-card" style="margin-top: 16px;">
+                                <div class="cot-card-header">
+                                    <i class="fas fa-comment-dots" style="color: #64748b;"></i>
+                                    <h3>Observaciones y Términos de Entrega</h3>
+                                </div>
+                                <div class="cot-form-group" style="margin-top: 8px;">
+                                    <textarea id="remNotas" class="mac-input" rows="2" style="width: 100%; resize: vertical;" placeholder="Ej. Trámite 100% legal verificable en portal de gobierno. Se entrega en mano propia del solicitante y se finiquita saldo pendiente."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Acciones de la Nota de Remisión -->
+                            <div class="cot-actions-bar" style="margin-top: 20px;">
+                                <button type="button" class="mac-btn" id="btnRemLimpiar">
+                                    <i class="fas fa-eraser"></i>
+                                    <span>Limpiar</span>
+                                </button>
+                                <button type="button" class="mac-btn" id="btnRemCopiarWhatsApp" style="color: #059669; font-weight: 600;">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <span>Comprobante WhatsApp</span>
+                                </button>
+                                <button type="button" class="mac-btn" id="btnRemEliminarActual" style="color: #dc2626; display: none;">
+                                    <i class="fas fa-trash-alt"></i>
+                                    <span>Eliminar Nota</span>
+                                </button>
+                                <button type="button" class="mac-btn mac-btn-primary" id="btnRemGuardar" style="background: #0284c7; border-color: #0369a1; color: #fff; font-weight: 700;">
+                                    <i class="fas fa-save"></i>
+                                    <span>Guardar Nota</span>
+                                </button>
+                                <button type="button" class="mac-btn mac-btn-primary" id="btnRemGenerarPdf" style="background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: #ffffff; border: 1px solid #047857; font-weight: 700; padding: 6px 14px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.35);">
+                                    <i class="fas fa-print"></i>
+                                    <span>Generar PDF / Imprimir</span>
+                                </button>
+                            </div>
+
+                        </div> <!-- Cierre columna izquierda 2/3 -->
+
+                        <!-- COLUMNA DERECHA: VISTA PREVIA EN VIVO CARTA (1/3) -->
+                        <div class="cotizador-preview-column">
+                            <div class="preview-panel-header">
+                                <div class="preview-panel-badge" style="color: #047857;">
+                                    <i class="fas fa-file-invoice"></i> Vista Previa Remisión (PDF)
+                                </div>
+                                <div class="preview-panel-actions">
+                                    <button type="button" class="preview-zoom-btn" id="btnZoomRemPreview" title="Alternar tamaño real / compacto">
+                                        <i class="fas fa-expand-alt"></i> <span id="remZoomBtnText">Agrandar</span>
+                                    </button>
+                                    <div class="preview-panel-status">
+                                        <span class="preview-pulse-dot" style="background: #10b981;"></span>
+                                        <span>En vivo</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="letter-sheet-viewport" id="remPreviewViewport">
+                                <div class="letter-sheet-paper" id="miniRemLetterSheet">
+                                    
+                                    <!-- HEADER CARTA MINIATURA REMISIÓN -->
+                                    <div class="mini-pdf-header">
+                                        <div class="mini-brand-box">
+                                            <div class="mini-brand-logo">
+                                                <img src="assets/images/logo1.png" alt="Gestor de Autos" class="mini-brand-img">
+                                                <div>
+                                                    <div class="mini-brand-name">GESTOR DE AUTOS</div>
+                                                    <div class="mini-brand-sub">Gestoría Vehicular • CDMX y EdoMex</div>
+                                                </div>
+                                            </div>
+                                            <div class="mini-contact-info">
+                                                <span><i class="fab fa-whatsapp" style="color: #25D366;"></i> 55 3575 7364</span>
+                                                <span class="mini-contact-sep">•</span>
+                                                <span><i class="fas fa-globe"></i> gestordeautos.com.mx</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="mini-meta-box">
+                                            <div class="mini-meta-badge" style="background: #10b981;">NOTA DE REMISIÓN</div>
+                                            <div class="mini-meta-item">
+                                                <span class="lbl">FOLIO:</span>
+                                                <strong class="val" id="prevRemFolio" style="color: #047857;">REM-2026-0001</strong>
+                                            </div>
+                                            <div class="mini-meta-item">
+                                                <span class="lbl">COTIZACIÓN:</span>
+                                                <strong class="val" id="prevRemCotOrigen">N/A</strong>
+                                            </div>
+                                            <div class="mini-meta-item">
+                                                <span class="lbl">FECHA:</span>
+                                                <strong class="val" id="prevRemFecha">23/10/2026</strong>
+                                            </div>
+                                            <div class="mini-meta-item">
+                                                <span class="lbl">ESTATUS:</span>
+                                                <strong class="val" id="prevRemEstatus" style="color: #0284c7;">En proceso</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mini-divider" style="border-top-color: #10b981;"></div>
+
+                                    <!-- DATOS CLIENTE Y VEHÍCULO -->
+                                    <div class="mini-info-grid">
+                                        <div class="mini-info-card">
+                                            <div class="mini-card-head"><i class="fas fa-user-tie"></i> CLIENTE / SOLICITANTE:</div>
+                                            <strong class="mini-info-val" id="prevRemCliente">Cliente Particular</strong>
+                                            <div class="mini-info-sub"><i class="fas fa-phone"></i> Tel: <span id="prevRemTelefono">55 3575 7364</span></div>
+                                            <div class="mini-info-sub"><i class="fas fa-map-marker-alt"></i> <span id="prevRemEntrega">Entrega a domicilio</span></div>
+                                        </div>
+                                        <div class="mini-info-card">
+                                            <div class="mini-card-head"><i class="fas fa-car-side"></i> FICHA DE LA UNIDAD:</div>
+                                            <strong class="mini-info-val" id="prevRemVehiculo">Vehículo sin especificar</strong>
+                                            <div class="mini-info-sub">VIN: <code id="prevRemVin" class="mini-vin-code">No registrado</code></div>
+                                            <div class="mini-info-sub">Placas: <strong id="prevRemPlacas">En trámite</strong></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- TABLA DE CONCEPTOS MINIATURA -->
+                                    <div class="mini-table-section">
+                                        <div class="mini-section-label">SERVICIOS Y DERECHOS AMPARADOS:</div>
+                                        <table class="mini-table">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 7%; text-align: center;">#</th>
+                                                    <th style="width: 47%;">Concepto</th>
+                                                    <th style="width: 12%; text-align: center;">Cant.</th>
+                                                    <th style="width: 17%; text-align: right;">P. Unit.</th>
+                                                    <th style="width: 17%; text-align: right;">Importe</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="prevRemTableBody">
+                                                <!-- Filas dinámicas -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- TOTALES Y DESGLOSE FINANCIERO MINIATURA -->
+                                    <div class="mini-totals-box">
+                                        <div class="mini-guarantee-note">
+                                            <i class="fas fa-shield-alt" style="color: #10b981;"></i>
+                                            <span>Trámite 100% legal verificado en portal oficial. Comprobante de pago y recepción de trámite vehicular.</span>
+                                        </div>
+                                        <div class="mini-totals-table">
+                                            <div class="mini-total-row">
+                                                <span>Subtotal:</span>
+                                                <strong id="prevRemSubtotal">$0.00</strong>
+                                            </div>
+                                            <div class="mini-total-row mini-total-grand">
+                                                <span>TOTAL GENERAL:</span>
+                                                <strong id="prevRemTotal">$0.00</strong>
+                                            </div>
+                                            <div class="mini-total-row" style="color: #0284c7; font-weight: 700;">
+                                                <span>Anticipo Recibido:</span>
+                                                <strong id="prevRemAnticipo">$0.00</strong>
+                                            </div>
+                                            <div class="mini-total-row" style="color: #dc2626; font-weight: 800; font-size: 11px;">
+                                                <span>SALDO PENDIENTE:</span>
+                                                <strong id="prevRemSaldo">$0.00</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- CHECKLIST DE DOCUMENTOS ENTREGADOS MINIATURA -->
+                                    <div class="mini-checklist-box" id="prevRemChecklistContainer">
+                                        <div class="mini-section-label"><i class="fas fa-clipboard-check"></i> MATERIALES Y DOCUMENTOS AMPARADOS:</div>
+                                        <div class="mini-checklist-tags" id="prevRemChecklistTags">
+                                            <!-- Tags dinámicos según checkboxes -->
+                                        </div>
+                                    </div>
+
+                                    <!-- DOBLE CAJA DE FIRMAS (ENTREGA Y RECIBIDO) -->
+                                    <div class="mini-dual-signatures">
+                                        <div class="mini-sign-box">
+                                            <div class="mini-sign-line"></div>
+                                            <strong class="mini-sign-name" id="prevRemGestorSign">Ing. Joel Durán</strong>
+                                            <div class="mini-sign-lbl">Entregó • Gestor de Autos</div>
+                                        </div>
+                                        <div class="mini-sign-box">
+                                            <div class="mini-sign-line"></div>
+                                            <strong class="mini-sign-name" id="prevRemClienteSign">Cliente / Solicitante</strong>
+                                            <div class="mini-sign-lbl">Recibí de Conformidad</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- FOOTER CON QR DINÁMICO -->
+                                    <div class="mini-footer-section">
+                                        <div class="mini-qr-box">
+                                            <div id="prevRemQrCode" class="mini-qr-render"></div>
+                                            <div class="mini-qr-text">
+                                                <span class="mini-qr-title">VALIDACIÓN DE NOTA</span>
+                                                <span class="mini-qr-desc">Escanea con celular</span>
+                                            </div>
+                                        </div>
+                                        <div class="mini-legal-bar" style="margin: 0;">
+                                            <a href="https://gestordeautos.com.mx" target="_blank" class="mini-legal-site">www.GestorDeAutos.com.mx</a>
+                                            <span class="mini-legal-sep">•</span>
+                                            <span>Comprobante de Trámite Vehicular</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div> <!-- Cierre columna derecha 1/3 -->
+
+                    </div> <!-- Cierre remEditorSection -->
+
+                    <!-- SUB-VISTA 2: HISTORIAL Y HERRAMIENTAS DE ELIMINACIÓN -->
+                    <div id="remHistorialSection" class="rem-historial-container" style="display: none; padding: 18px 24px; overflow-y: auto;">
+                        
+                        <!-- Tarjetas de Estadísticas -->
+                        <div class="rem-stats-grid">
+                            <div class="rem-stat-card">
+                                <div class="rem-stat-val" id="statRemTotal">0</div>
+                                <div class="rem-stat-lbl">Notas Registradas</div>
+                            </div>
+                            <div class="rem-stat-card" style="border-left-color: #f59e0b;">
+                                <div class="rem-stat-val" style="color: #d97706;" id="statRemPendientes">0</div>
+                                <div class="rem-stat-lbl">Con Saldo Pendiente</div>
+                            </div>
+                            <div class="rem-stat-card" style="border-left-color: #10b981;">
+                                <div class="rem-stat-val" style="color: #059669;" id="statRemLiquidadas">0</div>
+                                <div class="rem-stat-lbl">Liquidadas / Entregadas</div>
+                            </div>
+                            <div class="rem-stat-card" style="border-left-color: #2563eb;">
+                                <div class="rem-stat-val" style="color: #1d4ed8;" id="statRemMontoTotal">$0.00</div>
+                                <div class="rem-stat-lbl">Total en Remisión</div>
+                            </div>
+                        </div>
+
+                        <!-- Barra de Herramientas de Eliminación y Filtros -->
+                        <div class="rem-toolbar">
+                            <div class="rem-toolbar-left">
+                                <div class="rem-search-box">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="remSearchInput" class="mac-input" placeholder="Buscar por folio, cliente, serie o placas...">
+                                </div>
+                                <select id="remFilterStatus" class="mac-select" style="max-width: 170px;">
+                                    <option value="todos">Todos los estatus</option>
+                                    <option value="En proceso">En proceso</option>
+                                    <option value="Anticipo pagado">Anticipo pagado</option>
+                                    <option value="Liquidada">Liquidada</option>
+                                    <option value="Entregada">Entregada</option>
+                                </select>
+                            </div>
+
+                            <div class="rem-toolbar-right">
+                                <!-- HERRAMIENTAS DE ELIMINACIÓN MÚLTIPLE -->
+                                <button type="button" class="mac-btn" id="btnRemEliminarSeleccionadas" style="color: #dc2626; border-color: #fca5a5; display: none;" title="Eliminar las notas seleccionadas con checkbox">
+                                    <i class="fas fa-trash-alt"></i>
+                                    <span>Eliminar Seleccionadas (<span id="remCountSelected">0</span>)</span>
+                                </button>
+                                <button type="button" class="mac-btn" id="btnRemVaciarTodo" style="color: #64748b;" title="Eliminar todas las notas con confirmación de seguridad">
+                                    <i class="fas fa-dumpster"></i>
+                                    <span>Vaciar Historial</span>
+                                </button>
+                                <button type="button" class="mac-btn mac-btn-primary" id="btnRemNuevaDesdeHistorial" style="background: #10b981; border-color: #059669; color: #fff;">
+                                    <i class="fas fa-plus"></i>
+                                    <span>Nueva Nota</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- TABLA ESTILO macOS FINDER CON CHECKBOXES -->
+                        <div class="mac-table-container" style="background: #ffffff; border: 1px solid #c9c9c9; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-top: 12px;">
+                            <table class="mac-table" id="remisionesTable">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 38px; text-align: center;">
+                                            <input type="checkbox" id="chkSelectAllRem" title="Seleccionar todas">
+                                        </th>
+                                        <th style="width: 125px;">Folio</th>
+                                        <th style="width: 95px;">Fecha</th>
+                                        <th style="width: 160px;">Cliente / Empresa</th>
+                                        <th>Vehículo / Placas</th>
+                                        <th style="width: 105px; text-align: right;">Total</th>
+                                        <th style="width: 105px; text-align: right;">Anticipo</th>
+                                        <th style="width: 105px; text-align: right;">Saldo</th>
+                                        <th style="width: 120px; text-align: center;">Estatus</th>
+                                        <th style="width: 110px; text-align: center;">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="remisionesTableBody">
+                                    <!-- Filas generadas dinámicamente -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div> <!-- Cierre remHistorialSection -->
+
+                </div> <!-- Cierre remisionesView -->
 
                 <!-- Barra de Estado Inferior -->
                 <footer class="mac-status-bar">
@@ -613,18 +1233,18 @@
     <!-- ========================================================================= -->
     <div id="printableCotizacion" class="pdf-quotation-document">
         
-        <!-- HEADER DE LA COTIZACIÓN -->
+        <!-- HEADER FORMAL CARTA -->
         <header class="pdf-header">
             <div class="pdf-header-brand">
                 <div class="pdf-logo-box">
-                    <i class="fas fa-car" style="color: #1e3a8a; font-size: 28px;"></i>
+                    <img src="assets/images/logo1.png" alt="Gestor de Autos" class="pdf-brand-img">
                     <div class="pdf-brand-text">
                         <h2>GESTOR DE AUTOS</h2>
-                        <span>Gestoría Vehicular Integral CDMX & EdoMex</span>
+                        <span>Gestoría Vehicular Especializada • CDMX & Estado de México</span>
                     </div>
                 </div>
                 <div class="pdf-company-contact">
-                    <div><i class="fas fa-globe"></i> gestordeautos.com.mx</div>
+                    <div><i class="fas fa-globe"></i> www.gestordeautos.com.mx</div>
                     <div><i class="fab fa-whatsapp"></i> 55 3575 7364</div>
                     <div><i class="fas fa-envelope"></i> contacto@gestordeautos.com.mx</div>
                     <div><i class="fas fa-map-marker-alt"></i> CDMX y Área Metropolitana</div>
@@ -640,7 +1260,7 @@
                     </div>
                     <div class="pdf-meta-row">
                         <span class="pdf-meta-lbl">FECHA:</span>
-                        <strong class="pdf-meta-val" id="pdfFechaDisplay">22/10/2026</strong>
+                        <strong class="pdf-meta-val" id="pdfFechaDisplay">23/10/2026</strong>
                     </div>
                     <div class="pdf-meta-row">
                         <span class="pdf-meta-lbl">VIGENCIA:</span>
@@ -649,6 +1269,10 @@
                     <div class="pdf-meta-row">
                         <span class="pdf-meta-lbl">GESTOR:</span>
                         <span class="pdf-meta-val" id="pdfGestorDisplay">Ing. Joel Durán</span>
+                    </div>
+                    <div class="pdf-meta-row">
+                        <span class="pdf-meta-lbl">VALIDACIÓN:</span>
+                        <code class="pdf-token-code" id="pdfSecurityHashDisplay">GA-2026-AUTH</code>
                     </div>
                 </div>
             </div>
@@ -668,12 +1292,12 @@
                         <strong class="pdf-val" id="pdfClienteDisplay">Cliente Particular</strong>
                     </div>
                     <div class="pdf-info-row">
-                        <span class="pdf-lbl">Tipo de Trámite:</span>
-                        <span class="pdf-val">Gestoría Vehicular Personalizada</span>
+                        <span class="pdf-lbl">Canal de Entrega:</span>
+                        <span class="pdf-val" id="pdfModalidadDisplay">Entrega Directa a Domicilio / Oficina</span>
                     </div>
                     <div class="pdf-info-row">
-                        <span class="pdf-lbl">Canal de Entrega:</span>
-                        <span class="pdf-val">Entrega Directa a Domicilio / Oficina</span>
+                        <span class="pdf-lbl">Tiempo Estimado:</span>
+                        <span class="pdf-val" id="pdfTiempoDisplay">24 a 48 Horas Hábiles</span>
                     </div>
                 </div>
             </div>
@@ -706,10 +1330,10 @@
                 <thead>
                     <tr>
                         <th style="width: 6%; text-align: center;">#</th>
-                        <th style="width: 54%;">Descripción del Trámite o Concepto</th>
+                        <th style="width: 52%;">Descripción del Trámite o Concepto</th>
                         <th style="width: 10%; text-align: center;">Cant.</th>
-                        <th style="width: 15%; text-align: right;">Precio Unit.</th>
-                        <th style="width: 15%; text-align: right;">Importe</th>
+                        <th style="width: 16%; text-align: right;">Precio Unit.</th>
+                        <th style="width: 16%; text-align: right;">Importe</th>
                     </tr>
                 </thead>
                 <tbody id="pdfTableBody">
@@ -723,7 +1347,7 @@
             <div class="pdf-terms-box">
                 <div class="pdf-terms-title"><i class="fas fa-shield-alt"></i> GARANTÍA Y ESTATUS LEGAL:</div>
                 <p>• Trámites 100% legales y oficiales, verificables directamente en los portales oficiales de gobierno (SEMOVI CDMX y Secretaría de Finanzas EdoMex).</p>
-                <p>• El presupuesto incluye derechos de trámite, gestoría profesional, integración de expediente y entrega exprés.</p>
+                <p>• El presupuesto incluye derechos de trámite, gestoría profesional, integración de expediente y entrega exprés garantizada.</p>
             </div>
 
             <div class="pdf-totals-table">
@@ -738,6 +1362,14 @@
                 <div class="pdf-total-row pdf-total-grand">
                     <span>TOTAL A LIQUIDAR:</span>
                     <strong id="pdfTotalDisplay">$0.00</strong>
+                </div>
+                <div class="pdf-total-row" id="pdfAnticipoRowDisplay" style="display: none; color: #0284c7; font-weight: 700;">
+                    <span>Anticipo Requerido (50%):</span>
+                    <strong id="pdfAnticipoDisplay">$0.00</strong>
+                </div>
+                <div class="pdf-total-row" id="pdfSaldoRowDisplay" style="display: none; color: #d97706; font-weight: 700;">
+                    <span>Saldo contra Entrega:</span>
+                    <strong id="pdfSaldoDisplay">$0.00</strong>
                 </div>
                 <div class="pdf-currency-note">Pesos Mexicanos (MXN)</div>
             </div>
@@ -795,10 +1427,11 @@
                 <div class="pdf-qr-meta">
                     <strong>VALIDACIÓN DIGITAL OFICIAL</strong>
                     <span>Escanea para verificar autenticidad</span>
+                    <code id="pdfQrTokenDisplay">GA-2026-AUTH</code>
                 </div>
             </div>
             <div class="pdf-footer-note">
-                Presupuesto formal emitido de forma digital por <strong>Gestor de Autos México</strong>. Trámites 100% legales y oficiales verificables directamente ante las dependencias de gobierno correspondientes.
+                Presupuesto formal emitido de forma digital por <strong>Gestor de Autos México</strong>. Trámites 100% legales y oficiales verificables directamente ante SEMOVI CDMX y Secretaría de Finanzas EdoMex.
                 <div class="pdf-legal-bar">
                     <span class="pdf-legal-site">www.GestorDeAutos.com.mx</span>
                     <span class="pdf-legal-sep">•</span>
@@ -814,11 +1447,208 @@
 
     </div>
 
+    <!-- ========================================================================= -->
+    <!-- PLANTILLA DE NOTA DE REMISIÓN FORMAL PARA IMPRESIÓN Y GENERACIÓN DE PDF  -->
+    <!-- ========================================================================= -->
+    <div id="printableRemisionDoc" class="pdf-remision-document">
+        
+        <!-- HEADER FORMAL CARTA -->
+        <header class="pdf-header" style="border-bottom-color: #047857;">
+            <div class="pdf-header-brand">
+                <div class="pdf-logo-box">
+                    <img src="assets/images/logo1.png" alt="Gestor de Autos" class="pdf-brand-img">
+                    <div class="pdf-brand-text">
+                        <h2>GESTOR DE AUTOS</h2>
+                        <span>Gestoría Vehicular Especializada • CDMX & Estado de México</span>
+                    </div>
+                </div>
+                <div class="pdf-company-contact">
+                    <div><i class="fas fa-globe"></i> www.gestordeautos.com.mx</div>
+                    <div><i class="fab fa-whatsapp"></i> 55 3575 7364</div>
+                    <div><i class="fas fa-envelope"></i> contacto@gestordeautos.com.mx</div>
+                    <div><i class="fas fa-map-marker-alt"></i> CDMX y Área Metropolitana</div>
+                </div>
+            </div>
+
+            <div class="pdf-header-meta">
+                <div class="pdf-meta-badge" style="background: #10b981;">NOTA DE REMISIÓN</div>
+                <div class="pdf-meta-table">
+                    <div class="pdf-meta-row">
+                        <span class="pdf-meta-lbl">FOLIO:</span>
+                        <strong class="pdf-meta-val" id="pdfRemFolioDisplay" style="color: #047857;">REM-2026-0001</strong>
+                    </div>
+                    <div class="pdf-meta-row">
+                        <span class="pdf-meta-lbl">COTIZACIÓN:</span>
+                        <span class="pdf-meta-val" id="pdfRemCotOrigenDisplay">N/A</span>
+                    </div>
+                    <div class="pdf-meta-row">
+                        <span class="pdf-meta-lbl">FECHA:</span>
+                        <strong class="pdf-meta-val" id="pdfRemFechaDisplay">23/10/2026</strong>
+                    </div>
+                    <div class="pdf-meta-row">
+                        <span class="pdf-meta-lbl">ESTATUS:</span>
+                        <strong class="pdf-meta-val" id="pdfRemEstatusDisplay">Liquidada</strong>
+                    </div>
+                    <div class="pdf-meta-row">
+                        <span class="pdf-meta-lbl">GESTOR:</span>
+                        <span class="pdf-meta-val" id="pdfRemGestorDisplay">Ing. Joel Durán</span>
+                    </div>
+                    <div class="pdf-meta-row">
+                        <span class="pdf-meta-lbl">VALIDACIÓN:</span>
+                        <code class="pdf-token-code" id="pdfRemSecurityHashDisplay">GA-REM-2026</code>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="pdf-divider" style="border-top-color: #047857;"></div>
+
+        <!-- BLOQUES DE INFORMACIÓN (CLIENTE Y VEHÍCULO) -->
+        <section class="pdf-info-grid">
+            <div class="pdf-info-card">
+                <div class="pdf-info-title" style="color: #047857;">
+                    <i class="fas fa-user-tie"></i> DATOS DEL CLIENTE / RECEPTOR
+                </div>
+                <div class="pdf-info-body">
+                    <div class="pdf-info-row">
+                        <span class="pdf-lbl">Cliente o Empresa:</span>
+                        <strong class="pdf-val" id="pdfRemClienteDisplay">Cliente Particular</strong>
+                    </div>
+                    <div class="pdf-info-row">
+                        <span class="pdf-lbl">Teléfono / WhatsApp:</span>
+                        <span class="pdf-val" id="pdfRemTelefonoDisplay">55 3575 7364</span>
+                    </div>
+                    <div class="pdf-info-row">
+                        <span class="pdf-lbl">Lugar / Modalidad:</span>
+                        <span class="pdf-val" id="pdfRemEntregaDisplay">Entrega directa a domicilio</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pdf-info-card">
+                <div class="pdf-info-title" style="color: #047857;">
+                    <i class="fas fa-car-side"></i> FICHA TÉCNICA DEL VEHÍCULO
+                </div>
+                <div class="pdf-info-body">
+                    <div class="pdf-info-row">
+                        <span class="pdf-lbl">Vehículo:</span>
+                        <strong class="pdf-val" id="pdfRemVehiculoDisplay">Vehículo no especificado</strong>
+                    </div>
+                    <div class="pdf-info-row">
+                        <span class="pdf-lbl">Número de Serie (VIN):</span>
+                        <code class="pdf-vin-code" id="pdfRemVinDisplay">No registrado</code>
+                    </div>
+                    <div class="pdf-info-row">
+                        <span class="pdf-lbl">Placas:</span>
+                        <strong class="pdf-val" id="pdfRemPlacasDisplay">En trámite</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TABLA DE CONCEPTOS -->
+        <section class="pdf-table-section">
+            <div class="pdf-section-title" style="color: #047857;">DESGLOSE DE SERVICIOS Y HONORARIOS AMPARADOS</div>
+            <table class="pdf-table">
+                <thead>
+                    <tr>
+                        <th style="width: 6%; text-align: center;">#</th>
+                        <th style="width: 52%;">Descripción del Trámite o Concepto</th>
+                        <th style="width: 10%; text-align: center;">Cant.</th>
+                        <th style="width: 16%; text-align: right;">Precio Unit.</th>
+                        <th style="width: 16%; text-align: right;">Importe</th>
+                    </tr>
+                </thead>
+                <tbody id="pdfRemTableBody">
+                    <!-- Filas dinámicas -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- TOTALES Y DESGLOSE FINANCIERO -->
+        <section class="pdf-totals-section">
+            <div class="pdf-terms-box">
+                <div class="pdf-terms-title"><i class="fas fa-shield-alt"></i> COMPROBANTE OFICIAL Y GARANTÍA:</div>
+                <p>• La presente Nota de Remisión ampara la gestión vehicular realizada conforme a los aranceles y derechos oficiales de gobierno.</p>
+                <p id="pdfRemNotasDisplay">• Trámite 100% legal y oficial verificable en portales de SEMOVI CDMX y Secretaría de Finanzas EdoMex.</p>
+                <div style="margin-top: 6px; font-size: 8.5px; color: #475569;">
+                    <strong>Método de pago anticipo:</strong> <span id="pdfRemMetodoPagoDisplay">SPEI BBVA</span>
+                    <span id="pdfRemRefPagoWrap"> | Ref: <span id="pdfRemRefPagoDisplay">N/A</span></span>
+                </div>
+            </div>
+
+            <div class="pdf-totals-table">
+                <div class="pdf-total-row">
+                    <span>Subtotal de Servicios:</span>
+                    <strong id="pdfRemSubtotalDisplay">$0.00</strong>
+                </div>
+                <div class="pdf-total-row pdf-total-grand" style="border-top-color: #047857;">
+                    <span>TOTAL GENERAL:</span>
+                    <strong id="pdfRemTotalDisplay">$0.00</strong>
+                </div>
+                <div class="pdf-total-row" style="color: #0284c7; font-weight: 700;">
+                    <span>Anticipo Recibido:</span>
+                    <strong id="pdfRemAnticipoDisplay">$0.00</strong>
+                </div>
+                <div class="pdf-total-row" style="color: #dc2626; font-weight: 800; font-size: 11.5px; border-top: 1px dashed #cbd5e1;">
+                    <span>SALDO PENDIENTE:</span>
+                    <strong id="pdfRemSaldoDisplay">$0.00</strong>
+                </div>
+                <div class="pdf-currency-note">Pesos Mexicanos (MXN)</div>
+            </div>
+        </section>
+
+        <!-- DOCUMENTOS Y MATERIALES ENTREGADOS / RECIBIDOS -->
+        <section class="pdf-info-card" style="margin-bottom: 8px;">
+            <div class="pdf-info-title" style="color: #047857;">
+                <i class="fas fa-boxes-packing"></i> CHECKLIST DE MATERIALES Y DOCUMENTACIÓN ENTREGADA
+            </div>
+            <div id="pdfRemChecklistDisplay" style="display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 9px; padding: 2px 0;">
+                <!-- Chips de documentos amparados -->
+            </div>
+        </section>
+
+        <!-- DOBLE FIRMA DE CONFORMIDAD -->
+        <section style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 10px; margin-bottom: 8px;">
+            <div class="pdf-signature-box" style="text-align: center;">
+                <div class="pdf-sign-line" style="margin: 0 auto 4px auto; width: 75%;"></div>
+                <div class="pdf-sign-name" id="pdfRemSignName">Ing. Joel Durán</div>
+                <div class="pdf-sign-title">Gestor Vehicular Autorizado • Gestor de Autos</div>
+            </div>
+            <div class="pdf-signature-box" style="text-align: center;">
+                <div class="pdf-sign-line" style="margin: 0 auto 4px auto; width: 75%;"></div>
+                <div class="pdf-sign-name" id="pdfRemSignCliente">Cliente / Solicitante</div>
+                <div class="pdf-sign-title">Firma de Recibido de Conformidad</div>
+            </div>
+        </section>
+
+        <!-- PIE CON QR Y SELLO DIGITAL -->
+        <footer class="pdf-footer">
+            <div class="pdf-qr-box">
+                <div id="pdfRemQrCode" class="pdf-qr-render"></div>
+                <div class="pdf-qr-meta">
+                    <strong>VALIDACIÓN DIGITAL</strong>
+                    <span>Comprobante Oficial Gestor de Autos</span>
+                    <code id="pdfRemQrTokenDisplay">GA-REM-2026</code>
+                </div>
+            </div>
+            <div class="pdf-footer-note">
+                Nota de remisión y comprobante emitida digitalmente por <strong>Gestor de Autos México</strong>.
+                <div class="pdf-legal-bar">
+                    <span class="pdf-legal-site">www.GestorDeAutos.com.mx</span>
+                    <span class="pdf-legal-sep">•</span>
+                    <a href="https://gestordeautos.com.mx/aviso-privacidad.html" target="_blank" class="pdf-legal-link">Términos y Condiciones</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
     <!-- Scripts de Supabase, DB, QRCode y Funcionalidad -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-client.js"></script>
     <script src="db.js"></script>
     <script src="qrcode.min.js"></script>
-    <script src="dashboard.js?v=6"></script>
+    <script src="dashboard.js?v=7"></script>
 </body>
 </html>
