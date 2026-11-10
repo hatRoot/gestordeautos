@@ -1421,6 +1421,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let currentEditingRemId = null;
     let currentRemSecurityHash = '';
     let lastDeletedRemision = null;
+    let currentPaymentMode = 'pagado'; // 'pagado' | 'anticipo' | 'debe'
 
     // Elementos DOM de Remisiones
     const btnTabRemEditor = document.getElementById('btnTabRemEditor');
@@ -1430,6 +1431,40 @@ document.addEventListener('DOMContentLoaded', async () => {
     const btnRemNuevaDesdeHistorial = document.getElementById('btnRemNuevaDesdeHistorial');
     const remEditorSection = document.getElementById('remEditorSection');
     const remHistorialSection = document.getElementById('remHistorialSection');
+
+    // Selector de Condición de Pago
+    const btnModePagado = document.getElementById('btnModePagado');
+    const btnModeAnticipo = document.getElementById('btnModeAnticipo');
+    const btnModeDebe = document.getElementById('btnModeDebe');
+    const remGroupAnticipo = document.getElementById('remGroupAnticipo');
+    const btnRemAnticipo30 = document.getElementById('btnRemAnticipo30');
+    const lblRemMetodoPago = document.getElementById('lblRemMetodoPago');
+    const remRowAnticipo = document.getElementById('remRowAnticipo');
+    const lblRemRowAnticipo = document.getElementById('lblRemRowAnticipo');
+    const remRowSaldo = document.getElementById('remRowSaldo');
+    const lblRemSaldoText = document.getElementById('lblRemSaldoText');
+
+    // Elementos de Vista Previa Dinámica (Carta)
+    const prevRemAnticipoRow = document.getElementById('prevRemAnticipoRow');
+    const prevRemAnticipoLbl = document.getElementById('prevRemAnticipoLbl');
+    const prevRemSaldoRow = document.getElementById('prevRemSaldoRow');
+    const prevRemSaldoLbl = document.getElementById('prevRemSaldoLbl');
+
+    // Elementos de Documento PDF Imprimible
+    const pdfRemMetodoTitle = document.getElementById('pdfRemMetodoTitle');
+    const pdfRemAnticipoRow = document.getElementById('pdfRemAnticipoRow');
+    const pdfRemAnticipoLbl = document.getElementById('pdfRemAnticipoLbl');
+    const pdfRemSaldoRow = document.getElementById('pdfRemSaldoRow');
+    const pdfRemSaldoLbl = document.getElementById('pdfRemSaldoLbl');
+
+    // Toast de Notificación y Modal de WhatsApp
+    const remSaveToast = document.getElementById('remSaveToast');
+    const remSaveToastMsg = document.getElementById('remSaveToastMsg');
+    const remWhatsAppModal = document.getElementById('remWhatsAppModal');
+    const remWhatsAppTextPreview = document.getElementById('remWhatsAppTextPreview');
+    const btnCloseRemWhatsAppModal = document.getElementById('btnCloseRemWhatsAppModal');
+    const btnCopyAgainWhatsApp = document.getElementById('btnCopyAgainWhatsApp');
+    const btnOpenDirectWhatsApp = document.getElementById('btnOpenDirectWhatsApp');
 
     // Importación desde archivo o cotización
     const remFileInputCotizacion = document.getElementById('remFileInputCotizacion');
@@ -1744,16 +1779,21 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
 
-        // Anticipo recibido
-        if (remAnticipoInput) {
-            if (cot.anticipo && Number(cot.anticipo) > 0) {
-                remAnticipoInput.value = cot.anticipo;
-                if (remEstatusSelect) remEstatusSelect.value = 'Anticipo pagado';
-            } else if (cot.total && Number(cot.total) > 0) {
-                // Sugerencia estándar: 50% de anticipo
-                remAnticipoInput.value = Math.round(Number(cot.total) * 0.5);
-                if (remEstatusSelect) remEstatusSelect.value = 'Anticipo pagado';
-            }
+        // Determinar condición y estado de pago al importar
+        const totalCot = Number(cot.total || cot.subtotal || 0);
+        const antCot = Number(cot.anticipo || 0);
+
+        if (cot.paymentMode) {
+            setPaymentMode(cot.paymentMode);
+            if (remAnticipoInput && cot.anticipo !== undefined) remAnticipoInput.value = cot.anticipo;
+        } else if (antCot > 0 && antCot < totalCot) {
+            setPaymentMode('anticipo');
+            if (remAnticipoInput) remAnticipoInput.value = antCot;
+        } else if (antCot >= totalCot && totalCot > 0) {
+            setPaymentMode('pagado');
+        } else {
+            // Por defecto en Nota de Remisión se asume que ya fue liquidado al 100%
+            setPaymentMode('pagado');
         }
 
         recalcularTotalesRemision();
@@ -1824,30 +1864,77 @@ document.addEventListener('DOMContentLoaded', async () => {
         addConceptoRemFila('Alta de Placas Estado de México 2026', 1, 1800);
     }
 
+    // Control de Condición y Estado de Pago (Pagado 100%, Anticipo, Debe Todo)
+    function setPaymentMode(mode) {
+        currentPaymentMode = mode || 'pagado';
+
+        if (btnModePagado) btnModePagado.classList.toggle('active', currentPaymentMode === 'pagado');
+        if (btnModeAnticipo) btnModeAnticipo.classList.toggle('active', currentPaymentMode === 'anticipo');
+        if (btnModeDebe) btnModeDebe.classList.toggle('active', currentPaymentMode === 'debe');
+
+        const subtotal = calcularSubtotalRemision();
+
+        if (currentPaymentMode === 'pagado') {
+            if (remGroupAnticipo) remGroupAnticipo.style.display = 'none';
+            if (remRowAnticipo) remRowAnticipo.style.display = 'none';
+            if (lblRemMetodoPago) lblRemMetodoPago.textContent = 'Método de Liquidación:';
+            if (lblRemSaldoText) lblRemSaldoText.textContent = 'ESTADO DE PAGO:';
+            if (remAnticipoInput) remAnticipoInput.value = subtotal;
+            if (remEstatusSelect) remEstatusSelect.value = 'Liquidada';
+        } else if (currentPaymentMode === 'anticipo') {
+            if (remGroupAnticipo) remGroupAnticipo.style.display = 'block';
+            if (remRowAnticipo) remRowAnticipo.style.display = 'flex';
+            if (lblRemMetodoPago) lblRemMetodoPago.textContent = 'Método de Pago Anticipo:';
+            if (lblRemSaldoText) lblRemSaldoText.textContent = 'SALDO POR LIQUIDAR:';
+            if (remAnticipoInput) {
+                const currentVal = Number(remAnticipoInput.value || 0);
+                if (currentVal <= 0 || currentVal >= subtotal) {
+                    remAnticipoInput.value = Math.round(subtotal * 0.5);
+                }
+            }
+            if (remEstatusSelect) remEstatusSelect.value = 'Anticipo pagado';
+        } else if (currentPaymentMode === 'debe') {
+            if (remGroupAnticipo) remGroupAnticipo.style.display = 'none';
+            if (remRowAnticipo) remRowAnticipo.style.display = 'none';
+            if (lblRemMetodoPago) lblRemMetodoPago.textContent = 'Método Previsto de Pago:';
+            if (lblRemSaldoText) lblRemSaldoText.textContent = 'A LIQUIDAR A LA ENTREGA:';
+            if (remAnticipoInput) remAnticipoInput.value = 0;
+            if (remEstatusSelect) remEstatusSelect.value = 'En proceso';
+        }
+
+        recalcularTotalesRemision();
+        actualizarVistaPreviaRemision(false);
+    }
+
+    if (btnModePagado) btnModePagado.addEventListener('click', () => setPaymentMode('pagado'));
+    if (btnModeAnticipo) btnModeAnticipo.addEventListener('click', () => setPaymentMode('anticipo'));
+    if (btnModeDebe) btnModeDebe.addEventListener('click', () => setPaymentMode('debe'));
+
     // Botones de Anticipo Rápido
     if (btnRemAnticipo50) {
         btnRemAnticipo50.addEventListener('click', () => {
             const total = calcularSubtotalRemision();
-            remAnticipoInput.value = Math.round(total * 0.5);
+            if (remAnticipoInput) remAnticipoInput.value = Math.round(total * 0.5);
+            recalcularTotalesRemision();
+            actualizarVistaPreviaRemision(false);
+        });
+    }
+    if (btnRemAnticipo30) {
+        btnRemAnticipo30.addEventListener('click', () => {
+            const total = calcularSubtotalRemision();
+            if (remAnticipoInput) remAnticipoInput.value = Math.round(total * 0.3);
             recalcularTotalesRemision();
             actualizarVistaPreviaRemision(false);
         });
     }
     if (btnRemAnticipo100) {
         btnRemAnticipo100.addEventListener('click', () => {
-            const total = calcularSubtotalRemision();
-            remAnticipoInput.value = total;
-            if (remEstatusSelect) remEstatusSelect.value = 'Liquidada';
-            recalcularTotalesRemision();
-            actualizarVistaPreviaRemision(false);
+            setPaymentMode('pagado');
         });
     }
     if (btnRemAnticipoCero) {
         btnRemAnticipoCero.addEventListener('click', () => {
-            remAnticipoInput.value = 0;
-            if (remEstatusSelect) remEstatusSelect.value = 'En proceso';
-            recalcularTotalesRemision();
-            actualizarVistaPreviaRemision(false);
+            setPaymentMode('debe');
         });
     }
 
@@ -1866,23 +1953,55 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function recalcularTotalesRemision() {
         const subtotal = calcularSubtotalRemision();
-        const anticipo = Math.max(0, Number(remAnticipoInput?.value || 0));
-        const saldo = Math.max(0, subtotal - anticipo);
+        let anticipo = 0;
+        let saldo = 0;
+
+        if (currentPaymentMode === 'pagado') {
+            anticipo = subtotal;
+            saldo = 0;
+            if (remRowAnticipo) remRowAnticipo.style.display = 'none';
+            if (lblRemSaldoText) lblRemSaldoText.textContent = 'ESTADO DE PAGO:';
+            if (remSaldoText) {
+                remSaldoText.textContent = '✓ PAGADO AL 100% (LIQUIDADO)';
+                remSaldoText.style.color = '#10b981';
+            }
+        } else if (currentPaymentMode === 'anticipo') {
+            anticipo = Math.max(0, Number(remAnticipoInput?.value || 0));
+            saldo = Math.max(0, subtotal - anticipo);
+            if (remRowAnticipo) remRowAnticipo.style.display = 'flex';
+            if (lblRemSaldoText) lblRemSaldoText.textContent = 'SALDO POR LIQUIDAR:';
+            if (remSaldoText) {
+                remSaldoText.textContent = formatMoney(saldo);
+                remSaldoText.style.color = saldo > 0 ? '#dc2626' : '#10b981';
+            }
+        } else { // 'debe'
+            anticipo = 0;
+            saldo = subtotal;
+            if (remRowAnticipo) remRowAnticipo.style.display = 'none';
+            if (lblRemSaldoText) lblRemSaldoText.textContent = 'A LIQUIDAR A LA ENTREGA:';
+            if (remSaldoText) {
+                remSaldoText.textContent = formatMoney(saldo);
+                remSaldoText.style.color = '#d97706';
+            }
+        }
 
         if (remSubtotalText) remSubtotalText.textContent = formatMoney(subtotal);
         if (remTotalText) remTotalText.textContent = formatMoney(subtotal);
         if (remAnticipoText) remAnticipoText.textContent = formatMoney(anticipo);
-        if (remSaldoText) remSaldoText.textContent = formatMoney(saldo);
 
         // Auto-ajuste de estatus sugerido si el saldo es cero
         if (remEstatusSelect) {
-            if (saldo === 0 && subtotal > 0 && anticipo >= subtotal) {
+            if (currentPaymentMode === 'pagado') {
                 if (remEstatusSelect.value !== 'Entregada') {
                     remEstatusSelect.value = 'Liquidada';
                 }
-            } else if (anticipo > 0 && saldo > 0) {
+            } else if (currentPaymentMode === 'anticipo') {
                 if (remEstatusSelect.value !== 'Entregada') {
                     remEstatusSelect.value = 'Anticipo pagado';
+                }
+            } else if (currentPaymentMode === 'debe') {
+                if (remEstatusSelect.value !== 'Entregada') {
+                    remEstatusSelect.value = 'En proceso';
                 }
             }
         }
@@ -2004,10 +2123,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         }
 
-        // Totales preview
+        // Totales y estado financiero preview
         const subtotal = calcularSubtotalRemision();
-        const anticipo = Math.max(0, Number(remAnticipoInput?.value || 0));
-        const saldo = Math.max(0, subtotal - anticipo);
+        let anticipo = 0;
+        let saldo = 0;
 
         const prevRemSubtotal = document.getElementById('prevRemSubtotal');
         const prevRemTotal = document.getElementById('prevRemTotal');
@@ -2016,8 +2135,40 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (prevRemSubtotal) prevRemSubtotal.textContent = formatMoney(subtotal);
         if (prevRemTotal) prevRemTotal.textContent = formatMoney(subtotal);
-        if (prevRemAnticipo) prevRemAnticipo.textContent = formatMoney(anticipo);
-        if (prevRemSaldo) prevRemSaldo.textContent = formatMoney(saldo);
+
+        if (currentPaymentMode === 'pagado') {
+            anticipo = subtotal;
+            saldo = 0;
+            if (prevRemAnticipoRow) prevRemAnticipoRow.style.display = 'none';
+            if (prevRemSaldoRow) prevRemSaldoRow.style.display = 'flex';
+            if (prevRemSaldoLbl) prevRemSaldoLbl.textContent = 'ESTADO DE PAGO:';
+            if (prevRemSaldo) {
+                prevRemSaldo.textContent = '✓ PAGADO 100%';
+                prevRemSaldo.style.color = '#10b981';
+            }
+        } else if (currentPaymentMode === 'anticipo') {
+            anticipo = Math.max(0, Number(remAnticipoInput?.value || 0));
+            saldo = Math.max(0, subtotal - anticipo);
+            if (prevRemAnticipoRow) prevRemAnticipoRow.style.display = 'flex';
+            if (prevRemAnticipoLbl) prevRemAnticipoLbl.textContent = 'Anticipo Recibido:';
+            if (prevRemAnticipo) prevRemAnticipo.textContent = formatMoney(anticipo);
+            if (prevRemSaldoRow) prevRemSaldoRow.style.display = 'flex';
+            if (prevRemSaldoLbl) prevRemSaldoLbl.textContent = 'SALDO PENDIENTE:';
+            if (prevRemSaldo) {
+                prevRemSaldo.textContent = formatMoney(saldo);
+                prevRemSaldo.style.color = saldo > 0 ? '#dc2626' : '#10b981';
+            }
+        } else { // 'debe'
+            anticipo = 0;
+            saldo = subtotal;
+            if (prevRemAnticipoRow) prevRemAnticipoRow.style.display = 'none';
+            if (prevRemSaldoRow) prevRemSaldoRow.style.display = 'flex';
+            if (prevRemSaldoLbl) prevRemSaldoLbl.textContent = 'A LIQUIDAR A LA ENTREGA:';
+            if (prevRemSaldo) {
+                prevRemSaldo.textContent = formatMoney(saldo);
+                prevRemSaldo.style.color = '#d97706';
+            }
+        }
 
         // Checklist de documentos preview
         const prevRemChecklistTags = document.getElementById('prevRemChecklistTags');
@@ -2039,9 +2190,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         qrMsg += `*Cliente:* ${cliente}\n`;
         qrMsg += `*Vehículo:* ${vehiculoStr} (Placas: ${placas})\n`;
         if (vin !== 'No registrado') qrMsg += `*VIN:* ${vin}\n`;
-        qrMsg += `*Total:* ${formatMoney(subtotal)}\n`;
-        qrMsg += `*Anticipo Recibido:* ${formatMoney(anticipo)}\n`;
-        qrMsg += `*Saldo Pendiente:* ${formatMoney(saldo)}\n`;
+        qrMsg += `*Total General:* ${formatMoney(subtotal)}\n`;
+        if (currentPaymentMode === 'pagado') {
+            qrMsg += `*Estado de Pago:* ✓ PAGADO AL 100% (LIQUIDADO)\n`;
+            qrMsg += `*Saldo Pendiente:* $0.00\n`;
+        } else if (currentPaymentMode === 'anticipo') {
+            qrMsg += `*Anticipo Recibido:* ${formatMoney(anticipo)}\n`;
+            qrMsg += `*Saldo Pendiente:* ${formatMoney(saldo)}\n`;
+        } else {
+            qrMsg += `*Anticipo:* $0.00\n`;
+            qrMsg += `*A Liquidar a la Entrega:* ${formatMoney(saldo)}\n`;
+        }
         qrMsg += `*Estatus:* ${estatus}\n`;
         qrMsg += `*Código de Validación:* ${currentRemSecurityHash}\n`;
         qrMsg += `🌐 www.GestorDeAutos.com.mx`;
@@ -2141,8 +2300,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Totales y pagos imprimible
         const subtotal = calcularSubtotalRemision();
-        const anticipo = Math.max(0, Number(remAnticipoInput?.value || 0));
-        const saldo = Math.max(0, subtotal - anticipo);
+        let anticipo = 0;
+        let saldo = 0;
 
         const pdfRemSubtotalDisplay = document.getElementById('pdfRemSubtotalDisplay');
         const pdfRemTotalDisplay = document.getElementById('pdfRemTotalDisplay');
@@ -2153,10 +2312,47 @@ document.addEventListener('DOMContentLoaded', async () => {
         const pdfRemRefPagoWrap = document.getElementById('pdfRemRefPagoWrap');
         const pdfRemRefPagoDisplay = document.getElementById('pdfRemRefPagoDisplay');
 
+        if (pdfRemMetodoTitle) {
+            pdfRemMetodoTitle.textContent = currentPaymentMode === 'pagado' ? 'Método de liquidación:' : (currentPaymentMode === 'anticipo' ? 'Método de pago anticipo:' : 'Método previsto de pago:');
+        }
+
         if (pdfRemSubtotalDisplay) pdfRemSubtotalDisplay.textContent = formatMoney(subtotal);
         if (pdfRemTotalDisplay) pdfRemTotalDisplay.textContent = formatMoney(subtotal);
-        if (pdfRemAnticipoDisplay) pdfRemAnticipoDisplay.textContent = formatMoney(anticipo);
-        if (pdfRemSaldoDisplay) pdfRemSaldoDisplay.textContent = formatMoney(saldo);
+
+        if (currentPaymentMode === 'pagado') {
+            anticipo = subtotal;
+            saldo = 0;
+            if (pdfRemAnticipoRow) pdfRemAnticipoRow.style.display = 'none';
+            if (pdfRemSaldoRow) pdfRemSaldoRow.style.display = 'flex';
+            if (pdfRemSaldoLbl) pdfRemSaldoLbl.textContent = 'ESTADO DE PAGO:';
+            if (pdfRemSaldoDisplay) {
+                pdfRemSaldoDisplay.textContent = '✓ PAGADO AL 100% (LIQUIDADO)';
+                pdfRemSaldoDisplay.style.color = '#10b981';
+            }
+        } else if (currentPaymentMode === 'anticipo') {
+            anticipo = Math.max(0, Number(remAnticipoInput?.value || 0));
+            saldo = Math.max(0, subtotal - anticipo);
+            if (pdfRemAnticipoRow) pdfRemAnticipoRow.style.display = 'flex';
+            if (pdfRemAnticipoLbl) pdfRemAnticipoLbl.textContent = 'Anticipo Recibido:';
+            if (pdfRemAnticipoDisplay) pdfRemAnticipoDisplay.textContent = formatMoney(anticipo);
+            if (pdfRemSaldoRow) pdfRemSaldoRow.style.display = 'flex';
+            if (pdfRemSaldoLbl) pdfRemSaldoLbl.textContent = 'SALDO POR LIQUIDAR:';
+            if (pdfRemSaldoDisplay) {
+                pdfRemSaldoDisplay.textContent = formatMoney(saldo);
+                pdfRemSaldoDisplay.style.color = saldo > 0 ? '#dc2626' : '#10b981';
+            }
+        } else { // 'debe'
+            anticipo = 0;
+            saldo = subtotal;
+            if (pdfRemAnticipoRow) pdfRemAnticipoRow.style.display = 'none';
+            if (pdfRemSaldoRow) pdfRemSaldoRow.style.display = 'flex';
+            if (pdfRemSaldoLbl) pdfRemSaldoLbl.textContent = 'A LIQUIDAR A LA ENTREGA:';
+            if (pdfRemSaldoDisplay) {
+                pdfRemSaldoDisplay.textContent = formatMoney(saldo);
+                pdfRemSaldoDisplay.style.color = '#d97706';
+            }
+        }
+
         if (pdfRemNotasDisplay) pdfRemNotasDisplay.textContent = notas;
         if (pdfRemMetodoPagoDisplay) pdfRemMetodoPagoDisplay.textContent = metodoPago;
         if (pdfRemRefPagoWrap && pdfRemRefPagoDisplay) {
@@ -2189,6 +2385,49 @@ document.addEventListener('DOMContentLoaded', async () => {
         return { folio, cliente };
     }
 
+    // Notificación Toast Flotante para Remisión
+    let remToastTimer = null;
+    function mostrarToastRemision(mensaje) {
+        if (!remSaveToast) return;
+        if (remSaveToastMsg) {
+            remSaveToastMsg.innerHTML = `<i class="fas fa-check-circle" style="color: #34d399; margin-right: 6px;"></i> ${escapeHtml(mensaje)}`;
+        }
+        remSaveToast.style.display = 'flex';
+        clearTimeout(remToastTimer);
+        remToastTimer = setTimeout(() => {
+            remSaveToast.style.display = 'none';
+        }, 4000);
+    }
+
+    // Copiar Texto al Portapapeles con Fallback Seguro
+    function copiarTextoSeguro(texto) {
+        if (navigator.clipboard && window.isSecureContext) {
+            return navigator.clipboard.writeText(texto).catch(() => copiarConFallback(texto));
+        }
+        return copiarConFallback(texto);
+    }
+
+    function copiarConFallback(texto) {
+        return new Promise((resolve, reject) => {
+            try {
+                const ta = document.createElement('textarea');
+                ta.value = texto;
+                ta.style.position = 'fixed';
+                ta.style.left = '-9999px';
+                ta.style.top = '-9999px';
+                document.body.appendChild(ta);
+                ta.focus();
+                ta.select();
+                const res = document.execCommand('copy');
+                document.body.removeChild(ta);
+                if (res) resolve();
+                else reject(new Error('Fallback copy failed'));
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
     // Botón Generar PDF / Imprimir Nota de Remisión
     if (btnRemGenerarPdf) {
         btnRemGenerarPdf.addEventListener('click', () => {
@@ -2200,23 +2439,34 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.body.classList.remove('printing-cotizacion');
             document.body.classList.add('printing-remision');
 
+            const cleanupPrint = () => {
+                document.title = origTitle;
+                document.body.classList.remove('printing-remision');
+                window.removeEventListener('afterprint', cleanupPrint);
+            };
+
+            window.addEventListener('afterprint', cleanupPrint);
+
+            // Timeout de respaldo en caso de que afterprint tarde
+            setTimeout(() => {
+                document.title = origTitle;
+                document.body.classList.remove('printing-remision');
+            }, 30000);
+
             setTimeout(() => {
                 window.print();
-                setTimeout(() => {
-                    document.title = origTitle;
-                    document.body.classList.remove('printing-remision');
-                }, 1000);
-            }, 60);
+            }, 80);
         });
     }
 
-    // Copiar Comprobante para WhatsApp
+    // Copiar Comprobante para WhatsApp y Abrir Modal
     if (btnRemCopiarWhatsApp) {
         btnRemCopiarWhatsApp.addEventListener('click', () => {
             const folio = remFolioInput?.value.trim() || 'REM-2026-0001';
             const fechaVal = remFechaInput?.value || new Date().toISOString().split('T')[0];
             const estatus = remEstatusSelect?.value || 'En proceso';
             const cliente = remClienteInput?.value.trim() || 'Cliente';
+            const telefono = remTelefonoInput?.value.trim() || '';
             const gestor = remGestorInput?.value.trim() || 'Ing. Joel Durán';
             const vin = remSerieInput?.value.trim() || 'No registrado';
             const placas = remPlacasInput?.value.trim() || 'En trámite';
@@ -2229,8 +2479,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             const refPago = remReferenciaPagoInput?.value.trim() || '';
 
             const subtotal = calcularSubtotalRemision();
-            const anticipo = Math.max(0, Number(remAnticipoInput?.value || 0));
-            const saldo = Math.max(0, subtotal - anticipo);
+            let anticipo = 0;
+            let saldo = 0;
 
             // Conceptos
             let conceptosTexto = '';
@@ -2252,38 +2502,90 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             });
 
-            let msj = `🧾 *NOTA DE REMISIÓN Y COMPROBANTE DE PAGO*\n`;
+            let msj = `🧾 *NOTA DE REMISIÓN — GESTOR DE AUTOS*\n`;
             msj += `*Folio:* ${folio}\n`;
             msj += `*Fecha:* ${fechaVal}\n`;
             msj += `*Estatus:* ${estatus}\n`;
-            msj += `*Gestor:* ${gestor}\n`;
+            msj += `*Gestor Responsable:* ${gestor}\n`;
             msj += `*Cliente:* ${cliente}\n`;
             msj += `*Vehículo:* ${vehiculoStr}\n`;
-            msj += `*Serie/VIN:* ${vin}\n`;
+            if (vin !== 'No registrado') msj += `*Serie/VIN:* ${vin}\n`;
             msj += `*Placas:* ${placas}\n`;
             msj += `*Lugar de Entrega:* ${entrega}\n`;
             msj += `─────────────────────────\n`;
-            msj += `*SERVICIOS AMPARADOS:*\n${conceptosTexto || '• Gestoría vehicular y derechos\n'}`;
+            msj += `*SERVICIOS Y DERECHOS AMPARADOS:*\n${conceptosTexto || '• Gestoría vehicular y derechos oficiales\n'}`;
             msj += `─────────────────────────\n`;
-            msj += `*Total General:* ${formatMoney(subtotal)}\n`;
-            msj += `*Anticipo Recibido:* ${formatMoney(anticipo)} (${metodoPago}${refPago ? ' - Ref: ' + refPago : ''})\n`;
-            msj += `*SALDO PENDIENTE:* ${formatMoney(saldo)} (Contra entrega)\n`;
+            msj += `*TOTAL GENERAL:* ${formatMoney(subtotal)}\n`;
+
+            if (currentPaymentMode === 'pagado') {
+                anticipo = subtotal;
+                saldo = 0;
+                msj += `*ESTADO DE PAGO:* ✓ PAGADO AL 100% (LIQUIDADO)\n`;
+                msj += `*Método de Liquidación:* ${metodoPago}${refPago ? ' (Ref: ' + refPago + ')' : ''}\n`;
+                msj += `*Saldo Pendiente:* $0.00 (SIN ADEUDO)\n`;
+            } else if (currentPaymentMode === 'anticipo') {
+                anticipo = Math.max(0, Number(remAnticipoInput?.value || 0));
+                saldo = Math.max(0, subtotal - anticipo);
+                msj += `*Anticipo Recibido:* ${formatMoney(anticipo)} (${metodoPago}${refPago ? ' - Ref: ' + refPago : ''})\n`;
+                msj += `*SALDO POR LIQUIDAR:* ${formatMoney(saldo)} (A la entrega física)\n`;
+            } else { // 'debe'
+                saldo = subtotal;
+                msj += `*Anticipo Recibido:* $0.00\n`;
+                msj += `*A LIQUIDAR A LA ENTREGA:* ${formatMoney(saldo)} (Contra entrega física)\n`;
+            }
+
             if (docsTexto) {
                 msj += `─────────────────────────\n`;
-                msj += `*Documentos y Materiales Amparados:*\n${docsTexto}`;
+                msj += `*Materiales y Documentos Amparados:*\n${docsTexto}`;
             }
             msj += `─────────────────────────\n`;
             if (currentRemSecurityHash) {
                 msj += `*Código de Validación:* ${currentRemSecurityHash}\n`;
             }
-            msj += `Trámites 100% legales y oficiales verificables en portal de gobierno.\n`;
+            msj += `Trámites 100% oficiales y legales verificables en portal de gobierno.\n`;
             msj += `🌐 www.GestorDeAutos.com.mx`;
 
-            navigator.clipboard.writeText(msj).then(() => {
-                alert('✅ Comprobante de remisión copiado al portapapeles. ¡Listo para enviar por WhatsApp!');
-            }).catch(err => {
-                console.error(err);
-                alert('No se pudo copiar automáticamente. Puedes seleccionar el texto manualmente.');
+            // Copiar texto
+            copiarTextoSeguro(msj).then(() => {
+                mostrarToastRemision('✓ Comprobante copiado al portapapeles');
+            }).catch(() => {});
+
+            // Preparar Modal de WhatsApp
+            if (remWhatsAppTextPreview) {
+                remWhatsAppTextPreview.value = msj;
+            }
+
+            if (btnOpenDirectWhatsApp) {
+                const digits = telefono.replace(/\D/g, '');
+                let phoneParam = '525535757364'; // fallback
+                if (digits.length === 10) {
+                    phoneParam = '52' + digits;
+                } else if (digits.length >= 11) {
+                    phoneParam = digits.startsWith('52') ? digits : '52' + digits;
+                }
+                btnOpenDirectWhatsApp.href = `https://wa.me/${phoneParam}?text=${encodeURIComponent(msj)}`;
+            }
+
+            if (remWhatsAppModal) {
+                remWhatsAppModal.style.display = 'flex';
+            }
+        });
+    }
+
+    if (btnCloseRemWhatsAppModal) {
+        btnCloseRemWhatsAppModal.addEventListener('click', () => {
+            if (remWhatsAppModal) remWhatsAppModal.style.display = 'none';
+        });
+    }
+
+    if (btnCopyAgainWhatsApp) {
+        btnCopyAgainWhatsApp.addEventListener('click', () => {
+            const texto = remWhatsAppTextPreview?.value || '';
+            copiarTextoSeguro(texto).then(() => {
+                mostrarToastRemision('✓ Copiado nuevamente al portapapeles');
+                const orig = btnCopyAgainWhatsApp.innerHTML;
+                btnCopyAgainWhatsApp.innerHTML = `<i class="fas fa-check"></i> ¡Copiado!`;
+                setTimeout(() => { btnCopyAgainWhatsApp.innerHTML = orig; }, 1500);
             });
         });
     }
@@ -2339,6 +2641,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         return {
             id: currentEditingRemId || Date.now(),
             folio: folio,
+            paymentMode: currentPaymentMode,
             cotOrigen: cotOrigen,
             fecha: fecha,
             estatus: estatus,
@@ -2394,7 +2697,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             updateRemisionesStats();
             renderRemisionesTable();
-            alert(`✅ Nota de remisión "${remData.folio}" guardada con éxito en el sistema.`);
+
+            // Feedback visual inmediato
+            const originalBtnHtml = btnRemGuardar.innerHTML;
+            btnRemGuardar.innerHTML = `<i class="fas fa-check"></i> ¡Guardada con Éxito!`;
+            btnRemGuardar.style.background = '#047857';
+            setTimeout(() => {
+                btnRemGuardar.innerHTML = originalBtnHtml;
+                btnRemGuardar.style.background = '';
+            }, 1800);
+
+            mostrarToastRemision(`Nota ${remData.folio} guardada exitosamente`);
         });
     }
 
@@ -2431,6 +2744,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             btnRemEliminarActual.style.display = 'none';
         }
 
+        setPaymentMode('pagado');
         recalcularTotalesRemision();
         actualizarVistaPreviaRemision(true);
     }
@@ -2555,6 +2869,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         if (btnRemEliminarActual) btnRemEliminarActual.style.display = 'inline-flex';
+
+        // Restaurar modo de pago
+        const mode = item.paymentMode || (Number(item.saldo || 0) === 0 ? 'pagado' : (Number(item.anticipo || 0) > 0 ? 'anticipo' : 'debe'));
+        setPaymentMode(mode);
 
         recalcularTotalesRemision();
         actualizarVistaPreviaRemision(false);

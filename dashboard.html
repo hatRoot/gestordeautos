@@ -726,21 +726,46 @@
                                     </table>
                                 </div>
 
-                                <!-- Panel Financiero de Remisión (Totales, Anticipo, Saldo) -->
+                                <!-- SELECTOR DE CONDICIÓN DE PAGO (3 OPCIONES DIRECTAS) -->
+                                <div class="rem-payment-mode-box">
+                                    <div class="rem-payment-mode-title">
+                                        <i class="fas fa-hand-holding-dollar" style="color: #10b981;"></i>
+                                        <strong>Condición y Estado de Pago del Trámite:</strong>
+                                    </div>
+                                    <div class="rem-payment-mode-pills">
+                                        <button type="button" class="rem-mode-pill active" id="btnModePagado" data-mode="pagado">
+                                            <i class="fas fa-check-circle" style="color: #10b981;"></i>
+                                            <span>1. Ya Pagó (Liquidado 100%)</span>
+                                        </button>
+                                        <button type="button" class="rem-mode-pill" id="btnModeAnticipo" data-mode="anticipo">
+                                            <i class="fas fa-wallet" style="color: #0284c7;"></i>
+                                            <span>2. Dio Anticipo (Resta Saldo)</span>
+                                        </button>
+                                        <button type="button" class="rem-mode-pill" id="btnModeDebe" data-mode="debe">
+                                            <i class="fas fa-hourglass-half" style="color: #d97706;"></i>
+                                            <span>3. Debe Todo (Contra Entrega)</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Panel Financiero de Remisión Adaptable (Totales, Pagos, Saldos) -->
                                 <div class="rem-financial-box">
                                     <div class="rem-financial-left">
-                                        <div class="cot-form-group">
+                                        
+                                        <!-- Campo de Anticipo (Visible solo si mode === anticipo) -->
+                                        <div class="cot-form-group" id="remGroupAnticipo" style="display: none;">
                                             <label for="remAnticipoInput">Monto de Anticipo Recibido ($)</label>
                                             <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
                                                 <input type="number" id="remAnticipoInput" class="mac-input" value="0" min="0" step="10" style="font-weight: 700; color: #0284c7; max-width: 160px;">
                                                 <button type="button" class="mac-btn" id="btnRemAnticipo50" style="padding: 4px 8px;" title="Fijar 50%">50%</button>
-                                                <button type="button" class="mac-btn" id="btnRemAnticipo100" style="padding: 4px 8px;" title="Liquidar 100%">100%</button>
-                                                <button type="button" class="mac-btn" id="btnRemAnticipoCero" style="padding: 4px 8px;" title="Sin anticipo">$0</button>
+                                                <button type="button" class="mac-btn" id="btnRemAnticipo30" style="padding: 4px 8px;" title="Fijar 30%">30%</button>
                                             </div>
                                         </div>
+
+                                        <!-- Datos Bancarios y Método de Pago -->
                                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
                                             <div class="cot-form-group">
-                                                <label for="remMetodoPago">Método de Pago Anticipo</label>
+                                                <label for="remMetodoPago" id="lblRemMetodoPago">Método de Liquidación</label>
                                                 <select id="remMetodoPago" class="mac-select">
                                                     <option value="Transferencia SPEI (BBVA)">Transferencia SPEI (BBVA)</option>
                                                     <option value="Depósito Prácticaja BBVA">Depósito Prácticaja BBVA</option>
@@ -765,13 +790,13 @@
                                             <span>Total General:</span>
                                             <strong id="remTotalText">$0.00</strong>
                                         </div>
-                                        <div class="cot-summary-row" style="color: #0284c7; font-weight: 700;">
-                                            <span>Anticipo Recibido:</span>
+                                        <div class="cot-summary-row" id="remRowAnticipo" style="display: none; color: #0284c7; font-weight: 700;">
+                                            <span id="lblRemRowAnticipo">Anticipo Recibido:</span>
                                             <strong id="remAnticipoText">$0.00</strong>
                                         </div>
-                                        <div class="cot-summary-row" style="color: #dc2626; font-size: 14px; font-weight: 800; border-top: 1px dashed #cbd5e1; padding-top: 6px; margin-top: 6px;">
-                                            <span>SALDO POR LIQUIDAR:</span>
-                                            <strong id="remSaldoText">$0.00</strong>
+                                        <div class="cot-summary-row" id="remRowSaldo" style="border-top: 1px dashed #cbd5e1; padding-top: 6px; margin-top: 6px;">
+                                            <span id="lblRemSaldoText">ESTADO DE PAGO:</span>
+                                            <strong id="remSaldoText" style="color: #10b981;">✓ PAGADO 100%</strong>
                                         </div>
                                     </div>
                                 </div>
@@ -955,7 +980,7 @@
                                     <div class="mini-totals-box">
                                         <div class="mini-guarantee-note">
                                             <i class="fas fa-shield-alt" style="color: #10b981;"></i>
-                                            <span>Trámite 100% legal verificado en portal oficial. Comprobante de pago y recepción de trámite vehicular.</span>
+                                            <span id="prevRemGuaranteeNote">Trámite 100% legal verificado en portal oficial. Comprobante oficial de pago y trámite vehicular.</span>
                                         </div>
                                         <div class="mini-totals-table">
                                             <div class="mini-total-row">
@@ -966,13 +991,13 @@
                                                 <span>TOTAL GENERAL:</span>
                                                 <strong id="prevRemTotal">$0.00</strong>
                                             </div>
-                                            <div class="mini-total-row" style="color: #0284c7; font-weight: 700;">
-                                                <span>Anticipo Recibido:</span>
+                                            <div class="mini-total-row" id="prevRemAnticipoRow" style="display: none; color: #0284c7; font-weight: 700;">
+                                                <span id="prevRemAnticipoLbl">Anticipo Recibido:</span>
                                                 <strong id="prevRemAnticipo">$0.00</strong>
                                             </div>
-                                            <div class="mini-total-row" style="color: #dc2626; font-weight: 800; font-size: 11px;">
-                                                <span>SALDO PENDIENTE:</span>
-                                                <strong id="prevRemSaldo">$0.00</strong>
+                                            <div class="mini-total-row" id="prevRemSaldoRow" style="font-weight: 800; font-size: 11px;">
+                                                <span id="prevRemSaldoLbl">ESTADO:</span>
+                                                <strong id="prevRemSaldo" style="color: #10b981;">✓ PAGADO 100%</strong>
                                             </div>
                                         </div>
                                     </div>
@@ -1572,7 +1597,7 @@
                 <p>• La presente Nota de Remisión ampara la gestión vehicular realizada conforme a los aranceles y derechos oficiales de gobierno.</p>
                 <p id="pdfRemNotasDisplay">• Trámite 100% legal y oficial verificable en portales de SEMOVI CDMX y Secretaría de Finanzas EdoMex.</p>
                 <div style="margin-top: 6px; font-size: 8.5px; color: #475569;">
-                    <strong>Método de pago anticipo:</strong> <span id="pdfRemMetodoPagoDisplay">SPEI BBVA</span>
+                    <strong id="pdfRemMetodoTitle">Método de liquidación:</strong> <span id="pdfRemMetodoPagoDisplay">SPEI BBVA</span>
                     <span id="pdfRemRefPagoWrap"> | Ref: <span id="pdfRemRefPagoDisplay">N/A</span></span>
                 </div>
             </div>
@@ -1586,13 +1611,13 @@
                     <span>TOTAL GENERAL:</span>
                     <strong id="pdfRemTotalDisplay">$0.00</strong>
                 </div>
-                <div class="pdf-total-row" style="color: #0284c7; font-weight: 700;">
-                    <span>Anticipo Recibido:</span>
+                <div class="pdf-total-row" id="pdfRemAnticipoRow" style="display: none; color: #0284c7; font-weight: 700;">
+                    <span id="pdfRemAnticipoLbl">Anticipo Recibido:</span>
                     <strong id="pdfRemAnticipoDisplay">$0.00</strong>
                 </div>
-                <div class="pdf-total-row" style="color: #dc2626; font-weight: 800; font-size: 11.5px; border-top: 1px dashed #cbd5e1;">
-                    <span>SALDO PENDIENTE:</span>
-                    <strong id="pdfRemSaldoDisplay">$0.00</strong>
+                <div class="pdf-total-row" id="pdfRemSaldoRow" style="font-weight: 800; font-size: 11.5px; border-top: 1px dashed #cbd5e1;">
+                    <span id="pdfRemSaldoLbl">ESTADO DE PAGO:</span>
+                    <strong id="pdfRemSaldoDisplay" style="color: #10b981;">✓ PAGADO 100%</strong>
                 </div>
                 <div class="pdf-currency-note">Pesos Mexicanos (MXN)</div>
             </div>
@@ -1644,11 +1669,41 @@
 
     </div>
 
+    <!-- Toast Flotante para Notificaciones de Remisión -->
+    <div id="remSaveToast" class="mac-undo-toast" style="display: none; background: #065f46; border: 1px solid #10b981; color: #ffffff; box-shadow: 0 4px 14px rgba(0,0,0,0.25);">
+        <span id="remSaveToastMsg"><i class="fas fa-check-circle" style="color: #34d399; margin-right: 6px;"></i> Nota guardada con éxito</span>
+    </div>
+
+    <!-- Modal WhatsApp para Remisión -->
+    <div class="mac-sheet-overlay" id="remWhatsAppModal" style="display: none;">
+        <div class="mac-sheet" style="max-width: 540px; background: #ffffff;">
+            <div class="mac-sheet-title" style="color: #047857; display: flex; align-items: center; gap: 8px;">
+                <i class="fab fa-whatsapp" style="color: #25D366; font-size: 20px;"></i>
+                <span>Comprobante Oficial para WhatsApp</span>
+            </div>
+            <p style="font-size: 11.5px; color: #64748b; margin: 4px 0 10px 0;">
+                El texto ya ha sido copiado al portapapeles. Puedes abrir WhatsApp directamente con el número del cliente o copiarlo de nuevo.
+            </p>
+            <textarea id="remWhatsAppTextPreview" class="mac-input" rows="11" style="width: 100%; font-family: monospace; font-size: 11px; line-height: 1.4; resize: vertical;" readonly></textarea>
+            <div class="mac-sheet-actions" style="margin-top: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                <button type="button" class="mac-btn" id="btnCloseRemWhatsAppModal">Cerrar</button>
+                <div style="display: flex; gap: 8px;">
+                    <button type="button" class="mac-btn" id="btnCopyAgainWhatsApp">
+                        <i class="far fa-copy"></i> Copiar de nuevo
+                    </button>
+                    <a href="#" target="_blank" class="mac-btn mac-btn-primary" id="btnOpenDirectWhatsApp" style="background: #25D366; border-color: #128C7E; color: #fff; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                        <i class="fab fa-whatsapp"></i> <span>Abrir en WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts de Supabase, DB, QRCode y Funcionalidad -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-client.js"></script>
     <script src="db.js"></script>
     <script src="qrcode.min.js"></script>
-    <script src="dashboard.js?v=7"></script>
+    <script src="dashboard.js?v=8"></script>
 </body>
 </html>
